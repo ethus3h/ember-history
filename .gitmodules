@@ -25,3 +25,6 @@
 [submodule "ember-retired-repositories-old-renamed-2017feb07"]
 	path = ember-retired-repositories-old-renamed-2017feb07
 	url = https://github.com/ethus3h/ember-retired-repositories-old-renamed-2017feb07.git
+[submodule "wreathe-old-renamed-2017feb07"]
+	path = wreathe-old-renamed-2017feb07
+	url = https://github.com/ethus3h/wreathe-old-renamed-2017feb07.git

@@ -3,7 +3,7 @@
 	url = https://github.com/ethus3h/ember-web-site-wordpress.git
 [submodule "rubberfs"]
 	path = rubberfs
-	url = https://github.com/ethus3h/rubberfs.git
+	url = ./rubberfs
 [submodule "internetarchive"]
 	path = internetarchive
 	url = https://github.com/ethus3h/internetarchive.git

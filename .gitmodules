@@ -1,0 +1,24 @@
+[submodule "ember-web-site-wordpress"]
+	path = ember-web-site-wordpress
+	url = https://github.com/ethus3h/ember-web-site-wordpress.git
+[submodule "rubberfs"]
+	path = rubberfs
+	url = https://github.com/ethus3h/rubberfs.git
+[submodule "internetarchive"]
+	path = internetarchive
+	url = https://github.com/ethus3h/internetarchive.git
+[submodule "app-configs"]
+	path = app-configs
+	url = https://github.com/ethus3h/app-configs.git
+[submodule "arcmaj3"]
+	path = arcmaj3
+	url = https://github.com/ethus3h/arcmaj3.git
+[submodule "arcmaj3-client"]
+	path = arcmaj3-client
+	url = https://github.com/ethus3h/arcmaj3-client.git
+[submodule "ember-old-moved-2016apr24a25"]
+	path = ember-old-moved-2016apr24a25
+	url = https://github.com/ethus3h/ember-old-moved-2016apr24a25.git
+[submodule "ember-repositories"]
+	path = ember-repositories
+	url = https://github.com/ethus3h/ember-repositories.git

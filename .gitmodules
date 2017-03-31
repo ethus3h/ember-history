@@ -28,3 +28,9 @@
 [submodule "wreathe-old-renamed-2017feb07"]
 	path = wreathe-old-renamed-2017feb07
 	url = https://github.com/ethus3h/wreathe-old-renamed-2017feb07.git
+[submodule "wreathe-kernel"]
+	path = wreathe-kernel
+	url = https://github.com/ethus3h/wreathe-kernel.git
+[submodule "crystal-metadata"]
+	path = crystal-metadata
+	url = https://github.com/ethus3h/crystal-metadata.git

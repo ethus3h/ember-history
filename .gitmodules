@@ -34,3 +34,6 @@
 [submodule "crystal-metadata"]
 	path = crystal-metadata
 	url = https://github.com/ethus3h/crystal-metadata.git
+[submodule "MailKit-meta"]
+	path = MailKit-meta
+	url = https://github.com/ethus3h/MailKit-meta.git

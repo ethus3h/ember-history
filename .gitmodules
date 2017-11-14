@@ -37,3 +37,9 @@
 [submodule "MailKit-meta"]
 	path = MailKit-meta
 	url = https://github.com/ethus3h/MailKit-meta.git
+[submodule "node-spotify-downloader-"]
+	path = node-spotify-downloader-
+	url = https://github.com/ethus3h/node-spotify-downloader-.git
+[submodule "node-spotify-web-"]
+	path = node-spotify-web-
+	url = https://github.com/ethus3h/node-spotify-web-.git

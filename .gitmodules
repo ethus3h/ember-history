@@ -43,3 +43,6 @@
 [submodule "node-spotify-web-"]
 	path = node-spotify-web-
 	url = https://github.com/ethus3h/node-spotify-web-.git
+[submodule "futuramerlin-record-label"]
+	path = futuramerlin-record-label
+	url = https://github.com/ethus3h/futuramerlin-record-label.git

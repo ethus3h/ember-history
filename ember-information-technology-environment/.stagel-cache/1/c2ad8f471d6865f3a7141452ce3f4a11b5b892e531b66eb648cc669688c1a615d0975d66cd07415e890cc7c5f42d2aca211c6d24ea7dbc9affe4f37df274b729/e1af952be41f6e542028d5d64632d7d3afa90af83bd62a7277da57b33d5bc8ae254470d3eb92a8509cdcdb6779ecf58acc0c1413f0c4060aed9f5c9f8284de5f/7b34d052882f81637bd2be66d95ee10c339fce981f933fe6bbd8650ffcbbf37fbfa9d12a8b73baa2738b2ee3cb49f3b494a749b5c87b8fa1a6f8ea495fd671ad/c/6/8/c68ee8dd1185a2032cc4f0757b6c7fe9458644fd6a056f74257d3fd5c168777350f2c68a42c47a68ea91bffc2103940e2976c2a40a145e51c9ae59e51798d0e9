@@ -1,0 +1,129 @@
+async function listDcDatasets() {
+    await internalDebugStackEnter('listDcDatasets:dc-data'); let strArrayReturn;
+
+    let strArrayRes = [];
+    strArrayRes = [ 'DcData', 'formats', 'mappings/from/ascii', 'mappings/from/unicode', 'mappings/to/html', 'mappings/to/lang_en', 'mappings/to/unicode' ];
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function dcGetColumn(strDataset, intColumn) {
+    await internalDebugCollect('str Dataset = ' + strDataset + '; '); await internalDebugCollect('int Column = ' + intColumn + '; '); await internalDebugStackEnter('dcGetColumn:dc-data'); await assertIsStr(strDataset); await assertIsInt(intColumn); let strArrayReturn;
+
+    let strArrayRes = [];
+    let intCount = 0;
+    intCount = await dcDatasetLength(strDataset);
+    let intI = 0;
+    while (await implLt(intI, intCount)) {
+        strArrayRes = await push(strArrayRes, await dcDataLookupById(strDataset, intI, intColumn));
+        intI = await implAdd(intI, 1);
+    }
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function getDcCount() {
+    await internalDebugStackEnter('getDcCount:dc-data'); let intReturn;
+
+    let intRes = 0;
+    intRes = await dcDatasetLength('DcData');
+}
+
+async function isDcDataset(strIn) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugStackEnter('isDcDataset:dc-data'); await assertIsStr(strIn); let boolReturn;
+
+    let boolRes = false;
+    boolRes = await contains(await listDcDatasets(), strIn);
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function dcGetField(intDc, intFieldNumber) {
+    await internalDebugCollect('int Dc = ' + intDc + '; '); await internalDebugCollect('int FieldNumber = ' + intFieldNumber + '; '); await internalDebugStackEnter('dcGetField:dc-data'); await assertIsInt(intDc); await assertIsInt(intFieldNumber); let strReturn;
+
+    await assertIsDc(intDc);
+    let strRes = '';
+    strRes = await dcDataLookupById('DcData', intDc, intFieldNumber);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function dcGetName(intDc) {
+    await internalDebugCollect('int Dc = ' + intDc + '; '); await internalDebugStackEnter('dcGetName:dc-data'); await assertIsInt(intDc); let strReturn;
+
+    await assertIsDc(intDc);
+    let strRes = '';
+    strRes = await dcGetField(intDc, 1);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function dcGetCombiningClass(intDc) {
+    await internalDebugCollect('int Dc = ' + intDc + '; '); await internalDebugStackEnter('dcGetCombiningClass:dc-data'); await assertIsInt(intDc); let strReturn;
+
+    await assertIsDc(intDc);
+    let strRes = '';
+    strRes = await dcGetField(intDc, 2);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function dcGetBidiClass(intDc) {
+    await internalDebugCollect('int Dc = ' + intDc + '; '); await internalDebugStackEnter('dcGetBidiClass:dc-data'); await assertIsInt(intDc); let strReturn;
+
+    await assertIsDc(intDc);
+    let strRes = '';
+    strRes = await dcGetField(intDc, 3);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function dcGetCasing(intDc) {
+    await internalDebugCollect('int Dc = ' + intDc + '; '); await internalDebugStackEnter('dcGetCasing:dc-data'); await assertIsInt(intDc); let strReturn;
+
+    await assertIsDc(intDc);
+    let strRes = '';
+    strRes = await dcGetField(intDc, 4);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function dcGetType(intDc) {
+    await internalDebugCollect('int Dc = ' + intDc + '; '); await internalDebugStackEnter('dcGetType:dc-data'); await assertIsInt(intDc); let strReturn;
+
+    await assertIsDc(intDc);
+    let strRes = '';
+    strRes = await dcGetField(intDc, 5);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function dcGetScript(intDc) {
+    await internalDebugCollect('int Dc = ' + intDc + '; '); await internalDebugStackEnter('dcGetScript:dc-data'); await assertIsInt(intDc); let strReturn;
+
+    await assertIsDc(intDc);
+    let strRes = '';
+    strRes = await dcGetField(intDc, 6);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function dcGetComplexTraits(intDc) {
+    await internalDebugCollect('int Dc = ' + intDc + '; '); await internalDebugStackEnter('dcGetComplexTraits:dc-data'); await assertIsInt(intDc); let strReturn;
+
+    await assertIsDc(intDc);
+    let strRes = '';
+    strRes = await dcGetField(intDc, 7);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function dcGetDescription(intDc) {
+    await internalDebugCollect('int Dc = ' + intDc + '; '); await internalDebugStackEnter('dcGetDescription:dc-data'); await assertIsInt(intDc); let strReturn;
+
+    await assertIsDc(intDc);
+    let strRes = '';
+    strRes = await dcGetField(intDc, 8);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}

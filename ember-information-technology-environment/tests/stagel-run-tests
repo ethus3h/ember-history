@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1091
+source ember_bash_setup &> /dev/null || { printf '%b' '\033[1;31m' >&2; echo "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd): The required dependency ember-shared could not be found (or ember_bash_setup could not be sourced for some other reason)." >&2; printf '%b' '\033[0m' >&2; exit 1; }
+#set -x
+
+trap 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."' ERR
+
+(
+cd tests || die
+
+runTestForEachLanguage() {
+    #runTest -v "stagel/bash/$1"
+    runTest "stagel/js/$1"
+}
+
+runTest stagel/no-codegen/routine-minimal
+runTest stagel/no-codegen/routine-newline-in-body
+runTest stagel/no-codegen/if-with-indented
+runTest stagel/no-codegen/if-with-comment
+runTest stagel/no-codegen/routine-with-if
+runTest stagel/no-codegen/loop-block-longhand
+runTest stagel/no-codegen/loop-block
+runTest stagel/no-codegen/routine-fizzbuzz
+runTestForEachLanguage arglist-two-nested
+runTestForEachLanguage arglist-three-nested
+runTest stagel/js/routine-minimal
+runTest stagel/js/two-routines
+runTest stagel/js/bare-block
+runTest stagel/js/if-statement
+runTest stagel/js/if-one-command
+runTest stagel/js/if-with-indented
+runTest stagel/js/if-with-comment
+runTest stagel/js/if-with-comment-and-inner-block
+runTest stagel/js/routine-fbSwitcher-return-type
+runTest stagel/js/routine-fizzbuzz-fbSwitcher
+runTest stagel/js/routine-with-if
+runTest stagel/js/declare-n
+runTest stagel/js/set-number-add-no-routine
+runTest stagel/js/set-number-add
+runTest stagel/js/set-to-str-routine-with-new
+runTest stagel/js/set-to-str-routine-invocation
+#runTest -v stagel/js/routine-fizzbuzz
+runTest stagel/js/logical-or
+runTestForEachLanguage generic-parameter
+runTestForEachLanguage generic-ga-gi-parameter
+runTestForEachLanguage array-s
+runTest stagel/js/array-zero-only
+runTest stagel/js/bool-literal
+runTest stagel/js/str-escape-literal
+runTest stagel/js/else
+runTest stagel/js/elif
+runTestForEachLanguage arglist-inline-end
+runTest stagel/js/loop-block-longhand
+runTest stagel/js/loop-block
+runTest stagel/js/wasm-tests
+
+reportTests
+)

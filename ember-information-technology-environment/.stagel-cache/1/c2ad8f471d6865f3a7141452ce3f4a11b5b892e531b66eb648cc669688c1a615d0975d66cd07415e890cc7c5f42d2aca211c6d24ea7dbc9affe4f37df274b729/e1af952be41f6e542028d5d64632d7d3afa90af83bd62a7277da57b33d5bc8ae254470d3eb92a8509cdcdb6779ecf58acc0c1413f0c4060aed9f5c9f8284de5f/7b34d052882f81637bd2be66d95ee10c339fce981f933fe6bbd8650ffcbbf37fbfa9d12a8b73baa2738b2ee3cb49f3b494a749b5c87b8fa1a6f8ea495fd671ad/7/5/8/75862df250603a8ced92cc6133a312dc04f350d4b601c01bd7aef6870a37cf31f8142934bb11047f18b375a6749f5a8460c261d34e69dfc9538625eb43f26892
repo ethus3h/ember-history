@@ -1,0 +1,8 @@
+async function runTestsFormatHtmlFragment(boolV) {
+    await internalDebugCollect('bool V = ' + boolV + '; '); await internalDebugStackEnter('runTestsFormatHtmlFragment:format-htmlFragment-tests'); await assertIsBool(boolV);
+
+    await testing(boolV, 'formatHtmlFragment');
+    await runTest(boolV, await arrEq(await strToByteArray('<div style="white-space:pre-wrap">5&lt;6</div>'), await dcaToHtmlFragment([ 39, 46, 40 ])));
+
+    await internalDebugStackExit();
+}

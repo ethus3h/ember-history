@@ -1,0 +1,106 @@
+r/an/dcaFromAscii an/content
+    assertIsByteArray an/content
+    new an/res
+    new n/l
+    set n/l count an/content
+    new n/c
+    set n/c 0
+    while lt n/c n/l
+        set an/res append an/res dcFromFormat 'ascii' anFromN get an/content n/c
+        set n/c add n/c 1
+    assertIsDcArray an/res
+    return an/res
+
+r/an/dcaToAscii an/content
+    assertIsDcArray an/content
+    new an/res
+    new n/l
+    set n/l count an/content
+    new n/c
+    set n/c 0
+    new an/temp
+    new n/dcAtIndex
+    while lt n/c n/l
+        set n/dcAtIndex get an/content n/c
+        set an/temp dcToFormat 'utf8' n/dcAtIndex
+        if arrNonempty an/temp
+            if isAsciiByte get an/temp 0
+                set an/res append an/res an/temp
+            else
+                exportWarningUnmappable n/c n/dcAtIndex
+        else
+            exportWarningUnmappable n/c n/dcAtIndex
+        set n/c add n/c 1
+    assertIsByteArray an/res
+    return an/res
+
+r/b/isAsciiByte n/n
+    new b/temp
+    set b/temp intIsBetween n/n 0 127
+    return b/temp
+
+r/b/asciiIsDigit n/n
+    new b/temp
+    set b/temp intIsBetween n/n 48 57
+    return b/temp
+
+r/b/asciiIsPrintable n/n
+    new b/temp
+    set b/temp intIsBetween n/n 32 126
+    return b/temp
+
+r/b/asciiIsSpace n/n
+    new b/temp
+    set b/temp eq n/n 32
+    return b/temp
+
+r/b/asciiIsNewline n/n
+    new b/t1
+    set b/t1 eq n/n 10
+    new b/t2
+    set b/t2 or b/t1 eq n/n 13
+    return b/t2
+
+r/b/asciiIsLetterUpper n/n
+    new b/temp
+    set b/temp intIsBetween n/n 65 90
+    return b/temp
+
+r/b/asciiIsLetterLower n/n
+    new b/temp
+    set b/temp intIsBetween n/n 97 122
+    return b/temp
+
+r/b/asciiIsLetter n/n
+    new b/temp
+    set b/temp asciiIsLetterLower n/n
+    set b/temp or b/temp asciiIsLetterUpper n/n
+    return b/temp
+
+r/b/asciiIsAlphanum n/n
+    new b/temp
+    set b/temp asciiIsLetter n/n
+    set b/temp or b/temp asciiIsDigit n/n
+    return b/temp
+
+r/an/crlf
+    new an/temp
+    set an/temp ( 13 10 )
+    return an/temp
+
+# 0  NUL    16 DLE    32 SP   48 0    64 @    80 P    96  `    112 p
+# 1  SOH    17 DC1    33 !    49 1    65 A    81 Q    97  a    113 q
+# 2  STX    18 DC2    34 "    50 2    66 B    82 R    98  b    114 r
+# 3  ETX    19 DC3    35 #    51 3    67 C    83 S    99  c    115 s
+# 4  EOT    20 DC4    36 $    52 4    68 D    84 T    100 d    116 t
+# 5  ENQ    21 NAK    37 %    53 5    69 E    85 U    101 e    117 u
+# 6  ACK    22 SYN    38 &    54 6    70 F    86 V    102 f    118 v
+# 7  BEL    23 ETB    39 '    55 7    71 G    87 W    103 g    119 w
+# 8  BS     24 CAN    40 (    56 8    72 H    88 X    104 h    120 x
+# 9  HT     25 EM     41 )    57 9    73 I    89 Y    105 i    121 y
+# 10 LF     26 SUB    42 *    58 :    74 J    90 Z    106 j    122 z
+# 11 VT     27 ESC    43 +    59 ;    75 K    91 [    107 k    123 {
+# 12 FF     28 FS     44 ,    60 <    76 L    92 \    108 l    124 |
+# 13 CR     29 GS     45 -    61 =    77 M    93 ]    109 m    125 }
+# 14 SO     30 RS     46 .    62 >    78 N    94 ^    110 n    126 ~
+# 15 SI     31 US     47 /    63 ?    79 O    95 _    111 o    127 DEL

@@ -1,0 +1,305 @@
+async function isNonnegative(intIn) {
+    await internalDebugCollect('int In = ' + intIn + '; '); await internalDebugStackEnter('isNonnegative:math'); await assertIsInt(intIn); let boolReturn;
+
+    if (await implLt(intIn, 0)) {
+
+        boolReturn = false; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+    }
+
+    boolReturn = true; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function isNegative(intIn) {
+    await internalDebugCollect('int In = ' + intIn + '; '); await internalDebugStackEnter('isNegative:math'); await assertIsInt(intIn); let boolReturn;
+
+    if (await implLt(intIn, 0)) {
+
+        boolReturn = true; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+    }
+
+    boolReturn = false; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function isPositive(intIn) {
+    await internalDebugCollect('int In = ' + intIn + '; '); await internalDebugStackEnter('isPositive:math'); await assertIsInt(intIn); let boolReturn;
+
+    if (await le(intIn, 0)) {
+
+        boolReturn = false; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+    }
+
+    boolReturn = true; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function isNonpositive(intIn) {
+    await internalDebugCollect('int In = ' + intIn + '; '); await internalDebugStackEnter('isNonpositive:math'); await assertIsInt(intIn); let boolReturn;
+
+    if (await le(intIn, 0)) {
+
+        boolReturn = true; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+    }
+
+    boolReturn = false; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function isEven(intIn) {
+    await internalDebugCollect('int In = ' + intIn + '; '); await internalDebugStackEnter('isEven:math'); await assertIsInt(intIn); let boolReturn;
+
+    if (await implEq(0, await implMod(intIn, 2))) {
+
+        boolReturn = true; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+    }
+
+    boolReturn = false; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function isOdd(intIn) {
+    await internalDebugCollect('int In = ' + intIn + '; '); await internalDebugStackEnter('isOdd:math'); await assertIsInt(intIn); let boolReturn;
+
+    if (await implEq(0, await implMod(intIn, 2))) {
+
+        boolReturn = false; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+    }
+
+    boolReturn = true; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function assertIsEven(intIn) {
+    await internalDebugCollect('int In = ' + intIn + '; '); await internalDebugStackEnter('assertIsEven:math'); await assertIsInt(intIn);
+
+    await assertIsTrue(await isEven(intIn));
+
+    await internalDebugStackExit();
+}
+
+async function assertIsOdd(intIn) {
+    await internalDebugCollect('int In = ' + intIn + '; '); await internalDebugStackEnter('assertIsOdd:math'); await assertIsInt(intIn);
+
+    await assertIsTrue(await isOdd(intIn));
+
+    await internalDebugStackExit();
+}
+
+async function intIsBetween(intN, intA, intB) {
+    await internalDebugCollect('int N = ' + intN + '; '); await internalDebugCollect('int A = ' + intA + '; '); await internalDebugCollect('int B = ' + intB + '; '); await internalDebugStackEnter('intIsBetween:math'); await assertIsInt(intN); await assertIsInt(intA); await assertIsInt(intB); let boolReturn;
+
+    /* Checks whether N is within the range A and B, including endpoints */
+    /* Can't do it this way since it can use ints intermediately that are outside of 32 bit */
+    /*new n/t1 */
+    /*set n/t1 sub n/n n/a */
+    /*new n/t2 */
+    /*set n/t2 sub n/n n/b */
+    /*new n/t3 */
+    /*set n/t3 mul n/t1 n/t2 */
+    /*new b/temp */
+    /*set b/temp le n/t3 0 */
+    /* So instead implement using gt/lt */
+    boolTemp = await implAnd(await ge(intN, intA), await le(intN, intB));
+
+    boolReturn = boolTemp; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function intToBase36Char(intN) {
+    await internalDebugCollect('int N = ' + intN + '; '); await internalDebugStackEnter('intToBase36Char:math'); await assertIsInt(intN); let strReturn;
+
+    /* Returns the nth digit in base 36 or less (using capitalized digits). */
+    if (await implNot(await intIsBetween(intN, 0, 36))) {
+        let strTemp = '';
+        strTemp = await strFrom(intN);
+        await implDie(await implCat(await strFrom(strTemp, ' is not within the supported range of numbers between 0 and 36 (Z).')));
+    }
+    let strRes = '';
+    if (await le(intN, 9)) {
+        strRes = await charFromByte(await implAdd(intN, 48));
+    }
+    else {
+        strRes = await charFromByte(await implAdd(intN, 55));
+    }
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function intFromBase36Char(strN) {
+    await internalDebugCollect('str N = ' + strN + '; '); await internalDebugStackEnter('intFromBase36Char:math'); await assertIsStr(strN); let intReturn;
+
+    /* Returns an int given the nth digit in base 36 or less (using capitalized digits). */
+    await assertIsChar(strN);
+    let strUc = '';
+    strUc = await strToUpper(strN);
+    let intRes = 0;
+    intRes = await byteFromChar(strUc);
+    if (await ge(intRes, 65)) {
+        if (await implGt(intRes, 90)) {
+            await implDie(await implCat(strUc, ' is not within the supported range of digits between 0 and Z (36).'));
+        }
+        intRes = await implSub(intRes, 55);
+    }
+    else {
+        if (await implNot(await intIsBetween(intRes, 48, 57))) {
+            await implDie(await implCat(strN, ' is not within the supported range of digits between 0 and Z (36).'));
+        }
+        intRes = await implSub(intRes, 48);
+    }
+    if (await implNot(await intIsBetween(intRes, 0, 36))) {
+        await implDie(await implCat('Internal error in intFromBase36Char called with n=', await implCat(strN, '.')));
+    }
+
+    intReturn = intRes; await assertIsInt(intReturn); await internalDebugStackExit(); return intReturn;
+}
+
+async function intFromBaseStr(strN, intB) {
+    await internalDebugCollect('str N = ' + strN + '; '); await internalDebugCollect('int B = ' + intB + '; '); await internalDebugStackEnter('intFromBaseStr:math'); await assertIsStr(strN); await assertIsInt(intB); let intReturn;
+
+    /* Returns the integer represented by n in the requested base. Strategy based on https://www.geeksforgeeks.org/convert-base-decimal-vice-versa/ */
+    await assertIsBaseStr(strN, intB);
+    let strUc = '';
+    strUc = await strToUpper(strN);
+    let intRes = 0;
+    intRes = 0;
+    let intLen = 0;
+    intLen = await len(strUc);
+    let intInt = 0;
+    intInt = 0;
+    let intPow = 0;
+    intPow = 1;
+    while (await implGt(intLen, 0)) {
+        intLen = await implSub(intLen, 1);
+        intInt = await intFromBase36Char(await strCharAtPos(strUc, intLen));
+        await assertIsTrue(await implLt(intInt, intB));
+        intRes = await implAdd(intRes, await implMul(intInt, intPow));
+        intPow = await implMul(intPow, intB);
+    }
+
+    intReturn = intRes; await assertIsInt(intReturn); await internalDebugStackExit(); return intReturn;
+}
+
+async function hexToDec(strN) {
+    await internalDebugCollect('str N = ' + strN + '; '); await internalDebugStackEnter('hexToDec:math'); await assertIsStr(strN); let intReturn;
+
+    let intRes = 0;
+    intRes = await intFromBaseStr(strN, 16);
+
+    intReturn = intRes; await assertIsInt(intReturn); await internalDebugStackExit(); return intReturn;
+}
+
+async function decToHex(intN) {
+    await internalDebugCollect('int N = ' + intN + '; '); await internalDebugStackEnter('decToHex:math'); await assertIsInt(intN); let strReturn;
+
+    let strRes = '';
+    strRes = await intToBaseStr(intN, 16);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function intToBaseStr(intN, intB) {
+    await internalDebugCollect('int N = ' + intN + '; '); await internalDebugCollect('int B = ' + intB + '; '); await internalDebugStackEnter('intToBaseStr:math'); await assertIsInt(intN); await assertIsInt(intB); let strReturn;
+
+    /* Returns a string representing n in the requested base. Strategy based on https://www.geeksforgeeks.org/convert-base-decimal-vice-versa/ */
+    let strRes = '';
+    if (await implEq(0, intN)) {
+        strRes = '0';
+    }
+    else {
+        while (await implGt(intN, 0)) {
+            strRes = await implCat(strRes, await intToBase36Char(await implMod(intN, intB)));
+            intN = await implDiv(intN, intB);
+        }
+        strRes = await reverseStr(strRes);
+    }
+    await assertIsBaseStr(strRes, intB);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function isSupportedBase(intB) {
+    await internalDebugCollect('int B = ' + intB + '; '); await internalDebugStackEnter('isSupportedBase:math'); await assertIsInt(intB); let boolReturn;
+
+    /* StageL base conversion routines support base 1 to base 36. */
+    let boolRes = false;
+    boolRes = await intIsBetween(intB, 1, 36);
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function isBaseDigit(strIn, intB) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugCollect('int B = ' + intB + '; '); await internalDebugStackEnter('isBaseDigit:math'); await assertIsStr(strIn); await assertIsInt(intB); let boolReturn;
+
+    await assertIsChar(strIn);
+    await assertIsSupportedBase(intB);
+    if (await implNot(await asciiIsAlphanum(await byteFromChar(strIn)))) {
+
+        boolReturn = false; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+    }
+    let intDigitVal = 0;
+    intDigitVal = await intFromBase36Char(strIn);
+    let boolRes = false;
+    boolRes = await implLt(intDigitVal, intB);
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function isBaseStr(strIn, intB) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugCollect('int B = ' + intB + '; '); await internalDebugStackEnter('isBaseStr:math'); await assertIsStr(strIn); await assertIsInt(intB); let boolReturn;
+
+    let intLen = 0;
+    intLen = await len(strIn);
+    intLen = await implSub(intLen, 1);
+    await assertIsNonnegative(intLen);
+    let strChr = '';
+    let boolRes = false;
+    boolRes = true;
+    while (await ge(intLen, 0)) {
+        strChr = await strCharAtPos(strIn, intLen);
+        boolRes = await implAnd(boolRes, await isBaseDigit(strChr, intB));
+        intLen = await implSub(intLen, 1);
+    }
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function formatPercentage(intA, intB) {
+    await internalDebugCollect('int A = ' + intA + '; '); await internalDebugCollect('int B = ' + intB + '; '); await internalDebugStackEnter('formatPercentage:math'); await assertIsInt(intA); await assertIsInt(intB); let strReturn;
+
+    if (await implEq(0, intA)) {
+
+        strReturn = '0.000'; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+    }
+    let intPercentageN = 0;
+    intPercentageN = await implMul(100, await implDiv(await implMul(intA, 100000), intB));
+    let strPercentageTemp = '';
+    strPercentageTemp = await strFrom(intPercentageN);
+    let intCount = 0;
+    intCount = await implSub(await len(strPercentageTemp), 2);
+    let intCounter = 0;
+    intCounter = intCount;
+    let strPercentage = '';
+    let intDecimLoc = 0;
+    intDecimLoc = await implSub(intCount, 3);
+    while (await implGt(intCounter, 0)) {
+        if (await implEq(intCounter, await implSub(intCount, intDecimLoc))) {
+            strPercentage = await implCat(strPercentage, '.');
+        }
+        strPercentage = await implCat(strPercentage, await strChar(strPercentageTemp, await implSub(intCount, intCounter)));
+        intCounter = await implSub(intCounter, 1);
+    }
+
+    strReturn = strPercentage; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function inc(intN) {
+    await internalDebugCollect('int N = ' + intN + '; '); await internalDebugStackEnter('inc:math'); await assertIsInt(intN); let intReturn;
+
+    let intRes = 0;
+    intRes = await implAdd(1, intN);
+
+    intReturn = intRes; await assertIsInt(intReturn); await internalDebugStackExit(); return intReturn;
+}
+
+async function dec(intN) {
+    await internalDebugCollect('int N = ' + intN + '; '); await internalDebugStackEnter('dec:math'); await assertIsInt(intN); let intReturn;
+
+    let intRes = 0;
+    intRes = await implAdd(-1, intN);
+
+    intReturn = intRes; await assertIsInt(intReturn); await internalDebugStackExit(); return intReturn;
+}

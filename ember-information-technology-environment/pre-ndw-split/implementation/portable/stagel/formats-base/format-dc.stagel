@@ -1,0 +1,61 @@
+r/b/isDc g/in
+    if not isInt g/in
+        return false
+    new n/num
+    set n/num g/in
+    new b/res
+    set b/res isNonnegative n/num
+    return b/res
+
+r/b/isKnownDc g/in
+    if not isDc g/in
+        return false
+    if gt g/in maximumKnownDc
+        return false
+    return true
+
+r/n/maximumKnownDc
+    new s/res
+    set s/res dcDatasetLength 'DcData'
+    return s/res
+
+r/b/dcIsNewline n/dc
+    assertIsDc n/dc
+    # This function returns whether a character should be treated as a newline, in general. Individual characters may have more complex or ambiguous meanings (see details in DcData.csv), but this is useful as a general guide.
+    # We can't just use:
+    #if eq 'B' dcGetBidiClass n/dc
+    #    return true
+    # because that means "Paragraph_Separator" bidi class, and includes some things that really shouldn't be considered newlines from what I can tell (information separator two through four), and does not include some things that are (U+2028 Line Separator).
+    if contains ( 119 120 121 240 294 295 ) n/dc
+        return true
+    return false
+
+r/b/dcIsSpace n/dc
+    assertIsDc n/dc
+    if eq 'Zs' dcGetType n/dc
+        return true
+    return false
+
+r/b/dcIsPrintable n/dc
+    assertIsDc n/dc
+    new s/type
+    set s/type dcGetType n/dc
+    new s/generalType
+    set s/generalType strChar s/type 0
+    if or eq 'Zl' s/type } eq 'Zp' s/type
+        return false
+    if or eq '!' s/generalType } eq 'C' s/generalType
+        return false
+    return true
+
+r/b/dcIsELCode n/dc
+    assertIsDc n/dc
+    new b/res
+    set b/res eq 'EL ' substr dcGetScript n/dc } 0 3
+    return b/res
+
+r/s/dcGetELClass n/dc
+    assertIsDc n/dc
+    new s/res
+    set s/res substr dcGetScript n/dc } 3 -1
+    return s/res

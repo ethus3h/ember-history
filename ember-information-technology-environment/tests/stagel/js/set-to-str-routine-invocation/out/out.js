@@ -1,0 +1,1 @@
+strTemp = await fbSwitcher(intCounter);

@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1091
+source ember_bash_setup &> /dev/null || { printf '%b' '\033[1;31m' >&2; echo "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd): The required dependency ember-shared could not be found (or ember_bash_setup could not be sourced for some other reason)." >&2; printf '%b' '\033[0m' >&2; exit 1; }
+#set -x
+
+trap 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."' ERR
+
+[[ -f ./build-temp/wasm-dist-build-ready ]] || die "Please run build-scripts/dist-build to prepare dependencies."
+
+source ./support/build-scripts/dist-versions
+
+#rm -rf ./built/wasm-sources
+rm -rf ./built/wasm-common
+cp -ra ./implementation/portable/wasm-sources ./built/
+mv ./built/wasm-sources ./built/wasm-common
+cd ./built/wasm-common/
+
+# Copy built library files
+
+mkdir -p temp
+cp -ra ../wasm-dist-built/include ./temp
+cp -ra ../wasm-dist-built/lib ./temp
+
+# Build WASM components
+
+cToWasm() {
+    echo "Building WASM file: $1"
+    # https://web.archive.org/web/20190212131643/https://stackoverflow.com/questions/45295339/can-i-somehow-build-webassembly-code-without-the-emscripten-glue
+    clang "$1" -o "$1".o -ansi -pedantic -Werror -DSTACK_SIZE=1044480 -w -Wno-implicit-function-declaration -ffunction-sections -fdata-sections -nostdinc -I./temp/include/libc -I./temp/include -I./temp/lib --target=wasm32-unknown-unknown-wasm -c -Ofast
+    mkdir -p temp
+    [[ -d "temp/lib" ]] || cp -ra ../wasm-dist-built/lib ./temp/
+    [[ -d "temp/include" ]] || cp -ra ../wasm-dist-built/include ./temp/
+    mv "$1".o temp/
+    (
+        cd temp
+        # Link with libc:
+        #src/work/wasm-install/bin/lld -flavor wasm -entry=main --allow-undefined-file=src/work/wasm-install/sysroot/lib/wasm.syms -o src/work/torture-lld-musl/20020510-1.c.o.wasm src/work/torture-o/20020510-1.c.o src/work/wasm-install/sysroot/lib/libc.a
+        # Or without a libc (you need to provide one somehow):
+        # --allow-undefined allows undefined symbols in the linked executable. E.g. "extern" declarations. Should I remove that flag?
+        # All the -u symbolname stuff is needed since it uses the Emscripten libc etc. which depend on some JavaScript implementations of some stuff.
+        #wasm-ld -L./lib -lc-wasm -lc -ldlmalloc -lcompiler_rt_wasm -lcompiler_rt -lc_rt_wasm -lc-extras -lpthreads_stub -u sbrk -u __syscall6 -u __syscall146 -u __syscall140 -u __lock -u __unlock -u emscripten_memcpy_big -u __buildEnvironment --export-dynamic --print-gc-sections --no-gc-sections --no-entry -o "$1".o.wasm "$1".o # -u _start #  --allow-undefined
+        # Crashes while Web page is loading with out of memory:
+        #wasm-ld -L./lib -lc-wasm -lc -ldlmalloc -lcompiler_rt_wasm -lcompiler_rt -lc_rt_wasm -lc-extras -lpthreads_stub --allow-undefined --export-dynamic --print-gc-sections --no-gc-sections --no-entry -o "$1".o.wasm "$1".o # -u _start #  --allow-undefined
+        wasm-ld --export-dynamic --print-gc-sections --no-gc-sections --no-entry -o "$1".o.wasm "$1".o # -u _start #  --allow-undefined
+        wasm2wat --inline-exports --inline-imports -f --generate-names -o "$1".wat "$1".o.wasm
+        mv "$1".wat ../
+
+        # Or, if you want an assembly file instead:
+        #src/work/wasm-install/bin/clang src/work/gcc/gcc/testsuite/gcc.c-torture/execute/20020227-1.c -o src/work/torture-s/20020227-1.c.s --std=gnu89 -DSTACK_SIZE=1044480 -w -Wno-implicit-function-declaration --target=wasm32-unknown-unknown -S -O2 --sysroot=src/work/wasm-install/sysroot
+        # And get the binary file:
+        #src/work/wasm-install/bin/wast2wasm src/work/torture-s2wasm/loop-6.c.s.wast -o src/work/torture-wast2wasm/loop-6.c.s.wast.wasm
+    ) || die
+}
+
+cToWasm eite-c-exts.c
+rm -r temp

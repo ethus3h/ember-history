@@ -1,0 +1,23 @@
+async function dcPreprocessForFormat(intArrayIn, strFormat, strDirection) {
+    await internalDebugCollect('intArray In = ' + intArrayIn + '; '); await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugCollect('str Direction = ' + strDirection + '; '); await internalDebugStackEnter('dcPreprocessForFormat:dc-preprocess-for-format'); await assertIsIntArray(intArrayIn); await assertIsStr(strFormat); await assertIsStr(strDirection); let intArrayReturn;
+
+    let intArrayRes = [];
+    intArrayRes = intArrayIn;
+    let strPreferredLang = '';
+    strPreferredLang = await getPreferredLanguageForFormat(strFormat, strDirection);
+    let strPreferredCodeLang = '';
+    strPreferredCodeLang = await getPreferredCodeLanguageForFormat(strFormat, strDirection);
+    let strTemp = '';
+    if (await implIn('prefilter_semantic', await getSettingsForFormat(strFormat, strDirection))) {
+        strTemp = await pushFormatImportSetting('semanticToText', 'language', strPreferredLang);
+        intArrayRes = await dctSemanticToText(intArrayRes);
+        await setFormatImportSetting('semanticToText', 'language', strTemp);
+    }
+    if (await implIn('prefilter_code', await getSettingsForFormat(strFormat, strDirection))) {
+        strTemp = await pushFormatImportSetting('codeToText', 'language', strPreferredCodeLang);
+        intArrayRes = await dctCodeToText(intArrayRes);
+        await setFormatImportSetting('codeToText', 'language', strTemp);
+    }
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}

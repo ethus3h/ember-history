@@ -1,0 +1,3 @@
+r/v/debugRev n/level s/message
+    # Just the debug routine with the arguments reversed to avoid needing to close a bunch of arglists for a dynamically constructed string.
+    debug s/message n/level

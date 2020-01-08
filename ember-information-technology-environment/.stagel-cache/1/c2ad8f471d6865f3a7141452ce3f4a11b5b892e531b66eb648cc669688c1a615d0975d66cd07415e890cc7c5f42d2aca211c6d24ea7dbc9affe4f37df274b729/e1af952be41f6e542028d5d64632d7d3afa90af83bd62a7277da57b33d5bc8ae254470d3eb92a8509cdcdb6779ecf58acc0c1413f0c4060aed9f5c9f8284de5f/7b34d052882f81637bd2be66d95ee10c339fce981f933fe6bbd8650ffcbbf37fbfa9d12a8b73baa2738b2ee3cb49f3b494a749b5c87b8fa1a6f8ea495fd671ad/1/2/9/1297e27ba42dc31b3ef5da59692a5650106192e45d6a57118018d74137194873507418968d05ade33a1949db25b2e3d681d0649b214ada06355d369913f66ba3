@@ -1,0 +1,11 @@
+async function runTestsMath(boolV) {
+    await internalDebugCollect('bool V = ' + boolV + '; '); await internalDebugStackEnter('runTestsMath:math-tests'); await assertIsBool(boolV);
+
+    await testing(boolV, 'math');
+    await runTest(boolV, await implEq(4, await implAdd(2, 2)));
+    await runTest(boolV, await ne(4, await implAdd(2, 3)));
+    await runTest(boolV, await implEq('26BD', await decToHex(9917)));
+    await runTest(boolV, await implEq(9917, await hexToDec('26BD')));
+
+    await internalDebugStackExit();
+}

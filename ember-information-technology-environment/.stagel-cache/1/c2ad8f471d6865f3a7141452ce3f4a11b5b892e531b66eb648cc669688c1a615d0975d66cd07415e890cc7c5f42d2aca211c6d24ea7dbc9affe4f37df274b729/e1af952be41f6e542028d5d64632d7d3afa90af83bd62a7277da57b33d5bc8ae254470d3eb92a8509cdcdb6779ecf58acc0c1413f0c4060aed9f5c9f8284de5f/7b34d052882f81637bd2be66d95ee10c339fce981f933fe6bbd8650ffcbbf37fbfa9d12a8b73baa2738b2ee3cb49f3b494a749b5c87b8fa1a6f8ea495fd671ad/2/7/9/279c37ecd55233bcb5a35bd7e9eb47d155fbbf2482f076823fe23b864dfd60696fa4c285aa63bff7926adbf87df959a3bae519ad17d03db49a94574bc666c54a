@@ -1,0 +1,229 @@
+async function getSettingForFormat(strFormat, strDirection, strSettingKey) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugCollect('str Direction = ' + strDirection + '; '); await internalDebugCollect('str SettingKey = ' + strSettingKey + '; '); await internalDebugStackEnter('getSettingForFormat:formats-settings'); await assertIsStr(strFormat); await assertIsStr(strDirection); await assertIsStr(strSettingKey); let strReturn;
+
+    /* s/direction can be "in" for import settings or "out" for export settings. */
+    let strArrayTemp = [];
+    strArrayTemp = await getSettingsForFormat(strFormat, strDirection);
+    let strRes = '';
+    if (await contains(strArrayTemp, strSettingKey)) {
+        strRes = await getNext(strArrayTemp, await indexOf(strArrayTemp, strSettingKey));
+    }
+    else {
+        strRes = '';
+    }
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function getSettingsForFormat(strFormat, strDirection) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugCollect('str Direction = ' + strDirection + '; '); await internalDebugStackEnter('getSettingsForFormat:formats-settings'); await assertIsStr(strFormat); await assertIsStr(strDirection); let strArrayReturn;
+
+    /* Returns an array of setting key/value pairs. A format setting string looks like, which should be fairly parseable (keys and vals follow StageL ident naming rules): key1:val1,key2:val2, */
+    let intFormatId = 0;
+    intFormatId = await getFormatId(strFormat);
+    let strArrayRes = [];
+    if (await implEq(strDirection, 'in')) {
+        strArrayRes = await settingStringToArray(await getImportSettings(intFormatId));
+    }
+    else {
+        strArrayRes = await settingStringToArray(await getExportSettings(intFormatId));
+    }
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function getEnabledVariantsForFormat(strFormat, strDirection) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugCollect('str Direction = ' + strDirection + '; '); await internalDebugStackEnter('getEnabledVariantsForFormat:formats-settings'); await assertIsStr(strFormat); await assertIsStr(strDirection); let strArrayReturn;
+
+    let strArrayRes = [];
+    strArrayRes = await strSplit(await getSettingForFormat(strFormat, strDirection, 'variants'), ' ');
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function getPreferredLanguageForFormat(strFormat, strDirection) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugCollect('str Direction = ' + strDirection + '; '); await internalDebugStackEnter('getPreferredLanguageForFormat:formats-settings'); await assertIsStr(strFormat); await assertIsStr(strDirection); let strReturn;
+
+    let strRes = '';
+    strRes = await getEnvLanguage();
+    let strArrayTemp = [];
+    strArrayTemp = await getEnabledVariantsForFormat(strFormat, strDirection);
+    let intC = 0;
+    intC = 0;
+    let intL = 0;
+    intL = await count(strArrayTemp);
+    let boolContinue = false;
+    boolContinue = true;
+    let intItem = 0;
+    while (boolContinue) {
+        if (await implNot(await implLt(intC, await implAdd(-1, intL)))) {
+            boolContinue = false;
+        }
+        strItem = await get(strArrayTemp, intC);
+        if (await implEq('lang_', await substr(strItem, 0, 5))) {
+            strRes = strItem;
+            boolContinue = false;
+        }
+        intC = await inc(intC);
+    }
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function getPreferredCodeLanguageForFormat(strFormat, strDirection) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugCollect('str Direction = ' + strDirection + '; '); await internalDebugStackEnter('getPreferredCodeLanguageForFormat:formats-settings'); await assertIsStr(strFormat); await assertIsStr(strDirection); let strReturn;
+
+    let strRes = '';
+    strRes = await getEnvCodeLanguage();
+    let strArrayTemp = [];
+    strArrayTemp = await getEnabledVariantsForFormat(strFormat, strDirection);
+    let intC = 0;
+    intC = 0;
+    let intL = 0;
+    intL = await count(strArrayTemp);
+    let boolContinue = false;
+    boolContinue = true;
+    let intItem = 0;
+    while (boolContinue) {
+        if (await implNot(await implLt(intC, await implAdd(-1, intL)))) {
+            boolContinue = false;
+        }
+        strItem = await get(strArrayTemp, intC);
+        if (await implEq('pl_', await substr(strItem, 0, 3))) {
+            strRes = await substr(strItem, 3, -1);
+            boolContinue = false;
+        }
+        intC = await inc(intC);
+    }
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+/* setImportSettings/setExportSettings are platform implementation in environment */
+
+async function getImportSettings(intFormatId) {
+    await internalDebugCollect('int FormatId = ' + intFormatId + '; '); await internalDebugStackEnter('getImportSettings:formats-settings'); await assertIsInt(intFormatId); let strReturn;
+
+    let strRes = '';
+    if (await implLt(intFormatId, await count(await getImportSettingsArr()))) {
+        strRes = await get(await getImportSettingsArr(), intFormatId);
+    }
+    else {
+        strRes = '';
+    }
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function getExportSettings(intFormatId) {
+    await internalDebugCollect('int FormatId = ' + intFormatId + '; '); await internalDebugStackEnter('getExportSettings:formats-settings'); await assertIsInt(intFormatId); let strReturn;
+
+    let strRes = '';
+    if (await implLt(intFormatId, await count(await getExportSettingsArr()))) {
+        strRes = await get(await getExportSettingsArr(), intFormatId);
+    }
+    else {
+        strRes = '';
+    }
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function pushImportSettings(intFormatId, strNewSettingString) {
+    await internalDebugCollect('int FormatId = ' + intFormatId + '; '); await internalDebugCollect('str NewSettingString = ' + strNewSettingString + '; '); await internalDebugStackEnter('pushImportSettings:formats-settings'); await assertIsInt(intFormatId); await assertIsStr(strNewSettingString);
+
+    /* Note that all import settings must be popped in the reverse of the order they were pushed (all formats' import settings share the same stack). */
+    await setSharedState('strArrayImportDeferredSettingsStack', await push(await getSharedState('strArrayImportDeferredSettingsStack'), await getImportSettings(intFormatId)));
+    await setImportSettings(intFormatId, strNewSettingString);
+
+    await internalDebugStackExit();
+}
+
+async function pushExportSettings(intFormatId, strNewSettingString) {
+    await internalDebugCollect('int FormatId = ' + intFormatId + '; '); await internalDebugCollect('str NewSettingString = ' + strNewSettingString + '; '); await internalDebugStackEnter('pushExportSettings:formats-settings'); await assertIsInt(intFormatId); await assertIsStr(strNewSettingString);
+
+    /* Note that all export settings must be popped in the reverse of the order they were pushed (all formats' export settings share the same stack). */
+    await setSharedState('strArrayExportDeferredSettingsStack', await push(await getSharedState('strArrayExportDeferredSettingsStack'), await getExportSettings(intFormatId)));
+    await setExportSettings(intFormatId, strNewSettingString);
+
+    await internalDebugStackExit();
+}
+
+async function popImportSettings(intFormatId) {
+    await internalDebugCollect('int FormatId = ' + intFormatId + '; '); await internalDebugStackEnter('popImportSettings:formats-settings'); await assertIsInt(intFormatId);
+
+    await setImportSettings(intFormatId, await get(await getSharedState('strArrayImportDeferredSettingsStack'), -1));
+    await setSharedState('strArrayImportDeferredSettingsStack', await asSubset(await getSharedState('strArrayImportDeferredSettingsStack'), 0, -2));
+
+    await internalDebugStackExit();
+}
+
+async function popExportSettings(intFormatId) {
+    await internalDebugCollect('int FormatId = ' + intFormatId + '; '); await internalDebugStackEnter('popExportSettings:formats-settings'); await assertIsInt(intFormatId);
+
+    await setExportSettings(intFormatId, await get(await getSharedState('strArrayExportDeferredSettingsStack'), -1));
+    await setSharedState('strArrayExportDeferredSettingsStack', await asSubset(await getSharedState('strArrayExportDeferredSettingsStack'), 0, -2));
+
+    await internalDebugStackExit();
+}
+
+async function settingStringToArray(strSettings) {
+    await internalDebugCollect('str Settings = ' + strSettings + '; '); await internalDebugStackEnter('settingStringToArray:formats-settings'); await assertIsStr(strSettings); let strArrayReturn;
+
+    let strArrayRes = [];
+    intCount = await len(strSettings);
+    let intCounter = 0;
+    intCounter = 0;
+    let strElem = '';
+    let strState = '';
+    strState = 'key';
+    let strChar = '';
+    while (await implLt(intCounter, intCount)) {
+        strChar = await charAt(strSettings, intCounter);
+        if (await implEq(strState, 'key')) {
+            if (await implEq(strChar, ':')) {
+                strArrayRes = await push(strArrayRes, strElem);
+                strElem = '';
+                strState = 'val';
+            }
+            else {
+                strElem = await implCat(strElem, strChar);
+            }
+        }
+        else {
+            if (await implEq(strChar, ',')) {
+                strArrayRes = await push(strArrayRes, strElem);
+                strElem = '';
+                strState = 'key';
+            }
+            else {
+                strElem = await implCat(strElem, strChar);
+            }
+        }
+        intCounter = await implAdd(intCounter, 1);
+    }
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function settingArrayToString(strArraySettings) {
+    await internalDebugCollect('strArray Settings = ' + strArraySettings + '; '); await internalDebugStackEnter('settingArrayToString:formats-settings'); await assertIsStrArray(strArraySettings); let strReturn;
+
+    let strRes = '';
+    intCount = await count(strArraySettings);
+    let intCounter = 0;
+    intCounter = 0;
+    let strElem = '';
+    while (await implLt(intCounter, intCount)) {
+        strElem = await get(strArraySettings, intCounter);
+        await assertIsTrue(await isValidIdent(strElem));
+        if (await implEq(0, await implMod(intCounter, 2))) {
+            strRes = await implCat(strRes, await implCat(strElem, ','));
+        }
+        else {
+            strRes = await implCat(strRes, await implCat(strElem, ':'));
+        }
+        intCounter = await implAdd(intCounter, 1);
+    }
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}

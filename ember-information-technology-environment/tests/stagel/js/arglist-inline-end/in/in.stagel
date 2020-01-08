@@ -1,0 +1,2 @@
+if or eq 'Zp' s/type } eq 'Zl' s/type
+    # return true

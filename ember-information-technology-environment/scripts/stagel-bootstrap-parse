@@ -1,0 +1,342 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1091
+source ember_bash_setup &> /dev/null || { printf '%b' '\033[1;31m' >&2; echo "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd): The required dependency ember-shared could not be found (or ember_bash_setup could not be sourced for some other reason)." >&2; printf '%b' '\033[0m' >&2; exit 1; }
+#set -x
+
+trap 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."' ERR
+
+# Takes a StageL file as first argument, and prints out corresponding StageL tokens.
+
+quiet="false"
+if [[ "$1" == "-q" ]]; then
+    quiet="true"
+    shift
+fi
+
+input="$1"
+filename="$(basename "$input")"
+filename="${filename//.stagel}" # Don't include extension in name when displaying it in backtraces
+
+tokens=()
+
+# First, break up the input into tokens in the tokens array. This doesn't support streaming, so isn't good for long documents, but should suffice for now. The format should be streamable to other formats; this was just easier to implement for now.
+
+parserState="token"
+currentIndentLevel="0"
+countingIndentSpaces="true"
+indentSpacesCounted="0"
+lineNumber="1"
+columnNumber="1"
+
+pushToken() {
+    if [[ -n "${tokens[-1]}" ]] || [[ -n "${tokens[-2]}" ]]; then
+        # There's a token in the last slot in the tokens array, so make a new slot for the next one
+        tokens+=("$lineNumber:$columnNumber:$currentIndentLevel")
+        tokens+=("")
+        tokens+=("")
+    fi
+    tokens[-3]="$lineNumber:$columnNumber:$currentIndentLevel"
+    tokens[-2]="$1"
+    tokens[-1]="$2"
+    # Make a new slot for whatever happens next
+    tokens+=("$lineNumber:$columnNumber:$currentIndentLevel")
+    tokens+=("")
+    tokens+=("")
+}
+
+insertToken() {
+    local insertAfter="$1"
+    local newTokenType="$2"
+    local newToken="$3"
+    local tokensTemp=("${tokens[@]:0:insertAfter}")
+    #print_r "${tokensTemp[@]}" >&2
+    tokensTemp+=("${tokens[$((insertAfter - 2))]}")
+    tokensTemp+=("$newTokenType")
+    #print_r "${tokensTemp[@]}" >&2
+    tokensTemp+=("$newToken")
+    #print_r "${tokensTemp[@]}" >&2
+    tokensTemp+=("${tokens[@]:insertAfter}")
+    #print_r "${tokensTemp[@]}" >&2
+    tokens=("${tokensTemp[@]}")
+    #print_r "${tokens[@]}" >&2
+}
+
+# We need a dummy token at the beginning so we can insertToken after it (otherwise it would be inserting after something that doesn't exist)
+tokens+=("$lineNumber:$columnNumber:$currentIndentLevel")
+tokens+=("start-document")
+tokens+=("")
+
+# And a token to record the filename
+tokens+=("$lineNumber:$columnNumber:$currentIndentLevel")
+tokens+=("filename")
+tokens+=("$filename")
+
+# Add empty slots to the array for the first token
+tokens+=("$lineNumber:$columnNumber:$currentIndentLevel") # Line/column/depth goes in first slot
+tokens+=("") # Token type goes in second slot
+tokens+=("") # Token content goes in third slot
+#set -x
+while read -r byte; do
+    byte=$(( 16#$byte )) # Convert to decimal
+    if asciiIsNewline "$byte" || { [[ "$parserState" == "token" ]] && [[ "$byte" == "59" ]]; }; then
+        pushToken newline ""
+        lineNumber=$(( lineNumber + 1 ))
+        columnNumber=1
+    else
+        columnNumber=$(( columnNumber + 1 ))
+    fi
+    #declare -p tokens >&2
+    tokenCount="${#tokens[@]}" >&2
+    comment='
+    if [[ $lineNumber -eq 3 ]]; then
+        set -x
+    fi
+    if [[ $lineNumber -eq 4 ]]; then
+        die
+    fi
+    '
+    case $parserState in
+    token)
+        if [[ "$countingIndentSpaces" == "true" ]]; then
+            if asciiIsPrintable "$byte" && [[ "$byte" != "32" ]]; then
+                if [[ $(( indentSpacesCounted % 4 )) -eq 0 ]] && [[ "$indentSpacesCounted" -lt $(( currentIndentLevel * 4 )) ]]; then
+                    #set -x
+                    tempIndentLevelDedentState=$(( currentIndentLevel - ( indentSpacesCounted / 4 ) ))
+                    for (( i=0; i<tempIndentLevelDedentState; i++ )); do
+                        currentIndentLevel=$(( currentIndentLevel - 1 ))
+                        pushToken dedent ""
+                    done
+                    #set +x
+                elif [[ "$indentSpacesCounted" -eq $(( currentIndentLevel * 4 )) ]]; then
+                    true # The expected number of indent spaces was found; do nothing
+                elif [[ "$indentSpacesCounted" -eq $(( ( currentIndentLevel + 1 ) * 4 )) ]]; then
+                    pushToken "indent" ""
+                    currentIndentLevel=$(( currentIndentLevel + 1 ))
+                else
+                    die "Found $indentSpacesCounted spaces on line $lineNumber, column $columnNumber, but the current indentation level would expect $(( currentIndentLevel * 4 )) spaces."
+                fi
+                countingIndentSpaces="false"
+                indentSpacesCounted="0"
+            elif [[ "$byte" == "32" ]]; then
+                indentSpacesCounted=$(( indentSpacesCounted + 1 ))
+            fi
+        fi
+
+        if asciiIsNewline "$byte"; then
+            countingIndentSpaces="true"
+        fi
+
+        if asciiIsLetter "$byte" || asciiIsDigit "$byte" || [[ "$byte" == 45 ]] || [[ "$byte" == 47 ]]; then
+            [[ -z "${tokens[-1]}" ]] && tokens[-3]="$lineNumber:$columnNumber:$currentIndentLevel"
+            tokens[-1]="${tokens[-1]} $byte"
+        elif asciiIsSpace "$byte"; then
+            if [[ -n "${tokens[-1]}" ]]; then
+                # End of token.
+                # There's a token in the last slot in the tokens array, so make a new slot for the next one
+                tokens+=("$lineNumber:$columnNumber:$currentIndentLevel")
+                tokens+=("")
+                tokens+=("")
+            fi
+        elif asciiIsNewline "$byte"; then
+            # End of token
+            if [[ -n "${tokens[-1]}" ]]; then
+                tokens+=("$lineNumber:$columnNumber:$currentIndentLevel")
+                tokens+=("")
+                tokens+=("")
+            fi
+        elif [[ "$byte" == 125 ]]; then
+            pushToken inline-arglist-end ""
+        elif [[ "$byte" == 123 ]]; then
+            pushToken loop-block ""
+        elif [[ "$byte" == 39 ]]; then
+            parserState="literal-s"
+            tokens[-3]="$lineNumber:$columnNumber:$currentIndentLevel"
+            tokens[-2]="literal-s"
+        elif [[ "$byte" == 60 ]]; then
+            pushToken literal-ab-start ""
+        elif [[ "$byte" == 62 ]]; then
+            pushToken literal-ab-end ""
+        elif [[ "$byte" == 40 ]]; then
+            pushToken literal-an-start ""
+        elif [[ "$byte" == 41 ]]; then
+            pushToken literal-an-end ""
+        elif [[ "$byte" == 91 ]]; then
+            pushToken literal-as-start ""
+        elif [[ "$byte" == 93 ]]; then
+            pushToken literal-as-end ""
+        elif [[ "$byte" == 35 ]]; then
+            parserState="comment"
+            tokens[-3]="$lineNumber:$columnNumber:$currentIndentLevel"
+            tokens[-2]="comment"
+        else
+            die "Unexpected byte $byte in basic token."
+        fi
+        ;;
+    comment)
+        if asciiIsNewline "$byte"; then
+            parserState="token"
+            if [[ -n "${tokens[-1]}" ]] || [[ -n "${tokens[-2]}" ]]; then
+                # There's a token in the last slot in the tokens array, so make a new slot for the next one
+                tokens+=("$lineNumber:$columnNumber:$currentIndentLevel")
+                tokens+=("")
+                tokens+=("")
+            fi
+            countingIndentSpaces="true"
+        elif asciiIsPrintable "$byte"; then
+            tokens[-1]="${tokens[-1]} $byte"
+        else
+            die "Non-printable byte $byte in a comment."
+        fi
+        ;;
+    literal-s)
+        if [[ "$byte" == 39 ]]; then
+            parserState="token"
+            tokens+=("$lineNumber:$columnNumber:$currentIndentLevel")
+            tokens+=("")
+            tokens+=("")
+        elif asciiIsPrintable "$byte"; then
+            tokens[-1]="${tokens[-1]} $byte"
+        else
+            die "Non-printable byte $byte in a string literal."
+        fi
+        ;;
+    *)
+        die "Unknown parser state $parserState."
+        ;;
+    esac
+done < <(hexdump -v -e '1/1 "%02X\n"' < "$input")
+
+tempIndentLevel="$currentIndentLevel"
+for (( i=0; i<tempIndentLevel; i++ )); do
+    currentIndentLevel=$(( currentIndentLevel - 1 ))
+    pushToken dedent ""
+done
+
+pushToken "end-document" ""
+tokenCount="${#tokens[@]}"
+
+# If there's an empty token slot at the end, remove it
+if [[ -z "${tokens[-1]}" ]] && [[ -z "${tokens[-2]}" ]]; then
+    unset 'tokens[-1]'
+    unset 'tokens[-1]'
+    unset 'tokens[-1]'
+fi
+
+# Not all the tokens are identified yet. So, now, let's label them all.
+
+inParameterList="false"
+for (( i=0; i<tokenCount; i++ )); do
+    if ! (( (i+1) % 3 )); then
+        if [[ -n "${tokens[$i - 1]+x}" ]] && [[ -z "${tokens[$i - 1]}" ]]; then
+            # Set the token names in the table for these that aren't yet identified
+            firstByte="${tokens[$i]:1}"
+            if asciiIsDigit "${firstByte%% *}" || [[ "${firstByte%% *}" == "45" ]]; then
+                tokens[$i - 1]="literal-n"
+            else
+                case "${tokens[$i]}" in
+                " 114 47 98 47 "*)
+                    tokens[$i - 1]="ident-r-b"
+                    tokens[$i]="${tokens[$i]# 114 47 98 47}"
+                    ;;
+                " 114 47 110 47 "*)
+                    tokens[$i - 1]="ident-r-n"
+                    tokens[$i]="${tokens[$i]# 114 47 110 47}"
+                    ;;
+                " 114 47 115 47 "*)
+                    tokens[$i - 1]="ident-r-s"
+                    tokens[$i]="${tokens[$i]# 114 47 115 47}"
+                    ;;
+                " 114 47 118 47 "*)
+                    tokens[$i - 1]="ident-r-v"
+                    tokens[$i]="${tokens[$i]# 114 47 118 47}"
+                    ;;
+                " 114 47 97 98 47 "*)
+                    tokens[$i - 1]="ident-r-ab"
+                    tokens[$i]="${tokens[$i]# 114 47 97 98 47}"
+                    ;;
+                " 114 47 97 110 47 "*)
+                    tokens[$i - 1]="ident-r-an"
+                    tokens[$i]="${tokens[$i]# 114 47 97 110 47}"
+                    ;;
+                " 114 47 97 115 47 "*)
+                    tokens[$i - 1]="ident-r-as"
+                    tokens[$i]="${tokens[$i]# 114 47 97 115 47}"
+                    ;;
+                " 98 47 "*)
+                    tokens[$i - 1]="ident-b"
+                    tokens[$i]="${tokens[$i]# 98 47}"
+                    ;;
+                " 103 47 "*)
+                    tokens[$i - 1]="ident-g"
+                    tokens[$i]="${tokens[$i]# 103 47}"
+                    ;;
+                " 110 47 "*)
+                    tokens[$i - 1]="ident-n"
+                    tokens[$i]="${tokens[$i]# 110 47}"
+                    ;;
+                " 115 47 "*)
+                    tokens[$i - 1]="ident-s"
+                    tokens[$i]="${tokens[$i]# 115 47}"
+                    ;;
+                " 97 98 47 "*)
+                    tokens[$i - 1]="ident-ab"
+                    tokens[$i]="${tokens[$i]# 97 98 47}"
+                    ;;
+                " 97 110 47 "*)
+                    tokens[$i - 1]="ident-an"
+                    tokens[$i]="${tokens[$i]# 97 110 47}"
+                    ;;
+                " 97 115 47 "*)
+                    tokens[$i - 1]="ident-as"
+                    tokens[$i]="${tokens[$i]# 97 115 47}"
+                    ;;
+                " 103 97 47 "*)
+                    tokens[$i - 1]="ident-ga"
+                    tokens[$i]="${tokens[$i]# 103 97 47}"
+                    ;;
+                " 103 105 47 "*)
+                    tokens[$i - 1]="ident-gi"
+                    tokens[$i]="${tokens[$i]# 103 105 47}"
+                    ;;
+                " 116 114 117 101")
+                    tokens[$i - 1]="literal-b"
+                    tokens[$i]="true"
+                    ;;
+                " 102 97 108 115 101")
+                    tokens[$i - 1]="literal-b"
+                    tokens[$i]="false"
+                    ;;
+                *)
+                    tokens[$i - 1]="command"
+                    ;;
+                esac
+            fi
+        fi
+    fi
+done
+
+tokenCount="${#tokens[@]}"
+# Convert command & number tokens' labels to strings instead of space-separated ASCII
+
+for (( i=0; i<tokenCount; i++ )); do
+    if ! (( (i+1) % 3 )); then
+        if [[ "${tokens[$i - 1]}" == "command" ]] || [[ "${tokens[$i - 1]}" == "literal-n" ]]; then
+            tokens[$i]="$(asciiDecListToText <<< "${tokens[$i]}")"
+        fi
+    fi
+done
+
+tokenCount="${#tokens[@]}"
+#declare -p tokens >&2
+    if [[ "$quiet" != "true" ]]; then
+    echo "Document contains $((tokenCount / 3)) tokens." >&2
+    for (( i=0; i<tokenCount; i++ )); do
+        ! (( (i+1) % 3 )) && echo "Token #$((i / 3 + 1)) (${tokens[$i - 2]}): ${tokens[$i - 1]} ($((i-1))): ${tokens[$i]} ($i)" >&2
+    done
+fi
+
+# We now know what each token is, so output them.
+for (( i=0; i<tokenCount; i++ )); do
+    echo "${tokens[$i]}"
+done
+true

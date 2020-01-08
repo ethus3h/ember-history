@@ -1,0 +1,16 @@
+r/an/dcaFromElad an/in
+    assertIsByteArray an/in
+    new an/res
+
+    # FIXME: actually implement; make sure it doesn't recurse since elad parsing is needed to load language translation tables; presumably refactor logic into a separate routine and provide a separate routine for FromElad and FromEladWithoutLangSupport (if language support ever even ends up in the "From" parsers, where it makes little sense as it would only be guessing)...
+    set an/res dcaFromAscii an/in
+
+    return an/res
+
+r/an/dcaToElad an/in
+    new an/res
+
+    # FIXME: Implement
+
+    assertIsByteArray an/res
+    return an/res

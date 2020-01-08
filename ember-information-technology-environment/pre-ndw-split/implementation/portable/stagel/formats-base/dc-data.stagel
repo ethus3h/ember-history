@@ -1,0 +1,77 @@
+r/as/listDcDatasets
+    new as/res
+    set as/res [ 'DcData' 'formats' 'mappings/from/ascii' 'mappings/from/unicode' 'mappings/to/html' 'mappings/to/lang_en' 'mappings/to/unicode' ]
+    return as/res
+
+r/as/dcGetColumn s/dataset n/column
+    new as/res
+    new n/count
+    set n/count dcDatasetLength s/dataset
+    new n/i
+    while lt n/i n/count
+        set as/res push as/res dcDataLookupById s/dataset n/i n/column
+        set n/i add n/i 1
+    return as/res
+
+r/n/getDcCount
+    new n/res
+    set n/res dcDatasetLength 'DcData'
+
+r/b/isDcDataset s/in
+    new b/res
+    set b/res contains listDcDatasets } s/in
+    return b/res
+
+r/s/dcGetField n/dc n/fieldNumber
+    assertIsDc n/dc
+    new s/res
+    set s/res dcDataLookupById 'DcData' n/dc n/fieldNumber
+    return s/res
+
+r/s/dcGetName n/dc
+    assertIsDc n/dc
+    new s/res
+    set s/res dcGetField n/dc 1
+    return s/res
+
+r/s/dcGetCombiningClass n/dc
+    assertIsDc n/dc
+    new s/res
+    set s/res dcGetField n/dc 2
+    return s/res
+
+r/s/dcGetBidiClass n/dc
+    assertIsDc n/dc
+    new s/res
+    set s/res dcGetField n/dc 3
+    return s/res
+
+r/s/dcGetCasing n/dc
+    assertIsDc n/dc
+    new s/res
+    set s/res dcGetField n/dc 4
+    return s/res
+
+r/s/dcGetType n/dc
+    assertIsDc n/dc
+    new s/res
+    set s/res dcGetField n/dc 5
+    return s/res
+
+r/s/dcGetScript n/dc
+    assertIsDc n/dc
+    new s/res
+    set s/res dcGetField n/dc 6
+    return s/res
+
+r/s/dcGetComplexTraits n/dc
+    assertIsDc n/dc
+    new s/res
+    set s/res dcGetField n/dc 7
+    return s/res
+
+r/s/dcGetDescription n/dc
+    assertIsDc n/dc
+    new s/res
+    set s/res dcGetField n/dc 8
+    return s/res

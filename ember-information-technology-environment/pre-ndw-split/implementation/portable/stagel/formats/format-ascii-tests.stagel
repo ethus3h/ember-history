@@ -1,0 +1,4 @@
+r/v/runTestsFormatAscii b/v
+    testing b/v 'formatAscii'
+    runTest b/v arrEq ( 0 212 120 216 221 226 231 21 26 ) dcaFromAscii ( 0 5 10 15 20 25 30 35 40 )
+    runTest b/v arrEq ( 0 5 10 15 20 25 30 35 40 ) dcaToAscii ( 0 212 120 216 291 221 226 231 21 26 )

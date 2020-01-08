@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1091
+source ember_bash_setup &> /dev/null || { printf '%b' '\033[1;31m' >&2; echo "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd): The required dependency ember-shared could not be found (or ember_bash_setup could not be sourced for some other reason)." >&2; printf '%b' '\033[0m' >&2; exit 1; }
+#set -x
+
+trap 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."' ERR
+
+eite-single-test() {
+    testPath="$1"
+    runInput="$(tempFile)"
+    runOutput="$(tempFile)"
+    runShouldFail="$(tempFile)"
+    if [[ -d "$testPath" ]]; then
+        cp "$testPath/in.eite" "$runInput"
+        if [[ -e "$testPath/invalid" ]]; then
+            say "true" > "$runShouldFail"
+        else
+            say "false" > "$runShouldFail"
+        fi
+    else
+        die "TODO: not implemented"
+    fi
+    eite run "$runInput" > "$runOutput"
+    assert fileEquals "$testPath/out" "$runOutput"
+}
+
+find "$(readlink -f "$(abspath "$(dirname "$(ember-getconf ConfigLocation)")"/../share/eite/tests)")" -name '.eite-test' -exec runTest eite-single-test {} \;

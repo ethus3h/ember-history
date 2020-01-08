@@ -1,0 +1,150 @@
+1:1:0
+start-document
+
+1:1:0
+filename
+in
+1:2:0
+command
+new
+1:6:0
+ident-as
+ 116 101 109 112
+1:12:0
+newline
+
+2:2:0
+command
+set
+2:6:0
+ident-as
+ 116 101 109 112
+2:14:0
+literal-as-start
+
+2:16:0
+literal-s
+ 100
+2:20:0
+literal-s
+ 98
+2:24:0
+literal-s
+ 108
+2:28:0
+literal-s
+ 99
+2:32:0
+literal-s
+ 98
+2:36:0
+literal-s
+ 97
+2:40:0
+literal-as-end
+
+2:40:0
+newline
+
+3:2:0
+command
+new
+3:6:0
+ident-n
+ 99
+3:8:0
+newline
+
+4:2:0
+command
+new
+4:6:0
+ident-n
+ 105
+4:8:0
+newline
+
+5:2:0
+command
+new
+5:6:0
+ident-s
+ 101 108 101 109
+5:11:0
+newline
+
+6:2:0
+command
+while
+6:8:0
+command
+lt
+6:11:0
+ident-n
+ 105
+6:15:0
+command
+count
+6:21:0
+ident-as
+ 116 101 109 112
+6:27:0
+newline
+
+7:6:0
+indent
+
+7:6:1
+command
+set
+7:10:1
+ident-s
+ 101 108 101 109
+7:17:1
+command
+get
+7:21:1
+ident-as
+ 116 101 109 112
+7:29:1
+ident-n
+ 105
+7:31:1
+newline
+
+8:6:1
+command
+set
+8:10:1
+ident-n
+ 105
+8:14:1
+command
+inc
+8:18:1
+ident-n
+ 105
+8:20:1
+newline
+
+9:6:1
+command
+set
+9:10:1
+ident-n
+ 99
+9:14:1
+command
+inc
+9:18:1
+ident-n
+ 99
+9:20:1
+newline
+
+10:1:0
+dedent
+
+10:1:0
+end-document
+

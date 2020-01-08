@@ -1,0 +1,89 @@
+r/an/dcaFromAsciiSafeSubset an/content
+    new n/len
+    set n/len count an/content
+    new n/counter
+    set n/counter 0
+    new s/state
+    set s/state 'normal'
+    new an/prefilter
+    new n/currentChar
+    new b/strict
+    set b/strict false
+    if eq 'true' getSettingForFormat 'asciiSafeSubset' 'in' 'strict'
+        set b/strict true
+    while lt n/counter n/len
+        set n/currentChar get an/content n/counter
+        assertIsTrue isAsciiSafeSubsetChar n/currentChar
+        if and b/strict and eq s/state 'normal' } eq n/currentChar 10
+            die 'LF without preceding CR not allowed in asciiSafeSubset strict mode.'
+        if and eq s/state 'normal' } eq n/currentChar 13
+            # Wait to see if there's a lf after this cr. If so, treat them as a unit.
+            set s/state 'crlf'
+        elif eq s/state 'crlf'
+            set s/state 'normal'
+            set an/prefilter append an/prefilter crlf
+            if ne n/currentChar 10
+                if b/strict
+                    die 'CR followed by non-LF byte not allowed in asciiSafeSubset strict mode.'
+                # Reparse the current character
+                set n/counter sub n/counter 1
+        else
+            set an/prefilter push an/prefilter n/currentChar
+        set n/counter add n/counter 1
+    set an/prefilter dcaFromAscii an/prefilter
+    return an/prefilter
+
+r/an/dcaToAsciiSafeSubset an/dcIn
+    assertIsDcArray an/dcIn
+    new an/out
+    new an/temp
+    new n/len
+    set n/len count an/dcIn
+    new n/inputIndex
+    set n/inputIndex 0
+    new n/dcAtIndex
+    new s/state
+    set s/state 'normal'
+    new an/mapTemp
+    while lt n/inputIndex n/len
+        set an/mapTemp dcToFormat 'utf8' get an/dcIn n/inputIndex
+        if eq 0 count an/mapTemp
+            set an/temp setElement an/temp n/inputIndex -1
+        else
+            set an/temp setElement an/temp n/inputIndex get an/mapTemp 0
+        set n/inputIndex add n/inputIndex 1
+    set n/inputIndex 0
+    new an/tempChar
+    while lt n/inputIndex n/len
+        set n/dcAtIndex get an/dcIn n/inputIndex
+        if eq n/dcAtIndex 121
+            set s/state 'crlf'
+            set n/inputIndex add n/inputIndex 1
+            set n/dcAtIndex get an/dcIn n/inputIndex
+        if eq s/state 'normal'
+            set an/tempChar dcToFormat 'utf8' n/dcAtIndex
+            if eq 0 count an/tempChar
+                exportWarningUnmappable n/inputIndex n/dcAtIndex
+            else
+                if dcIsNewline n/dcAtIndex
+                    set an/out append an/out crlf
+                elif isAsciiSafeSubsetChar get an/tempChar 0
+                    set an/out push an/out an/tempChar
+                else
+                    exportWarningUnmappable n/inputIndex n/dcAtIndex
+        elif eq s/state 'crlf'
+            set s/state 'normal'
+            if eq n/dcAtIndex 120
+                # Found ambiguous cr, lf in a row, so only output one crlf
+                set an/out append an/out crlf
+            else
+                # Reprocess the current character with 'normal' state
+                set n/inputIndex sub n/inputIndex 1
+        set n/inputIndex add n/inputIndex 1
+    assertIsByteArray an/out
+    return an/out
+
+r/b/isAsciiSafeSubsetChar n/char
+    new b/res
+    set b/res or asciiIsPrintable n/char } asciiIsNewline n/char
+    return b/res

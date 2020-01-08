@@ -1,0 +1,31 @@
+async function dctCodeToText(intArrayIn) {
+    await internalDebugCollect('intArray In = ' + intArrayIn + '; '); await internalDebugStackEnter('dctCodeToText:code-to-text'); await assertIsIntArray(intArrayIn); let intArrayReturn;
+
+    let intArrayRes = [];
+    let intC = 0;
+    intC = 0;
+    let intL = 0;
+    intL = await count(intArrayIn);
+    let intCurrentDc = 0;
+    let strTargetLanguage = '';
+    strTargetLanguage = await getFormatImportSetting('codeToText', 'language');
+    if (await implEq(0, await len(strTargetLanguage))) {
+        strTargetLanguage = await getEnvCodeLanguage();
+    }
+    let strTemp = '';
+    while (await implLt(intC, intL)) {
+        intCurrentDc = await get(intArrayIn, intC);
+        if (await dcIsELCode(intCurrentDc)) {
+            strTemp = await dcGetMappingToFormat(intCurrentDc, strTargetLanguage);
+            if (await ne(0, await len(strTemp))) {
+                intArrayRes = await append(intArrayRes, await dcaFromElad(strTemp));
+            }
+            else {
+                intArrayRes = await push(intArrayRes, intCurrentDc);
+            }
+        }
+        intC = await inc(intC);
+    }
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}

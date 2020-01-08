@@ -1,0 +1,214 @@
+async function strChar(strStr, intIndex) {
+    await internalDebugCollect('str Str = ' + strStr + '; '); await internalDebugCollect('int Index = ' + intIndex + '; '); await internalDebugStackEnter('strChar:strings'); await assertIsStr(strStr); await assertIsInt(intIndex); let strReturn;
+
+    let strTemp = '';
+    strTemp = await substring(strStr, intIndex, 1);
+
+    strReturn = strTemp; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function strCharAtPos(strStr, intIndex) {
+    await internalDebugCollect('str Str = ' + strStr + '; '); await internalDebugCollect('int Index = ' + intIndex + '; '); await internalDebugStackEnter('strCharAtPos:strings'); await assertIsStr(strStr); await assertIsInt(intIndex); let strReturn;
+
+    /* helper alias */
+    let strTemp = '';
+    strTemp = await strChar(strStr, intIndex);
+
+    strReturn = strTemp; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function charAtPos(strStr, intIndex) {
+    await internalDebugCollect('str Str = ' + strStr + '; '); await internalDebugCollect('int Index = ' + intIndex + '; '); await internalDebugStackEnter('charAtPos:strings'); await assertIsStr(strStr); await assertIsInt(intIndex); let strReturn;
+
+    /* helper alias */
+    let strTemp = '';
+    strTemp = await strChar(strStr, intIndex);
+
+    strReturn = strTemp; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function charAt(strStr, intIndex) {
+    await internalDebugCollect('str Str = ' + strStr + '; '); await internalDebugCollect('int Index = ' + intIndex + '; '); await internalDebugStackEnter('charAt:strings'); await assertIsStr(strStr); await assertIsInt(intIndex); let strReturn;
+
+    /* helper alias */
+    let strTemp = '';
+    strTemp = await strChar(strStr, intIndex);
+
+    strReturn = strTemp; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function setCharAt(strStr, intIndex, strChar) {
+    await internalDebugCollect('str Str = ' + strStr + '; '); await internalDebugCollect('int Index = ' + intIndex + '; '); await internalDebugCollect('str Char = ' + strChar + '; '); await internalDebugStackEnter('setCharAt:strings'); await assertIsStr(strStr); await assertIsInt(intIndex); await assertIsStr(strChar); let strReturn;
+
+    let strRes = '';
+    let intFirstEnd = 0;
+    let intLastStart = 0;
+    intFirstEnd = await implSub(await len(strStr), await dec(intIndex));
+    intLastStart = await implSub(await len(strStr), await inc(intIndex));
+    strRes = await implCat(await substr(strStr, 0, intFirstEnd), await implCat(strChar, await substr(strStr, intLastStart, -1)));
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function reverseStr(strStr) {
+    await internalDebugCollect('str Str = ' + strStr + '; '); await internalDebugStackEnter('reverseStr:strings'); await assertIsStr(strStr); let strReturn;
+
+    let intL = 0;
+    intL = await len(strStr);
+    let intC = 0;
+    intC = 0;
+    let strRes = '';
+    while (await le(intC, intL)) {
+        strRes = await implCat(strRes, await strCharAtPos(strStr, await implSub(intL, intC)));
+        intC = await implAdd(1, intC);
+    }
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function charToUpper(strChar) {
+    await internalDebugCollect('str Char = ' + strChar + '; '); await internalDebugStackEnter('charToUpper:strings'); await assertIsStr(strChar); let strReturn;
+
+    await assertIsChar(strChar);
+    let intTemp = 0;
+    intTemp = await byteFromChar(strChar);
+    if (await intIsBetween(intTemp, 97, 122)) {
+        intTemp = await implSub(intTemp, 32);
+    }
+    let strRes = '';
+    strRes = await charFromByte(intTemp);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function strToUpper(strStr) {
+    await internalDebugCollect('str Str = ' + strStr + '; '); await internalDebugStackEnter('strToUpper:strings'); await assertIsStr(strStr); let strReturn;
+
+    let strRes = '';
+    let intI = 0;
+    intI = 0;
+    let intCount = 0;
+    intCount = await len(strStr);
+    while (await implLt(intI, intCount)) {
+        strRes = await implCat(strRes, await charToUpper(await strCharAtPos(strStr, intI)));
+        intI = await implAdd(intI, 1);
+    }
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function charToLower(strChar) {
+    await internalDebugCollect('str Char = ' + strChar + '; '); await internalDebugStackEnter('charToLower:strings'); await assertIsStr(strChar); let strReturn;
+
+    await assertIsChar(strChar);
+    let intTemp = 0;
+    intTemp = await byteFromChar(strChar);
+    if (await intIsBetween(intTemp, 65, 90)) {
+        intTemp = await implAdd(intTemp, 32);
+    }
+    let strRes = '';
+    strRes = await charFromByte(intTemp);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function strToLower(strStr) {
+    await internalDebugCollect('str Str = ' + strStr + '; '); await internalDebugStackEnter('strToLower:strings'); await assertIsStr(strStr); let strReturn;
+
+    let strRes = '';
+    let intI = 0;
+    intI = 0;
+    let intCount = 0;
+    intCount = await len(strStr);
+    while (await implLt(intI, intCount)) {
+        strRes = await implCat(strRes, await charToLower(await strCharAtPos(strStr, intI)));
+        intI = await implAdd(intI, 1);
+    }
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function strEmpty(strStr) {
+    await internalDebugCollect('str Str = ' + strStr + '; '); await internalDebugStackEnter('strEmpty:strings'); await assertIsStr(strStr); let boolReturn;
+
+    let boolRes = false;
+    boolRes = await implEq(0, await len(strStr));
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function strNonempty(strStr) {
+    await internalDebugCollect('str Str = ' + strStr + '; '); await internalDebugStackEnter('strNonempty:strings'); await assertIsStr(strStr); let boolReturn;
+
+    let boolRes = false;
+    boolRes = await implNot(await strEmpty(strStr));
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function substr(strStr, intStart, intLen) {
+    await internalDebugCollect('str Str = ' + strStr + '; '); await internalDebugCollect('int Start = ' + intStart + '; '); await internalDebugCollect('int Len = ' + intLen + '; '); await internalDebugStackEnter('substr:strings'); await assertIsStr(strStr); await assertIsInt(intStart); await assertIsInt(intLen); let strReturn;
+
+    /* Convenience wrapper */
+    let strRes = '';
+    strRes = await substring(strStr, intStart, intLen);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function strContainsOnlyInt(strIn) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugStackEnter('strContainsOnlyInt:strings'); await assertIsStr(strIn); let boolReturn;
+
+    /* Positive int, specifically. Only digits allowed. */
+    let intTemp = 0;
+    intTemp = await len(strIn);
+    let intI = 0;
+    intI = 0;
+    let boolRes = false;
+    boolRes = true;
+    while (await implLt(intI, intTemp)) {
+        if (await implNot(await asciiIsDigit(await byteFromChar(await strCharAtPos(strIn, intI))))) {
+            boolRes = false;
+        }
+        intI = await implAdd(intI, 1);
+    }
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function isValidIdent(strIn) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugStackEnter('isValidIdent:strings'); await assertIsStr(strIn); let strReturn;
+
+    /* Doesn't check for duplicate idents or whatever. Just makes sure the basic form is correct. */
+    let intTemp = 0;
+    intTemp = await len(strIn);
+    let intI = 0;
+    intI = 0;
+    let boolRes = false;
+    boolRes = true;
+    let intCurrentCharByte = 0;
+    while (await implLt(intI, intTemp)) {
+        intCurrentCharByte = await byteFromChar(await strCharAtPos(strIn, intI));
+        if (await implEq(intI, 0)) {
+            /* First character can only be lowercase letter */
+            if (await implNot(await asciiIsLetterLower(intCurrentCharByte))) {
+                boolRes = false;
+            }
+        }
+        else if (await implNot(await or(await asciiIsDigit(intCurrentCharByte), await asciiIsLetter(intCurrentCharByte)))) {
+            boolRes = false;
+        }
+        intI = await implAdd(intI, 1);
+    }
+
+    strReturn = boolRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function prepareStrForEcho(strIn) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugStackEnter('prepareStrForEcho:strings'); await assertIsStr(strIn); let intArrayReturn;
+
+    let intArrayRes = [];
+    intArrayRes = await convertFormats('ascii', await getEnvPreferredFormat(), await append(await strToByteArray(strIn), await crlf()));
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}

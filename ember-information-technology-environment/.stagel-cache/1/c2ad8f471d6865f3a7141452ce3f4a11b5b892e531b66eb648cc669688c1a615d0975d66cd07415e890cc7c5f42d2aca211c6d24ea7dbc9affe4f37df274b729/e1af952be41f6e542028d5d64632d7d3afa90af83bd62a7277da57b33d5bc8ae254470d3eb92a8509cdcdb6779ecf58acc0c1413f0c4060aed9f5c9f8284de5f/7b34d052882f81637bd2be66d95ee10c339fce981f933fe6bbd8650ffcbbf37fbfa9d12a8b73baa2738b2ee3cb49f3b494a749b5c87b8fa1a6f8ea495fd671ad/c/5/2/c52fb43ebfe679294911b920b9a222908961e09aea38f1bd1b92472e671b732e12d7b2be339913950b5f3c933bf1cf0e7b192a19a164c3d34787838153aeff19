@@ -1,0 +1,12 @@
+async function dcaToHtml(intArrayDcIn) {
+    await internalDebugCollect('intArray DcIn = ' + intArrayDcIn + '; '); await internalDebugStackEnter('dcaToHtml:format-html'); await assertIsIntArray(intArrayDcIn); let intArrayReturn;
+
+    await assertIsDcArray(intArrayDcIn);
+    let intArrayOut = [];
+    intArrayOut = await strToByteArray('<!DOCTYPE html><html><head><title></title></head><body>');
+    intArrayOut = await append(intArrayOut, await dcaToHtmlFragment(intArrayDcIn));
+    intArrayOut = await append(intArrayOut, await strToByteArray('</body></html>'));
+    await assertIsByteArray(intArrayOut);
+
+    intArrayReturn = intArrayOut; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}

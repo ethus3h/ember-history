@@ -1,0 +1,3 @@
+r/v/runTestsWasm b/v b/a
+    runTest b/v eq 42 wasmCall 'fortytwo' < true false >
+    runTest b/v eq 4 wasmCallArrIn 'add' ( 2 2 )

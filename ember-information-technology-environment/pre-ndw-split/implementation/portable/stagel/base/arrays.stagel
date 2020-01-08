@@ -1,0 +1,208 @@
+r/ab/abSubset ab/in n/start n/end
+    new n/count
+    set n/count count ab/in
+    if lt n/start 0
+        set n/start add n/count n/start
+    if lt n/end 0
+        set n/end add n/count n/end
+    new n/i
+    set n/i n/start
+    set n/count n/end
+    new ab/res
+    while le n/i n/count
+        set ab/res push ab/res get ab/in n/i
+        set n/i add n/i 1
+    return ab/res
+
+r/an/anSubset an/in n/start n/end
+    new n/count
+    set n/count count an/in
+    if lt n/start 0
+        set n/start add n/count n/start
+    if lt n/end 0
+        set n/end add n/count n/end
+    new n/i
+    set n/i n/start
+    set n/count n/end
+    new an/res
+    while le n/i n/count
+        set an/res push an/res get an/in n/i
+        set n/i add n/i 1
+    return an/res
+
+r/as/asSubset as/in n/start n/end
+    new n/count
+    set n/count count as/in
+    if lt n/start 0
+        set n/start add n/count n/start
+    if lt n/end 0
+        set n/end add n/count n/end
+    new n/i
+    set n/i n/start
+    set n/count n/end
+    new as/res
+    while le n/i n/count
+        set as/res push as/res get as/in n/i
+        set n/i add n/i 1
+    return as/res
+
+r/ab/abFromB b/in
+    new ab/res
+    set ab/res push ab/res b/in
+    return ab/res
+
+r/an/anFromN n/in
+    new an/res
+    set an/res push an/res n/in
+    return an/res
+
+r/as/asFromS s/in
+    new as/res
+    set as/res push as/res s/in
+    return as/res
+
+r/b/contains ga/in g/value
+    new n/count
+    set n/count sub count ga/in } 1
+    new g/elem
+    while ge n/count 0
+        set g/elem get ga/in n/count
+        if eq g/elem g/value
+            return true
+        set n/count sub n/count 1
+    return false
+
+r/b/implIn g/value ga/in
+    # Convenience wrapper
+    new b/res
+    set b/res contains ga/in g/value
+    return b/res
+
+r/n/indexOf ga/in g/value
+    new n/count
+    set n/count count ga/in
+    new n/counter
+    set n/counter 0
+    new g/elem
+    while lt n/counter n/count
+        set g/elem get ga/in n/counter
+        if eq g/elem g/value
+            return n/counter
+        set n/counter add n/counter 1
+    return -1
+
+r/b/arrEmpty ga/in
+    new b/res
+    set b/res eq 0 count ga/in
+    return b/res
+
+r/b/arrNonempty ga/in
+    new b/res
+    set b/res not arrEmpty ga/in
+    return b/res
+
+r/b/isArray gi/in
+    # Just a convenience wrapper
+    new b/res
+    set b/res isGenericArray gi/in
+    return b/res
+
+r/b/arrEq ga/a ga/b
+    new n/count
+    set n/count count ga/a
+    if ne n/count count ga/b
+        return false
+    new g/elem
+    new n/i
+    while lt n/i n/count
+        set g/elem get ga/a n/i
+        if ne g/elem get ga/b n/i
+            return false
+        set n/i add n/i 1
+    return true
+
+r/b/isIntArray ga/in
+    new n/count
+    set n/count sub count ga/in } 1
+    new g/elem
+    while ge n/count 0
+        set g/elem get ga/in n/count
+        if not isInt g/elem
+            return false
+        set n/count sub n/count 1
+    return true
+
+r/b/isStrArray ga/in
+    new n/count
+    set n/count sub count ga/in } 1
+    new g/elem
+    while ge n/count 0
+        set g/elem get ga/in n/count
+        if not isStr g/elem
+            return false
+        set n/count sub n/count 1
+    return true
+
+r/b/isBoolArray ga/in
+    new n/count
+    set n/count sub count ga/in } 1
+    new g/elem
+    while ge n/count 0
+        set g/elem get ga/in n/count
+        if not isBool g/elem
+            return false
+        set n/count sub n/count 1
+    return true
+
+r/b/isCharArray ga/in
+    new n/count
+    set n/count sub count ga/in } 1
+    new g/elem
+    while ge n/count 0
+        set g/elem get ga/in n/count
+        if not isChar g/elem
+            return false
+        set n/count sub n/count 1
+    return true
+
+r/b/isByteArray ga/in
+    new n/count
+    set n/count sub count ga/in } 1
+    new g/elem
+    while ge n/count 0
+        set g/elem get ga/in n/count
+        if not isByte g/elem
+            return false
+        set n/count sub n/count 1
+    return true
+
+r/b/isIntBitArray ga/in
+    new n/count
+    set n/count sub count ga/in } 1
+    new g/elem
+    while ge n/count 0
+        set g/elem get ga/in n/count
+        if not isIntBit g/elem
+            return false
+        set n/count sub n/count 1
+    return true
+
+r/b/isDcArray ga/in
+    new n/count
+    set n/count sub count ga/in } 1
+    new g/elem
+    while ge n/count 0
+        set g/elem get ga/in n/count
+        if not isDc g/elem
+            return false
+        set n/count sub n/count 1
+    return true
+
+r/n/sumArray an/in
+    new n/count
+    set n/count sub count an/in } 1
+    new n/res
+    while ge n/count 0
+        set n/res add n/res get an/in n/count
+        set n/count sub n/count 1
+    return n/res

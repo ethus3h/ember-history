@@ -1,0 +1,5 @@
+new s/n
+if eq 'a' s/n
+    set s/n 'FizzBuzz'
+else
+    set s/n 'b'

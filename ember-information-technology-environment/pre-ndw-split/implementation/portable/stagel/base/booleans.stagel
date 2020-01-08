@@ -1,0 +1,34 @@
+r/b/or b/a b/b
+    new b/temp
+    set b/temp not b/a
+    set b/temp not and b/temp not b/b
+    return b/temp
+
+r/b/nor b/a b/b
+    new b/temp
+    set b/temp not or b/a b/b
+    return b/temp
+
+r/b/nand b/a b/b
+    new b/temp
+    set b/temp not and b/a b/b
+    return b/temp
+
+r/b/xor b/a b/b
+    new b/temp
+    set b/temp nand b/a b/b
+    set b/temp and b/temp or b/a b/b
+    return b/temp
+
+r/b/xnor b/a b/b
+    new b/temp
+    set b/temp not xor b/a b/b
+    return b/temp
+
+r/b/isTrue b/in
+    return b/in
+
+r/b/isFalse b/in
+    new b/res
+    set b/res not b/in
+    return b/res

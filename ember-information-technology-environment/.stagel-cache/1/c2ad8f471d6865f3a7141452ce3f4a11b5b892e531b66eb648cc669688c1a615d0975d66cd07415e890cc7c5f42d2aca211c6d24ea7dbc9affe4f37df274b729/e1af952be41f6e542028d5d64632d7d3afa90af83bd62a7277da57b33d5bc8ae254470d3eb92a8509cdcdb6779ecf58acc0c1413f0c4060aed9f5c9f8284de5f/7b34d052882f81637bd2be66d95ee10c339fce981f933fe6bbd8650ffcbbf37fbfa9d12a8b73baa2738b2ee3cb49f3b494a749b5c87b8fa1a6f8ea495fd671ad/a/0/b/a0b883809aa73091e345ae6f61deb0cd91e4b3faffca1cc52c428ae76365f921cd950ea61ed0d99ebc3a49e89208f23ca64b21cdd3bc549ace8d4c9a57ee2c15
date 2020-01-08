@@ -1,0 +1,597 @@
+async function dcaToUtf8(intArrayContent) {
+    await internalDebugCollect('intArray Content = ' + intArrayContent + '; '); await internalDebugStackEnter('dcaToUtf8:format-utf8'); await assertIsIntArray(intArrayContent); let intArrayReturn;
+
+    await assertIsDcArray(intArrayContent);
+    let intArrayRes = [];
+    let intArrayToOutput = [];
+    intArrayToOutput = intArrayContent;
+    let intArrayTemp = [];
+    let intDcAtIndex = 0;
+    let intArrayUnmappables = [];
+    let intUnmappablesCount = 0;
+    let intUnmappablesCounter = 0;
+    let intArrayUnmappablesIntermediatePacked = [];
+    let boolFoundAnyUnmappables = false;
+    boolFoundAnyUnmappables = false;
+    let strArrayVariantSettings = [];
+    strArrayVariantSettings = await utf8VariantSettings('out');
+    let boolDcBasenbEnabled = false;
+    boolDcBasenbEnabled = await contains(strArrayVariantSettings, 'dcBasenb');
+    let boolDcBasenbFragmentEnabled = false;
+    boolDcBasenbFragmentEnabled = await contains(strArrayVariantSettings, 'dcBasenbFragment');
+    intArrayToOutput = await dcPreprocessForFormat(intArrayToOutput, 'utf8', 'out');
+    let intL = 0;
+    intL = await count(intArrayToOutput);
+    let intC = 0;
+    intC = 0;
+    while (await le(intC, intL)) {
+        /* Start by getting the character's UTF8 equivalent and putting it in an/temp. This might be empty, if the character can't be mapped to UTF8. */
+        if (await implLt(intC, intL)) {
+            intDcAtIndex = await get(intArrayToOutput, intC);
+            intArrayTemp = await dcToFormat('utf8', intDcAtIndex);
+        }
+        /* Could the character be mapped? If not, stick it in the unmappables array or warn as appropriate. */
+        if (await implEq(0, await count(intArrayTemp))) {
+            if (await implLt(intC, intL)) {
+                if (boolDcBasenbEnabled) {
+                    intArrayUnmappables = await push(intArrayUnmappables, intDcAtIndex);
+                }
+                else {
+                    await exportWarningUnmappable(intC, intDcAtIndex);
+                }
+            }
+        }
+        /* If we've reached the end of the input string or the last character was mappable, convert the an/unmappables array to PUA characters and append that result to the output string */
+        if (boolDcBasenbEnabled) {
+            if (await or(await implEq(intC, intL), await ne(0, await count(intArrayTemp)))) {
+                intUnmappablesCount = await count(intArrayUnmappables);
+                if (await ne(0, intUnmappablesCount)) {
+                    if (await implNot(boolFoundAnyUnmappables)) {
+                        if (await implNot(boolDcBasenbFragmentEnabled)) {
+                            intArrayRes = await append(intArrayRes, await getArmoredUtf8EmbeddedStartUuid());
+                        }
+                    }
+                    boolFoundAnyUnmappables = true;
+                    /* We've gotten to the end of a string of unmappable characters, so convert them to PUA characters */
+                    intUnmappablesCounter = 0;
+                    while (await implLt(intUnmappablesCounter, intUnmappablesCount)) {
+                        /* The packing method for this works basically like UTF8, where each character is mapped to a series of bytes. So, first get the bytearray for the character we're on. Each character should be packed separately, to make it easy to spot where one character ends and the next begins. */
+                        intArrayUnmappablesIntermediatePacked = await append(intArrayUnmappablesIntermediatePacked, await pack32(await get(intArrayUnmappables, intUnmappablesCounter)));
+                        intUnmappablesCounter = await implAdd(intUnmappablesCounter, 1);
+                        intArrayRes = await append(intArrayRes, await byteArrayToBase17bUtf8(intArrayUnmappablesIntermediatePacked));
+                        intArrayUnmappablesIntermediatePacked = [  ];
+                    }
+                    intArrayUnmappables = [  ];
+                    intArrayUnmappablesIntermediatePacked = [  ];
+                }
+            }
+        }
+        /* Stick the current character onto the result array */
+        if (await implLt(intC, intL)) {
+            intArrayRes = await append(intArrayRes, intArrayTemp);
+        }
+        /* and finally increment the loop counter */
+        intC = await implAdd(intC, 1);
+    }
+    if (await implAnd(boolDcBasenbEnabled, boolFoundAnyUnmappables)) {
+        if (await implNot(boolDcBasenbFragmentEnabled)) {
+            intArrayRes = await append(intArrayRes, await getArmoredUtf8EmbeddedEndUuid());
+        }
+    }
+    await assertIsByteArray(intArrayRes);
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function dcaFromUtf8(intArrayContent) {
+    await internalDebugCollect('intArray Content = ' + intArrayContent + '; '); await internalDebugStackEnter('dcaFromUtf8:format-utf8'); await assertIsIntArray(intArrayContent); let intArrayReturn;
+
+    let intArrayRes = [];
+    let intArrayRemaining = [];
+    intArrayRemaining = intArrayContent;
+    let intArrayTemp = [];
+    let intArrayLatestChar = [];
+    let intDcBasenbUuidMonitorState = 0;
+    intDcBasenbUuidMonitorState = 0;
+    let intDcBasenbUuidMonitorReprocessNeededCount = 0;
+    intDcBasenbUuidMonitorReprocessNeededCount = 0;
+    let strArrayVariantSettings = [];
+    strArrayVariantSettings = await utf8VariantSettings('in');
+    let boolDcBasenbEnabled = false;
+    boolDcBasenbEnabled = await contains(strArrayVariantSettings, 'dcBasenb');
+    let boolInDcBasenbSection = false;
+    boolInDcBasenbSection = false;
+    if (boolDcBasenbEnabled) {
+        boolInDcBasenbSection = await contains(strArrayVariantSettings, 'dcBasenbFragment');
+    }
+    let intSkipThisChar = 0;
+    intSkipThisChar = 0;
+    let intArrayCollectedDcBasenbChars = [];
+    let intCollectedDcBasenbCharsCount = 0;
+    let intCollectedDcBasenbCharsCounter = 0;
+    let intArrayCurrentUnmappableChar = [];
+    let intTempArrayCount = 0;
+    while (await implNot(await implEq(0, await count(intArrayRemaining)))) {
+        intArrayTemp = [  ];
+        intArrayLatestChar = await pack32(await firstCharOfUtf8String(intArrayRemaining));
+        if (boolDcBasenbEnabled) {
+            /* Dcbasenb is enabled, so process characters accordingly. */
+            if (await implNot(boolInDcBasenbSection)) {
+                /* Not in a dcbasenb section, so look out for the UUID in case we run into one */
+                /* All this code down to "(End of code section)" is only looking for UUIDs, and can mostly be disregarded for purposes of understanding the decoder logic. */
+                /* 8 characters for uuid. Probably a better way to do this but oh well. Got them with new TextEncoder().encode('[char]'); etc. */
+                if (await ne(0, intDcBasenbUuidMonitorReprocessNeededCount)) {
+                    /* We're reprocessing potential UUID chars that didn't match a UUID after all, so don't check them for being a UUID. FIXME: Non-UUID char being reprocessed followed by 244 141 129 157 etc. (a potential UUID) would NOT be checked to be a UUID here. It should handle correctly the situation where there's potential but not a UUID, followed by potential and is a UUID, overlapping, like that. */
+                    intDcBasenbUuidMonitorReprocessNeededCount = await implSub(intDcBasenbUuidMonitorReprocessNeededCount, 1);
+                }
+                else {
+                    /* Check for a UUID. */
+                    if (await implEq(intDcBasenbUuidMonitorState, 0)) {
+                        if (await arrEq(intArrayLatestChar, [ 244, 141, 129, 157 ])) {
+                            intDcBasenbUuidMonitorState = 1;
+                        }
+                    }
+                    else if (await implEq(intDcBasenbUuidMonitorState, 1)) {
+                        if (await arrEq(intArrayLatestChar, [ 244, 139, 182, 128 ])) {
+                            intDcBasenbUuidMonitorState = 2;
+                        }
+                        else {
+                            intDcBasenbUuidMonitorReprocessNeededCount = intDcBasenbUuidMonitorState;
+                            intDcBasenbUuidMonitorState = 0;
+                        }
+                    }
+                    else if (await implEq(intDcBasenbUuidMonitorState, 2)) {
+                        if (await arrEq(intArrayLatestChar, [ 243, 188, 183, 162 ])) {
+                            intDcBasenbUuidMonitorState = 3;
+                        }
+                        else {
+                            intDcBasenbUuidMonitorReprocessNeededCount = intDcBasenbUuidMonitorState;
+                            intDcBasenbUuidMonitorState = 0;
+                        }
+                    }
+                    else if (await implEq(intDcBasenbUuidMonitorState, 3)) {
+                        if (await arrEq(intArrayLatestChar, [ 243, 186, 128, 138 ])) {
+                            intDcBasenbUuidMonitorState = 4;
+                        }
+                        else {
+                            intDcBasenbUuidMonitorReprocessNeededCount = intDcBasenbUuidMonitorState;
+                            intDcBasenbUuidMonitorState = 0;
+                        }
+                    }
+                    else if (await implEq(intDcBasenbUuidMonitorState, 4)) {
+                        if (await arrEq(intArrayLatestChar, [ 243, 184, 165, 142 ])) {
+                            intDcBasenbUuidMonitorState = 5;
+                        }
+                        else {
+                            intDcBasenbUuidMonitorReprocessNeededCount = intDcBasenbUuidMonitorState;
+                            intDcBasenbUuidMonitorState = 0;
+                        }
+                    }
+                    else if (await implEq(intDcBasenbUuidMonitorState, 5)) {
+                        if (await arrEq(intArrayLatestChar, [ 244, 136, 186, 141 ])) {
+                            intDcBasenbUuidMonitorState = 6;
+                        }
+                        else {
+                            intDcBasenbUuidMonitorReprocessNeededCount = intDcBasenbUuidMonitorState;
+                            intDcBasenbUuidMonitorState = 0;
+                        }
+                    }
+                    else if (await implEq(intDcBasenbUuidMonitorState, 6)) {
+                        if (await arrEq(intArrayLatestChar, [ 243, 178, 139, 160 ])) {
+                            intDcBasenbUuidMonitorState = 7;
+                        }
+                        else {
+                            intDcBasenbUuidMonitorReprocessNeededCount = intDcBasenbUuidMonitorState;
+                            intDcBasenbUuidMonitorState = 0;
+                        }
+                    }
+                    else if (await implEq(intDcBasenbUuidMonitorState, 7)) {
+                        if (await arrEq(intArrayLatestChar, [ 244, 143, 186, 144 ])) {
+                            intDcBasenbUuidMonitorState = 0;
+                            intArrayLatestChar = [  ];
+                            boolInDcBasenbSection = true;
+                        }
+                        else {
+                            intDcBasenbUuidMonitorReprocessNeededCount = intDcBasenbUuidMonitorState;
+                            intDcBasenbUuidMonitorState = 0;
+                        }
+                    }
+                    if (await ne(0, intDcBasenbUuidMonitorReprocessNeededCount)) {
+                        /* It's necessary to reprocess the number of bytes that were consumed while checking for a UUID */
+                        intTempArrayCount = await implSub(await count(intArrayContent), await count(intArrayRemaining));
+                        intArrayRemaining = await anSubset(intArrayContent, intTempArrayCount, await implAdd(intTempArrayCount, await implMul(4, intDcBasenbUuidMonitorReprocessNeededCount)));
+                    }
+                }
+            }
+            else {
+                /* Dcbasenb support is enabled, and we're inside a dcbasenb region. Process chars accordingly. */
+                if (await ne(0, intDcBasenbUuidMonitorReprocessNeededCount)) {
+                    /* Reprocessing non-UUID chars that could have been a UUID. Again, FIXME same as for the start UUID reprocessing bug mentioned in the earlier FIXME. */
+                    intDcBasenbUuidMonitorReprocessNeededCount = await implSub(intDcBasenbUuidMonitorReprocessNeededCount, 1);
+                }
+                else {
+                    /* Look for a dcbasenb region end UUID. */
+                    if (await implEq(intDcBasenbUuidMonitorState, 0)) {
+                        if (await arrEq(intArrayLatestChar, [ 243, 188, 133, 185 ])) {
+                            intDcBasenbUuidMonitorState = 1;
+                        }
+                    }
+                    else if (await implEq(intDcBasenbUuidMonitorState, 1)) {
+                        if (await arrEq(intArrayLatestChar, [ 243, 180, 182, 175 ])) {
+                            intDcBasenbUuidMonitorState = 2;
+                        }
+                        else {
+                            intDcBasenbUuidMonitorReprocessNeededCount = intDcBasenbUuidMonitorState;
+                            intDcBasenbUuidMonitorState = 0;
+                        }
+                    }
+                    else if (await implEq(intDcBasenbUuidMonitorState, 2)) {
+                        if (await arrEq(intArrayLatestChar, [ 244, 136, 161, 186 ])) {
+                            intDcBasenbUuidMonitorState = 3;
+                        }
+                        else {
+                            intDcBasenbUuidMonitorReprocessNeededCount = intDcBasenbUuidMonitorState;
+                            intDcBasenbUuidMonitorState = 0;
+                        }
+                    }
+                    else if (await implEq(intDcBasenbUuidMonitorState, 3)) {
+                        if (await arrEq(intArrayLatestChar, [ 243, 191, 148, 138 ])) {
+                            intDcBasenbUuidMonitorState = 4;
+                        }
+                        else {
+                            intDcBasenbUuidMonitorReprocessNeededCount = intDcBasenbUuidMonitorState;
+                            intDcBasenbUuidMonitorState = 0;
+                        }
+                    }
+                    else if (await implEq(intDcBasenbUuidMonitorState, 4)) {
+                        if (await arrEq(intArrayLatestChar, [ 244, 134, 178, 166 ])) {
+                            intDcBasenbUuidMonitorState = 5;
+                        }
+                        else {
+                            intDcBasenbUuidMonitorReprocessNeededCount = intDcBasenbUuidMonitorState;
+                            intDcBasenbUuidMonitorState = 0;
+                        }
+                    }
+                    else if (await implEq(intDcBasenbUuidMonitorState, 5)) {
+                        if (await arrEq(intArrayLatestChar, [ 244, 141, 184, 130 ])) {
+                            intDcBasenbUuidMonitorState = 6;
+                        }
+                        else {
+                            intDcBasenbUuidMonitorReprocessNeededCount = intDcBasenbUuidMonitorState;
+                            intDcBasenbUuidMonitorState = 0;
+                        }
+                    }
+                    else if (await implEq(intDcBasenbUuidMonitorState, 6)) {
+                        if (await arrEq(intArrayLatestChar, [ 243, 178, 128, 176 ])) {
+                            intDcBasenbUuidMonitorState = 7;
+                        }
+                        else {
+                            intDcBasenbUuidMonitorReprocessNeededCount = intDcBasenbUuidMonitorState;
+                            intDcBasenbUuidMonitorState = 0;
+                        }
+                    }
+                    else if (await implEq(intDcBasenbUuidMonitorState, 7)) {
+                        if (await arrEq(intArrayLatestChar, [ 244, 143, 188, 157 ])) {
+                            intDcBasenbUuidMonitorState = 0;
+                            intArrayLatestChar = [  ];
+                            boolInDcBasenbSection = false;
+                            /* Handle any remaining collected DcBasenb characters */
+                            if (await ne(0, await count(intArrayCollectedDcBasenbChars))) {
+                                intArrayCollectedDcBasenbChars = await byteArrayFromBase17bUtf8(intArrayCollectedDcBasenbChars);
+                                if (await excepArr(intArrayCollectedDcBasenbChars)) {
+                                    await importWarning(await implSub(await count(intArrayContent), await count(intArrayRemaining), ), 'An invalid base17b UTF8 input was encountered. Probably it was incorrectly truncated.');
+                                    intArrayCollectedDcBasenbChars = [  ];
+                                }
+                                intCollectedDcBasenbCharsCount = await count(intArrayCollectedDcBasenbChars);
+                                intCollectedDcBasenbCharsCounter = 0;
+                                while (await implLt(intCollectedDcBasenbCharsCounter, intCollectedDcBasenbCharsCount)) {
+                                    intArrayCurrentUnmappableChar = await utf8BytesFromDecimalChar(await firstCharOfUtf8String(intArrayCollectedDcBasenbChars));
+                                    intArrayRes = await append(intArrayRes, await unpack32(intArrayCurrentUnmappableChar));
+                                    intCollectedDcBasenbCharsCounter = await implAdd(intCollectedDcBasenbCharsCounter, await count(intArrayCurrentUnmappableChar));
+                                }
+                                intArrayCollectedDcBasenbChars = [  ];
+                            }
+                        }
+                        else {
+                            intDcBasenbUuidMonitorReprocessNeededCount = intDcBasenbUuidMonitorState;
+                            intDcBasenbUuidMonitorState = 0;
+                        }
+                    }
+                    if (await ne(0, intDcBasenbUuidMonitorReprocessNeededCount)) {
+                        /* It's necessary to reprocess the number of bytes that were consumed while checking for a UUID */
+                        intTempArrayCount = await count(intArrayRemaining);
+                        intArrayRemaining = await anSubset(intArrayContent, intTempArrayCount, await implAdd(intTempArrayCount, await implMul(4, intDcBasenbUuidMonitorReprocessNeededCount)));
+                    }
+                }
+                /* (End of code section) (see explanation above) */
+            }
+            if (await implEq(0, intDcBasenbUuidMonitorState)) {
+                /* Process the current character: if we're in a dcbasenb section, check if it is a dcbasenb character and collect it for decoding. Otherwise, decode the preceding run of dcbasenb chars as a chunk and append that to the result. */
+                if (await ne(0, await count(intArrayLatestChar))) {
+                    /* There is a latest char (latestChar has more than 0 elems), so work on it */
+                    if (await implAnd(boolInDcBasenbSection, await implAnd(await isBasenbChar(intArrayLatestChar), await implNot(await isBasenbDistinctRemainderChar(intArrayLatestChar))))) {
+                        /* The character is a dcbasenb char and we're in a dcbasenb section, so collect the character for decoding. */
+                        /* Should decode each character as a single batch with the end of the run denoted by isBasenbDistinctRemainderChar, so don't match those here. */
+                        intArrayCollectedDcBasenbChars = await append(intArrayCollectedDcBasenbChars, intArrayLatestChar);
+                        intSkipThisChar = await count(intArrayLatestChar);
+                    }
+                    else {
+                        /* Not a basenb char (or not in a dcbasenb section), so decode the ones we've collected, if there are any */
+                        if (await ne(0, await count(intArrayCollectedDcBasenbChars))) {
+                            if (await isBasenbDistinctRemainderChar(intArrayLatestChar)) {
+                                intArrayCollectedDcBasenbChars = await push(intArrayCollectedDcBasenbChars, intArrayLatestChar);
+                            }
+                            intArrayCollectedDcBasenbChars = await byteArrayFromBase17bUtf8(intArrayCollectedDcBasenbChars);
+                            if (await excepArr(intArrayCollectedDcBasenbChars)) {
+                                await importWarning(await implSub(await count(intArrayContent), await count(intArrayRemaining), ), 'An invalid base17b UTF8 input was encountered. Probably it was incorrectly truncated.');
+                                intArrayCollectedDcBasenbChars = [  ];
+                            }
+                            intCollectedDcBasenbCharsCount = await count(intArrayCollectedDcBasenbChars);
+                            intCollectedDcBasenbCharsCounter = 0;
+                            while (await implLt(intCollectedDcBasenbCharsCounter, intCollectedDcBasenbCharsCount)) {
+                                intArrayCurrentUnmappableChar = await utf8BytesFromDecimalChar(await firstCharOfUtf8String(intArrayCollectedDcBasenbChars));
+                                intArrayRes = await append(intArrayRes, await unpack32(intArrayCurrentUnmappableChar));
+                                intCollectedDcBasenbCharsCounter = await implAdd(intCollectedDcBasenbCharsCounter, await count(intArrayCurrentUnmappableChar));
+                            }
+                            intArrayCollectedDcBasenbChars = [  ];
+                        }
+                    }
+                }
+                else {
+                    /* The latest char was the last char of a confirmed UUID. */
+                    intSkipThisChar = 4;
+                }
+            }
+        }
+        intTempArrayCount = await count(intArrayLatestChar);
+        if (await implEq(0, intDcBasenbUuidMonitorState)) {
+            /* (We're not trying to spot a UUID right now: either the current char couldn't be one, or we confirmed it's not part of one and are re-processing this char.) */
+            if (await ne(0, intSkipThisChar)) {
+                /* The current character was a dcbasenb character, so it was stuck onto the collectedDcBasenbChars array and so we defer working on it until later. (Or, it was the last character of a confirmed UUID; either way, it doesn't get processed now.) */
+                intTempArrayCount = intSkipThisChar;
+                intSkipThisChar = 0;
+            }
+            else {
+                /* Not skipping the current char, so decode it from Unicode normally. */
+                intArrayTemp = intArrayLatestChar;
+                let intArrayTempFromUnicode = [];
+                intArrayTempFromUnicode = await dcFromFormat('unicode', intArrayTemp);
+                if (await le(1, await count(intArrayTempFromUnicode))) {
+                    if (await ne(-1, await get(intArrayTempFromUnicode, 0))) {
+                        intArrayRes = await append(intArrayRes, intArrayTempFromUnicode);
+                    }
+                }
+            }
+        }
+        /* Place in an/remaining the substring of input that has not been processed yet. */
+        intArrayRemaining = await anSubset(intArrayRemaining, intTempArrayCount, -1);
+    }
+    if (boolDcBasenbEnabled) {
+        /* Handle any remaining collected DcBasenb characters */
+        if (await ne(0, await count(intArrayCollectedDcBasenbChars))) {
+            intArrayCollectedDcBasenbChars = await byteArrayFromBase17bUtf8(intArrayCollectedDcBasenbChars);
+            if (await excepArr(intArrayCollectedDcBasenbChars)) {
+                await importWarning(await implSub(await count(intArrayContent), await count(intArrayRemaining), ), 'An invalid base17b UTF8 input was encountered. Probably it was incorrectly truncated.');
+                intArrayCollectedDcBasenbChars = [  ];
+            }
+            intCollectedDcBasenbCharsCount = await count(intArrayCollectedDcBasenbChars);
+            intCollectedDcBasenbCharsCounter = 0;
+            while (await implLt(intCollectedDcBasenbCharsCounter, intCollectedDcBasenbCharsCount)) {
+                intArrayCurrentUnmappableChar = await utf8BytesFromDecimalChar(await firstCharOfUtf8String(intArrayCollectedDcBasenbChars));
+                intArrayRes = await append(intArrayRes, await unpack32(intArrayCurrentUnmappableChar));
+                intCollectedDcBasenbCharsCounter = await implAdd(intCollectedDcBasenbCharsCounter, await count(intArrayCurrentUnmappableChar));
+            }
+        }
+    }
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function utf8VariantSettings(strDirection) {
+    await internalDebugCollect('str Direction = ' + strDirection + '; '); await internalDebugStackEnter('utf8VariantSettings:format-utf8'); await assertIsStr(strDirection); let strArrayReturn;
+
+    let strArrayRes = [];
+    strArrayRes = await getEnabledVariantsForFormat('utf8', strDirection);
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function dcaFromUnicodeChar(intChar) {
+    await internalDebugCollect('int Char = ' + intChar + '; '); await internalDebugStackEnter('dcaFromUnicodeChar:format-utf8'); await assertIsInt(intChar); let intArrayReturn;
+
+    /* Takes a character number, not a byte array. */
+    let intArrayRes = [];
+    let intArrayTemp = [];
+    intArrayTemp = await dcFromFormat('unicode', await anFromN(intChar));
+    if (await ne(0, await count(intArrayTemp))) {
+        intArrayRes = await push(intArrayRes, await get(intArrayTemp, 0));
+    }
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function dcToUnicodeCharArray(intDc) {
+    await internalDebugCollect('int Dc = ' + intDc + '; '); await internalDebugStackEnter('dcToUnicodeCharArray:format-utf8'); await assertIsInt(intDc); let intArrayReturn;
+
+    /* Returns a character number, not a byte array. */
+    let intArrayRes = [];
+    let intArrayTemp = [];
+    intArrayTemp = await dcToFormat('unicode', intDc);
+    if (await ne(0, await count(intArrayTemp))) {
+        intArrayRes = await push(intArrayRes, await firstCharOfUtf8String(intArrayTemp));
+    }
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function dcaToDcbnbUtf8(intArrayContent) {
+    await internalDebugCollect('intArray Content = ' + intArrayContent + '; '); await internalDebugStackEnter('dcaToDcbnbUtf8:format-utf8'); await assertIsIntArray(intArrayContent); let intArrayReturn;
+
+    /* convenience wrapper */
+    let intArrayRes = [];
+    await pushExportSettings(await getFormatId('utf8'), 'variants:dcBasenb,');
+    intArrayRes = await dcaToUtf8(intArrayContent);
+    await popExportSettings(await getFormatId('utf8'));
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function dcaFromDcbnbUtf8(intArrayContent) {
+    await internalDebugCollect('intArray Content = ' + intArrayContent + '; '); await internalDebugStackEnter('dcaFromDcbnbUtf8:format-utf8'); await assertIsIntArray(intArrayContent); let intArrayReturn;
+
+    /* convenience wrapper */
+    let intArrayRes = [];
+    await pushImportSettings(await getFormatId('utf8'), 'variants:dcBasenb,');
+    intArrayRes = await dcaFromUtf8(intArrayContent);
+    await popImportSettings(await getFormatId('utf8'));
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function dcaToDcbnbFragmentUtf8(intArrayContent) {
+    await internalDebugCollect('intArray Content = ' + intArrayContent + '; '); await internalDebugStackEnter('dcaToDcbnbFragmentUtf8:format-utf8'); await assertIsIntArray(intArrayContent); let intArrayReturn;
+
+    /* convenience wrapper */
+    let intArrayRes = [];
+    await pushExportSettings(await getFormatId('utf8'), 'variants:dcBasenb dcBasenbFragment,skip_prefilter_semantic:,skip_prefilter_code:,');
+    intArrayRes = await dcaToUtf8(intArrayContent);
+    await popExportSettings(await getFormatId('utf8'));
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function dcaFromDcbnbFragmentUtf8(intArrayContent) {
+    await internalDebugCollect('intArray Content = ' + intArrayContent + '; '); await internalDebugStackEnter('dcaFromDcbnbFragmentUtf8:format-utf8'); await assertIsIntArray(intArrayContent); let intArrayReturn;
+
+    /* convenience wrapper */
+    let intArrayRes = [];
+    await pushImportSettings(await getFormatId('utf8'), 'variants:dcBasenb dcBasenbFragment,');
+    intArrayRes = await dcaFromUtf8(intArrayContent);
+    await popImportSettings(await getFormatId('utf8'));
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function utf8CharArrayFromByteArray(intArrayIn) {
+    await internalDebugCollect('intArray In = ' + intArrayIn + '; '); await internalDebugStackEnter('utf8CharArrayFromByteArray:format-utf8'); await assertIsIntArray(intArrayIn); let intArrayReturn;
+
+    let intArrayRes = [];
+    let intArrayRemaining = [];
+    intArrayRemaining = intArrayIn;
+    let intTemp = 0;
+    while (await implLt(0, await count(intArrayRemaining))) {
+        intTemp = await firstCharOfUtf8String(intArrayRemaining);
+        intArrayRes = await push(intArrayRes, intTemp);
+        intArrayRemaining = await anSubset(intArrayRemaining, await count(await utf8BytesFromDecimalChar(intTemp), ), -1);
+    }
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function byteArrayFromUtf8CharArray(intArrayIn) {
+    await internalDebugCollect('intArray In = ' + intArrayIn + '; '); await internalDebugStackEnter('byteArrayFromUtf8CharArray:format-utf8'); await assertIsIntArray(intArrayIn); let intArrayReturn;
+
+    let intArrayRes = [];
+    let intCount = 0;
+    let intI = 0;
+    intCount = await count(intArrayIn);
+    intI = 0;
+    while (await implLt(intI, intCount)) {
+        intArrayRes = await append(intArrayRes, await utf8BytesFromDecimalChar(await get(intArrayIn, intI)));
+        intI = await implAdd(1, intI);
+    }
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function dcbnbGetFirstChar(intArrayIn) {
+    await internalDebugCollect('intArray In = ' + intArrayIn + '; '); await internalDebugStackEnter('dcbnbGetFirstChar:format-utf8'); await assertIsIntArray(intArrayIn); let intArrayReturn;
+
+    /* Return the first character of a dcbnb string (doesn't do any conversion; returns dcbnb) */
+    let intArrayRes = [];
+    if (await implEq(0, await count(intArrayIn))) {
+
+        intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+    }
+    let boolContinue = false;
+    boolContinue = true;
+    let intArrayNextUtf8 = [];
+    let intArrayRemaining = [];
+    intArrayRemaining = intArrayIn;
+    let intTempArrayCount = 0;
+    while (boolContinue) {
+        intArrayNextUtf8 = await pack32(await firstCharOfUtf8String(intArrayRemaining));
+        if (await implNot(await isBasenbChar(intArrayNextUtf8))) {
+            if (await implEq(0, await count(intArrayRes))) {
+                intArrayRes = intArrayNextUtf8;
+            }
+            boolContinue = false;
+        }
+        else {
+            intArrayRes = await append(intArrayRes, intArrayNextUtf8);
+            if (await isBasenbDistinctRemainderChar(intArrayNextUtf8)) {
+                boolContinue = false;
+            }
+            else {
+                intTempArrayCount = await count(intArrayNextUtf8);
+                intArrayRemaining = await anSubset(intArrayRemaining, intTempArrayCount, -1);
+            }
+        }
+    }
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function dcbnbGetLastChar(intArrayIn) {
+    await internalDebugCollect('intArray In = ' + intArrayIn + '; '); await internalDebugStackEnter('dcbnbGetLastChar:format-utf8'); await assertIsIntArray(intArrayIn); let intArrayReturn;
+
+    /* Return the last character of a dcbnb string (doesn't do any conversion; returns dcbnb) */
+    let intArrayRes = [];
+    if (await implEq(0, await count(intArrayIn))) {
+
+        intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+    }
+    let boolContinue = false;
+    boolContinue = true;
+    let intArrayNextUtf8 = [];
+    let intArrayRemaining = [];
+    intArrayRemaining = intArrayIn;
+    let intTempArrayCount = 0;
+    intTempArrayCount = 0;
+    let boolPastFirstBasenbRemainderChar = false;
+    boolPastFirstBasenbRemainderChar = false;
+    while (boolContinue) {
+        if (await ne(0, await count(intArrayRemaining))) {
+            intArrayNextUtf8 = await pack32(await lastCharOfUtf8String(intArrayRemaining));
+        }
+        else {
+            intArrayNextUtf8 = [  ];
+        }
+        if (await implNot(await isBasenbChar(intArrayNextUtf8))) {
+            if (await implEq(0, await count(intArrayRes))) {
+                intArrayRes = intArrayNextUtf8;
+            }
+            boolContinue = false;
+        }
+        else {
+            if (await isBasenbDistinctRemainderChar(intArrayNextUtf8)) {
+                if (boolPastFirstBasenbRemainderChar) {
+                    boolContinue = false;
+                }
+                else {
+                    intArrayRes = await append(intArrayNextUtf8, intArrayRes);
+                    intTempArrayCount = await count(intArrayNextUtf8);
+                    intArrayRemaining = await anSubset(intArrayRemaining, 0, await implAdd(-1, await implMul(-1, intTempArrayCount)));
+                    boolPastFirstBasenbRemainderChar = true;
+                }
+            }
+            else {
+                intArrayRes = await append(intArrayNextUtf8, intArrayRes);
+                intTempArrayCount = await count(intArrayNextUtf8);
+                intArrayRemaining = await anSubset(intArrayRemaining, 0, await implAdd(-1, await implMul(-1, intTempArrayCount)));
+            }
+        }
+    }
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}

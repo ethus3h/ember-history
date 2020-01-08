@@ -1,0 +1,3 @@
+if eq 0 mod n/num 15
+    new s/n
+    set s/n 'FizzBuzz'

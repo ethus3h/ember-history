@@ -1,0 +1,18 @@
+async function runTestsTypeConversion(boolV) {
+    await internalDebugCollect('bool V = ' + boolV + '; '); await internalDebugStackEnter('runTestsTypeConversion:type-conversion-tests'); await assertIsBool(boolV);
+
+    await testing(boolV, 'typeConversion');
+    await runTest(boolV, await arrEq([ 'a', 'b', 'c' ], await strSplit('a,b,c', ',')));
+    await runTest(boolV, await arrEq([ 'a', 'b', 'c' ], await strSplit('aabbabc', 'ab')));
+    await runTest(boolV, await arrEq([ 'a', 'b', 'c', '' ], await strSplit('aabbabcab', 'ab')));
+    await runTest(boolV, await arrEq([ '', 'c' ], await strSplit('abc', 'ab')));
+    await runTest(boolV, await arrEq([ '', '', 'baa' ], await strSplit('ababbaa', 'ab')));
+    await runTest(boolV, await arrEq([ 'a', '' ], await strSplit('aab', 'ab')));
+    await runTest(boolV, await arrEq([ '', 'a', '' ], await strSplit('abaab', 'ab')));
+    await runTest(boolV, await arrEq([ '', 'a', '', '' ], await strSplit('abaabab', 'ab')));
+    await runTest(boolV, await arrEq([ '', '', '' ], await strSplit('abab', 'ab')));
+    await runTest(boolV, await arrEq([ '', '' ], await strSplit('ab', 'ab')));
+    await runTest(boolV, await arrEq([ '', '', '' ], await strSplit(await strJoin(await strSplit('abab', 'ab'), 'ab'), 'ab')));
+
+    await internalDebugStackExit();
+}

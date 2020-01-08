@@ -1,0 +1,5 @@
+new as/temp
+set as/temp [ 'd' 'b' 'l' 'c' 'b' 'a' ]
+new n/c
+as/temp { n/i s/elem
+    set n/c inc n/c

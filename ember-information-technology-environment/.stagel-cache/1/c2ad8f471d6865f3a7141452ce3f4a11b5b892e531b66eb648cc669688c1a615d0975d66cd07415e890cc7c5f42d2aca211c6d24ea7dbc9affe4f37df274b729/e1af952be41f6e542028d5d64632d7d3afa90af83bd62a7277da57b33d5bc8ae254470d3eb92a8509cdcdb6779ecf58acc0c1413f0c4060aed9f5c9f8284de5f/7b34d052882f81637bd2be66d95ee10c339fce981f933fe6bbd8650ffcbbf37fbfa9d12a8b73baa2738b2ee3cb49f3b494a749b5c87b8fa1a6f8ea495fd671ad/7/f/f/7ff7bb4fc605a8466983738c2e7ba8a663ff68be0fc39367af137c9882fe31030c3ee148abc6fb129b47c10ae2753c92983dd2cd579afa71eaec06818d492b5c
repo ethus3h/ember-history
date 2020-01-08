@@ -1,0 +1,8 @@
+async function runTestsDcData(boolV) {
+    await internalDebugCollect('bool V = ' + boolV + '; '); await internalDebugStackEnter('runTestsDcData:dc-data-tests'); await assertIsBool(boolV);
+
+    await testing(boolV, 'dcData');
+    await runTest(boolV, await implEq('B', await dcGetBidiClass(120)));
+
+    await internalDebugStackExit();
+}

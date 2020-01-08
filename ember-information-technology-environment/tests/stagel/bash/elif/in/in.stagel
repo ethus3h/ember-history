@@ -1,0 +1,7 @@
+new s/n
+if eq 'a' s/n
+    set s/n 'FizzBuzz'
+elif eq 'b' s/n
+    set s/n 'c'
+else
+    set s/n 'b'

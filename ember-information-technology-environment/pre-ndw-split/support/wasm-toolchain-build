@@ -1,0 +1,151 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1091
+source ember_bash_setup &> /dev/null || { printf '%b' '\033[1;31m' >&2; echo "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd): The required dependency ember-shared could not be found (or ember_bash_setup could not be sourced for some other reason)." >&2; printf '%b' '\033[0m' >&2; exit 1; }
+#set -x
+
+trap 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."' ERR
+
+source ./support/build-scripts/dist-versions || die
+./support/build-scripts/dist-unpack || die "Could not run dist-unpack."
+
+# Build WebAssembly toolchain
+
+(
+
+rm -rf ./build-temp/build
+mkdir -p ./build-temp/build
+rm -rf ./build-temp/out
+mkdir ./build-temp/out
+
+cd ./build-temp/build || die
+
+unpackedDir="$(readlink -f .)/../unpacked"
+
+echo "Building wat2wasm"
+cp -r "$unpackedDir/wabt-$myWabtVersion" ./
+cd ./wabt-"$myWabtVersion" || die
+
+echo "Building wat2wasm: Preparing dependencies"
+cp -r "$unpackedDir/emscripten-$myEmscriptenCommit" "./emscripten" || die
+cp -r "$unpackedDir/ply-${myPlyVersion}" "./emscripten/third_party/ply" || die
+rm -rf "./third_party"
+mkdir "./third_party" || die "Error creating empty third_party directory"
+cp -r "$unpackedDir/googletest-release-${myGoogletestVersion}" "./third_party/gtest" || die
+cp -r "$unpackedDir/ply-${myPlyVersion}" "./third_party/ply" || die
+cp -r "$unpackedDir/testsuite-${myTestsuiteCommit}" "./third_party/testsuite" || die
+
+rm -rf "./src/prebuilt"
+mkdir "./src/prebuilt" || die "Error creating empty src/prebuilt directory"
+re2c -W -Werror --no-generation-date -bc8 -o src/wast-lexer-gen.cc src/wast-lexer.cc
+src/wasm2c_tmpl.py -o src/wasm2c.include.c src/wasm2c.c.tmpl
+src/wasm2c_tmpl.py -o src/wasm2c.include.h src/wasm2c.h.tmpl
+rm src/wasm2c.{c,h}.tmpl src/wasm2c_tmpl.py
+(
+    cd "$(readlink -f .)" || die
+
+    EM_CONFIG="$(readlink -f .)/.emscripten"
+    export EM_CONFIG
+    EM_CACHE="$(readlink -f .)/.emscripten_cache"
+    export EM_CACHE
+    #EMCC_DEBUG="1"
+    #export EMCC_DEBUG
+    EM_PORTS="$(readlink -f .)/.emscripten_ports"
+    export EM_PORTS
+    EMCC_TEMP_DIR="$(readlink -f .)"/.emscripten_temp
+    export EMCC_TEMP_DIR
+    TEMP_DIR="$EMCC_TEMP_DIR"
+    export TEMP_DIR
+    # Unset flags if they're set (should only apply to this subshell)
+    CFLAGS=""
+    export CFLAGS
+    CXXFLAGS=""
+    export CXXFLAGS
+    LDFLAGS=""
+    export LDFLAGS
+
+    rm -f "$EM_CONFIG"
+    rm -f ./emscripten/.emscripten
+    ln -s "$EM_CONFIG" ./emscripten/.emscripten # shared:ERROR: File /nvme0n1p5/build-temp/build/wabt-1.0.8/emscripten/.emscripten passed to --em-config does not exist!
+    rm -rf "$EM_CACHE"
+    mkdir "$EM_CACHE"
+    mkdir "$EM_CACHE/wasm_o"
+    rm -rf "$EM_PORTS"
+    mkdir "$EM_PORTS"
+    mkdir "$EM_PORTS/binaryen"
+    mkdir -p "$EMCC_TEMP_DIR"
+
+    # Based on https://github.com/emscripten-core/emscripten/blob/c53838be5d58a03d947d19047e12ac07a02afa7d/tools/ports/binaryen.py and https://github.com/emscripten-core/emscripten/blob/ef230f55772b7a2b2d4c6a29b8f1cde915bd8e3f/tools/system_libs.py
+    cp -r "$unpackedDir/binaryen-version_${myBinaryenVersion}" "$EM_PORTS/binaryen/"
+    (
+        echo "Building wat2wasm: Building binaryen"
+        cd "$EM_PORTS/binaryen/binaryen-version_${myBinaryenVersion}/"
+        cmake -DCMAKE_BUILD_TYPE=Release .
+        cmake --build .
+        echo "${myBinaryenVersion}" > ../tag.txt
+        echo "${myBinaryenVersion}" > "$EM_CACHE/wasm_o/binaryen_tag_version_${myBinaryenVersion}.txt"
+        cp "$unpackedDir/binaryen-${myBinaryenVersion}.zip" "$EM_PORTS/binaryen.zip"
+    )
+
+    echo 'import os' >> "$EM_CONFIG"
+    echo 'EMSCRIPTEN_ROOT = '\'"$(readlink -f .)"\' >> "$EM_CONFIG"
+    echo 'LLVM_ROOT = '\''/usr/lib/llvm/9/bin'\' >> "$EM_CONFIG"
+    echo 'BINARYEN_ROOT = '\'\' >> "$EM_CONFIG"
+    echo 'TEMP_DIR = '\'"$EMCC_TEMP_DIR"\' >> "$EM_CONFIG"
+    echo 'NODE_JS = '\''/usr/bin/node'\' >> "$EM_CONFIG"
+    echo 'JS_ENGINES = [NODE_JS]' >> "$EM_CONFIG"
+    echo 'COMPILER_ENGINE = NODE_JS' >> "$EM_CONFIG" # Does it really need this
+    echo "COMPILER_OPTS = ['-O0']" >> "$EM_CONFIG"
+
+    # Stub out minify_wasm_js method to remove (some of the) node.js dependency
+    sed '/def\ minify_wasm_js/,/return\ js_file/{//!d}' ./emscripten/tools/shared.py | sponge ./emscripten/tools/shared.py
+
+    # Confirm that a broken binaryen build isn't causing all the headache
+    echo "Building wat2wasm: Building emscripten built-in packages (libc etc)"
+    ./emscripten/embuilder.py build libc
+    ./emscripten/embuilder.py build libc-wasm
+    ./emscripten/embuilder.py build libc++_noexcept
+    ./emscripten/embuilder.py build libc++abi
+    ./emscripten/embuilder.py build compiler_rt_wasm
+    ./emscripten/embuilder.py build dlmalloc
+    ./emscripten/embuilder.py build pthreads_stub
+    ./emscripten/embuilder.py build libc-extras
+
+    echo "Building wat2wasm: Compiling"
+    #EMCC_DEBUG="1"
+    #export EMCC_DEBUG
+    EMCC_CORES="1"
+    export EMCC_CORES
+    make -j1 demo
+)
+
+)
+
+mkdir -p ./build-temp/out/wabt
+
+cp -a ./build-temp/build/wabt-"${myWabtVersion}"/demo/libwabt.js ./build-temp/out/wabt/
+cp -a ./build-temp/build/wabt-"${myWabtVersion}"/out/emscripten/Release/libwabt.wasm ./build-temp/out/wabt/
+
+rm -rf ./build-temp/out/lib
+rm -rf ./build-temp/out/wasm_o
+cp -ra ./build-temp/build/wabt-"${myWabtVersion}"/.emscripten_cache/wasm_o ./build-temp/out/
+mv ./build-temp/out/wasm_o ./build-temp/out/lib
+
+rm -rf ./build-temp/out/include
+cp -ra ./build-temp/build/wabt-"${myWabtVersion}"/emscripten/system/include ./build-temp/out/
+rm ./build-temp/out/include/libc/bits
+cp -ra ./build-temp/build/wabt-"${myWabtVersion}"/emscripten/system/lib/libc/musl/arch/emscripten/bits ./build-temp/out/include/libc/
+
+rm -r ./build-temp/unpacked
+rm -r ./build-temp/build
+touch ./build-temp/wasm-dist-build-ready
+
+rm -rf ./built/wasm-dist-built
+cp -ra ./build-temp/out ./build-temp/wasm-dist-built
+mv ./build-temp/wasm-dist-built ./built/
+
+cp -r support support.wasm-toolchain-build-temp-a
+mv support support.wasm-toolchain-build-temp
+mv support.wasm-toolchain-build-temp-a support
+touch support/.no-build-data
+touch support/.no-build-scripts
+touch support/.no-build-docs

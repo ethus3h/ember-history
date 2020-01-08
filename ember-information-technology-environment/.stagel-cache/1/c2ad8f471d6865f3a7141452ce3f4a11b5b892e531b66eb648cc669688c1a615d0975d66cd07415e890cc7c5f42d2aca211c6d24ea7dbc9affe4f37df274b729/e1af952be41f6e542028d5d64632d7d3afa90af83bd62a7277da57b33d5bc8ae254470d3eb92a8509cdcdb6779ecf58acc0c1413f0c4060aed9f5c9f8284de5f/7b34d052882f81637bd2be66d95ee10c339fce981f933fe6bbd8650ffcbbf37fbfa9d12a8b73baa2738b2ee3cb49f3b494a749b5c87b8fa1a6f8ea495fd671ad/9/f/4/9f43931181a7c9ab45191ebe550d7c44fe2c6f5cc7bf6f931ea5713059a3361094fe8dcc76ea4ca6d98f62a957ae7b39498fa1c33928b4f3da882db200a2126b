@@ -1,0 +1,10 @@
+async function runTestsFormatDc(boolV) {
+    await internalDebugCollect('bool V = ' + boolV + '; '); await internalDebugStackEnter('runTestsFormatDc:format-dc-tests'); await assertIsBool(boolV);
+
+    await testing(boolV, 'formatDc');
+    await runTest(boolV, await dcIsPrintable(21));
+    await runTest(boolV, await implNot(await dcIsPrintable(231)));
+    await runTest(boolV, await dcIsNewline(120));
+
+    await internalDebugStackExit();
+}

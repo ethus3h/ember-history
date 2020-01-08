@@ -1,0 +1,22 @@
+r/an/dctCodeToText an/in
+    new an/res
+    new n/c
+    set n/c 0
+    new n/l
+    set n/l count an/in
+    new n/currentDc
+    new s/targetLanguage
+    set s/targetLanguage getFormatImportSetting 'codeToText' 'language'
+    if eq 0 len s/targetLanguage
+        set s/targetLanguage getEnvCodeLanguage
+    new s/temp
+    while lt n/c n/l
+        set n/currentDc get an/in n/c
+        if dcIsELCode n/currentDc
+            set s/temp dcGetMappingToFormat n/currentDc s/targetLanguage
+            if ne 0 len s/temp
+                set an/res append an/res dcaFromElad s/temp
+            else
+                set an/res push an/res n/currentDc
+        set n/c inc n/c
+    return an/res

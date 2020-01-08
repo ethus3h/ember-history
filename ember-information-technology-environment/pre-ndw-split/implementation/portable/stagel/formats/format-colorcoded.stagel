@@ -1,0 +1,73 @@
+r/an/dcaToColorcoded an/dcIn
+    assertIsDcArray an/dcIn
+    new an/out
+    set an/out strToByteArray '<!DOCTYPE html><html><head><title></title></head><body><p>Key: <span style="color:black">Letter</span> <span style="color:gray">Control</span> <span style="color:blue">Semantic</span> <span style="color:salmon">Mathematics</span> <span style="color:rebeccapurple">Symbols</span> <span style="color:red">Programming</span> <span style="color:green">Financial</span> <span style="color:orange">Punctuation</span> <span style="color:purple">Emoji</span> <span style="color:maroon">Styling</span> <span style="color:brown">Other</span></p>'
+    set an/out append an/out dcaToColorcodedFragment an/dcIn
+    set an/out append an/out strToByteArray '</body></html>'
+    assertIsByteArray an/out
+    return an/out
+
+r/an/dcaToColorcodedFragment an/dcIn
+    assertIsDcArray an/dcIn
+    new an/out
+    set an/out append an/out strToByteArray '<div style="white-space:pre-wrap">'
+    new n/len
+    set n/len count an/dcIn
+    new n/inputIndex
+    set n/inputIndex 0
+    new n/dcAtIndex
+    while lt n/inputIndex n/len
+        set n/dcAtIndex get an/dcIn n/inputIndex
+        set an/out append an/out dcToFormat 'colorcoded' n/dcAtIndex
+        set n/inputIndex add n/inputIndex 1
+    set an/out append an/out strToByteArray '</div>'
+    assertIsByteArray an/out
+    return an/out
+
+r/an/dcToColorcoded n/in
+    assertIsDc n/in
+    new an/out
+    set an/out append an/out strToByteArray '<span style="color:'
+    new s/type
+    set s/type dcGetType n/in
+    new s/script
+    set s/script dcGetScript n/in
+    new s/color
+    if eq 'L' strChar s/type 0
+        # Letter
+        set s/color 'black'
+    elif eq 'Controls' s/script
+        # Control
+        set s/color 'gray'
+    elif eq 'Semantic' s/script
+        # Semantic
+        set s/color 'blue'
+    elif eq 'Mathematics' s/script
+        # Mathematics
+        set s/color 'salmon'
+    elif eq 'Symbols' s/script
+        # Symbols
+        set s/color 'rebeccapurple'
+    elif eq 'EL ' substr s/script 0 3
+        # Programming
+        set s/color 'red'
+    elif eq 'Financial' s/script
+        # Financial
+        set s/color 'green'
+    elif eq 'Punctuation' s/script
+        # Punctuation
+        set s/color 'orange'
+    elif eq 'Emoji' s/script
+        # Emoji
+        set s/color 'purple'
+    elif eq 'Colors' s/script
+        # Styling
+        set s/color 'maroon'
+    else
+        # Other
+        set s/color 'brown'
+    set an/out append an/out strToByteArray s/color
+    set an/out append an/out strToByteArray '">'
+    set an/out append an/out strToByteArray strFrom n/in
+    set an/out append an/out strToByteArray '</span> '
+    return an/out

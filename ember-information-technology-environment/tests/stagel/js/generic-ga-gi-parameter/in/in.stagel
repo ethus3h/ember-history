@@ -1,0 +1,4 @@
+r/b/ne ga/a gi/b
+    new b/temp
+    set b/temp not eq ga/a gi/b
+    return b/temp

@@ -1,0 +1,38 @@
+# Calling a comparison with different types is an error. All types must be same type.
+
+r/b/ne g/a g/b
+    new b/temp
+    set b/temp not eq g/a g/b
+    return b/temp
+
+r/b/ge n/a n/b
+    new b/temp
+    set b/temp eq n/a n/b
+    set b/temp or b/temp gt n/a n/b
+    return b/temp
+
+r/b/le n/a n/b
+    new b/temp
+    set b/temp eq n/a n/b
+    set b/temp or b/temp lt n/a n/b
+    return b/temp
+
+r/b/ngt n/a n/b
+    new b/temp
+    set b/temp not gt n/a n/b
+    return b/temp
+
+r/b/nlt n/a n/b
+    new b/temp
+    set b/temp not lt n/a n/b
+    return b/temp
+
+r/b/nge n/a n/b
+    new b/temp
+    set b/temp not ge n/a n/b
+    return b/temp
+
+r/b/nle n/a n/b
+    new b/temp
+    set b/temp not le n/a n/b
+    return b/temp

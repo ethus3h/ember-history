@@ -1,0 +1,240 @@
+async function kvHasValue(strArrayData, strKey) {
+    await internalDebugCollect('strArray Data = ' + strArrayData + '; '); await internalDebugCollect('str Key = ' + strKey + '; '); await internalDebugStackEnter('kvHasValue:key-value'); await assertIsStrArray(strArrayData); await assertIsStr(strKey); let boolReturn;
+
+    await assertIsKvArray(strArrayData);
+    let boolRes = false;
+    boolRes = false;
+    let intL = 0;
+    intL = await count(strArrayData);
+    if (await ne(0, intL)) {
+        let intC = 0;
+        intC = 0;
+        let boolContinue = false;
+        boolContinue = true;
+        while (boolContinue) {
+            if (await implNot(await implLt(intC, intL))) {
+                boolContinue = false;
+            }
+            if (await implEq(0, await implMod(intC, 2))) {
+                if (await implEq(strKey, await get(strArrayData, intC))) {
+                    boolRes = true;
+                    boolContinue = false;
+                }
+            }
+            intC = await implAdd(intC, 1);
+        }
+    }
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function kvGetValue(strArrayData, strKey) {
+    await internalDebugCollect('strArray Data = ' + strArrayData + '; '); await internalDebugCollect('str Key = ' + strKey + '; '); await internalDebugStackEnter('kvGetValue:key-value'); await assertIsStrArray(strArrayData); await assertIsStr(strKey); let strReturn;
+
+    /* data format: [ 'a' 'b' 'c' 'd' ... ] */
+    /* Returns empty if value not set */
+    await assertIsKvArray(strArrayData);
+    let strRes = '';
+    strRes = '';
+    let intL = 0;
+    intL = await count(strArrayData);
+    if (await ne(0, intL)) {
+        let intC = 0;
+        intC = 0;
+        let boolContinue = false;
+        boolContinue = true;
+        let boolFound = false;
+        boolFound = false;
+        while (boolContinue) {
+            if (boolFound) {
+                strRes = await get(strArrayData, intC);
+                boolContinue = false;
+            }
+            else {
+                if (await implNot(await implLt(intC, await implAdd(-1, intL)))) {
+                    boolContinue = false;
+                }
+                if (await implEq(0, await implMod(intC, 2))) {
+                    if (await implEq(strKey, await get(strArrayData, intC))) {
+                        boolFound = true;
+                    }
+                }
+            }
+            intC = await implAdd(intC, 1);
+        }
+    }
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function kvGetDefinedValue(strArrayData, strKey) {
+    await internalDebugCollect('strArray Data = ' + strArrayData + '; '); await internalDebugCollect('str Key = ' + strKey + '; '); await internalDebugStackEnter('kvGetDefinedValue:key-value'); await assertIsStrArray(strArrayData); await assertIsStr(strKey); let strReturn;
+
+    await assertKvHasValue(strArrayData);
+    let strRes = '';
+    strRes = await kvGetValue(strArrayData, strKey);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function kvSetValue(strArrayData, strKey, strVal) {
+    await internalDebugCollect('strArray Data = ' + strArrayData + '; '); await internalDebugCollect('str Key = ' + strKey + '; '); await internalDebugCollect('str Val = ' + strVal + '; '); await internalDebugStackEnter('kvSetValue:key-value'); await assertIsStrArray(strArrayData); await assertIsStr(strKey); await assertIsStr(strVal); let strArrayReturn;
+
+    await assertIsKvArray(strArrayData);
+    let strArrayRes = [];
+    strArrayRes = strArrayData;
+    let intL = 0;
+    intL = await count(strArrayRes);
+    let boolFound = false;
+    boolFound = false;
+    if (await ne(0, intL)) {
+        let intC = 0;
+        intC = 0;
+        let boolContinue = false;
+        boolContinue = true;
+        while (boolContinue) {
+            if (boolFound) {
+                strArrayRes = await setElem(strArrayRes, intC, strVal);
+                boolContinue = false;
+            }
+            else {
+                if (await implNot(await implLt(intC, await dec(intL)))) {
+                    boolContinue = false;
+                }
+                if (await implEq(0, await implMod(intC, 2))) {
+                    if (await implEq(strKey, await get(strArrayData, intC))) {
+                        boolFound = true;
+                    }
+                }
+            }
+            intC = await implAdd(intC, 1);
+        }
+    }
+    if (await implNot(boolFound)) {
+        strArrayRes = await push(strArrayRes, strKey);
+        strArrayRes = await push(strArrayRes, strVal);
+    }
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function kvsHasValue(strData, strKey) {
+    await internalDebugCollect('str Data = ' + strData + '; '); await internalDebugCollect('str Key = ' + strKey + '; '); await internalDebugStackEnter('kvsHasValue:key-value'); await assertIsStr(strData); await assertIsStr(strKey); let boolReturn;
+
+    let boolRes = false;
+    boolRes = await kvHasValue(await kvSplit(strData), strKey);
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function kvsGetValue(strData, strKey) {
+    await internalDebugCollect('str Data = ' + strData + '; '); await internalDebugCollect('str Key = ' + strKey + '; '); await internalDebugStackEnter('kvsGetValue:key-value'); await assertIsStr(strData); await assertIsStr(strKey); let strReturn;
+
+    /* data format: [ 'a:b,c:d,' ... ] */
+    /* Returns empty if value not set */
+    let strRes = '';
+    strRes = await kvGetValue(await kvSplit(strData), strKey);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function kvsGetDefinedValue(strData, strKey) {
+    await internalDebugCollect('str Data = ' + strData + '; '); await internalDebugCollect('str Key = ' + strKey + '; '); await internalDebugStackEnter('kvsGetDefinedValue:key-value'); await assertIsStr(strData); await assertIsStr(strKey); let strReturn;
+
+    await assertKvsHasValue(strData);
+    let strRes = '';
+    strRes = await kvsGetValue(strData, strKey);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function kvsSetValue(strData, strKey, strVal) {
+    await internalDebugCollect('str Data = ' + strData + '; '); await internalDebugCollect('str Key = ' + strKey + '; '); await internalDebugCollect('str Val = ' + strVal + '; '); await internalDebugStackEnter('kvsSetValue:key-value'); await assertIsStr(strData); await assertIsStr(strKey); await assertIsStr(strVal); let strReturn;
+
+    let strRes = '';
+    strRes = await kvJoin(await kvSetValue(await kvSplit(strData), strKey, strVal));
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function assertKvHasValue(strArrayData, strKey) {
+    await internalDebugCollect('strArray Data = ' + strArrayData + '; '); await internalDebugCollect('str Key = ' + strKey + '; '); await internalDebugStackEnter('assertKvHasValue:key-value'); await assertIsStrArray(strArrayData); await assertIsStr(strKey);
+
+    await assertIsTrue(await kvHasValue(strArrayData, strKey));
+
+    await internalDebugStackExit();
+}
+
+async function assertKvsHasValue(strArrayData, strKey) {
+    await internalDebugCollect('strArray Data = ' + strArrayData + '; '); await internalDebugCollect('str Key = ' + strKey + '; '); await internalDebugStackEnter('assertKvsHasValue:key-value'); await assertIsStrArray(strArrayData); await assertIsStr(strKey);
+
+    await assertIsTrue(await kvsHasValue(strArrayData, strKey));
+
+    await internalDebugStackExit();
+}
+
+async function kvSplit(strData) {
+    await internalDebugCollect('str Data = ' + strData + '; '); await internalDebugStackEnter('kvSplit:key-value'); await assertIsStr(strData); let strArrayReturn;
+
+    let strArrayRes = [];
+    strArrayRes = [  ];
+    let strArrayTemp = [];
+    strArrayTemp = await strSplitEscaped(strData, ',');
+    let intL = 0;
+    intL = await count(strArrayTemp);
+    if (await ne(0, intL)) {
+        let intC = 0;
+        intC = 0;
+        while (await implLt(intC, intL)) {
+            strArrayRes = await append(strArrayRes, await strSplitEscaped(await get(strArrayTemp, intC), ':'));
+            intC = await inc(intC);
+        }
+    }
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function kvJoin(strArrayData) {
+    await internalDebugCollect('strArray Data = ' + strArrayData + '; '); await internalDebugStackEnter('kvJoin:key-value'); await assertIsStrArray(strArrayData); let strReturn;
+
+    let strRes = '';
+    strRes = '';
+    let intL = 0;
+    intL = await count(strArrayData);
+    if (await ne(0, intL)) {
+        let intC = 0;
+        intC = 0;
+        let strArrayTempA = [];
+        let strArrayTempB = [];
+        strArrayTempB = [  ];
+        while (await implLt(intC, intL)) {
+            if (await implEq(0, await implMod(intC, 2))) {
+                strArrayTempA = [  ];
+                strArrayTempA = await push(strArrayTempA, await get(strArrayData, intC));
+                strArrayTempA = await push(strArrayTempA, await get(strArrayData, await implAdd(1, intC)));
+                strArrayTempB = await push(strArrayTempB, await strJoinEscNoTrailing(strArrayTempA, ':'));
+            }
+            intC = await inc(intC);
+        }
+        strRes = await strJoinEsc(strArrayTempB, ',');
+    }
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function isKvArray(strArrayData) {
+    await internalDebugCollect('strArray Data = ' + strArrayData + '; '); await internalDebugStackEnter('isKvArray:key-value'); await assertIsStrArray(strArrayData); let boolReturn;
+
+    let boolRes = false;
+    boolRes = await isEven(await count(strArrayData));
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function assertIsKvArray(strArrayData) {
+    await internalDebugCollect('strArray Data = ' + strArrayData + '; '); await internalDebugStackEnter('assertIsKvArray:key-value'); await assertIsStrArray(strArrayData);
+
+    await assertIsTrue(await isKvArray(strArrayData));
+
+    await internalDebugStackExit();
+}

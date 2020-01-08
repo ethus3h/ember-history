@@ -1,0 +1,3 @@
+r/s/fbSwitcher n/num
+    if eq 0 mod n/num 15
+        return 'Buzz'

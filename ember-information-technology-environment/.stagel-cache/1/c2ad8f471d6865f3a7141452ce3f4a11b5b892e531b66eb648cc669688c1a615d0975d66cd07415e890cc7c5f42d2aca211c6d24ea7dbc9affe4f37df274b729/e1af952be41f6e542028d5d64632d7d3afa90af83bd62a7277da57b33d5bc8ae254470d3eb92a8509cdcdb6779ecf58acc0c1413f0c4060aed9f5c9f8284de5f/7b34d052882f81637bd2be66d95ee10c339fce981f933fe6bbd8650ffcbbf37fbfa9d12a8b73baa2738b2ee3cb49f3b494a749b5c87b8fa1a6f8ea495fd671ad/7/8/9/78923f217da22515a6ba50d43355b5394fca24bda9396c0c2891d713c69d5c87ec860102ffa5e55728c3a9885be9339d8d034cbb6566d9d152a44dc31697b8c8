@@ -1,0 +1,12 @@
+async function runTestsPack32(boolV) {
+    await internalDebugCollect('bool V = ' + boolV + '; '); await internalDebugStackEnter('runTestsPack32:pack32-tests'); await assertIsBool(boolV);
+
+    await testing(boolV, 'pack32');
+    await runTest(boolV, await implEq(0, await unpack32(await pack32(0))));
+    await runTest(boolV, await implEq(10, await unpack32(await pack32(10))));
+    await runTest(boolV, await implEq(100, await unpack32(await pack32(100))));
+    await runTest(boolV, await implEq(1000, await unpack32(await pack32(1000))));
+    await runTest(boolV, await implEq(10000, await unpack32(await pack32(10000))));
+
+    await internalDebugStackExit();
+}

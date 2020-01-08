@@ -1,0 +1,16 @@
+r/an/dcaToHtmlFragment an/dcIn
+    assertIsDcArray an/dcIn
+    new an/out
+    set an/out append an/out strToByteArray '<div style="white-space:pre-wrap">'
+    new n/len
+    set n/len count an/dcIn
+    new n/inputIndex
+    set n/inputIndex 0
+    new n/dcAtIndex
+    while lt n/inputIndex n/len
+        set n/dcAtIndex get an/dcIn n/inputIndex
+        set an/out append an/out dcToFormat 'html' n/dcAtIndex
+        set n/inputIndex add n/inputIndex 1
+    set an/out append an/out strToByteArray '</div>'
+    assertIsByteArray an/out
+    return an/out

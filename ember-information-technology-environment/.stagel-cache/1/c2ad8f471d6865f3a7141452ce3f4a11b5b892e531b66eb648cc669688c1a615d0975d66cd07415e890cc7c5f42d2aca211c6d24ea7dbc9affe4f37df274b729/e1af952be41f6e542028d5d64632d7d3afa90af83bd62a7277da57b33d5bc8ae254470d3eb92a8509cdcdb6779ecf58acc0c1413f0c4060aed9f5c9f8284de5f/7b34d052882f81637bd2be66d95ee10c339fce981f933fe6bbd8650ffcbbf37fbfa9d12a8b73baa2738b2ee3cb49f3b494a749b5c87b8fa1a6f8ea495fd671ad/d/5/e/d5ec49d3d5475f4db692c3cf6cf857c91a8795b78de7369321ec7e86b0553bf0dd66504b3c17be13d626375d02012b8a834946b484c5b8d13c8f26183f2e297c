@@ -1,0 +1,21 @@
+async function dcaToHtmlFragment(intArrayDcIn) {
+    await internalDebugCollect('intArray DcIn = ' + intArrayDcIn + '; '); await internalDebugStackEnter('dcaToHtmlFragment:format-htmlFragment'); await assertIsIntArray(intArrayDcIn); let intArrayReturn;
+
+    await assertIsDcArray(intArrayDcIn);
+    let intArrayOut = [];
+    intArrayOut = await append(intArrayOut, await strToByteArray('<div style="white-space:pre-wrap">'));
+    let intLen = 0;
+    intLen = await count(intArrayDcIn);
+    let intInputIndex = 0;
+    intInputIndex = 0;
+    let intDcAtIndex = 0;
+    while (await implLt(intInputIndex, intLen)) {
+        intDcAtIndex = await get(intArrayDcIn, intInputIndex);
+        intArrayOut = await append(intArrayOut, await dcToFormat('html', intDcAtIndex));
+        intInputIndex = await implAdd(intInputIndex, 1);
+    }
+    intArrayOut = await append(intArrayOut, await strToByteArray('</div>'));
+    await assertIsByteArray(intArrayOut);
+
+    intArrayReturn = intArrayOut; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}

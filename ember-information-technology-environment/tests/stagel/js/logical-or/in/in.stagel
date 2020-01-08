@@ -1,0 +1,5 @@
+r/b/or b/a b/b
+    new b/temp
+    set b/temp not b/a
+    set b/temp not and b/temp not b/b
+    return b/temp

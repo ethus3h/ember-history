@@ -1,0 +1,25 @@
+async function runTestsDocumentExec(boolV) {
+    await internalDebugCollect('bool V = ' + boolV + '; '); await internalDebugStackEnter('runTestsDocumentExec:document-exec-tests'); await assertIsBool(boolV);
+
+    await testing(boolV, 'documentExec');
+    await runExecTest(boolV, 'at-comment-no-space', 10);
+    await runExecTest(boolV, 'at-comment', 10);
+    await runExecTest(boolV, 'at-nl', 10);
+    await runExecTest(boolV, 'at-space-nl', 10);
+    await runExecTest(boolV, 'hello-world', 100);
+
+    await internalDebugStackExit();
+}
+
+async function runExecTest(boolV, strTestName, intTicksNeeded) {
+    await internalDebugCollect('bool V = ' + boolV + '; '); await internalDebugCollect('str TestName = ' + strTestName + '; '); await internalDebugCollect('int TicksNeeded = ' + intTicksNeeded + '; '); await internalDebugStackEnter('runExecTest:document-exec-tests'); await assertIsBool(boolV); await assertIsStr(strTestName); await assertIsInt(intTicksNeeded);
+
+    let intExecId = 0;
+    intExecId = await runDocumentPrepare(await loadStoredDocument('sems', await implCat('exec-tests/', await implCat(strTestName, '.sems'))));
+    await setExecOption(intExecId, 'stopExecAtTick', await strFrom(intTicksNeeded));
+    await setExecOption(intExecId, 'runHeadless', 'true');
+    await runDocumentGo(intExecId);
+    await runTest(boolV, await arrEq(await getCurrentExecFrame(intExecId), await loadStoredDocument('sems', await implCat('exec-tests/', await implCat(strTestName, '.out.sems')))));
+
+    await internalDebugStackExit();
+}

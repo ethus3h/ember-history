@@ -1,0 +1,97 @@
+async function dcaToColorcoded(intArrayDcIn) {
+    await internalDebugCollect('intArray DcIn = ' + intArrayDcIn + '; '); await internalDebugStackEnter('dcaToColorcoded:format-colorcoded'); await assertIsIntArray(intArrayDcIn); let intArrayReturn;
+
+    await assertIsDcArray(intArrayDcIn);
+    let intArrayOut = [];
+    intArrayOut = await strToByteArray('<!DOCTYPE html><html><head><title></title></head><body><p>Key: <span style="color:black">Letter</span> <span style="color:gray">Control</span> <span style="color:blue">Semantic</span> <span style="color:salmon">Mathematics</span> <span style="color:rebeccapurple">Symbols</span> <span style="color:red">Programming</span> <span style="color:green">Financial</span> <span style="color:orange">Punctuation</span> <span style="color:purple">Emoji</span> <span style="color:maroon">Styling</span> <span style="color:brown">Other</span></p>');
+    intArrayOut = await append(intArrayOut, await dcaToColorcodedFragment(intArrayDcIn));
+    intArrayOut = await append(intArrayOut, await strToByteArray('</body></html>'));
+    await assertIsByteArray(intArrayOut);
+
+    intArrayReturn = intArrayOut; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function dcaToColorcodedFragment(intArrayDcIn) {
+    await internalDebugCollect('intArray DcIn = ' + intArrayDcIn + '; '); await internalDebugStackEnter('dcaToColorcodedFragment:format-colorcoded'); await assertIsIntArray(intArrayDcIn); let intArrayReturn;
+
+    await assertIsDcArray(intArrayDcIn);
+    let intArrayOut = [];
+    intArrayOut = await append(intArrayOut, await strToByteArray('<div style="white-space:pre-wrap">'));
+    let intLen = 0;
+    intLen = await count(intArrayDcIn);
+    let intInputIndex = 0;
+    intInputIndex = 0;
+    let intDcAtIndex = 0;
+    while (await implLt(intInputIndex, intLen)) {
+        intDcAtIndex = await get(intArrayDcIn, intInputIndex);
+        intArrayOut = await append(intArrayOut, await dcToFormat('colorcoded', intDcAtIndex));
+        intInputIndex = await implAdd(intInputIndex, 1);
+    }
+    intArrayOut = await append(intArrayOut, await strToByteArray('</div>'));
+    await assertIsByteArray(intArrayOut);
+
+    intArrayReturn = intArrayOut; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function dcToColorcoded(intIn) {
+    await internalDebugCollect('int In = ' + intIn + '; '); await internalDebugStackEnter('dcToColorcoded:format-colorcoded'); await assertIsInt(intIn); let intArrayReturn;
+
+    await assertIsDc(intIn);
+    let intArrayOut = [];
+    intArrayOut = await append(intArrayOut, await strToByteArray('<span style="color:'));
+    let strType = '';
+    strType = await dcGetType(intIn);
+    let strScript = '';
+    strScript = await dcGetScript(intIn);
+    let strColor = '';
+    if (await implEq('L', await strChar(strType, 0))) {
+        /* Letter */
+        strColor = 'black';
+    }
+    else if (await implEq('Controls', strScript)) {
+        /* Control */
+        strColor = 'gray';
+    }
+    else if (await implEq('Semantic', strScript)) {
+        /* Semantic */
+        strColor = 'blue';
+    }
+    else if (await implEq('Mathematics', strScript)) {
+        /* Mathematics */
+        strColor = 'salmon';
+    }
+    else if (await implEq('Symbols', strScript)) {
+        /* Symbols */
+        strColor = 'rebeccapurple';
+    }
+    else if (await implEq('EL ', await substr(strScript, 0, 3))) {
+        /* Programming */
+        strColor = 'red';
+    }
+    else if (await implEq('Financial', strScript)) {
+        /* Financial */
+        strColor = 'green';
+    }
+    else if (await implEq('Punctuation', strScript)) {
+        /* Punctuation */
+        strColor = 'orange';
+    }
+    else if (await implEq('Emoji', strScript)) {
+        /* Emoji */
+        strColor = 'purple';
+    }
+    else if (await implEq('Colors', strScript)) {
+        /* Styling */
+        strColor = 'maroon';
+    }
+    else {
+        /* Other */
+        strColor = 'brown';
+    }
+    intArrayOut = await append(intArrayOut, await strToByteArray(strColor));
+    intArrayOut = await append(intArrayOut, await strToByteArray('">'));
+    intArrayOut = await append(intArrayOut, await strToByteArray(await strFrom(intIn)));
+    intArrayOut = await append(intArrayOut, await strToByteArray('</span> '));
+
+    intArrayReturn = intArrayOut; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}

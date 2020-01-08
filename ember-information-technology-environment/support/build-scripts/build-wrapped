@@ -1,0 +1,112 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1091
+source ember_bash_setup &> /dev/null || { printf '%b' '\033[1;31m' >&2; echo "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd): The required dependency ember-shared could not be found (or ember_bash_setup could not be sourced for some other reason)." >&2; printf '%b' '\033[0m' >&2; exit 1; }
+#set -x
+
+trap 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."' ERR
+
+# Build the StageL library. Also build StageR while we're at it.
+
+cache="--no-cache"
+cacheDir="."
+if [[ "$1" == "--cache" ]]; then
+    cache="--cache"
+    shift
+    cacheDir="$1"
+    shift
+elif [[ "$1" == "--no-cache" ]]; then
+    cache="--no-cache"
+    shift
+    cacheDir="$1"
+    shift
+fi
+debugBuild="--debug"
+if [[ "$1" == "--debug" ]]; then
+    debugBuild="--debug"
+    shift
+elif [[ "$1" == "--no-debug" ]]; then
+    debugBuild="--no-debug"
+    shift
+fi
+typecheckBuild="--runtime-type-checks"
+if [[ "$1" == "--runtime-type-checks" ]]; then
+    typecheckBuild="--runtime-type-checks"
+    shift
+elif [[ "$1" == "--no-runtime-type-checks" ]]; then
+    typecheckBuild="--no-runtime-type-checks"
+    shift
+fi
+
+slcmd="./support/build-scripts/build-stagel-inner"
+#[[ -f "./stagel-build-internal-stagel-inner" ]] && slcmd=./"$slcmd"
+srcmd="./support/build-scripts/build-stager-inner"
+#[[ -f "./stagel-build-internal-stager-inner" ]] && srcmd=./"$srcmd"
+
+rm -rf ./built/implementation-parts
+mkdir ./built/implementation-parts
+
+targets=(js sh)
+
+# FIXME: the "find" commands (I think?) don't return nonzero exit status on failure
+
+targetCount="${#targets[@]}"
+for (( i=0; i<targetCount; i++ )); do
+    [[ -d "./implementation/stagel-cores/${targets[$i]}" ]] || continue
+
+    # StageL language core for the target language
+
+    mkdir -p "./built/stagel-build-temp/implementation/stagel-cores/${targets[$i]}"
+
+    rm -f ./implementation/stagel-cores/"${targets[$i]}"/core."${targets[$i]}"
+
+    echo '// @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-3.0'$'\n' > ./built/stagel-build-temp/implementation/stagel-cores/"${targets[$i]}"/core."${targets[$i]}"
+
+    find ./implementation/stagel-cores/"${targets[$i]}"/ -name '*.'"${targets[$i]}" -exec "$slcmd" {} "${targets[$i]}" \;
+
+    echo $'\n''// @license-end' >> ./built/stagel-build-temp/implementation/stagel-cores/"${targets[$i]}"/core."${targets[$i]}"
+
+    # StageR
+
+    mkdir -p "./built/stagel-build-temp/implementation/portable/stagel"
+
+    rm -f ./built/stagel-build-temp/implementation/portable/stagel/portable."${targets[$i]}"
+
+    echo '// @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-3.0'$'\n' > ./built/stagel-build-temp/implementation/portable/stagel/portable."${targets[$i]}"
+
+    find ./implementation/portable/stagel/ -name '*.stagel' -exec "$srcmd" "$cache" "$cacheDir" "$debugBuild" "$typecheckBuild" {} "${targets[$i]}" \;
+
+    echo $'\n''// @license-end' >> ./built/stagel-build-temp/implementation/portable/stagel/portable."${targets[$i]}"
+
+    # NDW
+
+    mkdir -p "./built/stagel-build-temp/implementation/ndw/${targets[$i]}"
+
+    rm -f ./implementation/ndw/"${targets[$i]}"/ndw."${targets[$i]}"
+
+    echo '// @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-3.0'$'\n' > ./built/stagel-build-temp/implementation/ndw/"${targets[$i]}"/ndw."${targets[$i]}"
+
+    find ./implementation/ndw/"${targets[$i]}"/ -name '*.'"${targets[$i]}" -exec "$slcmd" {} "${targets[$i]}" "ndw" \;
+
+    echo $'\n''// @license-end' >> ./built/stagel-build-temp/implementation/ndw/"${targets[$i]}"/ndw."${targets[$i]}"
+
+    # Done StageL and StageR into ./built/stagel-build-temp; now move the build products into place and clean up
+
+    mkdir -p ./built/implementation-parts/"${targets[$i]}"
+
+    mv ./built/stagel-build-temp/implementation/stagel-cores/"${targets[$i]}"/core."${targets[$i]}" ./built/implementation-parts/"${targets[$i]}"/
+    mv ./built/stagel-build-temp/implementation/portable/stagel/portable."${targets[$i]}" ./built/implementation-parts/"${targets[$i]}"/
+    mv ./built/stagel-build-temp/implementation/ndw/"${targets[$i]}"/ndw."${targets[$i]}" ./built/implementation-parts/"${targets[$i]}"/
+
+    echo '// @license magnet:?xt=urn:btih:0b31508aeb0634b347b8270c7bee4d411b5d4109&dn=agpl-3.0.txt AGPL-3.0'$'\n' >> ./built/implementation-parts/"${targets[$i]}"/speedups."${targets[$i]}"
+    cat ./implementation/speedups/speedups."${targets[$i]}" >> ./built/implementation-parts/"${targets[$i]}"/speedups."${targets[$i]}"
+    echo $'\n''// @license-end' >> ./built/implementation-parts/"${targets[$i]}"/speedups."${targets[$i]}"
+
+    cp ./built/implementation-parts/"${targets[$i]}"/core."${targets[$i]}" ./built/implementation-parts/"${targets[$i]}"/eite."${targets[$i]}"
+    echo >> ./built/implementation-parts/"${targets[$i]}"/eite."${targets[$i]}"
+    cat ./built/implementation-parts/"${targets[$i]}"/portable."${targets[$i]}" >> ./built/implementation-parts/"${targets[$i]}"/eite."${targets[$i]}"
+    echo >> ./built/implementation-parts/"${targets[$i]}"/eite."${targets[$i]}"
+    cat ./built/implementation-parts/"${targets[$i]}"/speedups."${targets[$i]}" >> ./built/implementation-parts/"${targets[$i]}"/eite."${targets[$i]}"
+    cat ./built/implementation-parts/"${targets[$i]}"/ndw."${targets[$i]}" >> ./built/implementation-parts/"${targets[$i]}"/eite."${targets[$i]}"
+
+    rm -r "./built/stagel-build-temp"
+done

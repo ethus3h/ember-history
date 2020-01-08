@@ -1,0 +1,5 @@
+r/v/runTestsFormatDc b/v
+    testing b/v 'formatDc'
+    runTest b/v dcIsPrintable 21
+    runTest b/v not dcIsPrintable 231
+    runTest b/v dcIsNewline 120

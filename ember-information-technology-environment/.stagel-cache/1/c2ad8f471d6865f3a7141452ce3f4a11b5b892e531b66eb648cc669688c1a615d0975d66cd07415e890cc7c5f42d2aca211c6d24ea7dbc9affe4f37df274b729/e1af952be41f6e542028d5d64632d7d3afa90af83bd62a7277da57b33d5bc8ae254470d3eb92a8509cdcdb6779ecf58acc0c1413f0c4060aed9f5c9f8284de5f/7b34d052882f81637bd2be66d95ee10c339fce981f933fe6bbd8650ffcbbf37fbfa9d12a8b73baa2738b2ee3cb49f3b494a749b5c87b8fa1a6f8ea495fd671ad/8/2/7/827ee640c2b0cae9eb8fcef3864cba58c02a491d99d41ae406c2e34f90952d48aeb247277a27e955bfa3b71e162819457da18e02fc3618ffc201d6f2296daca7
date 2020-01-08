@@ -1,0 +1,36 @@
+async function isSupportedDocumentTransformation(strTransform) {
+    await internalDebugCollect('str Transform = ' + strTransform + '; '); await internalDebugStackEnter('isSupportedDocumentTransformation:document-transformations'); await assertIsStr(strTransform); let boolReturn;
+
+    let boolRes = false;
+    boolRes = await implIn(strTransform, strArrayListDocumentTransformations);
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function assertIsSupportedDocumentTransformation(strTransform) {
+    await internalDebugCollect('str Transform = ' + strTransform + '; '); await internalDebugStackEnter('assertIsSupportedDocumentTransformation:document-transformations'); await assertIsStr(strTransform);
+
+    await assertIsTrue(await isSupportedDocumentTransformation(strTransform));
+
+    await internalDebugStackExit();
+}
+
+async function applyDocumentTransformation(strTransform, intArrayDcArrayIn) {
+    await internalDebugCollect('str Transform = ' + strTransform + '; '); await internalDebugCollect('intArray DcArrayIn = ' + intArrayDcArrayIn + '; '); await internalDebugStackEnter('applyDocumentTransformation:document-transformations'); await assertIsStr(strTransform); await assertIsIntArray(intArrayDcArrayIn); let intArrayReturn;
+
+    await assertIsSupportedDocumentTransformation(strTransform);
+    await assertIsDcArray(intArrayDcArrayIn);
+    let intArrayRes = [];
+    if (await implEq(strTransform, 'semanticToText')) {
+        intArrayRes = await dctSemanticToText(intArrayDcArrayIn);
+    }
+    else if (await implEq(strTransform, 'codeToText')) {
+        intArrayRes = await dctCodeToText(intArrayDcArrayIn);
+    }
+    else {
+        await implDie(await implCat('Unimplemented document transformation: ', strTransform));
+    }
+    await assertIsDcArray(intArrayRes);
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}

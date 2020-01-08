@@ -1,0 +1,9 @@
+async function runTestsWasm(boolV) {
+    await internalDebugCollect('bool V = ' + boolV + '; '); await internalDebugStackEnter('runTestsWasm:wasm-tests'); await assertIsBool(boolV);
+
+    await testing(boolV, 'wasm');
+    await runTest(boolV, await implEq(42, await wasmCall('fortytwo', 0)));
+    /*runTest b/v eq 4 wasmCallArrIn 'add' ( 2 2 ) */
+
+    await internalDebugStackExit();
+}

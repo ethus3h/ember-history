@@ -1,0 +1,17 @@
+r/an/dcPreprocessForFormat an/in s/format s/direction
+    new an/res
+    set an/res an/in
+    new s/preferredLang
+    set s/preferredLang getPreferredLanguageForFormat s/format s/direction
+    new s/preferredCodeLang
+    set s/preferredCodeLang getPreferredCodeLanguageForFormat s/format s/direction
+    new s/temp
+    if in 'prefilter_semantic' getSettingsForFormat s/format s/direction
+        set s/temp pushFormatImportSetting 'semanticToText' 'language' s/preferredLang
+        set an/res dctSemanticToText an/res
+        setFormatImportSetting 'semanticToText' 'language' s/temp
+    if in 'prefilter_code' getSettingsForFormat s/format s/direction
+        set s/temp pushFormatImportSetting 'codeToText' 'language' s/preferredCodeLang
+        set an/res dctCodeToText an/res
+        setFormatImportSetting 'codeToText' 'language' s/temp
+    return an/res

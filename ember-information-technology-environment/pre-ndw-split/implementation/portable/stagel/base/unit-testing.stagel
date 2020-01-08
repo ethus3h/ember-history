@@ -1,0 +1,101 @@
+r/b/runTestsOnly b/v
+    # Run tests without report. b/v=verbose: true=print test result lines; false=return value only
+    # This runs each component's test suite
+    # General tests
+    #runTestsBits b/v
+    runTestsMath b/v
+    runTestsPack32 b/v
+    runTestsTypeConversion b/v
+    runTestsWasm b/v
+    # Core tests
+    runTestsDcData b/v
+    runTestsFormatDc b/v
+    # Format tests
+    runTestsFormatAscii b/v
+    runTestsFormatAsciiSafeSubset b/v
+    runTestsFormatHtml b/v
+    runTestsFormatHtmlFragment b/v
+    runTestsFormatIntegerList b/v
+    runTestsFormatSems b/v
+    runTestsFormatUtf8 b/v
+    # Document exec tests
+    runTestsDocumentExec b/v
+    # Did anything fail?
+    if eq n/failedTests 0
+        return true
+    return false
+
+r/v/testing b/v s/testSuite
+    if b/v
+        set an/testFrameBuffer append an/testFrameBuffer prepareStrForEcho cat 'Started running test suite: ' s/testSuite
+        renderDrawContents an/testFrameBuffer
+
+r/b/runTest b/v b/testReturn
+    set n/totalTests add n/totalTests 1
+    if b/testReturn
+        if b/v
+            set an/testFrameBuffer append an/testFrameBuffer prepareStrForEcho cat 'Test #' cat strFrom n/totalTests } ' passed.'
+        set n/passedTests add n/passedTests 1
+    else
+        if b/v
+            set an/testFrameBuffer append an/testFrameBuffer prepareStrForEcho cat 'Test #' cat strFrom n/totalTests } ' failed.'
+        set n/failedTests add n/failedTests 1
+    if b/v
+        renderDrawContents an/testFrameBuffer
+    return b/testReturn
+
+r/b/runTestNamed b/v s/testName b/testReturn
+    set n/totalTests add n/totalTests 1
+    if b/testReturn
+        if b/v
+            set an/testFrameBuffer append an/testFrameBuffer prepareStrForEcho cat 'Test #' cat strFrom n/totalTests } cat s/testName ' passed.'
+        set n/passedTests add n/passedTests 1
+    else
+        if b/v
+            set an/testFrameBuffer append an/testFrameBuffer prepareStrForEcho cat 'Test #' cat strFrom n/totalTests } cat s/testName ' failed.'
+        set n/failedTests add n/failedTests 1
+    if b/v
+        renderDrawContents an/testFrameBuffer
+    return b/testReturn
+
+r/v/clearTestStats
+    set n/totalTests 0
+    set n/passedTests 0
+    set n/failedTests 0
+
+r/b/reportTests
+    new s/passedWord
+    set s/passedWord 'tests'
+    if eq n/passedTests 1
+        set s/passedWord 'test'
+    new s/failedWord
+    set s/failedWord 'tests'
+    if eq n/failedTests 1
+        set s/failedWord 'test'
+    new s/totalWord
+    set s/totalWord 'tests'
+    if eq n/totalTests 1
+        set s/totalWord 'test'
+    new s/passedPercentage
+    set s/passedPercentage formatPercentage n/passedTests n/totalTests
+    new s/failedPercentage
+    set s/failedPercentage formatPercentage n/failedTests n/totalTests
+    set an/testFrameBuffer append an/testFrameBuffer prepareStrForEcho cat strFrom n/passedTests } cat ' ' cat s/passedWord cat ' (' cat s/passedPercentage cat '%) passed and ' cat strFrom n/failedTests } cat ' ' cat s/failedWord cat ' (' cat s/failedPercentage cat '%) failed out of a total of ' cat strFrom n/totalTests } cat ' ' cat s/totalWord '.'
+    new s/temp
+    if ne n/failedTests 0
+        set s/totalWord 'Some tests'
+        if eq n/totalTests 1
+            set s/totalWord 'A test'
+        set s/temp cat s/totalWord cat ' (' cat s/failedPercentage cat '%: ' cat strFrom n/failedTests } cat ' out of ' cat strFrom n/totalTests } ') failed!'
+        set an/testFrameBuffer append an/testFrameBuffer prepareStrForEcho s/temp
+        #error s/temp
+    if ne n/passedTests sub n/totalTests n/failedTests
+        die 'There is a problem in the testing framework.'
+    renderDrawContents an/testFrameBuffer
+    set an/testFrameBuffer ( )
+    new b/testReturn
+    set b/testReturn true
+    if ne n/failedTests 0
+        set b/testReturn false
+        #die s/temp
+    return b/testReturn

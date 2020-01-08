@@ -1,0 +1,107 @@
+async function isDc(genericIn) {
+    await internalDebugCollect('generic In = ' + genericIn + '; '); await internalDebugStackEnter('isDc:format-dc'); await assertIsGeneric(genericIn); let boolReturn;
+
+    if (await implNot(await isInt(genericIn))) {
+
+        boolReturn = false; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+    }
+    let intNum = 0;
+    intNum = genericIn;
+    let boolRes = false;
+    boolRes = await isNonnegative(intNum);
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function isKnownDc(genericIn) {
+    await internalDebugCollect('generic In = ' + genericIn + '; '); await internalDebugStackEnter('isKnownDc:format-dc'); await assertIsGeneric(genericIn); let boolReturn;
+
+    if (await implNot(await isDc(genericIn))) {
+
+        boolReturn = false; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+    }
+    if (await implGt(genericIn, await maximumKnownDc())) {
+
+        boolReturn = false; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+    }
+
+    boolReturn = true; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function maximumKnownDc() {
+    await internalDebugStackEnter('maximumKnownDc:format-dc'); let intReturn;
+
+    let strRes = '';
+    strRes = await dcDatasetLength('DcData');
+
+    intReturn = strRes; await assertIsInt(intReturn); await internalDebugStackExit(); return intReturn;
+}
+
+async function dcIsNewline(intDc) {
+    await internalDebugCollect('int Dc = ' + intDc + '; '); await internalDebugStackEnter('dcIsNewline:format-dc'); await assertIsInt(intDc); let boolReturn;
+
+    await assertIsDc(intDc);
+    /* This function returns whether a character should be treated as a newline, in general. Individual characters may have more complex or ambiguous meanings (see details in DcData.csv), but this is useful as a general guide. */
+    /* We can't just use: */
+    /*if eq 'B' dcGetBidiClass n/dc */
+    /*    return true */
+    /* because that means "Paragraph_Separator" bidi class, and includes some things that really shouldn't be considered newlines from what I can tell (information separator two through four), and does not include some things that are (U+2028 Line Separator). */
+    if (await contains([ 119, 120, 121, 240, 294, 295 ], intDc)) {
+
+        boolReturn = true; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+    }
+
+    boolReturn = false; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function dcIsSpace(intDc) {
+    await internalDebugCollect('int Dc = ' + intDc + '; '); await internalDebugStackEnter('dcIsSpace:format-dc'); await assertIsInt(intDc); let boolReturn;
+
+    await assertIsDc(intDc);
+    if (await implEq('Zs', await dcGetType(intDc))) {
+
+        boolReturn = true; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+    }
+
+    boolReturn = false; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function dcIsPrintable(intDc) {
+    await internalDebugCollect('int Dc = ' + intDc + '; '); await internalDebugStackEnter('dcIsPrintable:format-dc'); await assertIsInt(intDc); let boolReturn;
+
+    await assertIsDc(intDc);
+    let strType = '';
+    strType = await dcGetType(intDc);
+    let strGeneralType = '';
+    strGeneralType = await strChar(strType, 0);
+    if (await or(await implEq('Zl', strType), await implEq('Zp', strType))) {
+
+        boolReturn = false; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+    }
+    if (await or(await implEq('!', strGeneralType), await implEq('C', strGeneralType))) {
+
+        boolReturn = false; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+    }
+
+    boolReturn = true; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function dcIsELCode(intDc) {
+    await internalDebugCollect('int Dc = ' + intDc + '; '); await internalDebugStackEnter('dcIsELCode:format-dc'); await assertIsInt(intDc); let boolReturn;
+
+    await assertIsDc(intDc);
+    let boolRes = false;
+    boolRes = await implEq('EL ', await substr(await dcGetScript(intDc), 0, 3));
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function dcGetELClass(intDc) {
+    await internalDebugCollect('int Dc = ' + intDc + '; '); await internalDebugStackEnter('dcGetELClass:format-dc'); await assertIsInt(intDc); let strReturn;
+
+    await assertIsDc(intDc);
+    let strRes = '';
+    strRes = await substr(await dcGetScript(intDc), 3, -1);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}

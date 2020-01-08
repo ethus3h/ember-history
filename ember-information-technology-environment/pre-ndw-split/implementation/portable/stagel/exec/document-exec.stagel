@@ -1,0 +1,134 @@
+r/n/prepareDocumentExec an/contents
+    new n/execId
+    set n/execId -1
+    # documentExecData is a global, created during initialization. It holds the current document state for any documents being executed.
+    set n/execId count as/documentExecPtrs
+    set as/documentExecData push as/documentExecData strPrintArr an/contents
+    # documentExecPtrs is also a global created during init; it holds the current execution state of each document as an array of strings of of comma-terminated ints with the last indicating the position in the document where execution is (the earlier ints represent where execution should return to upon exiting the current scope, so it acts as a stack).
+    set as/documentExecSymbolIndex push as/documentExecSymbolIndex ''
+    set as/documentExecPtrs push as/documentExecPtrs '0,'
+    set as/documentExecFrames push as/documentExecFrames ''
+    set as/documentExecEvents push as/documentExecEvents ''
+    set as/documentExecLogs push as/documentExecLogs ''
+    set as/documentExecSettings push as/documentExecSettings ','
+    assertIsExecId n/execId
+    return n/execId
+
+r/b/isExecId n/execId
+    if lt n/execId count as/documentExecPtrs
+        return true
+    return false
+
+r/as/getExecSettings n/execId
+    new as/res
+    set as/res kvSplit get as/documentExecSettings n/execId
+    return as/res
+
+r/v/setExecSettings n/execId as/val
+    # Replace the entire exec settings array for this exec.
+    set as/documentExecSettings setElem as/documentExecSettings n/execId kvJoin as/val
+
+r/as/getExecPtrs n/execId
+    new as/res
+    set as/res strSplitEsc get as/documentExecPtrs n/execId } ','
+    return as/res
+
+r/v/setExecPtrs n/execId as/val
+    # Replace the entire exec pointer array for this exec.
+    set as/documentExecPtrs setElem as/documentExecPtrs n/execId strJoinEsc as/val ','
+
+r/n/getCurrentExecPtrPos n/execId
+    new n/res
+    set n/res intFromIntStr get getExecPtrs n/execId } -1
+    return n/res
+
+r/v/setExecPtrPos n/execId n/newPos
+    setExecPtrs n/execId setElem getExecPtrs n/execId } -1 strFrom n/newPos
+
+r/v/incrExecPtrPos n/execId
+    setExecPtrPos n/execId add 1 getCurrentExecPtrPos n/execId
+
+r/n/getNextLevelExecPtrPos n/execId
+    new n/res
+    set n/res intFromIntStr get getExecPtrs n/execId } -2
+    return n/res
+
+r/an/getCurrentExecData n/execId
+    new an/res
+    set an/res intArrFromStrPrintedArr get as/documentExecData n/execId
+    return an/res
+
+r/an/getCurrentExecFrame n/execId
+    new an/res
+    set an/res intArrFromStrPrintedArr get as/documentExecFrames n/execId
+    return an/res
+
+r/v/startDocumentExec n/execId
+    assertIsExecId n/execId
+    new b/continue
+    set b/continue true
+    new n/currentPtrPos
+    new an/wipFrame
+    new n/dc
+    new an/documentWorkingCopyData
+    set an/documentWorkingCopyData intArrFromStrPrintedArr get as/documentExecData n/execId
+    new as/state
+    set as/state [ 'normal' ]
+    new b/lastCharacterWasEscape
+    set b/lastCharacterWasEscape false
+    new n/stopExecAtTick
+    set n/stopExecAtTick positiveIntFromIntStr getExecOption n/execId 'stopExecAtTick'
+    new b/runHeadless
+    set b/runHeadless eq 'true' getExecOption n/execId 'runHeadless'
+    new n/currentTick
+    set n/currentTick 0
+    if isNonnegative n/stopExecAtTick
+        if ge n/currentTick add -1 n/stopExecAtTick
+            set b/continue false
+    while b/continue
+        if isNonnegative n/stopExecAtTick
+            if ge n/currentTick add -1 n/stopExecAtTick
+                set b/continue false
+        set n/currentTick inc n/currentTick
+        # This loop goes through each Dc in the document, running it.
+        # Where are we in the document? Store it in n/currentPtrPos.
+        # n/currentPtrPos is a read-only copy! For changing it, call setExecPtrPos or incrExecPtrPos
+        set n/currentPtrPos getCurrentExecPtrPos n/execId
+        # The execution process basically is a big state machine.
+        if ge n/currentPtrPos count an/documentWorkingCopyData
+            # We're done with the document
+            set b/continue false
+        else
+            set n/dc get an/documentWorkingCopyData n/currentPtrPos
+            debugRev 1 cat 'Starting exec loop with data ' cat strPrintArr an/documentWorkingCopyData } cat ' and at position ' cat strFrom n/currentPtrPos } cat ' with current Dc ' cat strFrom n/dc } cat '; in state ' cat strPrintArr as/state } cat ' at tick ' cat strFrom n/currentTick } '.'
+            if b/lastCharacterWasEscape
+                set b/lastCharacterWasEscape false
+                incrExecPtrPos n/execId
+            else
+                # Char isn't escaped, so process it normally
+                if eq n/dc 255
+                    set b/lastCharacterWasEscape true
+                else
+                    if eq 'normal' last as/state
+                        if in n/dc ( 246 247 )
+                            set as/state push as/state 'single-line source comment'
+                        elif in n/dc ( 249 250 )
+                            set as/state push as/state 'block source comment'
+                        if dcIsELCode n/dc
+                            # FIXME unimplemented
+                        else
+                            # Normal Dc, or at least we don't know what it is
+                            set an/wipFrame push an/wipFrame n/dc
+                    elif eq 'single-line source comment' last as/state
+                        if eq n/dc 248
+                            set as/state pop as/state
+                    elif eq 'block source comment' last as/state
+                        if eq n/dc 251
+                            set as/state pop as/state
+                incrExecPtrPos n/execId
+        if and not b/runHeadless } eq 0 mod n/currentTick 100
+            # Convert the frame data to the environment-appropriate format and output it. Ideally this would happen at more sensible intervals, but this is easy to implement...
+            setElement as/documentExecFrames n/execId printArr an/wipFrame
+            renderDrawContents dcaToFormat getEnvPreferredFormat } getCurrentExecFrame n/execId
+    setElement as/documentExecFrames n/execId printArr an/wipFrame
+    renderDrawContents dcaToFormat getEnvPreferredFormat } getCurrentExecFrame n/execId

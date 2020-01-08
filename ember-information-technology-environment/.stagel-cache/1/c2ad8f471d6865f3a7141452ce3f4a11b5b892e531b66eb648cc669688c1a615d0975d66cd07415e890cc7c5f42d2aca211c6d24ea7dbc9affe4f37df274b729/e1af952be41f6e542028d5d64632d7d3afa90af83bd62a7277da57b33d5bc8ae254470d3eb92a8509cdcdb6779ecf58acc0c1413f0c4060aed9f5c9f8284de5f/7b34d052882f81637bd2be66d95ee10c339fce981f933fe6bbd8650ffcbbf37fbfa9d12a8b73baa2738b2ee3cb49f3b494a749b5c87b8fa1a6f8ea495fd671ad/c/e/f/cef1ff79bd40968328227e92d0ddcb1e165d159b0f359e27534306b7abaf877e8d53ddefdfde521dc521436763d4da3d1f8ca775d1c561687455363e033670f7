@@ -1,0 +1,125 @@
+async function dcaFromSems(intArrayIn) {
+    await internalDebugCollect('intArray In = ' + intArrayIn + '; '); await internalDebugStackEnter('dcaFromSems:format-sems'); await assertIsIntArray(intArrayIn); let intArrayReturn;
+
+    await assertIsByteArray(intArrayIn);
+    let intArrayRes = [];
+    /* Accepts an array of bytes of a SEMS format document. Returns an array of Dcs. */
+    let intArrayContent = [];
+    intArrayContent = await utf8CharArrayFromByteArray(intArrayIn);
+    let strParserState = '';
+    strParserState = 'dc';
+    let strCurrentDc = '';
+    strCurrentDc = '';
+    let intContentLength = 0;
+    intContentLength = await count(intArrayContent);
+    let intCharOffset = 0;
+    let intCurrentChar = 0;
+    let boolStrict = false;
+    boolStrict = await implEq('true', await getSettingForFormat('sems', 'in', 'strict'));
+    while (await implLt(intCharOffset, intContentLength)) {
+        /* do something with each char in the array. an/content[n/byteOffset], which is copied to n/currentChar, holds the decimal value of the given char. These are Dcs encoded as ASCII text bytes, rather than an array of Dcs. */
+        intCurrentChar = await get(intArrayContent, intCharOffset);
+        if (await implEq(strParserState, 'dc')) {
+            if (await asciiIsDigit(intCurrentChar)) {
+                strCurrentDc = await implCat(strCurrentDc, await charFromByte(intCurrentChar));
+            }
+            else if (await implIn(intCurrentChar, [ 10, 13, 32 ])) {
+                intArrayRes = await push(intArrayRes, await intFromIntStr(strCurrentDc));
+                strCurrentDc = '';
+            }
+            else if (await implEq(35, intCurrentChar)) {
+                /* pound sign: start comment */
+                if (await ne(0, await len(strCurrentDc))) {
+                    /* Comment was not preceded by a space */
+                    await warnOrDie(boolStrict, 'No trailing space before comment present in sems format while importing. This is not allowed in strict mode.');
+                    intArrayRes = await push(intArrayRes, await intFromIntStr(strCurrentDc));
+                    strCurrentDc = '';
+                }
+                intArrayRes = await push(intArrayRes, 246);
+                strParserState = 'comment';
+            }
+            else {
+                await implDie('Unexpected parser state in SEMS document.');
+            }
+        }
+        else if (await implEq(strParserState, 'comment')) {
+            if (await asciiIsNewline(intCurrentChar)) {
+                intArrayRes = await push(intArrayRes, 248);
+                strParserState = 'dc';
+            }
+            else {
+                intArrayRes = await append(intArrayRes, await dcaFromUnicodeChar(intCurrentChar));
+            }
+        }
+        else {
+            await implDie('Internal error: unexpected parser state while parsing SEMS document');
+        }
+        intCharOffset = await implAdd(intCharOffset, 1);
+    }
+    if (await implEq(strParserState, 'comment')) {
+        /* Document ended with a comment and no newline at the end */
+        if (await ne(0, await len(strCurrentDc))) {
+            await implDie(await implCat('Internal error while parsing sems document: Unconsumed characters were left over when the end of the document was found: ', await implCat(strCurrentDc, '.')));
+        }
+        intArrayRes = await push(intArrayRes, 248);
+    }
+    else if (await ne(0, await len(strCurrentDc))) {
+        await warnOrDie(boolStrict, 'No trailing space present in sems format while importing. This is not allowed in strict mode.');
+        /* Ended without a trailing space */
+        intArrayRes = await push(intArrayRes, await intFromIntStr(strCurrentDc));
+    }
+    await assertIsDcArray(intArrayRes);
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function dcaToSems(intArrayDcIn) {
+    await internalDebugCollect('intArray DcIn = ' + intArrayDcIn + '; '); await internalDebugStackEnter('dcaToSems:format-sems'); await assertIsIntArray(intArrayDcIn); let intArrayReturn;
+
+    await assertIsDcArray(intArrayDcIn);
+    /* TODO: Support SEMS comment roundtripping */
+    let intArrayOut = [];
+    let intLen = 0;
+    intLen = await count(intArrayDcIn);
+    let intInputIndex = 0;
+    intInputIndex = 0;
+    let intCurrentDc = 0;
+    let boolInComment = false;
+    boolInComment = false;
+    let intArrayCurrentComment = [];
+    intArrayCurrentComment = [  ];
+    let boolAtCommentEnd = false;
+    boolAtCommentEnd = false;
+    while (await implLt(intInputIndex, intLen)) {
+        intCurrentDc = await get(intArrayDcIn, intInputIndex);
+        if (boolAtCommentEnd) {
+            boolAtCommentEnd = false;
+        }
+        if (await implEq(246, intCurrentDc)) {
+            boolInComment = true;
+            intArrayOut = await append(intArrayOut, await strToByteArray('#'));
+        }
+        else if (await implEq(248, intCurrentDc)) {
+            boolInComment = false;
+            boolAtCommentEnd = true;
+            intArrayOut = await append(intArrayOut, await dcaToDcbnbUtf8(intArrayCurrentComment));
+            intArrayCurrentComment = [  ];
+            intArrayOut = await append(intArrayOut, await crlf());
+        }
+        else {
+            if (boolInComment) {
+                intArrayCurrentComment = await push(intArrayCurrentComment, intCurrentDc);
+            }
+            else {
+                intArrayOut = await append(intArrayOut, await strToByteArray(await implCat(await strFrom(intCurrentDc), ' ')));
+            }
+        }
+        intInputIndex = await implAdd(intInputIndex, 1);
+    }
+    if (await implNot(boolAtCommentEnd)) {
+        intArrayOut = await append(intArrayOut, await crlf());
+    }
+    await assertIsByteArray(intArrayOut);
+
+    intArrayReturn = intArrayOut; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}

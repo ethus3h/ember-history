@@ -1,0 +1,345 @@
+async function listFormats() {
+    await internalDebugStackEnter('listFormats:formats-data'); let strArrayReturn;
+
+    let strArrayRes = [];
+    strArrayRes = await dcGetColumn('formats', 1);
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function isFormat(strFormat) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugStackEnter('isFormat:formats-data'); await assertIsStr(strFormat); let boolReturn;
+
+    let boolRes = false;
+    boolRes = await implIn(strFormat, await listFormats());
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function listInputFormats() {
+    await internalDebugStackEnter('listInputFormats:formats-data'); let strArrayReturn;
+
+    let strArrayRes = [];
+    strArrayRes = await dcDataFilterByValueGreater('formats', 3, 0, 1);
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function isSupportedInputFormat(strIn) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugStackEnter('isSupportedInputFormat:formats-data'); await assertIsStr(strIn); let boolReturn;
+
+    let boolRes = false;
+    boolRes = await contains(await listInputFormats(), strIn);
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function listInternalFormats() {
+    await internalDebugStackEnter('listInternalFormats:formats-data'); let strArrayReturn;
+
+    let strArrayRes = [];
+    strArrayRes = await dcDataFilterByValue('formats', 6, 'internal', 1);
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function isSupportedInternalFormat(strIn) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugStackEnter('isSupportedInternalFormat:formats-data'); await assertIsStr(strIn); let boolReturn;
+
+    let boolRes = false;
+    boolRes = await or(await contains(await listInputFormats(), strIn), await contains(await listInternalFormats(), strIn));
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function listOutputFormats() {
+    await internalDebugStackEnter('listOutputFormats:formats-data'); let strArrayReturn;
+
+    let strArrayRes = [];
+    strArrayRes = await dcDataFilterByValueGreater('formats', 4, 0, 1);
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function isSupportedOutputFormat(strIn) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugStackEnter('isSupportedOutputFormat:formats-data'); await assertIsStr(strIn); let boolReturn;
+
+    let boolRes = false;
+    boolRes = await contains(await listOutputFormats(), strIn);
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function listCharEncodings() {
+    await internalDebugStackEnter('listCharEncodings:formats-data'); let strArrayReturn;
+
+    let strArrayRes = [];
+    strArrayRes = await dcDataFilterByValue('formats', 6, 'encoding', 1);
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function isSupportedCharEncoding(strIn) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugStackEnter('isSupportedCharEncoding:formats-data'); await assertIsStr(strIn); let boolReturn;
+
+    /* Specifically, is it a supported character encoding for the output environment. */
+    let boolRes = false;
+    boolRes = await implAnd(await contains(await listCharEncodings(), strIn), await isSupportedOutputFormat(strIn));
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function listTerminalTypes() {
+    await internalDebugStackEnter('listTerminalTypes:formats-data'); let strArrayReturn;
+
+    let strArrayRes = [];
+    strArrayRes = await dcDataFilterByValue('formats', 6, 'terminal', 1);
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function isSupportedTerminalType(strIn) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugStackEnter('isSupportedTerminalType:formats-data'); await assertIsStr(strIn); let boolReturn;
+
+    /* Specifically, is it a supported terminal type for the output environment. */
+    let boolRes = false;
+    boolRes = await implAnd(await contains(await listTerminalTypes(), strIn), await isSupportedOutputFormat(strIn));
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function listDocumentTransformations() {
+    await internalDebugStackEnter('listDocumentTransformations:formats-data'); let strArrayReturn;
+
+    let strArrayRes = [];
+    strArrayRes = await dcDataFilterByValue('formats', 6, 'transformation', 1);
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function listDataTypes() {
+    await internalDebugStackEnter('listDataTypes:formats-data'); let strArrayReturn;
+
+    let strArrayRes = [];
+    strArrayRes = await dcDataFilterByValue('formats', 6, 'data', 1);
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function listVariantsForFormat(strFormat) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugStackEnter('listVariantsForFormat:formats-data'); await assertIsStr(strFormat); let strArrayReturn;
+
+    await assertIsFormat(strFormat);
+    let strNormalizedFmt = '';
+    strNormalizedFmt = await normalizeFormat(strFormat);
+    let strArrayFormats = [];
+    strArrayFormats = await listFormats();
+    let intCount = 0;
+    let intI = 0;
+    intCount = await count(strArrayFormats);
+    intI = 0;
+    let strCandidateFmt = '';
+    let strNormalizedVar = '';
+    let strArrayRes = [];
+    while (await implLt(intI, intCount)) {
+        strCandidateFmtType = await dcDataLookupById('formats', intI, 6);
+        if (await implEq('v:', await substr(strCandidateFmtType, 0, 2))) {
+            strCandidateFmtType = await substr(strCandidateFmtType, 3, -1);
+            if (await implIn(strCandidateFmtType, [ 'unicodePua' ])) {
+                strCandidateFmtType = 'unicode';
+            }
+            if (await implEq(strNormalizedFmt, strCandidateFmtType)) {
+                strArrayRes = await push(strArrayRes, await dcDataLookupById('formats', intI, 1));
+            }
+        }
+        intI = await implAdd(intI, 1);
+    }
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function getFormatId(strFormat) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugStackEnter('getFormatId:formats-data'); await assertIsStr(strFormat); let intReturn;
+
+    await assertIsFormat(strFormat);
+    let intRes = 0;
+    intRes = await intFromIntStr(await dcDataLookupByValue('formats', 1, strFormat, 0));
+
+    intReturn = intRes; await assertIsInt(intReturn); await internalDebugStackExit(); return intReturn;
+}
+
+async function normalizeFormat(strFormat) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugStackEnter('normalizeFormat:formats-data'); await assertIsStr(strFormat); let strReturn;
+
+    await assertIsFormat(strFormat);
+    if (await implEq(strFormat, 'utf8')) {
+
+        strReturn = 'unicode'; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+    }
+
+    strReturn = strFormat; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function getFormatName(strFormat) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugStackEnter('getFormatName:formats-data'); await assertIsStr(strFormat); let strReturn;
+
+    let strRes = '';
+    strRes = await dcDataLookupById('formats', await getFormatId(strFormat), 1);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function getFormatExtension(strFormat) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugStackEnter('getFormatExtension:formats-data'); await assertIsStr(strFormat); let strReturn;
+
+    let strRes = '';
+    strRes = await dcDataLookupById('formats', await getFormatId(strFormat), 2);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function getFormatImportSupport(strFormat) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugStackEnter('getFormatImportSupport:formats-data'); await assertIsStr(strFormat); let intReturn;
+
+    let intRes = 0;
+    intRes = await intFromIntStr(await dcDataLookupById('formats', await getFormatId(strFormat), 3));
+
+    intReturn = intRes; await assertIsInt(intReturn); await internalDebugStackExit(); return intReturn;
+}
+
+async function getFormatExportSupport(strFormat) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugStackEnter('getFormatExportSupport:formats-data'); await assertIsStr(strFormat); let intReturn;
+
+    let intRes = 0;
+    intRes = await intFromIntStr(await dcDataLookupById('formats', await getFormatId(strFormat), 4));
+
+    intReturn = intRes; await assertIsInt(intReturn); await internalDebugStackExit(); return intReturn;
+}
+
+async function getFormatTestsStatus(strFormat) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugStackEnter('getFormatTestsStatus:formats-data'); await assertIsStr(strFormat); let intReturn;
+
+    let intRes = 0;
+    intRes = await intFromIntStr(await dcDataLookupById('formats', await getFormatId(strFormat), 5));
+
+    intReturn = intRes; await assertIsInt(intReturn); await internalDebugStackExit(); return intReturn;
+}
+
+async function getFormatType(strFormat) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugStackEnter('getFormatType:formats-data'); await assertIsStr(strFormat); let strReturn;
+
+    let strRes = '';
+    strRes = await dcDataLookupById('formats', await getFormatId(strFormat), 6);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function getFormatLabel(strFormat) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugStackEnter('getFormatLabel:formats-data'); await assertIsStr(strFormat); let strReturn;
+
+    let strRes = '';
+    strRes = await dcDataLookupById('formats', await getFormatId(strFormat), 7);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function getFormatVariantTypes(strFormat) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugStackEnter('getFormatVariantTypes:formats-data'); await assertIsStr(strFormat); let strArrayReturn;
+
+    let strArrayRes = [];
+    strArrayRes = await strSplit(await dcDataLookupById('formats', await getFormatId(strFormat), 8), ',');
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function getFormatComments(strFormat) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugStackEnter('getFormatComments:formats-data'); await assertIsStr(strFormat); let strReturn;
+
+    let strRes = '';
+    strRes = await dcDataLookupById('formats', await getFormatId(strFormat), 9);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function formatIsVariant(strFormat) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugStackEnter('formatIsVariant:formats-data'); await assertIsStr(strFormat); let boolReturn;
+
+    /* Return true if the format is a variant of another format, rather than its own format. */
+    await assertIsFormat(strFormat);
+    let boolRes = false;
+    boolRes = await implEq('v:', await substr(await getFormatType(strFormat), 0, 2));
+
+    boolReturn = strRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function isVariantType(strVariantType) {
+    await internalDebugCollect('str VariantType = ' + strVariantType + '; '); await internalDebugStackEnter('isVariantType:formats-data'); await assertIsStr(strVariantType); let strReturn;
+
+    let boolRes = false;
+    boolRes = await implIn(strVariantType, [ 'encoding', 'unicodePua' ]);
+
+    strReturn = boolRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function formatGetVariantType(strFormat) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugStackEnter('formatGetVariantType:formats-data'); await assertIsStr(strFormat); let strReturn;
+
+    /* Return the string indicating the type of format variant this is. */
+    await assertIsTrue(await formatIsVariant(strFormat));
+    let strRes = '';
+    strRes = await substr(await getFormatType(strFormat), 2, -1);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function formatSupportsVariantType(strFormat, strVariantType) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugCollect('str VariantType = ' + strVariantType + '; '); await internalDebugStackEnter('formatSupportsVariantType:formats-data'); await assertIsStr(strFormat); await assertIsStr(strVariantType); let boolReturn;
+
+    await assertIsFormat(strFormat);
+    let boolRes = false;
+    boolRes = await implIn(strVariantType, await getFormatVariantTypes(strFormat));
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function formatSupportsVariant(strFormat, strVariant) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugCollect('str Variant = ' + strVariant + '; '); await internalDebugStackEnter('formatSupportsVariant:formats-data'); await assertIsStr(strFormat); await assertIsStr(strVariant); let boolReturn;
+
+    await assertIsFormat(strFormat);
+    let boolRes = false;
+    boolRes = await formatSupportsVariantType(strFormat, await formatGetVariantType(strVariant));
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}
+
+async function getFormatMetricsType(strFormat) {
+    await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugStackEnter('getFormatMetricsType:formats-data'); await assertIsStr(strFormat); let strReturn;
+
+    await assertIsFormat(strFormat);
+    let strRes = '';
+    let strType = '';
+    strType = await getFormatType(strFormat);
+    strRes = await implCat('complex-', strFormat);
+    if (await or(await implEq('text', strType), await implIn(strType, [ 'encoding', 'terminal' ]))) {
+        strRes = 'character';
+    }
+    else if (await implIn(strType, [  ])) {
+        strRes = 'pixel';
+    }
+    else if (await implIn(strType, [ 'internal' ])) {
+        strRes = await implCat('internal-', strFormat);
+    }
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function dcGetMappingToFormat(intDc, strFormat) {
+    await internalDebugCollect('int Dc = ' + intDc + '; '); await internalDebugCollect('str Format = ' + strFormat + '; '); await internalDebugStackEnter('dcGetMappingToFormat:formats-data'); await assertIsInt(intDc); await assertIsStr(strFormat); let strReturn;
+
+    await assertIsDc(intDc);
+    await assertIsSupportedOutputFormat(strFormat);
+    let strRes = '';
+    strRes = await dcDataLookupById(await implCat('mappings/to/', strFormat), intDc, 1);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}

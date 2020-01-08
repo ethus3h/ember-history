@@ -1,0 +1,123 @@
+async function dcaFromAsciiSafeSubset(intArrayContent) {
+    await internalDebugCollect('intArray Content = ' + intArrayContent + '; '); await internalDebugStackEnter('dcaFromAsciiSafeSubset:format-asciiSafeSubset'); await assertIsIntArray(intArrayContent); let intArrayReturn;
+
+    let intLen = 0;
+    intLen = await count(intArrayContent);
+    let intCounter = 0;
+    intCounter = 0;
+    let strState = '';
+    strState = 'normal';
+    let intArrayPrefilter = [];
+    let intCurrentChar = 0;
+    let boolStrict = false;
+    boolStrict = false;
+    if (await implEq('true', await getSettingForFormat('asciiSafeSubset', 'in', 'strict'))) {
+        boolStrict = true;
+    }
+    while (await implLt(intCounter, intLen)) {
+        intCurrentChar = await get(intArrayContent, intCounter);
+        await assertIsTrue(await isAsciiSafeSubsetChar(intCurrentChar));
+        if (await implAnd(boolStrict, await implAnd(await implEq(strState, 'normal'), await implEq(intCurrentChar, 10)))) {
+            await implDie('LF without preceding CR not allowed in asciiSafeSubset strict mode.');
+        }
+        if (await implAnd(await implEq(strState, 'normal'), await implEq(intCurrentChar, 13))) {
+            /* Wait to see if there's a lf after this cr. If so, treat them as a unit. */
+            strState = 'crlf';
+        }
+        else if (await implEq(strState, 'crlf')) {
+            strState = 'normal';
+            intArrayPrefilter = await append(intArrayPrefilter, await crlf());
+            if (await ne(intCurrentChar, 10)) {
+                if (boolStrict) {
+                    await implDie('CR followed by non-LF byte not allowed in asciiSafeSubset strict mode.');
+                }
+                /* Reparse the current character */
+                intCounter = await implSub(intCounter, 1);
+            }
+        }
+        else {
+            intArrayPrefilter = await push(intArrayPrefilter, intCurrentChar);
+        }
+        intCounter = await implAdd(intCounter, 1);
+    }
+    intArrayPrefilter = await dcaFromAscii(intArrayPrefilter);
+
+    intArrayReturn = intArrayPrefilter; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function dcaToAsciiSafeSubset(intArrayDcIn) {
+    await internalDebugCollect('intArray DcIn = ' + intArrayDcIn + '; '); await internalDebugStackEnter('dcaToAsciiSafeSubset:format-asciiSafeSubset'); await assertIsIntArray(intArrayDcIn); let intArrayReturn;
+
+    await assertIsDcArray(intArrayDcIn);
+    let intArrayOut = [];
+    let intArrayTemp = [];
+    let intLen = 0;
+    intLen = await count(intArrayDcIn);
+    let intInputIndex = 0;
+    intInputIndex = 0;
+    let intDcAtIndex = 0;
+    let strState = '';
+    strState = 'normal';
+    let intArrayMapTemp = [];
+    while (await implLt(intInputIndex, intLen)) {
+        intArrayMapTemp = await dcToFormat('utf8', await get(intArrayDcIn, intInputIndex));
+        if (await implEq(0, await count(intArrayMapTemp))) {
+            intArrayTemp = await setElement(intArrayTemp, intInputIndex, -1);
+        }
+        else {
+            intArrayTemp = await setElement(intArrayTemp, intInputIndex, await get(intArrayMapTemp, 0));
+        }
+        intInputIndex = await implAdd(intInputIndex, 1);
+    }
+    intInputIndex = 0;
+    let intArrayTempChar = [];
+    while (await implLt(intInputIndex, intLen)) {
+        intDcAtIndex = await get(intArrayDcIn, intInputIndex);
+        if (await implEq(intDcAtIndex, 121)) {
+            strState = 'crlf';
+            intInputIndex = await implAdd(intInputIndex, 1);
+            intDcAtIndex = await get(intArrayDcIn, intInputIndex);
+        }
+        if (await implEq(strState, 'normal')) {
+            intArrayTempChar = await dcToFormat('utf8', intDcAtIndex);
+            if (await implEq(0, await count(intArrayTempChar))) {
+                await exportWarningUnmappable(intInputIndex, intDcAtIndex);
+            }
+            else {
+                if (await dcIsNewline(intDcAtIndex)) {
+                    intArrayOut = await append(intArrayOut, await crlf());
+                }
+                else if (await isAsciiSafeSubsetChar(await get(intArrayTempChar, 0))) {
+                    intArrayOut = await push(intArrayOut, intArrayTempChar);
+                }
+                else {
+                    await exportWarningUnmappable(intInputIndex, intDcAtIndex);
+                }
+            }
+        }
+        else if (await implEq(strState, 'crlf')) {
+            strState = 'normal';
+            if (await implEq(intDcAtIndex, 120)) {
+                /* Found ambiguous cr, lf in a row, so only output one crlf */
+                intArrayOut = await append(intArrayOut, await crlf());
+            }
+            else {
+                /* Reprocess the current character with 'normal' state */
+                intInputIndex = await implSub(intInputIndex, 1);
+            }
+        }
+        intInputIndex = await implAdd(intInputIndex, 1);
+    }
+    await assertIsByteArray(intArrayOut);
+
+    intArrayReturn = intArrayOut; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function isAsciiSafeSubsetChar(intChar) {
+    await internalDebugCollect('int Char = ' + intChar + '; '); await internalDebugStackEnter('isAsciiSafeSubsetChar:format-asciiSafeSubset'); await assertIsInt(intChar); let boolReturn;
+
+    let boolRes = false;
+    boolRes = await or(await asciiIsPrintable(intChar), await asciiIsNewline(intChar));
+
+    boolReturn = boolRes; await assertIsBool(boolReturn); await internalDebugStackExit(); return boolReturn;
+}

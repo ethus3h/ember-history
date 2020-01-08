@@ -1,0 +1,4 @@
+r/v/f
+    new n/counter 1
+    set n/counter add n/counter 1
+    new s/temp ''

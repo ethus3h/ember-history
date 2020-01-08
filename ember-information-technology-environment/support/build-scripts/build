@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1091
+source ember_bash_setup &> /dev/null || { printf '%b' '\033[1;31m' >&2; echo "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd): The required dependency ember-shared could not be found (or ember_bash_setup could not be sourced for some other reason)." >&2; printf '%b' '\033[0m' >&2; exit 1; }
+#set -x
+
+trap 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."' ERR
+
+# Build the EITE implementation.
+
+sicmd="./support/build-scripts/build-wrapped"
+#[[ -f "./build-wrapped" ]] && sicmd=./"$sicmd"
+
+cache="--no-cache"
+cacheDir="."
+if [[ "$1" == "--cache" ]]; then
+    cache="--cache"
+    shift
+    cacheDir="$1"
+    shift
+elif [[ "$1" == "--no-cache" ]]; then
+    cache="--no-cache"
+    shift
+    cacheDir="$1"
+    shift
+fi
+debugBuild="--debug"
+if [[ "$1" == "--debug" ]]; then
+    debugBuild="--debug"
+    shift
+elif [[ "$1" == "--no-debug" ]]; then
+    debugBuild="--no-debug"
+    shift
+fi
+typecheckBuild="--runtime-type-checks"
+if [[ "$1" == "--runtime-type-checks" ]]; then
+    typecheckBuild="--runtime-type-checks"
+    shift
+elif [[ "$1" == "--no-runtime-type-checks" ]]; then
+    typecheckBuild="--no-runtime-type-checks"
+    shift
+fi
+
+if [[ "$1" == "--fast" ]]; then
+    debugBuild="--no-debug"
+    typecheckBuild="--no-runtime-type-checks"
+    shift
+fi
+
+distBuild="--no-dist-build"
+if [[ "$1" == "--dist-build" ]]; then
+    distBuild="--dist-build"
+    shift
+elif [[ "$1" == "--no-dist-build" ]]; then
+    distBuild="--no-dist-build"
+    shift
+fi
+
+echo "Building, please wait..."
+
+[[ "$distBuild" == "--dist-build" ]] && rm -rf ./built
+mkdir -p ./built
+mkdir -p ./build-temp
+
+[[ -d /usr/share/eite-wasm-toolchain/wasm-dist-built ]] || die "Couldn't find the WebAssembly toolchain for EITE! Have you installed it yet? (If there's not a package available, you can run make autodep to try to install dependencies. Or, to build and install it by hand, you can make a fresh clone of the ember-information-technology-environment repository and run ./configure; ./support/build-scripts/dist-fetch; make wasm-toolchain; make wasm-toolchain-install)"
+
+rm -rf ./built/wasm-dist-built
+cp -ra /usr/share/eite-wasm-toolchain/wasm-dist-built ./built/ || die "Couldn't copy the WebAssembly toolchain for EITE!"
+touch ./build-temp/wasm-dist-build-ready
+
+[[ -d ./build-temp/distfiles ]] || die "Make sure the required dependency files are in ./build-temp/distfiles, or run support/dist-fetch to get them from your /usr/portage."
+
+if [[ "$1" == "-v" ]]; then
+    shift
+    "$sicmd" "$cache" "$cacheDir" "$debugBuild" "$typecheckBuild" "$@"
+    [[ "$distBuild" == "--dist-build" ]] && ./support/dist-build
+    [[ "$distBuild" == "--dist-build" ]] && ./support/build-scripts/build-wasm-common
+elif [[ "$1" == "--somewhat-verbose" ]]; then
+    shift
+    # StageL goes to /dev/null, while other things are verbose
+    "$sicmd" "$cache" "$cacheDir" "$debugBuild" "$typecheckBuild" "$@" &> /dev/null
+    [[ "$distBuild" == "--dist-build" ]] && ./support/dist-build
+    [[ "$distBuild" == "--dist-build" ]] && ./support/build-scripts/build-wasm-common
+else
+    "$sicmd" "$cache" "$cacheDir" "$debugBuild" "$typecheckBuild" "$@" &> /dev/null
+    [[ "$distBuild" == "--dist-build" ]] && ./support/dist-build &> /dev/null
+    [[ "$distBuild" == "--dist-build" ]] && ./support/build-scripts/build-wasm-common &> /dev/null
+fi
+
+cp -ra ./implementation/portable/eite ./built/
+
+./support/build-scripts/build-web
+./support/build-scripts/build-edit-webextension
+
+echo "Done."

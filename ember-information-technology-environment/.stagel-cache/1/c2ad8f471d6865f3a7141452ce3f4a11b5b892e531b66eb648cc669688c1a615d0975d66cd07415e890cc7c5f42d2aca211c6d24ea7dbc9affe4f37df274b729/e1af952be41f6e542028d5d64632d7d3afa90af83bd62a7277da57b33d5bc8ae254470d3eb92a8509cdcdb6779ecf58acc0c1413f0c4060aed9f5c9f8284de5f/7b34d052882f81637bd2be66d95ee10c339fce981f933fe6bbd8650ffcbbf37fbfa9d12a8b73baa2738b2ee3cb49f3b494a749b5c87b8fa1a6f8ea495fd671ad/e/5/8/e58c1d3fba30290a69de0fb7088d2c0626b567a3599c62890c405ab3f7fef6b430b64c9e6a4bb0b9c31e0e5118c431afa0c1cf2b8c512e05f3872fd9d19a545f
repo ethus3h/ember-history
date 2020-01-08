@@ -1,0 +1,8 @@
+async function debugRev(intLevel, strMessage) {
+    await internalDebugCollect('int Level = ' + intLevel + '; '); await internalDebugCollect('str Message = ' + strMessage + '; '); await internalDebugStackEnter('debugRev:logging'); await assertIsInt(intLevel); await assertIsStr(strMessage);
+
+    /* Just the debug routine with the arguments reversed to avoid needing to close a bunch of arglists for a dynamically constructed string. */
+    await implDebug(strMessage, intLevel);
+
+    await internalDebugStackExit();
+}

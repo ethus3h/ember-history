@@ -1,0 +1,4 @@
+r/v/runTestsFormatAsciiSafeSubset b/v
+    testing b/v 'formatAsciiSafeSubset'
+    runTest b/v arrEq ( 121 120 21 26 ) dcaFromAsciiSafeSubset ( 13 10 35 40 )
+    runTest b/v arrEq ( 13 10 35 13 10 40 ) dcaToAsciiSafeSubset ( 0 212 120 216 291 221 226 231 21 121 120 26 )

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1091
+source ember_bash_setup &> /dev/null || { printf '%b' '\033[1;31m' >&2; echo "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd): The required dependency ember-shared could not be found (or ember_bash_setup could not be sourced for some other reason)." >&2; printf '%b' '\033[0m' >&2; exit 1; }
+#set -x
+
+trap 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."' ERR
+
+# Create Web extension version of edit tool
+
+rm -rf ./built/web
+mkdir ./built/web
+cp -ra ./implementation/platform-support/web/* ./built/web/
+cp -ra ./built/wasm-dist-built/wabt/* ./built/web/
+cp -ra ./built/eite/* ./built/web/
+rm -rf ./built/web/data
+cp -ra ./data ./built/web/
+cp -ra ./built/dist-built/ucd ./built/web/data/
+cp -a ./built/implementation-parts/js/eite.js ./built/web/
+cp -ra ./built/wasm-common ./built/web/
+cp -a /usr/share/futuramerlin-web-toolkit/assets/*.css ./built/web/
+cp -a ./LICENSE* ./built/web/
+rm ./built/web/papaparse.js
+cp -a /usr/share/javascript/PapaParse/papaparse.js ./built/web/

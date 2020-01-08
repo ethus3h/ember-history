@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE language SYSTEM "language.dtd"
+[
+	<!ENTITY digitPart "[0-9](?:_?[0-9])*">
+	<!ENTITY beforeDigit "(?&lt;![\.\w[:^ascii:]])">
+	<!ENTITY beforePointFloat "(?&lt;![\w[:^ascii:]])">
+]>
+<!-- StageL syntax highlighting file based on https://raw.githubusercontent.com/KDE/syntax-highlighting/master/data/syntax/python.xml -->
+<!-- xmllint -[invalid xml]-dtdvalid support/extras/language.xsd support/extras/stagel.xml  (but it doesn't check the dtd I guess because that's an xsd, whatever that is) -->
+<language name="StageL" version="1" style="python" indenter="python" kateversion="5.0" section="Sources" extensions="*.stagel" mimetype="application/x-stagel" casesensitive="1" author="Michael Bueker (original Python highlighter); Elli Chandler (StageL changes)" license="MIT (original Python highlighter); AGPL-3 (StageL changes)">
+	<highlighting>
+		<list name="import">
+			<item>import</item>
+			<item>from</item>
+			<item>as</item>
+		</list>
+		<list name="defs">
+			<item>new</item>
+			<item>set</item>
+		</list>
+		<list name="booleans">
+			<item>true</item>
+			<item>false</item>
+		</list>
+		<list name="operators">
+			<!-- because of the nature of StageL, these "operators" are just commonly used built-in functions -->
+			<!-- <item>add</item>
+			<item>sub</item>
+			<item>inc</item>
+			<item>cat</item> -->
+		</list>
+		<list name="flow">
+			<item>if</item>
+			<item>elif</item>
+			<item>else</item>
+			<item>{</item>
+			<item>}</item>
+			<item>while</item>
+			<item>until</item>
+			<item>return</item>
+		</list>
+		<contexts>
+			<context name="Normal" attribute="Normal Text" lineEndContext="#stay">
+				<keyword attribute="Import" String="import" context="#stay"/>
+				<keyword attribute="Definition Keyword" String="defs" context="#stay"/>
+				<keyword attribute="Operator Keyword" String="operators" context="#stay"/>
+				<keyword attribute="Flow Control Keyword" String="flow" context="#stay"/>
+				<RegExpr attribute="Normal Text" String="[a-zA-Z_][a-zA-Z_0-9]{2,}" context="#stay"/>
+				<RegExpr attribute="Definition Keyword" String="r/[a-zA-Z][a-zA-Z]?/[a-zA-Z_0-9]+" context="#stay"/>
+				<RegExpr attribute="Special Variable" String="[a-zA-Z][a-zA-Z]?/[a-zA-Z_0-9]+" context="#stay"/>
+
+				<keyword attribute="Definition Keyword" String="booleans" context="#stay"/>
+				<RegExpr attribute="Int" String="&beforeDigit;(?:[1-9](?:_?\d)*|0(?:_?0)*)\b" context="#stay"/>
+
+				<DetectChar attribute="Normal Text" char="&lt;" context="BoolArray" beginRegion="BoolArray"/>
+				<DetectChar attribute="Normal Text" char="[" context="StrArray" beginRegion="StrArray"/>
+				<DetectChar attribute="Normal Text" char="(" context="IntArray" beginRegion="IntArray"/>
+
+				<DetectChar attribute="Comment" char="#" context="Hash comment"/>
+
+				<IncludeRules context="StringVariants" />
+			</context>
+
+			<context name="#CheckForString" attribute="Normal Text" lineEndContext="#pop" fallthrough="true" fallthroughContext="#pop">
+				<DetectSpaces/>
+				<LineContinue attribute="Normal Text" context="CheckForStringNext"/>
+			</context>
+
+			<context name="CheckForStringNext" attribute="Normal Text" lineEndContext="#pop" fallthrough="true" fallthroughContext="#pop">
+				<DetectSpaces/>
+				<LineContinue attribute="Normal Text" context="CheckForStringNext"/>
+				<IncludeRules context="StringVariants"/>
+			</context>
+
+			<context name="StringVariants" attribute="Normal Text" lineEndContext="#stay">
+				<DetectSpaces/>
+				<RegExpr attribute="String" String="u?'"                  insensitive="true" context="Single A-string"/>
+			</context>
+
+			<context name="BoolArray" attribute="Normal Text" lineEndContext="#stay" noIndentationBasedFolding="true">
+				<DetectSpaces/>
+				<DetectChar attribute="Normal Text" char="&gt;" context="#pop" endRegion="BoolArray"/>
+				<keyword attribute="Boolean literal" String="booleans" context="#stay"/>
+			</context>
+
+			<context name="StrArray" attribute="Normal Text" lineEndContext="#stay" noIndentationBasedFolding="true">
+				<DetectSpaces/>
+				<DetectChar attribute="Normal Text" char="]" context="#pop" endRegion="StrArray"/>
+				<IncludeRules context="StringVariants" />
+			</context>
+
+			<context name="IntArray" attribute="Normal Text" lineEndContext="#stay" noIndentationBasedFolding="true">
+				<DetectSpaces/>
+				<DetectChar attribute="Normal Text" char=")" context="#pop" endRegion="IntArray"/>
+				<RegExpr attribute="Int" String="&beforeDigit;(?:[1-9](?:_?\d)*|0(?:_?0)*)\b" context="#stay"/>
+			</context>
+
+			<!-- Comments -->
+
+			<context name="Hash comment" attribute="Comment" lineEndContext="#pop">
+				<IncludeRules context="##Alerts" />
+				<IncludeRules context="##Modelines" />
+			</context>
+
+			<!-- Strings -->
+
+			<!--
+			It follows a Binary tree of string kinds (not even touching byte literals).
+			The levels are:
+			1. triple- vs. single-quoted
+			2. apostrophe vs. quotation mark
+			3. static vs. interpolated (f-literal)
+			4. escaped vs. raw
+			Adding byte literals wouldn’t make the current 2⁴ into 2⁵ contexts, as there are no byte f-literals
+			-->
+
+			<!-- Single-quoted A-strings -->
+			<context name="Single A-string" attribute="String" lineEndContext="#stay">
+				<IncludeRules context="stringescape"/>
+				<DetectChar attribute="String" char="'" context="#pop#CheckForString"/>
+			</context>
+
+			<!-- escape characters -->
+			<context name="stringescape" attribute="String Char" lineEndContext="#stay">
+				<RegExpr attribute="String Char" String="\\[\\]" context="#stay"/>
+			</context>
+
+		</contexts>
+
+		<itemDatas>
+			<itemData name="Normal Text" defStyleNum="dsNormal" spellChecking="false"/>
+			<itemData name="Definition Keyword" defStyleNum="dsKeyword" spellChecking="false"/>
+			<itemData name="Operator" defStyleNum="dsOperator" spellChecking="false"/>
+			<itemData name="Operator Keyword" defStyleNum="dsKeyword" spellChecking="false"/>
+			<itemData name="Flow Control Keyword" defStyleNum="dsControlFlow" spellChecking="false"/>
+			<itemData name="Builtin Function" defStyleNum="dsBuiltIn" spellChecking="false"/>
+			<itemData name="Special Variable" defStyleNum="dsVariable" spellChecking="false"/>
+			<itemData name="Extensions" defStyleNum="dsExtension" spellChecking="false"/>
+			<itemData name="Import" defStyleNum="dsImport" spellChecking="false"/>
+			<itemData name="Boolean literal" defStyleNum="dsKeyword" spellChecking="false"/>
+			<itemData name="Int" defStyleNum="dsDecVal" spellChecking="false"/>
+			<itemData name="Comment" defStyleNum="dsComment"/>
+			<itemData name="String" defStyleNum="dsString"/>
+			<itemData name="String Char" defStyleNum="dsChar" spellChecking="false"/>
+			<itemData name="Error" defStyleNum="dsError"/>
+		</itemDatas>
+	</highlighting>
+	<general>
+		<folding indentationsensitive="1" />
+		<emptyLines>
+			<emptyLine regexpr="(?:\s+|\s*#.*)"/>
+		</emptyLines>
+		<comments>
+			<comment name="singleLine" start="#" position="afterwhitespace"/>
+		</comments>
+		<keywords casesensitive="1" additionalDeliminator="#'"/>
+	</general>
+</language>
+
+<!-- kate: space-indent off; indent-width 4; -->

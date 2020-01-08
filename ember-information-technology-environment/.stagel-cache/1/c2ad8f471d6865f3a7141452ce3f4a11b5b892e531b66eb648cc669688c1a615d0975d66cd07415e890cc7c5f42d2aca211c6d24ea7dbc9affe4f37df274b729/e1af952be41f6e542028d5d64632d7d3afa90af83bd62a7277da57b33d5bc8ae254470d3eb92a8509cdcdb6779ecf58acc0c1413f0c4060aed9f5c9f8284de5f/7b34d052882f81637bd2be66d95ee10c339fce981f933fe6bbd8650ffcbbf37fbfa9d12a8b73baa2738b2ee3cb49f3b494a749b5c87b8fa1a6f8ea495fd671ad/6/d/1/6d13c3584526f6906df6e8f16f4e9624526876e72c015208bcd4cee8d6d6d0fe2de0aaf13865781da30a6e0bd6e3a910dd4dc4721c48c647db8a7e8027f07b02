@@ -1,0 +1,327 @@
+async function strPrintArr(genericArrayIn) {
+    await internalDebugCollect('genericArray In = ' + genericArrayIn + '; '); await internalDebugStackEnter('strPrintArr:type-conversion'); await assertIsGenericArray(genericArrayIn); let strReturn;
+
+    /* The reverse of this for an/ input is intArrFromStrPrintedArr. */
+    /* Hint: running this on a DcArray produces a sems document that can be turned back into a DcArray with dcarrParseSems strToByteArray s/str :) */
+    let strOut = '';
+    strOut = await strJoin(genericArrayIn, ' ');
+
+    strReturn = strOut; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function printArray(genericArrayIn) {
+    await internalDebugCollect('genericArray In = ' + genericArrayIn + '; '); await internalDebugStackEnter('printArray:type-conversion'); await assertIsGenericArray(genericArrayIn); let strReturn;
+
+    /* Just a convenience wrapper */
+    let strRes = '';
+    strRes = await strPrintArr(genericArrayIn);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function strPrintArray(genericArrayIn) {
+    await internalDebugCollect('genericArray In = ' + genericArrayIn + '; '); await internalDebugStackEnter('strPrintArray:type-conversion'); await assertIsGenericArray(genericArrayIn); let strReturn;
+
+    /* Just a convenience wrapper */
+    let strRes = '';
+    strRes = await strPrintArr(genericArrayIn);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function printArr(genericArrayIn) {
+    await internalDebugCollect('genericArray In = ' + genericArrayIn + '; '); await internalDebugStackEnter('printArr:type-conversion'); await assertIsGenericArray(genericArrayIn); let strReturn;
+
+    /* Just a convenience wrapper */
+    let strRes = '';
+    strRes = await strPrintArr(genericArrayIn);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function strSplit(strIn, strSeparator) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugCollect('str Separator = ' + strSeparator + '; '); await internalDebugStackEnter('strSplit:type-conversion'); await assertIsStr(strIn); await assertIsStr(strSeparator); let strArrayReturn;
+
+    let strArrayRes = [];
+    let intSeparLen = 0;
+    intSeparLen = await len(strSeparator);
+    let strRemaining = '';
+    strRemaining = strIn;
+    let intRemainingLen = 0;
+    intRemainingLen = await len(strRemaining);
+    let strCurrentElem = '';
+    let strCurrentChar = '';
+    while (await implLt(0, intRemainingLen)) {
+        if (await implEq(strSeparator, await substr(strRemaining, 0, intSeparLen))) {
+            strArrayRes = await push(strArrayRes, strCurrentElem);
+            strCurrentElem = '';
+            strRemaining = await substr(strRemaining, intSeparLen, -1);
+        }
+        else {
+            strCurrentChar = await strChar(strRemaining, 0);
+            strCurrentElem = await implCat(strCurrentElem, strCurrentChar);
+            if (await implLt(1, intRemainingLen)) {
+                strRemaining = await substr(strRemaining, 1, -1);
+            }
+            else {
+                strRemaining = '';
+            }
+        }
+        intRemainingLen = await len(strRemaining);
+    }
+    strArrayRes = await push(strArrayRes, strCurrentElem);
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function strJoin(genericArrayIn, strSeparator) {
+    await internalDebugCollect('genericArray In = ' + genericArrayIn + '; '); await internalDebugCollect('str Separator = ' + strSeparator + '; '); await internalDebugStackEnter('strJoin:type-conversion'); await assertIsGenericArray(genericArrayIn); await assertIsStr(strSeparator); let strReturn;
+
+    /* Opposite of strSplit for a given separator */
+    let intCount = 0;
+    intCount = await count(genericArrayIn);
+    let intI = 0;
+    intI = 0;
+    let strOut = '';
+    while (await implLt(intI, intCount)) {
+        strOut = await implCat(strOut, await strFrom(await get(genericArrayIn, intI)));
+        if (await ne(intI, await implAdd(-1, intCount))) {
+            strOut = await implCat(strOut, strSeparator);
+        }
+        intI = await implAdd(intI, 1);
+    }
+
+    strReturn = strOut; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function strSplitEscaped(strIn, strSeparator) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugCollect('str Separator = ' + strSeparator + '; '); await internalDebugStackEnter('strSplitEscaped:type-conversion'); await assertIsStr(strIn); await assertIsStr(strSeparator); let strArrayReturn;
+
+    let strArrayRes = [];
+    let strArrayExploded = [];
+    strArrayExploded = await strSplit(strIn, strSeparator);
+    strArrayRes = [  ];
+    let intK = 0;
+    let intL = 0;
+    intK = 0;
+    intL = await count(strArrayExploded);
+    let boolContinue = false;
+    boolContinue = true;
+    let strTemp = '';
+    let strArrayTempSubset = [];
+    while (await implAnd(boolContinue, await implLt(intK, intL))) {
+        if (await implEq('\\\\', await charAt(await get(strArrayExploded, intK), await implAdd(-1, await len(await get(strArrayExploded, intK)))))) {
+            if (await ge(await implAdd(1, intK), intL)) {
+                strArrayRes = await push(strArrayRes, await get(strArrayExploded, intK));
+                boolContinue = false;
+            }
+            strTemp = await setCharAt(await get(strArrayExploded, intK), await dec(await len(await get(strArrayExploded, intK), ), ), strSeparator);
+            await setElem(strArrayExploded, intK, strTemp);
+            /*array_splice($exploded, $k + 1, 1); // https://www.php.net/manual/en/function.array-splice.php */
+            strArrayTempSubset = await subset(strArrayExploded, await implAdd(1, intK), await implAdd(2, intK));
+            strArrayExploded = await append(strArrayTempSubset, await subset(strArrayExploded, await implAdd(2, intK), -1));
+            intL = await dec(intL);
+            intK = await dec(intK);
+        }
+        else {
+            strArrayRes = await push(strArrayRes, await get(strArrayExploded, intK));
+        }
+        intK = await implAdd(1, intK);
+    }
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+    /* Based on the explode_esc PHP function: */
+    /*//explode_escaped (not written by me) */
+    /*function explode_esc($delimiter, $string) */
+    /*{ */
+    /*    $exploded = explode($delimiter, $string); */
+    /*    $fixed    = array(); */
+    /*    for ($k = 0, $l = count($exploded); $k < $l; ++$k) { */
+    /*        if ($exploded[$k][strlen($exploded[$k]) - 1] == '\\') { */
+    /*            if ($k + 1 >= $l) { */
+    /*                $fixed[] = trim($exploded[$k]); */
+    /*                break; */
+    /*            } */
+    /*            $exploded[$k][strlen($exploded[$k]) - 1] = $delimiter; */
+    /*            $exploded[$k] .= $exploded[$k + 1]; */
+    /*            array_splice($exploded, $k + 1, 1); */
+    /*            --$l; */
+    /*            --$k; */
+    /*        } else */
+    /*            $fixed[] = trim($exploded[$k]); */
+    /*    } */
+    /*    return $fixed; */
+    /*} */
+}
+
+async function strSplitEsc(strIn, strSeparator) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugCollect('str Separator = ' + strSeparator + '; '); await internalDebugStackEnter('strSplitEsc:type-conversion'); await assertIsStr(strIn); await assertIsStr(strSeparator); let strArrayReturn;
+
+    /* Convenience wrapper */
+    let strArrayRes = [];
+    strArrayRes = await strSplitEscaped(strIn, strSeparator);
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function explodeEsc(strIn, strSeparator) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugCollect('str Separator = ' + strSeparator + '; '); await internalDebugStackEnter('explodeEsc:type-conversion'); await assertIsStr(strIn); await assertIsStr(strSeparator); let strArrayReturn;
+
+    let strArrayRes = [];
+    strArrayRes = await strSplitEscaped(strIn, strSeparator);
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function explodeEscaped(strIn, strSeparator) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugCollect('str Separator = ' + strSeparator + '; '); await internalDebugStackEnter('explodeEscaped:type-conversion'); await assertIsStr(strIn); await assertIsStr(strSeparator); let strArrayReturn;
+
+    let strArrayRes = [];
+    strArrayRes = await strSplitEscaped(strIn, strSeparator);
+
+    strArrayReturn = strArrayRes; await assertIsStrArray(strArrayReturn); await internalDebugStackExit(); return strArrayReturn;
+}
+
+async function strJoinEscaped(strArrayIn, strSeparator) {
+    await internalDebugCollect('strArray In = ' + strArrayIn + '; '); await internalDebugCollect('str Separator = ' + strSeparator + '; '); await internalDebugStackEnter('strJoinEscaped:type-conversion'); await assertIsStrArray(strArrayIn); await assertIsStr(strSeparator); let strReturn;
+
+    let strRes = '';
+    let intC = 0;
+    let intL = 0;
+    intC = 0;
+    intL = await count(strArrayIn);
+    while (await implLt(intC, intL)) {
+        strRes = await implCat(strRes, await implCat(await strReplace(await get(strArrayIn, intC), strSeparator, await implCat('\\', strSeparator), ), strSeparator));
+        intC = await inc(intC);
+    }
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function strJoinEsc(strArrayIn, strSeparator) {
+    await internalDebugCollect('strArray In = ' + strArrayIn + '; '); await internalDebugCollect('str Separator = ' + strSeparator + '; '); await internalDebugStackEnter('strJoinEsc:type-conversion'); await assertIsStrArray(strArrayIn); await assertIsStr(strSeparator); let strReturn;
+
+    /* Convenience wrapper */
+    let strRes = '';
+    strRes = await strJoinEscaped(strArrayIn, strSeparator);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function strJoinEscNoTrailing(strArrayIn, strSeparator) {
+    await internalDebugCollect('strArray In = ' + strArrayIn + '; '); await internalDebugCollect('str Separator = ' + strSeparator + '; '); await internalDebugStackEnter('strJoinEscNoTrailing:type-conversion'); await assertIsStrArray(strArrayIn); await assertIsStr(strSeparator); let strReturn;
+
+    /* a,b instead of a,b, */
+    let strRes = '';
+    let intSeparLen = 0;
+    intSeparLen = await len(strSeparator);
+    intSeparLen = await implSub(-1, intSeparLen);
+    strRes = await substr(await strJoinEscaped(strArrayIn, strSeparator), 0, intSeparLen);
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function intArrFromStrPrintedArr(strInput) {
+    await internalDebugCollect('str Input = ' + strInput + '; '); await internalDebugStackEnter('intArrFromStrPrintedArr:type-conversion'); await assertIsStr(strInput); let intArrayReturn;
+
+    /* Reverse of strPrintArr with an an/ parameter. */
+    let intArrayRes = [];
+    let intArrayContent = [];
+    intArrayContent = await strToByteArray(strInput);
+    let strCurrentInt = '';
+    strCurrentInt = '';
+    let intContentLength = 0;
+    intContentLength = await count(intArrayContent);
+    let intByteOffset = 0;
+    let intCurrentByte = 0;
+    while (await implLt(intByteOffset, intContentLength)) {
+        /* do something with each byte in the array. an/content[n/byteOffset] holds the decimal value of the given byte. These are ints represented as ASCII text bytes, rather than an array of ints. */
+        intCurrentByte = await get(intArrayContent, intByteOffset);
+        if (await asciiIsDigit(intCurrentByte)) {
+            strCurrentInt = await implCat(strCurrentInt, await charFromByte(intCurrentByte));
+        }
+        else if (await asciiIsSpace(intCurrentByte)) {
+            intArrayRes = await push(intArrayRes, await intFromIntStr(strCurrentInt));
+            strCurrentInt = '';
+        }
+        else {
+            await implDie('Unexpected parser state in intArrFromStrPrintedArr.');
+        }
+        intByteOffset = await implAdd(intByteOffset, 1);
+    }
+    if (await ne(0, await len(strCurrentInt))) {
+        /* Ended without a trailing space */
+        intArrayRes = await push(intArrayRes, await intFromIntStr(strCurrentInt));
+    }
+
+    intArrayReturn = intArrayRes; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function positiveIntFromIntStr(strIn) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugStackEnter('positiveIntFromIntStr:type-conversion'); await assertIsStr(strIn); let intReturn;
+
+    /* Returns a negative value for an empty input string */
+    let intRes = 0;
+    if (await implEq(0, await len(strIn))) {
+        intRes = -1;
+    }
+    else {
+        intRes = await intFromIntStr(strIn);
+    }
+
+    intReturn = intRes; await assertIsInt(intReturn); await internalDebugStackExit(); return intReturn;
+}
+
+async function posIntFromIntStr(strIn) {
+    await internalDebugCollect('str In = ' + strIn + '; '); await internalDebugStackEnter('posIntFromIntStr:type-conversion'); await assertIsStr(strIn); let intReturn;
+
+    /* Convenience wrapper */
+    let intRes = 0;
+    intRes = await positiveFromIntStr(strIn);
+
+    intReturn = intRes; await assertIsInt(intReturn); await internalDebugStackExit(); return intReturn;
+}
+
+async function charFromHexByte(strHexByte) {
+    await internalDebugCollect('str HexByte = ' + strHexByte + '; '); await internalDebugStackEnter('charFromHexByte:type-conversion'); await assertIsStr(strHexByte); let strReturn;
+
+    /* Bear in mind that StageL doesn't attempt to support Unicode. */
+    await assertIsBaseStr(strHexByte, 16);
+    let strRes = '';
+    strRes = await charFromByte(await intFromBaseStr(strHexByte, 16));
+
+    strReturn = strRes; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}
+
+async function strToByteArray(strInput) {
+    await internalDebugCollect('str Input = ' + strInput + '; '); await internalDebugStackEnter('strToByteArray:type-conversion'); await assertIsStr(strInput); let intArrayReturn;
+
+    let intCount = 0;
+    intCount = await len(strInput);
+    let intI = 0;
+    intI = 0;
+    let intArrayOut = [];
+    while (await implLt(intI, intCount)) {
+        intArrayOut = await push(intArrayOut, await byteFromChar(await strChar(strInput, intI)));
+        intI = await implAdd(intI, 1);
+    }
+
+    intArrayReturn = intArrayOut; await assertIsIntArray(intArrayReturn); await internalDebugStackExit(); return intArrayReturn;
+}
+
+async function strFromByteArray(intArrayInput) {
+    await internalDebugCollect('intArray Input = ' + intArrayInput + '; '); await internalDebugStackEnter('strFromByteArray:type-conversion'); await assertIsIntArray(intArrayInput); let strReturn;
+
+    /* Remember this will break if there are non-string bytes in it. */
+    let intCount = 0;
+    intCount = await count(intArrayInput);
+    let intI = 0;
+    intI = 0;
+    let strOut = '';
+    while (await implLt(intI, intCount)) {
+        strOut = await implCat(strOut, await charFromByte(await get(intArrayInput, intI)));
+        intI = await implAdd(intI, 1);
+    }
+
+    strReturn = strOut; await assertIsStr(strReturn); await internalDebugStackExit(); return strReturn;
+}

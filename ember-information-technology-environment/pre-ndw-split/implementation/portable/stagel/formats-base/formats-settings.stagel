@@ -1,0 +1,150 @@
+r/s/getSettingForFormat s/format s/direction s/settingKey
+    # s/direction can be "in" for import settings or "out" for export settings.
+    new as/temp
+    set as/temp getSettingsForFormat s/format s/direction
+    new s/res
+    if contains as/temp s/settingKey
+        set s/res getNext as/temp indexOf as/temp s/settingKey
+    else
+        set s/res ''
+    return s/res
+
+r/as/getSettingsForFormat s/format s/direction
+    # Returns an array of setting key/value pairs. A format setting string looks like, which should be fairly parseable (keys and vals follow StageL ident naming rules): key1:val1,key2:val2,
+    new n/formatId
+    set n/formatId getFormatId s/format
+    new as/res
+    if eq s/direction 'in'
+        set as/res settingStringToArray getImportSettings n/formatId
+    else
+        set as/res settingStringToArray getExportSettings n/formatId
+    return as/res
+
+r/as/getEnabledVariantsForFormat s/format s/direction
+    new as/res
+    set as/res strSplit getSettingForFormat s/format s/direction 'variants' } ' '
+    return as/res
+
+r/s/getPreferredLanguageForFormat s/format s/direction
+    new s/res
+    set s/res getEnvLanguage
+    new as/temp
+    set as/temp getEnabledVariantsForFormat s/format s/direction
+    new n/c
+    set n/c 0
+    new n/l
+    set n/l count as/temp
+    new b/continue
+    set b/continue true
+    new n/item
+    while b/continue
+        if not lt n/c add -1 n/l
+            set b/continue false
+        set s/item get as/temp n/c
+        if eq 'lang_' substr s/item 0 5
+            set s/res s/item
+            set b/continue false
+        set n/c inc n/c
+    return s/res
+
+r/s/getPreferredCodeLanguageForFormat s/format s/direction
+    new s/res
+    set s/res getEnvCodeLanguage
+    new as/temp
+    set as/temp getEnabledVariantsForFormat s/format s/direction
+    new n/c
+    set n/c 0
+    new n/l
+    set n/l count as/temp
+    new b/continue
+    set b/continue true
+    new n/item
+    while b/continue
+        if not lt n/c add -1 n/l
+            set b/continue false
+        set s/item get as/temp n/c
+        if eq 'pl_' substr s/item 0 3
+            set s/res substr s/item 3 -1
+            set b/continue false
+        set n/c inc n/c
+    return s/res
+
+# setImportSettings/setExportSettings are platform implementation in environment
+
+r/s/getImportSettings n/formatId
+    new s/res
+    if lt n/formatId count getImportSettingsArr
+        set s/res get getImportSettingsArr } n/formatId
+    else
+        set s/res ''
+    return s/res
+
+r/s/getExportSettings n/formatId
+    new s/res
+    if lt n/formatId count getExportSettingsArr
+        set s/res get getExportSettingsArr } n/formatId
+    else
+        set s/res ''
+    return s/res
+
+r/v/pushImportSettings n/formatId s/newSettingString
+    # Note that all import settings must be popped in the reverse of the order they were pushed (all formats' import settings share the same stack).
+    setSharedState 'strArrayImportDeferredSettingsStack' push getSharedState 'strArrayImportDeferredSettingsStack' } getImportSettings n/formatId
+    setImportSettings n/formatId s/newSettingString
+
+r/v/pushExportSettings n/formatId s/newSettingString
+    # Note that all export settings must be popped in the reverse of the order they were pushed (all formats' export settings share the same stack).
+    setSharedState 'strArrayExportDeferredSettingsStack' push getSharedState 'strArrayExportDeferredSettingsStack' } getExportSettings n/formatId
+    setExportSettings n/formatId s/newSettingString
+
+r/v/popImportSettings n/formatId
+    setImportSettings n/formatId get getSharedState 'strArrayImportDeferredSettingsStack' } -1
+    setSharedState 'strArrayImportDeferredSettingsStack' asSubset getSharedState 'strArrayImportDeferredSettingsStack' } 0 -2
+
+r/v/popExportSettings n/formatId
+    setExportSettings n/formatId get getSharedState 'strArrayExportDeferredSettingsStack' } -1
+    setSharedState 'strArrayExportDeferredSettingsStack' asSubset getSharedState 'strArrayExportDeferredSettingsStack' } 0 -2
+
+r/as/settingStringToArray s/settings
+    new as/res
+    set n/count len s/settings
+    new n/counter
+    set n/counter 0
+    new s/elem
+    new s/state
+    set s/state 'key'
+    new s/char
+    while lt n/counter n/count
+        set s/char charAt s/settings n/counter
+        if eq s/state 'key'
+            if eq s/char ':'
+                set as/res push as/res s/elem
+                set s/elem ''
+                set s/state 'val'
+            else
+                set s/elem cat s/elem s/char
+        else
+            if eq s/char ','
+                set as/res push as/res s/elem
+                set s/elem ''
+                set s/state 'key'
+            else
+                set s/elem cat s/elem s/char
+        set n/counter add n/counter 1
+    return as/res
+
+r/s/settingArrayToString as/settings
+    new s/res
+    set n/count count as/settings
+    new n/counter
+    set n/counter 0
+    new s/elem
+    while lt n/counter n/count
+        set s/elem get as/settings n/counter
+        assertIsTrue isValidIdent s/elem
+        if eq 0 mod n/counter 2
+            set s/res cat s/res cat s/elem ','
+        else
+            set s/res cat s/res cat s/elem ':'
+        set n/counter add n/counter 1
+    return s/res

@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1091
+source ember_bash_setup &> /dev/null || { printf '%b' '\033[1;31m' >&2; echo "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd): The required dependency ember-shared could not be found (or ember_bash_setup could not be sourced for some other reason)." >&2; printf '%b' '\033[0m' >&2; exit 1; }
+set -x
+
+trap 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."' ERR
+
+# Takes a StageL file as first argument, and prints out equivalent code in the language of the second argument (bash/js).
+
+cache="--no-cache"
+cacheDir="."
+if [[ "$1" == "--cache" ]]; then
+    cache="--cache"
+    shift
+    cacheDir="$1"
+    shift
+elif [[ "$1" == "--no-cache" ]]; then
+    cache="--no-cache"
+    shift
+    cacheDir="$1"
+    shift
+fi
+debugBuild="--debug"
+if [[ "$1" == "--debug" ]]; then
+    debugBuild="--debug"
+    shift
+elif [[ "$1" == "--no-debug" ]]; then
+    debugBuild="--no-debug"
+    shift
+fi
+typecheckBuild="--runtime-type-checks"
+if [[ "$1" == "--runtime-type-checks" ]]; then
+    typecheckBuild="--runtime-type-checks"
+    shift
+elif [[ "$1" == "--no-runtime-type-checks" ]]; then
+    typecheckBuild="--no-runtime-type-checks"
+    shift
+fi
+
+inputFile="$(readlink -f "$1")"
+targetLang="$2"
+
+# Try to cd to the directory the stagel-convert script is stored in. Based on https://stackoverflow.com/questions/59895/get-the-source-directory-of-a-bash-script-from-within-the-script-itself
+cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" || true
+
+if [[ "--cache" == "$cache" ]]; then
+    if ! [[ -f "./stagel-bootstrap-parse" ]]; then
+        parsePath="$(which stagel-bootstrap-parse)"
+    else
+        parsePath="./stagel-bootstrap-parse"
+    fi
+    if ! [[ -f "./stagel-bootstrap-codegen" ]]; then
+        codegenPath="$(which stagel-bootstrap-codegen)"
+    else
+        codegenPath="./stagel-bootstrap-codegen"
+    fi
+fi
+
+parseCmd="stagel-bootstrap-parse"
+[[ -f "./stagel-bootstrap-parse" ]] && parseCmd=./"$parseCmd"
+
+codegenCmd="stagel-bootstrap-codegen"
+[[ -f "./stagel-bootstrap-codegen" ]] && codegenCmd=./"$codegenCmd"
+
+cachePath=""
+needCache="false"
+if [[ "--cache" == "$cache" ]]; then
+    inputHash="$(sha512sum < "$inputFile" | awk '{print $1;}')"
+    configHash="$(sha512sum <<< "$debugBuild:$typecheckBuild:$targetLang" | awk '{print $1;}')"
+    parseHash="$(sha512sum < "$parsePath" | awk '{print $1;}')"
+    codegenHash="$(sha512sum < "$codegenPath" | awk '{print $1;}')"
+    hashA="${inputHash:0:1}"
+    hashB="${inputHash:1:1}"
+    hashC="${inputHash:2:1}"
+    cacheSubdir="$cacheDir/.stagel-cache/1/$codegenHash/$parseHash/$configHash/$hashA/$hashB/$hashC"
+    mkdir -p "$cacheSubdir"
+    cachePath="$cacheSubdir/$inputHash"
+    if [[ -e "$cachePath" ]]; then
+        cat "$cachePath"
+        exit
+    else
+        needCache="true"
+    fi
+fi
+
+if [[ "true" == "$needCache" ]]; then
+    "$parseCmd" -q "$inputFile" | "$codegenCmd" "$debugBuild" "$typecheckBuild" "$targetLang" > "$cachePath.tmp" || die "convert failed"
+    mv "$cachePath.tmp" "$cachePath" || die "move failed"
+    if ! [[ -s "$cachePath" ]]; then
+        rm -f "$cachePath"
+        die "Cache entry was empty."
+    fi
+    cat "$cachePath"
+    exit
+fi
+"$parseCmd" -q "$inputFile" | "$codegenCmd" "$debugBuild" "$typecheckBuild" "$targetLang"

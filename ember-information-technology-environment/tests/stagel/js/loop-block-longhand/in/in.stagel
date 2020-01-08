@@ -1,0 +1,9 @@
+new as/temp
+set as/temp [ 'd' 'b' 'l' 'c' 'b' 'a' ]
+new n/c
+new n/i
+new s/elem
+while lt n/i count as/temp
+    set s/elem get as/temp n/i
+    set n/i inc n/i
+    set n/c inc n/c

@@ -1,0 +1,14 @@
+StartChar: uni0696
+Encoding: 1686 1686 297
+Width: 530
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 200 -700 basechar 0
+AnchorPoint: "Anchor-1" 224 750 basechar 0
+LayerCount: 2
+Fore
+Refer: 290 1585 N 1 0 0 1 0 0 3
+Refer: 1119 -1 N 1 0 0 1 373 -531 2
+Refer: 1119 -1 N 1 0 0 1 176 64 2
+Substitution2: "'fina' Terminal Forms in Arabic lookup 2 subtable" uni0696.fina
+EndChar

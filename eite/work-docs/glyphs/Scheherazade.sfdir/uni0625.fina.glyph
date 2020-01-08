@@ -1,0 +1,14 @@
+StartChar: uni0625.fina
+Encoding: 65563 -1 454
+Width: 362
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 192 -491 basechar 0
+AnchorPoint: "Anchor-1" 100 1175 basechar 0
+LayerCount: 2
+Fore
+Refer: 455 -1 N 1 0 0 1 0 0 3
+Refer: 1133 -1 N 1 0 0 1 226 -290 2
+Substitution2: "Single Substitution lookup 17 subtable" uni0625.fina.postLamMed
+Substitution2: "Single Substitution lookup 16 subtable" uni0625.fina.postLamIni
+EndChar

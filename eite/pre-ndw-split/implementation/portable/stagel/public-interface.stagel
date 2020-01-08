@@ -1,0 +1,204 @@
+# This file contains the public interface for EITE.
+
+# If you just want to run EITE, use the following function.
+
+r/v/startEite
+    # Start EITE, using the default startup document. Does not return while EITE is still running.
+    loadAndRun 'sems' 'eite.sems'
+
+
+# If you want to run a different document, you can call loadAndRun with the format of the document to open and its location.
+
+r/v/loadAndRun s/format s/path
+    # Load and run the specified document. Does not return while the document is still running.
+    runDocument loadStoredDocument s/format s/path
+
+
+# If you want to convert a document to another format, you can call loadAndConvert with the format of the document, its location, and the format you want the results in.
+
+r/an/loadAndConvert s/inputFormat s/outputFormat s/path
+    # Load the specified document, and return it converted to the specified outputFormat as an array of bytes.
+    new an/out
+    set an/out exportDocument s/outputFormat loadStoredDocument s/inputFormat s/path }
+
+
+# To operate on a document you already have as a Dc array, you can call runDocument or convertDocument directly on it. Or, if you already have it as a byte array, you can call importDocument or importAndExport on it.
+
+r/v/runDocument an/contents
+    # Run the provided document. Does not return while the document is still running. Takes care of events and I/O automatically.
+    runDocumentGo runDocumentPrepare an/contents
+
+r/n/runDocumentPrepare an/contents
+    # Prepare to run the provided document. Use this followed by runDocumentGo if you want to configure execution settings before starting the document.
+    setupIfNeeded
+    assertIsDcArray an/contents
+    new n/execId
+    set n/execId prepareDocumentExec an/contents
+    assertIsExecId n/execId
+    return n/execId
+
+r/v/runDocumentGo n/execId
+    # Run a document, once it's been prepared to run by calling runDocumentPrepare.
+    internalRunDocument n/execId
+
+r/s/getExecOption n/execId s/key
+    # Get the value of an execution option for a document.
+    setupIfNeeded
+    assertIsExecId n/execId
+    new s/res
+    set s/res kvGetValue getExecSettings n/execId } s/key
+    return s/res
+
+r/as/getExecOptions n/execId
+    # Get the execution options set for a document.
+    setupIfNeeded
+    assertIsExecId n/execId
+    new as/res
+    set as/res getExecSettings n/execId
+    return as/res
+
+r/v/setExecOption n/execId s/key s/value
+    # Set an execution option for a document.
+    setupIfNeeded
+    assertIsExecId n/execId
+    setExecSettings n/execId kvSetValue getExecSettings n/execId } s/key s/value
+
+r/an/exportDocument s/format an/contents
+    setupIfNeeded
+    assertIsSupportedOutputFormat s/format
+    # Convert a document stored as an array of dcs to the specified format, and return it as an array of bytes.
+    setupIfNeeded
+    new an/out
+    set an/out dcaToFormat s/format an/contents
+    return an/out
+
+r/an/importDocument s/format an/contents
+    setupIfNeeded
+    assertIsSupportedInputFormat s/format
+    # Convert a document stored as an array of bytes in the specified format, and return it as an array of dc.
+    setupIfNeeded
+    new an/out
+    set an/out dcaFromFormat s/format an/contents
+    return an/out
+
+r/an/importAndExport s/inputFormat s/outputFormat an/contents
+    setupIfNeeded
+    assertIsSupportedInputFormat s/inputFormat
+    assertIsSupportedOutputFormat s/outputFormat
+    # Convert a document stored as an array of bytes in the specified input format, and return it as an array of bytes in the specified output format.
+    new an/out
+    set an/out convertFormats s/inputFormat s/outputFormat an/contents
+    return an/out
+
+r/s/getFormatImportSetting s/format s/key
+    # Return the value of the specified import setting for the specified format.
+    new s/res
+    set s/res kvGetValue getFormatImportSettings s/format } s/key
+    return s/res
+
+r/s/getFormatExportSetting s/format s/key
+    # Return the value of the specified export setting for the specified format.
+    new s/res
+    set s/res kvGetValue getFormatExportSettings s/format } s/key
+    return s/res
+
+r/v/setFormatImportSetting s/format s/key s/value
+    # Set the value of the specified import setting for the specified format.
+    setFormatImportSettings s/format kvSetValue getFormatImportSettings s/format } s/key s/value
+
+r/v/setFormatExportSetting s/format s/key s/value
+    # Set the value of the specified export setting for the specified format.
+    setFormatExportSettings s/format kvSetValue getFormatExportSettings s/format } s/key s/value
+
+r/s/pushFormatImportSetting s/format s/key s/value
+    # Temporarily set the value of the specified import setting for the specified format. Call setFormatImportSetting with the value this returns when you want to put the setting back.
+    new s/result
+    set s/result getFormatImportSetting s/format s/key
+    setFormatImportSetting s/format s/key s/value
+    return s/result
+
+r/s/pushFormatExportSetting s/format s/key s/value
+    # Temporarily set the value of the specified export setting for the specified format. Call setFormatExportSetting with the value this returns when you want to put the setting back.
+    new s/result
+    set s/result getFormatExportSetting s/format s/key
+    setFormatExportSetting s/format s/key s/value
+    return s/result
+
+r/as/getFormatImportSettings s/format
+    # Return the import settings array for the specified format.
+    setupIfNeeded
+    assertIsSupportedInputFormat s/format
+    new as/res
+    set as/res getSettingsForFormat s/format 'in'
+    return as/res
+
+r/as/getFormatExportSettings s/format
+    # Return the export settings array for the specified format.
+    setupIfNeeded
+    assertIsSupportedOutputFormat s/format
+    new as/res
+    set as/res getSettingsForFormat s/format 'out'
+    return as/res
+
+r/v/setFormatImportSettings s/format as/settings
+    # Replace the import settings array for the specified format.
+    setupIfNeeded
+    assertIsSupportedInputFormat s/format
+    setImportSettings getFormatId s/format } kvJoin as/settings
+
+r/v/setFormatExportSettings s/format as/settings
+    # Replace the export settings array for the specified format.
+    setupIfNeeded
+    assertIsSupportedOutputFormat s/format
+    setExportSettings getFormatId s/format } kvJoin as/settings
+
+r/an/transformDocument an/inputDocument s/transformation
+    # Apply one of the supported document transformations to the provided document, and return the result.
+    setupIfNeeded
+    assertIsSupportedDocumentTransformation s/transformation
+    new an/result
+    set an/result applyDocumentTransformation s/transformation an/inputDocument
+    return an/result
+
+
+# If you want more control over the document loading and execution, you can use these lower-level functions.
+
+r/an/loadStoredDocument s/format s/path
+    # Load and return the specified document as a Dc array.
+    setupIfNeeded
+    assertIsSupportedInputFormat s/format
+    new an/res
+    set an/res dcaFromFormat s/format getFileFromPath s/path
+    return an/res
+
+r/as/getDesiredEventNotifications n/execId
+    # Return list of event types (e.g. keystrokes, mouse movement, elapsed time) that the document wants to be notified of.
+    new as/res
+    return as/res
+
+r/an/sendEvent n/execId an/eventData
+    # Send the provided event or events data to the specified document.
+
+r/an/getDocumentFrame n/execId s/format
+    assertIsSupportedOutputFormat s/format
+    # Return the most recently available output for the given document in the requested format.
+
+
+# To run the tests, you can use runTests or runPrintTests.
+
+r/b/runTests
+    # Returns true if all tests pass; false otherwise. Displays a report of the tests.
+    setupIfNeeded
+    clearTestStats
+    runTestsOnly true
+    reportTests
+    if eq n/failedTests 0
+        return true
+    return false
+
+r/b/quietRunTests
+    # Returns true if all tests pass; false otherwise.
+    setupIfNeeded
+    new b/res
+    set b/res runTestsOnly false
+    return b/res

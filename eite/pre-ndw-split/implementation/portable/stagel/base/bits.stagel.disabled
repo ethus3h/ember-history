@@ -1,0 +1,133 @@
+r/n/bytesToInt32 n/a n/b n/c n/d
+    # Input bytes are 0 to 255
+    new n/res
+    # 8 least significant bits
+    set n/res n/d
+    # next 8: n * 2^8
+    set n/res add n/res mul n/c 256
+    # and so on: n * 2^16
+    set n/res add n/res mul n/b 65536
+    if le n/a 127
+        set n/res add n/res mul n/a 16777216
+    else
+        new n/temp
+        set n/temp sub n/a 127
+        set n/res add n/res mul n/temp 16777216
+        set n/res add n/res -2147483648
+    return n/res
+
+r/n/bitAnd32 n/a n/b
+    # 32-bit bit operations take and produce signed ints. E.g. passing a=-1 b=1 is equivalent to unsigned long 4294967295 << 1 (= 4294967294) and will return -2. Use unsigned conversion I guess.
+    new n/res
+    new n/atemp
+    new n/btemp
+    if lt n/a 0
+        set n/a add n/a 2147483648
+        if lt n/b 0
+            # both have msb=1 so result does too
+            set n/res -2147483648
+    if lt n/b 0
+        set n/b add n/b 2147483648
+    set n/atemp div n/a 16777216
+    set n/a sub n/a n/atemp
+    set n/btemp div n/b 16777216
+    set n/b sub n/b n/btemp
+    set n/res add n/res bytesToInt32 mul 16777216 bitAnd8 n/atemp n/btemp } } 0 0 0
+    set n/atemp div n/a 65536
+    set n/a sub n/a n/atemp
+    set n/btemp div n/b 65536
+    set n/b sub n/b n/btemp
+    set n/res add n/res bytesToInt32 0 mul 65536 bitAnd8 n/atemp n/btemp } } 0 0
+    set n/atemp div n/a 256
+    set n/a sub n/a n/atemp
+    set n/btemp div n/b 256
+    set n/b sub n/b n/btemp
+    set n/res add n/res bytesToInt32 0 0 mul 256 bitAnd8 n/atemp n/btemp } } 0
+    set n/res add n/res bytesToInt32 0 0 0 bitAnd8 n/a n/b
+    return n/res
+
+r/n/bitAnd32 n/a n/b
+    # FIXME unimplemented
+    return 1
+
+r/n/bitAnd n/width n/byte1 n/byte2
+    new n/res
+    if eq n/width 8
+        set n/res bitAnd8 n/byte1 n/byte2
+    elif eq n/width 32
+        set n/res bitAnd32 n/byte1 n/byte2
+    else
+        die cat 'bitAnd called with unsupported bit width ' strFrom n/width
+    return n/res
+
+r/n/bitNot n/width n/byte
+    new n/res
+    if eq n/width 8
+        set n/res bitNot8 n/byte
+    elif eq n/width 32
+        set n/res bitNot32 n/byte
+    else
+        die cat 'bitNot called with unsupported bit width ' strFrom n/width
+    return n/res
+
+r/n/bitLshift n/width n/byte1 n/places
+    new n/res
+    if eq n/width 8
+        set n/res bitLshift8 n/byte
+    elif eq n/width 32
+        set n/res bitLshift32 n/byte
+    else
+        die cat 'bitLshift called with unsupported bit width ' strFrom n/width
+    return n/res
+
+r/n/bitRshift n/width n/byte1 n/places
+    new n/res
+    if eq n/width 8
+        set n/res bitRshift8 n/byte
+    elif eq n/width 32
+        set n/res bitRshift32 n/byte
+    else
+        die cat 'bitRshift called with unsupported bit width ' strFrom n/width
+    return n/res
+
+r/n/bitOr n/width n/byte1 n/byte2
+    assertIsByte n/byte1
+    assertIsByte n/byte2
+    new n/temp
+    set n/temp bitNot n/width n/byte1
+    set n/temp bitNot n/width bitAnd n/width n/temp bitNot8 n/byte2
+    assertIsByte n/temp
+    return n/temp
+
+r/n/bitNor n/width n/byte1 n/byte2
+    assertIsByte n/byte1
+    assertIsByte n/byte2
+    new n/temp
+    set n/temp bitNot n/width bitOr n/width n/byte1 n/byte2
+    assertIsByte n/temp
+    return n/temp
+
+r/n/bitNand n/width n/byte1 n/byte2
+    assertIsByte n/byte1
+    assertIsByte n/byte2
+    new n/temp
+    set n/temp bitNot n/width bitAnd n/width n/byte1 n/byte2
+    assertIsByte n/temp
+    return n/temp
+
+r/n/bitXor n/width n/byte1 n/byte2
+    assertIsByte n/byte1
+    assertIsByte n/byte2
+    new n/temp
+    set n/temp bitNand n/width n/byte1 n/byte2
+    set n/temp bitAnd n/width n/temp bitOr n/width n/byte1 n/byte2
+    assertIsByte n/temp
+    return n/temp
+
+r/n/bitXnor n/width n/byte1 n/byte2
+    assertIsByte n/byte1
+    assertIsByte n/byte2
+    new n/temp
+    set n/temp bitNot n/width bitXor n/width n/byte1 n/byte2
+    assertIsByte n/temp
+    return n/temp

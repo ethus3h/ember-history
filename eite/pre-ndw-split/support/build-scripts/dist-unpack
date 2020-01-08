@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1091
+source ember_bash_setup &> /dev/null || { printf '%b' '\033[1;31m' >&2; echo "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd): The required dependency ember-shared could not be found (or ember_bash_setup could not be sourced for some other reason)." >&2; printf '%b' '\033[0m' >&2; exit 1; }
+#set -x
+
+trap 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."' ERR
+
+source ./support/build-scripts/dist-versions || die
+
+[[ -d ./build-temp/distfiles ]] || die "Make sure the required dependency files are in ./build-temp/distfiles, or run support/dist-fetch to get them from your /usr/portage."
+
+rm -rf ./build-temp/unpacked
+cp -ra ./build-temp/distfiles ./build-temp/unpacked
+
+# Unpack distfiles
+
+(
+cd ./build-temp/unpacked || die
+
+echo "Unpacking Unicode"
+mkdir "./ucd.all.flat-${myUnicodeVersion}/"
+unzip "./ucd.all.flat-${myUnicodeVersion}.zip" -d "./ucd.all.flat-${myUnicodeVersion}/"
+rm "./ucd.all.flat-${myUnicodeVersion}.zip"
+
+echo "Unpacking Binaryen"
+tar xozf ./binaryen-"$myBinaryenVersion".tar.gz
+rm ./binaryen-"$myBinaryenVersion".tar.gz
+# Leave the .zip version alone; that's for pretending to be the Emscripten port system
+
+echo "Unpacking Emscripten"
+tar xozf ./emscripten-"$myEmscriptenCommit".tar.gz
+rm ./emscripten-"$myEmscriptenCommit".tar.gz
+rm -r ./emscripten-"$myEmscriptenCommit"/tools/node_modules
+rm -r ./emscripten-"$myEmscriptenCommit"/tools/eliminator
+rm -r ./emscripten-"$myEmscriptenCommit"/third_party/closure-compiler
+rm -r ./emscripten-"$myEmscriptenCommit"/third_party/html-minifier
+rm -r ./emscripten-"$myEmscriptenCommit"/third_party/ply
+rm -r ./emscripten-"$myEmscriptenCommit"/third_party/websockify
+rm ./emscripten-"$myEmscriptenCommit"/third_party/lzma.js/lzma-full.js
+rm ./emscripten-"$myEmscriptenCommit"/third_party/lzma.js/lzma-decoder.js
+
+echo "Unpacking wabt dependencies"
+tar xozf ./googletest-"$myGoogletestVersion".tar.gz
+rm ./googletest-"$myGoogletestVersion".tar.gz
+tar xozf ./python-lex-yacc-"$myPlyVersion".tar.gz
+rm ./python-lex-yacc-"$myPlyVersion".tar.gz
+tar xozf ./WebAssembly-testsuite-"$myTestsuiteCommit".tar.gz
+rm WebAssembly-testsuite-"$myTestsuiteCommit".tar.gz
+
+echo "Unpacking wabt"
+tar xozf ./wabt-"$myWabtVersion".tar.gz
+rm ./wabt-"$myWabtVersion".tar.gz
+rm -r ./wabt-"$myWabtVersion"/src/prebuilt
+rm -r ./wabt-"$myWabtVersion"/third_party
+rm -r ./wabt-"$myWabtVersion"/demo/third_party
+rm ./wabt-"$myWabtVersion"/demo/libwabt.js
+)

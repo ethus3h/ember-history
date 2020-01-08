@@ -1,0 +1,26 @@
+StartChar: bracketright
+Encoding: 93 93 92
+Width: 253
+Flags: W
+LayerCount: 2
+Fore
+SplineSet
+158 -114 m 2,0,1
+ 158 -123 158 -123 148 -124 c 2,2,-1
+ 18 -124 l 2,3,4
+ 10 -124 10 -124 10 -109.5 c 128,-1,5
+ 10 -95 10 -95 16 -95 c 2,6,-1
+ 104 -95 l 2,7,8
+ 108 -95 108 -95 109 -87 c 2,9,-1
+ 109 495 l 2,10,11
+ 109 499 109 499 107.5 501 c 128,-1,12
+ 106 503 106 503 103 502 c 2,13,-1
+ 26 502 l 2,14,15
+ 17 502 17 502 17 516 c 128,-1,16
+ 17 530 17 530 25 530 c 2,17,-1
+ 150 530 l 2,18,19
+ 158 530 158 530 158 523 c 2,20,-1
+ 158 -114 l 2,0,1
+EndSplineSet
+Substitution2: "'rtla' Right to Left Alternates lookup 0 subtable" bracketleft
+EndChar

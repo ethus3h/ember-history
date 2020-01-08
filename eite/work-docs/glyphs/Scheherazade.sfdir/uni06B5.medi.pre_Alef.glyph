@@ -1,0 +1,14 @@
+StartChar: uni06B5.medi.preAlef
+Encoding: 66197 -1 1183
+Width: 522
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 250 -100 basechar 0
+AnchorPoint: "Anchor-2" 100 700 basechar 0
+AnchorPoint: "Anchor-1" 235 1400 basechar 0
+AnchorPoint: "Cursive-0" 150 250 exit 0
+LayerCount: 2
+Fore
+Refer: 1182 -1 N 1 0 0 1 0 0 3
+Refer: 1141 -1 N 1 0 0 1 233 1182 2
+EndChar

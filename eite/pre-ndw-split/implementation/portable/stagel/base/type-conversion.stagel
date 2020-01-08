@@ -1,0 +1,230 @@
+r/s/strPrintArr ga/in
+    # The reverse of this for an/ input is intArrFromStrPrintedArr.
+    # Hint: running this on a DcArray produces a sems document that can be turned back into a DcArray with dcarrParseSems strToByteArray s/str :)
+    new s/out
+    set s/out strJoin ga/in ' '
+    return s/out
+
+r/s/printArray ga/in
+    # Just a convenience wrapper
+    new s/res
+    set s/res strPrintArr ga/in
+    return s/res
+
+r/s/strPrintArray ga/in
+    # Just a convenience wrapper
+    new s/res
+    set s/res strPrintArr ga/in
+    return s/res
+
+r/s/printArr ga/in
+    # Just a convenience wrapper
+    new s/res
+    set s/res strPrintArr ga/in
+    return s/res
+
+r/as/strSplit s/in s/separator
+    new as/res
+    new n/separLen
+    set n/separLen len s/separator
+    new s/remaining
+    set s/remaining s/in
+    new n/remainingLen
+    set n/remainingLen len s/remaining
+    new s/currentElem
+    new s/currentChar
+    while lt 0 n/remainingLen
+        if eq s/separator substr s/remaining 0 n/separLen
+            set as/res push as/res s/currentElem
+            set s/currentElem ''
+            set s/remaining substr s/remaining n/separLen -1
+        else
+            set s/currentChar strChar s/remaining 0
+            set s/currentElem cat s/currentElem s/currentChar
+            if lt 1 n/remainingLen
+                set s/remaining substr s/remaining 1 -1
+            else
+                set s/remaining ''
+        set n/remainingLen len s/remaining
+    set as/res push as/res s/currentElem
+    return as/res
+
+r/s/strJoin ga/in s/separator
+    # Opposite of strSplit for a given separator
+    new n/count
+    set n/count count ga/in
+    new n/i
+    set n/i 0
+    new s/out
+    while lt n/i n/count
+        set s/out cat s/out strFrom get ga/in n/i
+        if ne n/i add -1 n/count
+            set s/out cat s/out s/separator
+        set n/i add n/i 1
+    return s/out
+
+r/as/strSplitEscaped s/in s/separator
+    new as/res
+    new as/exploded
+    set as/exploded strSplit s/in s/separator
+    set as/res [ ]
+    new n/k
+    new n/l
+    set n/k 0
+    set n/l count as/exploded
+    new b/continue
+    set b/continue true
+    new s/temp
+    new as/tempSubset
+    while and b/continue lt n/k n/l
+        if eq '\\' charAt get as/exploded n/k } add -1 len get as/exploded n/k
+            if ge add 1 n/k } n/l
+                set as/res push as/res get as/exploded n/k
+                set b/continue false
+            set s/temp setCharAt get as/exploded n/k } dec len get as/exploded n/k } } } s/separator
+            setElem as/exploded n/k s/temp
+            #array_splice($exploded, $k + 1, 1); // https://www.php.net/manual/en/function.array-splice.php
+            set as/tempSubset subset as/exploded add 1 n/k } add 2 n/k
+            set as/exploded append as/tempSubset subset as/exploded add 2 n/k } -1
+            set n/l dec n/l
+            set n/k dec n/k
+        else
+            set as/res push as/res get as/exploded n/k
+        set n/k add 1 n/k
+    return as/res
+    # Based on the explode_esc PHP function:
+    #//explode_escaped (not written by me)
+    #function explode_esc($delimiter, $string)
+    #{
+    #    $exploded = explode($delimiter, $string);
+    #    $fixed    = array();
+    #    for ($k = 0, $l = count($exploded); $k < $l; ++$k) {
+    #        if ($exploded[$k][strlen($exploded[$k]) - 1] == '\\') {
+    #            if ($k + 1 >= $l) {
+    #                $fixed[] = trim($exploded[$k]);
+    #                break;
+    #            }
+    #            $exploded[$k][strlen($exploded[$k]) - 1] = $delimiter;
+    #            $exploded[$k] .= $exploded[$k + 1];
+    #            array_splice($exploded, $k + 1, 1);
+    #            --$l;
+    #            --$k;
+    #        } else
+    #            $fixed[] = trim($exploded[$k]);
+    #    }
+    #    return $fixed;
+    #}
+
+r/as/strSplitEsc s/in s/separator
+    # Convenience wrapper
+    new as/res
+    set as/res strSplitEscaped s/in s/separator
+    return as/res
+
+r/as/explodeEsc s/in s/separator
+    new as/res
+    set as/res strSplitEscaped s/in s/separator
+    return as/res
+
+r/as/explodeEscaped s/in s/separator
+    new as/res
+    set as/res strSplitEscaped s/in s/separator
+    return as/res
+
+r/s/strJoinEscaped as/in s/separator
+    new s/res
+    new n/c
+    new n/l
+    set n/c 0
+    set n/l count as/in
+    while lt n/c n/l
+        set s/res cat s/res cat strReplace get as/in n/c } s/separator cat '\' s/separator } } s/separator
+        set n/c inc n/c
+    return s/res
+
+r/s/strJoinEsc as/in s/separator
+    # Convenience wrapper
+    new s/res
+    set s/res strJoinEscaped as/in s/separator
+    return s/res
+
+r/s/strJoinEscNoTrailing as/in s/separator
+    # a,b instead of a,b,
+    new s/res
+    new n/separLen
+    set n/separLen len s/separator
+    set n/separLen sub -1 n/separLen
+    set s/res substr strJoinEscaped as/in s/separator } 0 n/separLen
+    return s/res
+
+r/an/intArrFromStrPrintedArr s/input
+    # Reverse of strPrintArr with an an/ parameter.
+    new an/res
+    new an/content
+    set an/content strToByteArray s/input
+    new s/currentInt
+    set s/currentInt ''
+    new n/contentLength
+    set n/contentLength count an/content
+    new n/byteOffset
+    new n/currentByte
+    while lt n/byteOffset n/contentLength
+        # do something with each byte in the array. an/content[n/byteOffset] holds the decimal value of the given byte. These are ints represented as ASCII text bytes, rather than an array of ints.
+        set n/currentByte get an/content n/byteOffset
+        if asciiIsDigit n/currentByte
+            set s/currentInt cat s/currentInt charFromByte n/currentByte
+        elif asciiIsSpace n/currentByte
+            set an/res push an/res intFromIntStr s/currentInt
+            set s/currentInt ''
+        else
+            die 'Unexpected parser state in intArrFromStrPrintedArr.'
+        set n/byteOffset add n/byteOffset 1
+    if ne 0 len s/currentInt
+        # Ended without a trailing space
+        set an/res push an/res intFromIntStr s/currentInt
+    return an/res
+
+r/n/positiveIntFromIntStr s/in
+    # Returns a negative value for an empty input string
+    new n/res
+    if eq 0 len s/in
+        set n/res -1
+    else
+        set n/res intFromIntStr s/in
+    return n/res
+
+r/n/posIntFromIntStr s/in
+    # Convenience wrapper
+    new n/res
+    set n/res positiveFromIntStr s/in
+    return n/res
+
+r/s/charFromHexByte s/hexByte
+    # Bear in mind that StageL doesn't attempt to support Unicode.
+    assertIsBaseStr s/hexByte 16
+    new s/res
+    set s/res charFromByte intFromBaseStr s/hexByte 16
+    return s/res
+
+r/an/strToByteArray s/input
+    new n/count
+    set n/count len s/input
+    new n/i
+    set n/i 0
+    new an/out
+    while lt n/i n/count
+        set an/out push an/out byteFromChar strChar s/input n/i
+        set n/i add n/i 1
+    return an/out
+
+r/s/strFromByteArray an/input
+    # Remember this will break if there are non-string bytes in it.
+    new n/count
+    set n/count count an/input
+    new n/i
+    set n/i 0
+    new s/out
+    while lt n/i n/count
+        set s/out cat s/out charFromByte get an/input n/i
+        set n/i add n/i 1
+    return s/out

@@ -1,0 +1,16 @@
+StartChar: uni0647
+Encoding: 1607 1607 433
+Width: 502
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 200 -180 basechar 0
+AnchorPoint: "Anchor-1" 261 769 basechar 0
+LayerCount: 2
+Fore
+Refer: 435 1749 N 1 0 0 1 0 0 3
+Substitution2: "'calt' Contextual Alternates in Arabic lookup 12 subtable" uni0647.knotted
+Substitution2: "'calt' Contextual Alternates in Arabic lookup 11 subtable" uni0647.knotted
+Substitution2: "'medi' Medial Forms in Arabic lookup 3 subtable" uni0647.medi
+Substitution2: "'fina' Terminal Forms in Arabic lookup 2 subtable" uni0647.fina
+Substitution2: "'init' Initial Forms in Arabic lookup 1 subtable" uni0647.init
+EndChar

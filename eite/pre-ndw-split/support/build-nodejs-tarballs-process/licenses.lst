@@ -1,0 +1,22 @@
+│  ├─ licenses: Apache*
+│  ├─ licenses: Apache-2.0
+│  ├─ licenses: BSD*
+│  ├─ licenses: BSD-2-Clause
+│  ├─ licenses: (BSD-2-Clause OR MIT OR Apache-2.0)
+│  ├─ licenses: BSD-3-Clause
+│  ├─ licenses: (BSD-3-Clause OR GPL-2.0)
+│  ├─ licenses: CC0-1.0
+│  ├─ licenses: CC-BY-3.0
+│  ├─ licenses: Custom: https://secure.travis-ci.org/cryptocoinjs/bs58.png
+│  ├─ licenses: ISC
+│  ├─ licenses: MIT
+│  ├─ licenses: MIT*
+   ├─ licenses: MIT
+│  ├─ licenses: (MIT AND BSD-3-Clause)
+│  ├─ licenses: (MIT OR Apache-2.0)
+│  ├─ licenses: MPL-2.0
+│  ├─ licenses: PSF
+│  ├─ licenses: Unlicense
+│  ├─ licenses: WTFPL
+│  ├─ licenses: WTFPL OR ISC
+│  ├─ licenses: (WTFPL OR MIT)

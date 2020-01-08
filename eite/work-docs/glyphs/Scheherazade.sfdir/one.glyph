@@ -1,0 +1,71 @@
+StartChar: one
+Encoding: 49 49 21
+Width: 772
+GlyphClass: 2
+Flags: W
+TtInstrs:
+PUSHW_3
+ 19
+ 6
+ 3
+CALL
+SVTCA[y-axis]
+PUSHW_1
+ 0
+RCVT
+IF
+PUSHW_1
+ 17
+MDAP[rnd]
+ELSE
+PUSHW_2
+ 17
+ 11
+MIAP[no-rnd]
+EIF
+PUSHW_1
+ 0
+RCVT
+IF
+PUSHW_1
+ 0
+MDAP[rnd]
+ELSE
+PUSHW_2
+ 0
+ 5
+MIAP[no-rnd]
+EIF
+IUP[y]
+IUP[x]
+EndTTInstrs
+LayerCount: 2
+Fore
+SplineSet
+199 0 m 1,0,-1
+ 199 29 l 1,1,2
+ 248 29 248 29 275 35.5 c 128,-1,3
+ 302 42 302 42 314.5 59 c 128,-1,4
+ 327 76 327 76 329.5 105.5 c 128,-1,5
+ 332 135 332 135 332 180 c 2,6,-1
+ 332 756 l 2,7,8
+ 332 774 332 774 332.5 802 c 128,-1,9
+ 333 830 333 830 328.5 856.5 c 128,-1,10
+ 324 883 324 883 311 902.5 c 128,-1,11
+ 298 922 298 922 270 922 c 0,12,13
+ 250 922 250 922 230 914.5 c 128,-1,14
+ 210 907 210 907 193 899 c 1,15,-1
+ 180 922 l 1,16,-1
+ 430 1044 l 1,17,-1
+ 457 1044 l 1,18,-1
+ 457 180 l 2,19,20
+ 457 136 457 136 458.5 107 c 128,-1,21
+ 460 78 460 78 471.5 60.5 c 128,-1,22
+ 483 43 483 43 509 36 c 128,-1,23
+ 535 29 535 29 584 29 c 1,24,-1
+ 584 0 l 1,25,-1
+ 199 0 l 1,0,-1
+EndSplineSet
+Substitution2: "Single Substitution lookup 22 subtable" oneSmall
+Substitution2: "Single Substitution lookup 21 subtable" oneMedium
+EndChar

@@ -1,0 +1,14 @@
+StartChar: uni06B7.init.preAlef
+Encoding: 66184 -1 1170
+Width: 374
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 65 -100 basechar 0
+AnchorPoint: "Anchor-2" 65 825 basechar 0
+AnchorPoint: "Anchor-1" 125 1700 basechar 0
+AnchorPoint: "Cursive-0" 0 0 exit 0
+LayerCount: 2
+Fore
+Refer: 1167 -1 N 1 0 0 1 0 0 3
+Refer: 1126 -1 N 1 0 0 1 156 1426 2
+EndChar

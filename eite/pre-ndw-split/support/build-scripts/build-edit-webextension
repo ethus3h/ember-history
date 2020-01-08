@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1091
+source ember_bash_setup &> /dev/null || { printf '%b' '\033[1;31m' >&2; echo "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd): The required dependency ember-shared could not be found (or ember_bash_setup could not be sourced for some other reason)." >&2; printf '%b' '\033[0m' >&2; exit 1; }
+#set -x
+
+trap 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."' ERR
+
+# Create Web extension version of edit tool
+
+rm -rf ./built/edit-webextension
+mkdir ./built/edit-webextension
+cp -r ./implementation/platform-support/edit-webextension/* ./built/edit-webextension/
+cp -r ./built/web/* ./built/edit-webextension/
+
+if [[ "$1" == "--xpi" ]]; then
+    (
+        # https://web.archive.org/web/20190206082904/https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Package_your_extension_
+        cd ./built/edit-webextension
+        zip -r -FS ../edit-webextension.zip *
+        mv ../edit-webextension.zip ./edit-webextension.xpi
+        if [[ -d "/Ember Library/Ember satellite projects/wreathe-packages" ]]; then
+            date="$(date-uuid)"
+            mkdir "/Ember Library/Ember satellite projects/wreathe-packages/eite-edit-webextension" &> /dev/null || true
+            mkdir "/Ember Library/Ember satellite projects/wreathe-packages/eite-edit-webextension/$date"
+            srsync ./edit-webextension.xpi "/Ember Library/Ember satellite projects/wreathe-packages/eite-edit-webextension/$date/"
+            if [[ "$?" == "0" ]]; then
+                sudo rsync -a --checksum ./edit-webextension.xpi "/" && rm ./edit-webextension.xpi
+            fi
+        fi
+    )
+fi

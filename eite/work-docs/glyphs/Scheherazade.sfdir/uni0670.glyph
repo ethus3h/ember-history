@@ -1,0 +1,50 @@
+StartChar: uni0670
+Encoding: 1648 1648 924
+Width: 0
+GlyphClass: 4
+Flags: W
+TtInstrs:
+SVTCA[y-axis]
+PUSHW_1
+ 19
+MDAP[rnd]
+PUSHW_1
+ 6
+MDAP[rnd]
+PUSHW_1
+ 8
+MDAP[rnd]
+IUP[y]
+IUP[x]
+EndTTInstrs
+AnchorPoint: "Anchor-3" 180 1230 basemark 0
+AnchorPoint: "Anchor-3" 180 660 mark 0
+AnchorPoint: "Anchor-2" 180 630 mark 0
+AnchorPoint: "Anchor-1" 180 660 mark 0
+LayerCount: 2
+Fore
+SplineSet
+197 999 m 1,0,-1
+ 213 807 l 2,1,2
+ 213 797 213 797 210.5 769.5 c 128,-1,3
+ 208 742 208 742 204 713 c 128,-1,4
+ 200 684 200 684 195 661.5 c 128,-1,5
+ 190 639 190 639 184 639 c 0,6,7
+ 168 639 168 639 168 651 c 2,8,-1
+ 168 709 l 2,9,10
+ 168 744 168 744 164 779.5 c 128,-1,11
+ 160 815 160 815 154.5 848 c 128,-1,12
+ 149 881 149 881 145 908 c 128,-1,13
+ 141 935 141 935 141 952 c 0,14,15
+ 141 970 141 970 146.5 996.5 c 128,-1,16
+ 152 1023 152 1023 159.5 1047.5 c 128,-1,17
+ 167 1072 167 1072 175 1090 c 128,-1,18
+ 183 1108 183 1108 188 1110 c 0,19,20
+ 190 1107 190 1107 191.5 1098.5 c 128,-1,21
+ 193 1090 193 1090 194.5 1080 c 128,-1,22
+ 196 1070 196 1070 196.5 1060 c 128,-1,23
+ 197 1050 197 1050 197 1044 c 2,24,-1
+ 197 999 l 1,0,-1
+EndSplineSet
+Substitution2: "Single Substitution lookup 23 subtable" uni0670.large
+EndChar

@@ -1,0 +1,61 @@
+StartChar: _bar
+Encoding: 66153 -1 1139
+Width: 0
+GlyphClass: 2
+Flags: W
+TtInstrs:
+SVTCA[y-axis]
+PUSHW_1
+ 11
+MDAP[rnd]
+PUSHW_1
+ 13
+MDAP[rnd]
+PUSHW_1
+ 15
+MDAP[rnd]
+PUSHW_1
+ 19
+MDAP[rnd]
+PUSHW_1
+ 0
+MDAP[rnd]
+PUSHW_1
+ 2
+MDAP[rnd]
+PUSHW_1
+ 4
+MDAP[rnd]
+PUSHW_1
+ 8
+MDAP[rnd]
+PUSHW_1
+ 4
+SRP0
+PUSHW_2
+ 16
+ 1
+MIRP[rp0,min,rnd,grey]
+IUP[y]
+IUP[x]
+EndTTInstrs
+LayerCount: 2
+Fore
+SplineSet
+171 -33 m 1,0,1
+ 163 -32 163 -32 153 -30 c 0,2,3
+ 137 -27 137 -27 105 -27 c 2,4,-1
+ -112 -27 l 2,5,6
+ -126 -27 -126 -27 -138.5 -25 c 128,-1,7
+ -151 -23 -151 -23 -161 -21 c 0,8,9
+ -172 -18 -172 -18 -182 -14 c 1,10,-1
+ -157 43 l 1,11,12
+ -149 42 -149 42 -138 40 c 0,13,14
+ -120 37 -120 37 -92 37 c 2,15,-1
+ 123 37 l 2,16,17
+ 141 37 141 37 154.5 35 c 128,-1,18
+ 168 33 168 33 177 31 c 0,19,20
+ 188 28 188 28 195 25 c 1,21,-1
+ 171 -33 l 1,0,1
+EndSplineSet
+EndChar

@@ -1,0 +1,139 @@
+r/an/dcaFromFormat s/inFormat an/contentBytes
+    assertIsSupportedInputFormat s/inFormat
+    assertIsByteArray an/contentBytes
+    new an/res
+    if eq s/inFormat 'sems'
+        set an/res dcaFromSems an/contentBytes
+    elif eq s/inFormat 'integerList'
+        set an/res dcaFromIntegerList an/contentBytes
+    elif eq s/inFormat 'ascii'
+        set an/res dcaFromAscii an/contentBytes
+    elif eq s/inFormat 'asciiSafeSubset'
+        set an/res dcaFromAsciiSafeSubset an/contentBytes
+    elif eq s/inFormat 'utf8'
+        set an/res dcaFromUtf8 an/contentBytes
+    else
+        error cat 'Unimplemented document parsing format: ' s/inFormat
+    assertIsDcArray an/res
+    return an/res
+
+r/an/dcaToFormat s/outFormat an/dcArrayIn
+    assertIsSupportedOutputFormat s/outFormat
+    assertIsDcArray an/dcArrayIn
+    new an/res
+    if eq s/outFormat 'integerList'
+        set an/res dcaToIntegerList an/dcArrayIn
+    elif eq s/outFormat 'ascii'
+        set an/res dcaToAscii an/dcArrayIn
+    elif eq s/outFormat 'asciiSafeSubset'
+        set an/res dcaToAsciiSafeSubset an/dcArrayIn
+    elif eq s/outFormat 'colorcoded'
+        set an/res dcaToColorcoded an/dcArrayIn
+    elif eq s/outFormat 'utf8'
+        set an/res dcaToUtf8 an/dcArrayIn
+    elif eq s/outFormat 'html'
+        set an/res dcaToHtml an/dcArrayIn
+    elif eq s/outFormat 'htmlFragment'
+        set an/res dcaToHtmlFragment an/dcArrayIn
+    else
+        die cat 'Unimplemented document render output format: ' s/outFormat
+    assertIsByteArray an/res
+    return an/res
+
+r/an/convertFormats s/inFormat s/outFormat an/in
+    assertIsSupportedInputFormat s/inFormat
+    assertIsSupportedOutputFormat s/outFormat
+    assertIsByteArray an/in
+    new an/out
+    set an/out dcaToFormat s/outFormat dcaFromFormat s/inFormat an/in
+    assertIsByteArray an/out
+    return an/out
+
+r/s/getExportExtension s/format
+    # Produces the actual file extension to be used for a file exported in the given format, with the current configured format options.
+    new s/res
+    if isSupportedCharEncoding s/format
+        set s/res cat getFormatExtension s/format } '.txt'
+        return s/res
+    set s/res getFormatExtension s/format
+    return s/res
+
+r/an/dcToFormat s/outFormat n/dc
+    # Output byte array for a single dc, or an empty array if no output is available. Only operates on one Dc at a time. Some formats may not need this; calling with them is an error and should cause an assertion failure.
+    assertIsSupportedOutputFormat s/outFormat
+    assertIsDc n/dc
+    new an/res
+    new s/temp
+    if eq s/outFormat 'utf8'
+        new s/lookup
+        set s/lookup dcDataLookupById 'mappings/to/unicode' n/dc 1
+        if excOrEmpty s/lookup
+            set s/lookup dcDataLookupByValue 'mappings/from/unicode' 1 n/dc 0
+        if notExcep s/lookup
+            set an/res utf8BytesFromDecimalChar hexToDec s/lookup
+    elif eq s/outFormat 'colorcoded'
+        set an/res dcToColorcoded n/dc
+    elif eq s/outFormat 'html'
+        set s/temp dcDataLookupById 'mappings/to/html' n/dc 1
+        if strNonempty s/temp
+            set an/res strToByteArray s/temp
+        else
+            set s/temp dcDataLookupByValue 'mappings/from/unicode' 1 n/dc 0
+            if isBaseStr s/temp 16
+                set an/res append an/res utf8BytesFromDecimalChar hexToDec s/temp
+    else
+        die cat 'Unimplemented character output format: ' s/outFormat
+    # Returns an empty array if the Dc isn't printable. I don't think it should be an error to call this for a nonprintable Dc.
+    assertIsByteArray an/res
+    return an/res
+
+r/an/dcFromFormat s/inFormat an/content
+    # Retrieve dc (as a one-element array) corresponding to the input data (input data for some formats may be expected as byte arrays, but not for others), or an empty array if no match. Only operates on one Dc at a time. Some formats (e.g. sems) don't need this; calling with them is an error and should cause an assertion failure.
+    assertIsTrue isSupportedInternalFormat s/inFormat
+    new an/res
+    new n/dc
+    new s/temp
+    if or eq s/inFormat 'ascii' } eq s/inFormat 'unicode'
+        new n/c
+        set n/c get an/content 0
+        if eq s/inFormat 'ascii'
+            if not isAsciiByte n/c
+                die cat 'The character number ' cat strFrom n/c } ' is not a 7-bit ASCII character.'
+        assertIsNonnegative n/c
+        set s/temp dcDataLookupByValue 'mappings/from/unicode' 0 decToHex n/c } 1
+        if excep s/temp
+            warn cat 'FIXME: save unmapped unicode char ' strFrom n/c
+            return ( )
+        set n/dc intFromIntStr s/temp
+    else
+        die cat 'Unimplemented character source format: ' s/inFormat
+    set an/res setElement an/res 0 n/dc
+    assertIsDcArray an/res
+    return an/res
+
+r/v/importWarning n/index s/problem
+    new s/warning
+    set s/warning cat 'A problem was encountered while importing at character ' cat strFrom n/index } cat ': ' s/problem
+    set as/importWarnings push as/importWarnings s/warning
+    warn s/warning
+
+r/v/exportWarning n/index s/problem
+    new s/warning
+    set s/warning cat 'A problem was encountered while exporting at character ' cat strFrom n/index } cat ': ' s/problem
+    set as/exportWarnings push as/exportWarnings s/warning
+    warn s/warning
+
+r/as/getImportWarnings
+    new as/res
+    set as/res as/importWarnings
+    set as/importWarnings [ ]
+    return as/res
+
+r/as/getExportWarnings
+    new as/res
+    set as/res as/exportWarnings
+    set as/exportWarnings [ ]
+    return as/res
+
+r/v/exportWarningUnmappable n/index n/problemDc
+    exportWarning n/index cat 'The character ' cat strFrom n/problemDc } ' could not be represented in the chosen export format.'

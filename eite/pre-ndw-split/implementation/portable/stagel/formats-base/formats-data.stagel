@@ -1,0 +1,204 @@
+r/as/listFormats
+    new as/res
+    set as/res dcGetColumn 'formats' 1
+    return as/res
+
+r/b/isFormat s/format
+    new b/res
+    set b/res in s/format listFormats
+    return b/res
+
+r/as/listInputFormats
+    new as/res
+    set as/res dcDataFilterByValueGreater 'formats' 3 0 1
+    return as/res
+
+r/b/isSupportedInputFormat s/in
+    new b/res
+    set b/res contains listInputFormats } s/in
+    return b/res
+
+r/as/listInternalFormats
+    new as/res
+    set as/res dcDataFilterByValue 'formats' 6 'internal' 1
+    return as/res
+
+r/b/isSupportedInternalFormat s/in
+    new b/res
+    set b/res or contains listInputFormats } s/in } contains listInternalFormats } s/in
+    return b/res
+
+r/as/listOutputFormats
+    new as/res
+    set as/res dcDataFilterByValueGreater 'formats' 4 0 1
+    return as/res
+
+r/b/isSupportedOutputFormat s/in
+    new b/res
+    set b/res contains listOutputFormats } s/in
+    return b/res
+
+r/as/listCharEncodings
+    new as/res
+    set as/res dcDataFilterByValue 'formats' 6 'encoding' 1
+    return as/res
+
+r/b/isSupportedCharEncoding s/in
+    # Specifically, is it a supported character encoding for the output environment.
+    new b/res
+    set b/res and contains listCharEncodings } s/in } isSupportedOutputFormat s/in
+    return b/res
+
+r/as/listTerminalTypes
+    new as/res
+    set as/res dcDataFilterByValue 'formats' 6 'terminal' 1
+    return as/res
+
+r/b/isSupportedTerminalType s/in
+    # Specifically, is it a supported terminal type for the output environment.
+    new b/res
+    set b/res and contains listTerminalTypes } s/in } isSupportedOutputFormat s/in
+    return b/res
+
+r/as/listDocumentTransformations
+    new as/res
+    set as/res dcDataFilterByValue 'formats' 6 'transformation' 1
+    return as/res
+
+r/as/listDataTypes
+    new as/res
+    set as/res dcDataFilterByValue 'formats' 6 'data' 1
+    return as/res
+
+r/as/listVariantsForFormat s/format
+    assertIsFormat s/format
+    new s/normalizedFmt
+    set s/normalizedFmt normalizeFormat s/format
+    new as/formats
+    set as/formats listFormats
+    new n/count
+    new n/i
+    set n/count count as/formats
+    set n/i 0
+    new s/candidateFmt
+    new s/normalizedVar
+    new as/res
+    while lt n/i n/count
+        set s/candidateFmtType dcDataLookupById 'formats' n/i 6
+        if eq 'v:' substr s/candidateFmtType 0 2
+            set s/candidateFmtType substr s/candidateFmtType 3 -1
+            if in s/candidateFmtType [ 'unicodePua' ]
+                set s/candidateFmtType 'unicode'
+            if eq s/normalizedFmt s/candidateFmtType
+                set as/res push as/res dcDataLookupById 'formats' n/i 1
+        set n/i add n/i 1
+    return as/res
+
+r/n/getFormatId s/format
+    assertIsFormat s/format
+    new n/res
+    set n/res intFromIntStr dcDataLookupByValue 'formats' 1 s/format 0
+    return n/res
+
+r/s/normalizeFormat s/format
+    assertIsFormat s/format
+    if eq s/format 'utf8'
+        return 'unicode'
+    return s/format
+
+r/s/getFormatName s/format
+    new s/res
+    set s/res dcDataLookupById 'formats' getFormatId s/format } 1
+    return s/res
+
+r/s/getFormatExtension s/format
+    new s/res
+    set s/res dcDataLookupById 'formats' getFormatId s/format } 2
+    return s/res
+
+r/n/getFormatImportSupport s/format
+    new n/res
+    set n/res intFromIntStr dcDataLookupById 'formats' getFormatId s/format } 3
+    return n/res
+
+r/n/getFormatExportSupport s/format
+    new n/res
+    set n/res intFromIntStr dcDataLookupById 'formats' getFormatId s/format } 4
+    return n/res
+
+r/n/getFormatTestsStatus s/format
+    new n/res
+    set n/res intFromIntStr dcDataLookupById 'formats' getFormatId s/format } 5
+    return n/res
+
+r/s/getFormatType s/format
+    new s/res
+    set s/res dcDataLookupById 'formats' getFormatId s/format } 6
+    return s/res
+
+r/s/getFormatLabel s/format
+    new s/res
+    set s/res dcDataLookupById 'formats' getFormatId s/format } 7
+    return s/res
+
+r/as/getFormatVariantTypes s/format
+    new as/res
+    set as/res strSplit dcDataLookupById 'formats' getFormatId s/format } 8 } ','
+    return as/res
+
+r/s/getFormatComments s/format
+    new s/res
+    set s/res dcDataLookupById 'formats' getFormatId s/format } 9
+    return s/res
+
+r/b/formatIsVariant s/format
+    # Return true if the format is a variant of another format, rather than its own format.
+    assertIsFormat s/format
+    new b/res
+    set b/res eq 'v:' substr getFormatType s/format } 0 2
+    return s/res
+
+r/s/isVariantType s/variantType
+    new b/res
+    set b/res in s/variantType [ 'encoding' 'unicodePua' ]
+    return b/res
+
+r/s/formatGetVariantType s/format
+    # Return the string indicating the type of format variant this is.
+    assertIsTrue formatIsVariant s/format
+    new s/res
+    set s/res substr getFormatType s/format } 2 -1
+    return s/res
+
+r/b/formatSupportsVariantType s/format s/variantType
+    assertIsFormat s/format
+    new b/res
+    set b/res in s/variantType getFormatVariantTypes s/format
+    return b/res
+
+r/b/formatSupportsVariant s/format s/variant
+    assertIsFormat s/format
+    new b/res
+    set b/res formatSupportsVariantType s/format formatGetVariantType s/variant
+    return b/res
+
+r/s/getFormatMetricsType s/format
+    assertIsFormat s/format
+    new s/res
+    new s/type
+    set s/type getFormatType s/format
+    set s/res cat 'complex-' s/format
+    if or eq 'text' s/type } in s/type [ 'encoding' 'terminal' ]
+        set s/res 'character'
+    elif in s/type [ ]
+        set s/res 'pixel'
+    elif in s/type [ 'internal' ]
+        set s/res cat 'internal-' s/format
+    return s/res
+
+r/s/dcGetMappingToFormat n/dc s/format
+    assertIsDc n/dc
+    assertIsSupportedOutputFormat s/format
+    new s/res
+    set s/res dcDataLookupById cat 'mappings/to/' s/format } n/dc 1
+    return s/res

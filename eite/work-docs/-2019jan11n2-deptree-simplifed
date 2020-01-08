@@ -1,0 +1,110 @@
+dependency tree for intFromBase36Char:
+    internalDebugCollect
+        none
+
+    internalDebugStackEnter
+        implDie
+            implError
+                FIXMEUnimplemented
+                    assertIsStr
+                        assertionFailed
+                            implDie!
+                    implLog
+                        assertIsStr*
+                        internalDebugPrintStack
+                            none
+                implWarn
+                    assertIsStr*
+                    FIXMEUnimplemented*
+                    implLog*
+        internalDebugFlush
+            none
+        internalDebugQuiet
+            assertIsStr*
+            assertIsInt
+                assertionFailed*
+            implLog*
+
+    assertIsStr*
+
+    assertIsInt*
+
+    assertIsChar
+        assertIsStr
+            assertionFailed
+                implDie
+        assertIsTrue
+            assertIsBool
+                assertionFailed
+                    implDie
+        isChar
+            isCharByte
+                assertIsInt
+                    assertionFailed
+                        implDie
+            byteFromChar
+                assertIsStr*
+                assertIsTrue*
+                assertIsInt*
+            assertIsBool*
+
+    strToUpper
+        assertIsStr
+            assertionFailed
+                implDie
+        len
+            assertIsInt
+                assertionFailed
+                    implDie
+        implLt*
+        implCat
+            assertIsStr*
+        charToUpper
+            internalDebugCollect*
+            internalDebugStackEnter*
+            assertIsStr*
+            assertIsChar*
+            byteFromChar*
+            intIsBetween*
+            implSub*
+            charFromByte
+                assertIsInt*
+                assertIsStr*
+            internalDebugStackExit*
+        strCharAtPos
+            internalDebugCollect*
+            internalDebugStackEnter*
+            assertIsStr*
+            assertIsInt*
+            substring
+                assertIsStr*
+                assertIsInt*
+            internalDebugStackExit*
+        implAdd
+            assertIsInt*
+        assertIsStr*
+        internalDebugStackExit*
+
+    ge
+        internalDebugCollect*
+        internalDebugStackEnter*
+        assertIsInt*
+        implEq*
+        or*
+        implGt
+            assertIsInt*
+            assertIsBool*
+        assertIsBool*
+        internalDebugStackExit*
+
+    implGt*
+
+    implDie*
+
+    implCat*
+
+    implSub*
+
+    implNot*
+
+    internalDebugStackExit*

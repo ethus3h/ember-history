@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1091
+source ember_bash_setup &> /dev/null || { printf '%b' '\033[1;31m' >&2; echo "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd): The required dependency ember-shared could not be found (or ember_bash_setup could not be sourced for some other reason)." >&2; printf '%b' '\033[0m' >&2; exit 1; }
+#set -x
+
+trap 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."' ERR
+
+# Retrieve third-party files
+
+source ./support/build-scripts/dist-versions || die
+
+rm -rf ./build-temp/distfiles/
+mkdir -p ./build-temp/distfiles/
+
+if [[ -d /usr/portage/distfiles ]]; then
+    eiteEbuildDistfileCopy() {
+        echo "Copying distfile: $1"
+        rsync -a --checksum /usr/portage/distfiles/"$1" ./build-temp/distfiles/ &>/dev/null
+    }
+
+    # wabt and its build-time dependencies
+    eiteEbuildDistfileCopy "ucd.all.flat-${myUnicodeVersion}.zip"
+    eiteEbuildDistfileCopy "emscripten-${myEmscriptenCommit}.tar.gz"
+    eiteEbuildDistfileCopy "binaryen-${myBinaryenVersion}.tar.gz"
+    eiteEbuildDistfileCopy "binaryen-${myBinaryenVersion}.zip"
+    eiteEbuildDistfileCopy "wabt-${myWabtVersion}.tar.gz"
+    eiteEbuildDistfileCopy "googletest-${myGoogletestVersion}.tar.gz"
+    eiteEbuildDistfileCopy "python-lex-yacc-${myPlyVersion}.tar.gz"
+    eiteEbuildDistfileCopy "WebAssembly-testsuite-${myTestsuiteCommit}.tar.gz"
+else
+    (
+        cd ./build-temp/distfiles/
+        wget "https://www.unicode.org/Public/"${myUnicodeVersion}"/ucdxml/ucd.all.flat.zip" -O "ucd.all.flat-${myUnicodeVersion}.zip"
+        wget "https://github.com/emscripten-core/emscripten/archive/${myEmscriptenCommit}.tar.gz" -O "emscripten-${myEmscriptenCommit}.tar.gz"
+        wget "https://github.com/WebAssembly/binaryen/archive/version_${myBinaryenVersion}.tar.gz" -O "binaryen-${myBinaryenVersion}.tar.gz"
+        wget "https://github.com/WebAssembly/binaryen/archive/version_${myBinaryenVersion}.zip" -O "binaryen-${myBinaryenVersion}.zip"
+        wget "https://github.com/WebAssembly/wabt/archive/${myWabtVersion}.tar.gz" -O "wabt-${myWabtVersion}.tar.gz"
+        wget "https://github.com/google/googletest/archive/release-${myGoogletestVersion}.tar.gz" -O "googletest-${myGoogletestVersion}.tar.gz"
+        wget "https://github.com/dabeaz/ply/archive/${myPlyVersion}.tar.gz" -O "python-lex-yacc-${myPlyVersion}.tar.gz"
+        wget "https://github.com/WebAssembly/testsuite/archive/${myTestsuiteCommit}.tar.gz" -O "WebAssembly-testsuite-${myTestsuiteCommit}.tar.gz"
+    )
+fi

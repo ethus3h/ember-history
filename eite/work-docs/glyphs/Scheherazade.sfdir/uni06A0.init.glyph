@@ -1,0 +1,12 @@
+StartChar: uni06A0.init
+Encoding: 65950 -1 841
+Width: 735
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 308 -150 basechar 0
+AnchorPoint: "Anchor-1" 200 1305 basechar 0
+LayerCount: 2
+Fore
+Refer: 839 -1 N 1 0 0 1 0 0 3
+Refer: 1126 -1 N 1 0 0 1 330 879 2
+EndChar

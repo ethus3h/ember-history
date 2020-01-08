@@ -1,0 +1,13 @@
+r/v/runTestsTypeConversion b/v
+    testing b/v 'typeConversion'
+    runTest b/v arrEq [ 'a' 'b' 'c' ] strSplit 'a,b,c' ','
+    runTest b/v arrEq [ 'a' 'b' 'c' ] strSplit 'aabbabc' 'ab'
+    runTest b/v arrEq [ 'a' 'b' 'c' '' ] strSplit 'aabbabcab' 'ab'
+    runTest b/v arrEq [ '' 'c' ] strSplit 'abc' 'ab'
+    runTest b/v arrEq [ '' '' 'baa' ] strSplit 'ababbaa' 'ab'
+    runTest b/v arrEq [ 'a' '' ] strSplit 'aab' 'ab'
+    runTest b/v arrEq [ '' 'a' '' ] strSplit 'abaab' 'ab'
+    runTest b/v arrEq [ '' 'a' '' '' ] strSplit 'abaabab' 'ab'
+    runTest b/v arrEq [ '' '' '' ] strSplit 'abab' 'ab'
+    runTest b/v arrEq [ '' '' ] strSplit 'ab' 'ab'
+    runTest b/v arrEq [ '' '' '' ] strSplit strJoin strSplit 'abab' 'ab' } 'ab' } 'ab'

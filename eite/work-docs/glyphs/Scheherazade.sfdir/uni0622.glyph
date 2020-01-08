@@ -1,0 +1,14 @@
+StartChar: uni0622
+Encoding: 1570 1570 254
+Width: 297
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 100 -180 basechar 0
+AnchorPoint: "Anchor-1" 120 1395 basechar 0
+LayerCount: 2
+Fore
+Refer: 257 1575 N 1 0 0 1 0 0 3
+Refer: 1132 -1 N 1 0 0 1 129 1158 2
+Substitution2: "'fina' Terminal Forms in Arabic lookup 2 subtable" uni0622.fina
+MultipleSubs2: "'ccmp' Glyph Composition/Decomposition in Arabic lookup 0 subtable" uni0627 uni0653
+EndChar

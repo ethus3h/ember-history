@@ -1,0 +1,15 @@
+r/v/runTestsDocumentExec b/v
+    testing b/v 'documentExec'
+    runExecTest b/v 'at-comment-no-space' 10
+    runExecTest b/v 'at-comment' 10
+    runExecTest b/v 'at-nl' 10
+    runExecTest b/v 'at-space-nl' 10
+    runExecTest b/v 'hello-world' 100
+
+r/v/runExecTest b/v s/testName n/ticksNeeded
+    new n/execId
+    set n/execId runDocumentPrepare loadStoredDocument 'sems' cat 'exec-tests/' cat s/testName '.sems'
+    setExecOption n/execId 'stopExecAtTick' strFrom n/ticksNeeded
+    setExecOption n/execId 'runHeadless' 'true'
+    runDocumentGo n/execId
+    runTest b/v arrEq getCurrentExecFrame n/execId } loadStoredDocument 'sems' cat 'exec-tests/' cat s/testName '.out.sems'

@@ -1,0 +1,26 @@
+goal: illustrate eite
+strategy: trays containing blocks representing Dcs or similar elements from other apps, each tray a different color and the blocks for that tray that color
+blocks:
+	Picture editor:
+		Paintbrush tool
+		Red pixel at (50, 25)
+		Blur tool
+	Text editor:
+		A
+		س
+		字
+		🐱
+		❤
+	Programming language and structured data:
+		if (...) then { ... }
+		while (...) do { ... }
+		add (3, 4)
+		group-from-name("The Beatles")
+		members-of(group-from-name("The Beatles"))
+	Word processor:
+		Picture
+		Sound
+		Text
+	What I'm proposing:
+		(All of the above)
+32 total blocks; 5 trays

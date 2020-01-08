@@ -1,0 +1,12 @@
+StartChar: uni0698.fina.dotHat
+Encoding: 65612 -1 503
+Width: 487
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 201 -538 basechar 0
+AnchorPoint: "Anchor-1" 239 1021 basechar 0
+LayerCount: 2
+Fore
+Refer: 488 -1 N 1 0 0 1 0 0 3
+Refer: 1122 -1 N 1 0 0 1 350 376 2
+EndChar

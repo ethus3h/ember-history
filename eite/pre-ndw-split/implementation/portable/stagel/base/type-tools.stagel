@@ -1,0 +1,36 @@
+r/b/isByte g/in
+    if not isInt g/in
+        return false
+    new n/val
+    set n/val g/in
+    new b/res
+    set b/res intIsBetween n/val 0 255
+    return b/res
+
+r/b/isIntBit g/in
+    if not isInt g/in
+        return false
+    new n/val
+    set n/val g/in
+    new b/res
+    set b/res intIsBetween n/val 0 1
+    return b/res
+
+r/b/isChar g/in
+    if not isStr g/in
+        return false
+    new s/val
+    set s/val g/in
+    new b/res
+    set b/res isCharByte byteFromChar s/val
+    return b/res
+
+r/b/isCharByte g/in
+    # Bear in mind that StageL doesn't attempt to support Unicode.
+    if not isInt g/in
+        return false
+    new n/val
+    set n/val g/in
+    new b/res
+    set b/res intIsBetween n/val 32 126
+    return b/res

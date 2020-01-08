@@ -1,0 +1,59 @@
+StartChar: uni06F7.urdu
+Encoding: 66017 -1 999
+Width: 800
+GlyphClass: 2
+Flags: W
+TtInstrs:
+SVTCA[y-axis]
+PUSHW_1
+ 23
+MDAP[rnd]
+PUSHW_1
+ 26
+MDAP[rnd]
+PUSHW_1
+ 28
+MDAP[rnd]
+PUSHW_1
+ 4
+MDAP[rnd]
+PUSHW_3
+ 33
+ 4
+ 26
+SRP1
+SRP2
+IP
+IUP[y]
+IUP[x]
+EndTTInstrs
+LayerCount: 2
+Fore
+SplineSet
+743 108 m 0,0,1
+ 743 98 743 98 669 65 c 0,2,3
+ 594 33 594 33 585 33 c 0,4,5
+ 581 33 581 33 573.5 37 c 128,-1,6
+ 566 41 566 41 549.5 48.5 c 128,-1,7
+ 533 56 533 56 504 68 c 128,-1,8
+ 475 80 475 80 428 95 c 0,9,10
+ 334 126 334 126 246.5 145.5 c 128,-1,11
+ 159 165 159 165 78 173 c 0,12,13
+ 65 173 65 173 65 188 c 0,14,15
+ 65 194 65 194 100 247 c 0,16,17
+ 135 301 135 301 145 305 c 0,18,19
+ 242 377 242 377 316 451 c 128,-1,20
+ 390 525 390 525 443 603 c 0,21,22
+ 451 611 451 611 505 624 c 0,23,24
+ 533 631 533 631 549.5 634.5 c 128,-1,25
+ 566 638 566 638 573 638 c 0,26,27
+ 590 638 590 638 590 625 c 0,28,29
+ 590 597 590 597 403 443 c 0,30,31
+ 316 371 316 371 259.5 327.5 c 128,-1,32
+ 203 284 203 284 175 268 c 1,33,34
+ 402 240 402 240 593 175 c 0,35,36
+ 743 123 743 123 743 108 c 0,0,1
+EndSplineSet
+Substitution2: "Single Substitution lookup 22 subtable" uni06F7.Small.urdu
+Substitution2: "Single Substitution lookup 21 subtable" uni06F7.Medium.urdu
+EndChar

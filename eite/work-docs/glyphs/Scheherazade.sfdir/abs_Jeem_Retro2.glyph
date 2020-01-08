@@ -1,0 +1,16 @@
+StartChar: absJeemRetro2
+Encoding: 65547 -1 353
+Width: 1053
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 400 -825 basechar 0
+AnchorPoint: "Anchor-1" 402 1196 basechar 0
+LayerCount: 2
+Fore
+Refer: 340 1581 N 1 0 0 1 0 0 3
+Refer: 1131 -1 N 1 0 0 1 549 600 2
+Refer: 1119 -1 N 1 0 0 1 526 -199 2
+Substitution2: "'medi' Medial Forms in Arabic lookup 3 subtable" absJeemRetro2Med
+Substitution2: "'fina' Terminal Forms in Arabic lookup 2 subtable" absJeemRetro2Fin
+Substitution2: "'init' Initial Forms in Arabic lookup 1 subtable" absJeemRetro2Ini
+EndChar

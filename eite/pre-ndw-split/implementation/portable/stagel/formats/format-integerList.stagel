@@ -1,0 +1,43 @@
+r/an/dcaFromIntegerList an/content
+    assertIsByteArray an/content
+    new an/res
+
+    # Accepts an array of bytes representing an ASCII list of integers representing Dcs. Returns an array of Dcs. This format is the same as sems but without supporting comments.
+
+    new s/currentDc
+    set s/currentDc ''
+    new n/contentLength
+    set n/contentLength count an/content
+    new n/byteOffset
+    new n/currentByte
+    while lt n/byteOffset n/contentLength
+        # do something with each byte in the array. an/content[n/byteOffset] holds the decimal value of the given byte. These are Dcs encoded as ASCII text bytes, rather than an array of Dcs.
+        set n/currentByte get an/content n/byteOffset
+        if asciiIsDigit n/currentByte
+            set s/currentDc cat s/currentDc charFromByte n/currentByte
+        elif asciiIsSpace n/currentByte
+            set an/res push an/res intFromIntStr s/currentDc
+            set s/currentDc ''
+        else
+            die 'Unexpected parser state in integerList document.'
+        set n/byteOffset add n/byteOffset 1
+    if ne 0 len s/currentDc
+        # Ended without a trailing space
+        if eq 'true' getSettingForFormat 'integerList' 'in' 'strict'
+            die 'No trailing space present in integerList format while importing. This is not allowed in strict mode.'
+        set an/res push an/res intFromIntStr s/currentDc
+    assertIsDcArray an/res
+    return an/res
+
+r/an/dcaToIntegerList an/dcIn
+    assertIsDcArray an/dcIn
+    new an/out
+    new n/len
+    set n/len count an/dcIn
+    new n/inputIndex
+    set n/inputIndex 0
+    while lt n/inputIndex n/len
+        set an/out push an/out strToByteArray cat strFrom get an/dcIn n/inputIndex } } ' '
+        set n/inputIndex add n/inputIndex 1
+    assertIsByteArray an/out
+    return an/out

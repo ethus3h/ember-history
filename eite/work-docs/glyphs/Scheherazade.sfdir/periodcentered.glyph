@@ -1,0 +1,29 @@
+StartChar: periodcentered
+Encoding: 183 183 151
+Width: 279
+Flags: W
+TtInstrs:
+SVTCA[y-axis]
+PUSHW_1
+ 3
+MDAP[rnd]
+PUSHW_1
+ 9
+MDAP[rnd]
+IUP[y]
+IUP[x]
+EndTTInstrs
+LayerCount: 2
+Fore
+SplineSet
+227 506 m 0,0,1
+ 227 468 227 468 201.5 443 c 128,-1,2
+ 176 418 176 418 139 418 c 256,3,4
+ 102 418 102 418 76.5 443 c 128,-1,5
+ 51 468 51 468 51 506 c 0,6,7
+ 51 543 51 543 76.5 567.5 c 128,-1,8
+ 102 592 102 592 139 592 c 256,9,10
+ 176 592 176 592 201.5 567.5 c 128,-1,11
+ 227 543 227 543 227 506 c 0,0,1
+EndSplineSet
+EndChar

@@ -1,0 +1,13 @@
+StartChar: uni06C0.fina
+Encoding: 65746 -1 637
+Width: 553
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 200 -180 basechar 0
+AnchorPoint: "Anchor-1" 210 1135 basechar 0
+LayerCount: 2
+Fore
+Refer: 635 -1 N 1 0 0 1 0 0 3
+Refer: 1133 -1 N 1 0 0 1 310 849 2
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 7 subtable" uni0647.fina uni0654
+EndChar

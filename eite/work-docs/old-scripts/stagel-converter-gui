@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1091
+source ember_bash_setup &> /dev/null || { printf '%b' '\033[1;31m' >&2; echo "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd): The required dependency ember-shared could not be found (or ember_bash_setup could not be sourced for some other reason)." >&2; printf '%b' '\033[0m' >&2; exit 1; }
+#set -x
+
+trap 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."' ERR
+
+# Setup:
+
+# Open a terminal, and move it to the lower left. Run: clear; cd '/Ember Library/Ember/ember-information-technology-environment/cli/'; less ./stagel-converter-gui-example.stagel
+
+# Open another terminal, and move it to the right. Run: clear; cd '/Ember Library/Ember/ember-information-technology-environment/cli/'; watch -n 1 -t cat ./stagel-converter-gui-doc-output.js
+
+# Open a third terminal, and move it to the upper left. Run: cd '/Ember Library/Ember/ember-information-technology-environment/cli/'; ./stagel-converter-gui
+
+while true; do
+    clear
+    echo "Type your program here.
+    An example program is shown in the lower left area.
+    Press ctrl+D when you are done, and your program will be converted.
+    It will show up in the right area, as JavaScript."
+
+    cat >> ./stagel-converter-gui-doc.stagel 2>/dev/null || true
+
+    ./stagel-convert "./stagel-converter-gui-doc.stagel" "js" > "./stagel-converter-gui-doc-output.js" || true
+
+    (
+        cd ..
+        eogup-single || true
+    )
+
+    rm "./stagel-converter-gui-doc.stagel" || true
+    touch "./stagel-converter-gui-doc.stagel"
+done

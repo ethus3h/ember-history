@@ -1,0 +1,11 @@
+StartChar: uni06C0.medi
+Encoding: 65881 -1 772
+Width: 694
+GlyphClass: 2
+Flags: W
+LayerCount: 2
+Fore
+Refer: 767 -1 N 1 0 0 1 0 0 3
+Refer: 1133 -1 N 1 0 0 1 401 728 2
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 7 subtable" uni0647.medi uni0654
+EndChar

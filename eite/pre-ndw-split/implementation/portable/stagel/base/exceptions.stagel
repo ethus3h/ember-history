@@ -1,0 +1,41 @@
+# Can check for exception as result like: if eq s/res dcDataNoResultException
+
+r/s/dcDataNoResultException
+    return '89315802-d53d-4d11-ba5d-bf505e8ed454'
+
+r/s/byteArrayFromBasenbUtf8InvalidInputException
+    # It doesn't look like a normal UUID since it's an an/ function, so call strPrintArray on it to get the value as a string that can be compared using excep. (just use excepArr instead, which does this for you)
+    return '51 98 218 163 23 5 64 236 154 151 89 208 82 253 64 55 '
+
+r/b/excep s/test
+    new b/res
+    set b/res false
+    # Test for each exception type in turn
+    set b/res or b/res eq s/test dcDataNoResultException
+    set b/res or b/res eq s/test byteArrayFromBasenbUtf8InvalidInputException
+    return b/res
+
+r/b/notExcep s/test
+    new b/res
+    set b/res not excep s/test
+    return b/res
+
+r/b/excepArr ga/test
+    new b/res
+    set b/res excep strPrintArray ga/test
+    return b/res
+
+r/b/notExcepArr ga/test
+    new b/res
+    set b/res not excepArr ga/test
+    return b/res
+
+r/b/excOrEmpty s/test
+    new b/res
+    set b/res or excep s/test } strEmpty s/test
+    return b/res
+
+r/b/notExcOrEmpty s/test
+    new b/res
+    set b/res not excOrEmpty s/test
+    return b/res

@@ -1,0 +1,50 @@
+StartChar: uni06F7.Medium.urdu
+Encoding: 66048 -1 1032
+Width: 451
+GlyphClass: 4
+Flags: W
+TtInstrs:
+SVTCA[y-axis]
+PUSHW_1
+ 17
+MDAP[rnd]
+PUSHW_1
+ 19
+MDAP[rnd]
+PUSHW_1
+ 3
+MDAP[rnd]
+PUSHW_3
+ 23
+ 3
+ 17
+SRP1
+SRP2
+IP
+IUP[y]
+IUP[x]
+EndTTInstrs
+AnchorPoint: "Anchor-7" 451 0 basemark 0
+AnchorPoint: "Anchor-7" 0 0 mark 0
+AnchorPoint: "Anchor-6" 0 0 mark 0
+LayerCount: 2
+Fore
+SplineSet
+419 283 m 0,0,1
+ 419 277 419 277 377.5 254.5 c 128,-1,2
+ 336 232 336 232 330 232 c 1,3,4
+ 338 232 338 232 239 272 c 0,5,6
+ 134 317 134 317 44 327 c 0,7,8
+ 37 327 37 327 37 337 c 0,9,10
+ 37 342 37 342 56.5 377.5 c 128,-1,11
+ 76 413 76 413 82 416 c 0,12,13
+ 191 514 191 514 250 618 c 0,14,15
+ 254 623 254 623 285 632 c 128,-1,16
+ 316 641 316 641 323 641 c 0,17,18
+ 333 641 333 641 333 633 c 0,19,20
+ 333 615 333 615 227 509 c 0,21,22
+ 130 413 130 413 99 390 c 1,23,24
+ 227 373 227 373 335 328 c 0,25,26
+ 419 294 419 294 419 283 c 0,0,1
+EndSplineSet
+EndChar

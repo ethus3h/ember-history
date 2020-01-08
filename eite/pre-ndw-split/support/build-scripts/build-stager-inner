@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1091
+source ember_bash_setup &> /dev/null || { printf '%b' '\033[1;31m' >&2; echo "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd): The required dependency ember-shared could not be found (or ember_bash_setup could not be sourced for some other reason)." >&2; printf '%b' '\033[0m' >&2; exit 1; }
+#set -x
+
+trap 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."' ERR
+
+debugBuild="--debug"
+if [[ "$1" == "--debug" ]]; then
+    debugBuild="--debug"
+    shift
+elif [[ "$1" == "--no-debug" ]]; then
+    debugBuild="--no-debug"
+    shift
+fi
+typecheckBuild="--runtime-type-checks"
+if [[ "$1" == "--runtime-type-checks" ]]; then
+    typecheckBuild="--runtime-type-checks"
+    shift
+elif [[ "$1" == "--no-runtime-type-checks" ]]; then
+    typecheckBuild="--no-runtime-type-checks"
+    shift
+fi
+
+[[ -z "$2" ]] && die "No target language given."
+
+if [[ -f "./scripts/stagel-bootstrap-convert" ]]; then
+    ./scripts/stagel-convert "$debugBuild" "$typecheckBuild" "$1" "$2" >> ./built/stagel-build-temp/implementation/portable/stagel/portable."$2"
+else
+    stagel-convert "$debugBuild" "$typecheckBuild" "$1" "$2" >> ./built/stagel-build-temp/implementation/portable/stagel/portable."$2"
+fi
+echo >> ./built/stagel-build-temp/implementation/portable/stagel/portable."$2"

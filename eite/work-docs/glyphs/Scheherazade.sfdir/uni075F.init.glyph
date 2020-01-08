@@ -1,0 +1,12 @@
+StartChar: uni075F.init
+Encoding: 65954 -1 845
+Width: 735
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 308 -150 basechar 0
+AnchorPoint: "Anchor-1" 252 1205 basechar 0
+LayerCount: 2
+Fore
+Refer: 839 -1 N 1 0 0 1 0 0 3
+Refer: 1125 -1 N 1 0 0 1 329 868 2
+EndChar

@@ -1,0 +1,14 @@
+StartChar: uni0622.fina.postLamMed
+Encoding: 66203 -1 1189
+Width: 500
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-8" 300 -154 basechar 0
+AnchorPoint: "Anchor-4" 420 -100 basechar 0
+AnchorPoint: "Anchor-1" 33 1173 basechar 0
+AnchorPoint: "Cursive-0" 650 250 entry 0
+LayerCount: 2
+Fore
+Refer: 1192 -1 N 1 0 0 1 0 0 3
+Refer: 1132 -1 N 1 0 0 1 29 1046 2
+EndChar

@@ -1,0 +1,39 @@
+StartChar: sevenSmall
+Encoding: 66058 -1 1042
+Width: 319
+GlyphClass: 4
+Flags: W
+TtInstrs:
+SVTCA[y-axis]
+PUSHW_1
+ 0
+MDAP[rnd]
+PUSHW_3
+ 11
+ 2
+ 3
+CALL
+IUP[y]
+IUP[x]
+EndTTInstrs
+AnchorPoint: "Anchor-7" 319 0 basemark 0
+AnchorPoint: "Anchor-7" 0 0 mark 0
+AnchorPoint: "Anchor-6" 0 0 mark 0
+LayerCount: 2
+Fore
+SplineSet
+150 191 m 1,0,-1
+ 115 191 l 1,1,-1
+ 242 572 l 1,2,-1
+ 125 572 l 2,3,4
+ 107 572 107 572 93.5 570 c 128,-1,5
+ 80 568 80 568 69.5 562.5 c 128,-1,6
+ 59 557 59 557 50.5 547 c 128,-1,7
+ 42 537 42 537 33 521 c 1,8,-1
+ 23 523 l 1,9,-1
+ 66 623 l 1,10,-1
+ 291 623 l 1,11,-1
+ 291 613 l 1,12,-1
+ 150 191 l 1,0,-1
+EndSplineSet
+EndChar

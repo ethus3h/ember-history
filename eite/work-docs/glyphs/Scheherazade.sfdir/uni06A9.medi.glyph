@@ -1,0 +1,11 @@
+StartChar: uni06A9.medi
+Encoding: 65845 -1 736
+Width: 944
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 200 -150 basechar 0
+AnchorPoint: "Anchor-1" 205 1201 basechar 0
+LayerCount: 2
+Fore
+Refer: 732 -1 N 1 0 0 1 0 0 3
+EndChar

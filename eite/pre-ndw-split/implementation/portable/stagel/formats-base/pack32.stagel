@@ -1,0 +1,16 @@
+# This is an attempt at packing arbitrary 32-bit unsigned? ints losslessly in a manner similar to UTF-8. For now, it is simply a wrapper around WTF-8 (UTF-8 but allowing unpaired surrogates). Consequently, it only supports a chunk of the 32 bit numbers. Later it can be extended to support all. Note that these functions take *signed* ints as input at least for the moment.
+
+r/an/pack32 n/in
+    new an/res
+    set an/res intArrayPackWtf8 n/in
+    return an/res
+
+r/n/unpack32 an/in
+    new n/res
+    set n/res intUnpackWtf8 an/in
+    return n/res
+
+r/b/isPack32Char an/in
+    new b/res
+    set b/res boolIsUnpackableWtf8 an/in
+    return b/res

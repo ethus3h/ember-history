@@ -1,0 +1,12 @@
+StartChar: absSheenRetro1Ini
+Encoding: 65936 -1 827
+Width: 918
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 449 -201 basechar 0
+AnchorPoint: "Anchor-1" 355 1490 basechar 0
+LayerCount: 2
+Fore
+Refer: 821 -1 N 1 0 0 1 0 0 3
+Refer: 1127 -1 N 1 0 0 1 500 574 2
+EndChar

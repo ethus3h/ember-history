@@ -1,0 +1,97 @@
+r/an/dcaFromSems an/in
+    assertIsByteArray an/in
+    new an/res
+
+    # Accepts an array of bytes of a SEMS format document. Returns an array of Dcs.
+
+    new an/content
+    set an/content utf8CharArrayFromByteArray an/in
+    new s/parserState
+    set s/parserState 'dc'
+    new s/currentDc
+    set s/currentDc ''
+    new n/contentLength
+    set n/contentLength count an/content
+    new n/charOffset
+    new n/currentChar
+    new b/strict
+    set b/strict eq 'true' getSettingForFormat 'sems' 'in' 'strict'
+    while lt n/charOffset n/contentLength
+        # do something with each char in the array. an/content[n/byteOffset], which is copied to n/currentChar, holds the decimal value of the given char. These are Dcs encoded as ASCII text bytes, rather than an array of Dcs.
+        set n/currentChar get an/content n/charOffset
+        if eq s/parserState 'dc'
+            if asciiIsDigit n/currentChar
+                set s/currentDc cat s/currentDc charFromByte n/currentChar
+            elif in n/currentChar ( 10 13 32 )
+                set an/res push an/res intFromIntStr s/currentDc
+                set s/currentDc ''
+            elif eq 35 n/currentChar
+                # pound sign: start comment
+                if ne 0 len s/currentDc
+                    # Comment was not preceded by a space
+                    warnOrDie b/strict 'No trailing space before comment present in sems format while importing. This is not allowed in strict mode.'
+                    set an/res push an/res intFromIntStr s/currentDc
+                    set s/currentDc ''
+                set an/res push an/res 246
+                set s/parserState 'comment'
+            else
+                die 'Unexpected parser state in SEMS document.'
+        elif eq s/parserState 'comment'
+            if asciiIsNewline n/currentChar
+                set an/res push an/res 248
+                set s/parserState 'dc'
+            else
+                set an/res append an/res dcaFromUnicodeChar n/currentChar
+        else
+            die 'Internal error: unexpected parser state while parsing SEMS document'
+        set n/charOffset add n/charOffset 1
+    if eq s/parserState 'comment'
+        # Document ended with a comment and no newline at the end
+        if ne 0 len s/currentDc
+            die cat 'Internal error while parsing sems document: Unconsumed characters were left over when the end of the document was found: ' cat s/currentDc '.'
+        set an/res push an/res 248
+    elif ne 0 len s/currentDc
+        warnOrDie b/strict 'No trailing space present in sems format while importing. This is not allowed in strict mode.'
+        # Ended without a trailing space
+        set an/res push an/res intFromIntStr s/currentDc
+    assertIsDcArray an/res
+    return an/res
+
+r/an/dcaToSems an/dcIn
+    assertIsDcArray an/dcIn
+    # TODO: Support SEMS comment roundtripping
+    new an/out
+    new n/len
+    set n/len count an/dcIn
+    new n/inputIndex
+    set n/inputIndex 0
+    new n/currentDc
+    new b/inComment
+    set b/inComment false
+    new an/currentComment
+    set an/currentComment ( )
+    new b/atCommentEnd
+    set b/atCommentEnd false
+    while lt n/inputIndex n/len
+        set n/currentDc get an/dcIn n/inputIndex
+        if b/atCommentEnd
+            set b/atCommentEnd false
+        if eq 246 n/currentDc
+            set b/inComment true
+            set an/out append an/out strToByteArray '#'
+        elif eq 248 n/currentDc
+            set b/inComment false
+            set b/atCommentEnd true
+            set an/out append an/out dcaToDcbnbUtf8 an/currentComment
+            set an/currentComment ( )
+            set an/out append an/out crlf
+        else
+            if b/inComment
+                set an/currentComment push an/currentComment n/currentDc
+            else
+                set an/out append an/out strToByteArray cat strFrom n/currentDc } ' '
+        set n/inputIndex add n/inputIndex 1
+    if not b/atCommentEnd
+        set an/out append an/out crlf
+    assertIsByteArray an/out
+    return an/out

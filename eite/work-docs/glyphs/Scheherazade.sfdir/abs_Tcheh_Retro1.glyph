@@ -1,0 +1,16 @@
+StartChar: absTchehRetro1
+Encoding: 65544 -1 350
+Width: 1053
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 400 -825 basechar 0
+AnchorPoint: "Anchor-1" 393 1192 basechar 0
+LayerCount: 2
+Fore
+Refer: 340 1581 N 1 0 0 1 0 0 3
+Refer: 1131 -1 N 1 0 0 1 549 600 2
+Refer: 1128 -1 N 1 0 0 1 526 -109 2
+Substitution2: "'medi' Medial Forms in Arabic lookup 3 subtable" absTchehRetro1Med
+Substitution2: "'fina' Terminal Forms in Arabic lookup 2 subtable" absTchehRetro1Fin
+Substitution2: "'init' Initial Forms in Arabic lookup 1 subtable" absTchehRetro1Ini
+EndChar

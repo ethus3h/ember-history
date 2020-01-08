@@ -1,0 +1,14 @@
+StartChar: uni0675.fina.postLamIni
+Encoding: 66194 -1 1180
+Width: 535
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-8" 200 -136 basechar 0
+AnchorPoint: "Anchor-4" 420 -100 basechar 0
+AnchorPoint: "Anchor-1" 18 1551 basechar 0
+AnchorPoint: "Cursive-0" 535 0 entry 0
+LayerCount: 2
+Fore
+Refer: 1177 -1 N 1 0 0 1 0 0 3
+Refer: 1134 -1 N 1 0 0 1 46 1185 2
+EndChar

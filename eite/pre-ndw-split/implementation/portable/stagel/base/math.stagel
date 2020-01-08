@@ -1,0 +1,188 @@
+r/b/isNonnegative n/in
+    if lt n/in 0
+        return false
+    return true
+
+r/b/isNegative n/in
+    if lt n/in 0
+        return true
+    return false
+
+r/b/isPositive n/in
+    if le n/in 0
+        return false
+    return true
+
+r/b/isNonpositive n/in
+    if le n/in 0
+        return true
+    return false
+
+r/b/isEven n/in
+    if eq 0 mod n/in 2
+        return true
+    return false
+
+r/b/isOdd n/in
+    if eq 0 mod n/in 2
+        return false
+    return true
+
+r/v/assertIsEven n/in
+    assertIsTrue isEven n/in
+
+r/v/assertIsOdd n/in
+    assertIsTrue isOdd n/in
+
+r/b/intIsBetween n/n n/a n/b
+    # Checks whether N is within the range A and B, including endpoints
+    # Can't do it this way since it can use ints intermediately that are outside of 32 bit
+    #new n/t1
+    #set n/t1 sub n/n n/a
+    #new n/t2
+    #set n/t2 sub n/n n/b
+    #new n/t3
+    #set n/t3 mul n/t1 n/t2
+    #new b/temp
+    #set b/temp le n/t3 0
+    # So instead implement using gt/lt
+    set b/temp and ge n/n n/a } le n/n n/b
+    return b/temp
+
+r/s/intToBase36Char n/n
+    # Returns the nth digit in base 36 or less (using capitalized digits).
+    if not intIsBetween n/n 0 36
+        new s/temp
+        set s/temp strFrom n/n
+        die cat strFrom s/temp ' is not within the supported range of numbers between 0 and 36 (Z).'
+    new s/res
+    if le n/n 9
+        set s/res charFromByte add n/n 48
+    else
+        set s/res charFromByte add n/n 55
+    return s/res
+
+r/n/intFromBase36Char s/n
+    # Returns an int given the nth digit in base 36 or less (using capitalized digits).
+    assertIsChar s/n
+    new s/uc
+    set s/uc strToUpper s/n
+    new n/res
+    set n/res byteFromChar s/uc
+    if ge n/res 65
+        if gt n/res 90
+            die cat s/uc ' is not within the supported range of digits between 0 and Z (36).'
+        set n/res sub n/res 55
+    else
+        if not intIsBetween n/res 48 57
+            die cat s/n ' is not within the supported range of digits between 0 and Z (36).'
+        set n/res sub n/res 48
+    if not intIsBetween n/res 0 36
+        die cat 'Internal error in intFromBase36Char called with n=' cat s/n '.'
+    return n/res
+
+r/n/intFromBaseStr s/n n/b
+    # Returns the integer represented by n in the requested base. Strategy based on https://www.geeksforgeeks.org/convert-base-decimal-vice-versa/
+    assertIsBaseStr s/n n/b
+    new s/uc
+    set s/uc strToUpper s/n
+    new n/res
+    set n/res 0
+    new n/len
+    set n/len len s/uc
+    new n/int
+    set n/int 0
+    new n/pow
+    set n/pow 1
+    while gt n/len 0
+        set n/len sub n/len 1
+        set n/int intFromBase36Char strCharAtPos s/uc n/len
+        assertIsTrue lt n/int n/b
+        set n/res add n/res mul n/int n/pow
+        set n/pow mul n/pow n/b
+    return n/res
+
+r/n/hexToDec s/n
+    new n/res
+    set n/res intFromBaseStr s/n 16
+    return n/res
+
+r/s/decToHex n/n
+    new s/res
+    set s/res intToBaseStr n/n 16
+    return s/res
+
+r/s/intToBaseStr n/n n/b
+    # Returns a string representing n in the requested base. Strategy based on https://www.geeksforgeeks.org/convert-base-decimal-vice-versa/
+    new s/res
+    if eq 0 n/n
+        set s/res '0'
+    else
+        while gt n/n 0
+            set s/res cat s/res intToBase36Char mod n/n n/b
+            set n/n div n/n n/b
+        set s/res reverseStr s/res
+    assertIsBaseStr s/res n/b
+    return s/res
+
+r/b/isSupportedBase n/b
+    # StageL base conversion routines support base 1 to base 36.
+    new b/res
+    set b/res intIsBetween n/b 1 36
+    return b/res
+
+r/b/isBaseDigit s/in n/b
+    assertIsChar s/in
+    assertIsSupportedBase n/b
+    if not asciiIsAlphanum byteFromChar s/in
+        return false
+    new n/digitVal
+    set n/digitVal intFromBase36Char s/in
+    new b/res
+    set b/res lt n/digitVal n/b
+    return b/res
+
+r/b/isBaseStr s/in n/b
+    new n/len
+    set n/len len s/in
+    set n/len sub n/len 1
+    assertIsNonnegative n/len
+    new s/chr
+    new b/res
+    set b/res true
+    while ge n/len 0
+        set s/chr strCharAtPos s/in n/len
+        set b/res and b/res isBaseDigit s/chr n/b
+        set n/len sub n/len 1
+    return b/res
+
+r/s/formatPercentage n/a n/b
+    if eq 0 n/a
+        return '0.000'
+    new n/percentageN
+    set n/percentageN mul 100 div mul n/a 100000 } n/b
+    new s/percentageTemp
+    set s/percentageTemp strFrom n/percentageN
+    new n/count
+    set n/count sub len s/percentageTemp } 2
+    new n/counter
+    set n/counter n/count
+    new s/percentage
+    new n/decimLoc
+    set n/decimLoc sub n/count 3
+    while gt n/counter 0
+        if eq n/counter sub n/count n/decimLoc
+            set s/percentage cat s/percentage '.'
+        set s/percentage cat s/percentage strChar s/percentageTemp sub n/count n/counter
+        set n/counter sub n/counter 1
+    return s/percentage
+
+r/n/inc n/n
+    new n/res
+    set n/res add 1 n/n
+    return n/res
+
+r/n/dec n/n
+    new n/res
+    set n/res add -1 n/n
+    return n/res

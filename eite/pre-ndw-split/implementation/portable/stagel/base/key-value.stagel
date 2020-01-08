@@ -1,0 +1,156 @@
+r/b/kvHasValue as/data s/key
+    assertIsKvArray as/data
+    new b/res
+    set b/res false
+    new n/l
+    set n/l count as/data
+    if ne 0 n/l
+        new n/c
+        set n/c 0
+        new b/continue
+        set b/continue true
+        while b/continue
+            if not lt n/c n/l
+                set b/continue false
+            if eq 0 mod n/c 2
+                if eq s/key get as/data n/c
+                    set b/res true
+                    set b/continue false
+            set n/c add n/c 1
+    return b/res
+
+r/s/kvGetValue as/data s/key
+    # data format: [ 'a' 'b' 'c' 'd' ... ]
+    # Returns empty if value not set
+    assertIsKvArray as/data
+    new s/res
+    set s/res ''
+    new n/l
+    set n/l count as/data
+    if ne 0 n/l
+        new n/c
+        set n/c 0
+        new b/continue
+        set b/continue true
+        new b/found
+        set b/found false
+        while b/continue
+            if b/found
+                set s/res get as/data n/c
+                set b/continue false
+            else
+                if not lt n/c add -1 n/l
+                    set b/continue false
+                if eq 0 mod n/c 2
+                    if eq s/key get as/data n/c
+                        set b/found true
+            set n/c add n/c 1
+    return s/res
+
+r/s/kvGetDefinedValue as/data s/key
+    assertKvHasValue as/data
+    new s/res
+    set s/res kvGetValue as/data s/key
+    return s/res
+
+r/as/kvSetValue as/data s/key s/val
+    assertIsKvArray as/data
+    new as/res
+    set as/res as/data
+    new n/l
+    set n/l count as/res
+    new b/found
+    set b/found false
+    if ne 0 n/l
+        new n/c
+        set n/c 0
+        new b/continue
+        set b/continue true
+        while b/continue
+            if b/found
+                set as/res setElem as/res n/c s/val
+                set b/continue false
+            else
+                if not lt n/c dec n/l
+                    set b/continue false
+                if eq 0 mod n/c 2
+                    if eq s/key get as/data n/c
+                        set b/found true
+            set n/c add n/c 1
+    if not b/found
+        set as/res push as/res s/key
+        set as/res push as/res s/val
+    return as/res
+
+r/b/kvsHasValue s/data s/key
+    new b/res
+    set b/res kvHasValue kvSplit s/data } s/key
+    return b/res
+
+r/s/kvsGetValue s/data s/key
+    # data format: [ 'a:b,c:d,' ... ]
+    # Returns empty if value not set
+    new s/res
+    set s/res kvGetValue kvSplit s/data } s/key
+    return s/res
+
+r/s/kvsGetDefinedValue s/data s/key
+    assertKvsHasValue s/data
+    new s/res
+    set s/res kvsGetValue s/data s/key
+    return s/res
+
+r/s/kvsSetValue s/data s/key s/val
+    new s/res
+    set s/res kvJoin kvSetValue kvSplit s/data } s/key s/val
+    return s/res
+
+r/v/assertKvHasValue as/data s/key
+    assertIsTrue kvHasValue as/data s/key
+
+r/v/assertKvsHasValue as/data s/key
+    assertIsTrue kvsHasValue as/data s/key
+
+r/as/kvSplit s/data
+    new as/res
+    set as/res [ ]
+    new as/temp
+    set as/temp strSplitEscaped s/data ','
+    new n/l
+    set n/l count as/temp
+    if ne 0 n/l
+        new n/c
+        set n/c 0
+        while lt n/c n/l
+            set as/res append as/res strSplitEscaped get as/temp n/c } ':'
+            set n/c inc n/c
+    return as/res
+
+r/s/kvJoin as/data
+    new s/res
+    set s/res ''
+    new n/l
+    set n/l count as/data
+    if ne 0 n/l
+        new n/c
+        set n/c 0
+        new as/tempA
+        new as/tempB
+        set as/tempB [ ]
+        while lt n/c n/l
+            if eq 0 mod n/c 2
+                set as/tempA [ ]
+                set as/tempA push as/tempA get as/data n/c
+                set as/tempA push as/tempA get as/data add 1 n/c
+                set as/tempB push as/tempB strJoinEscNoTrailing as/tempA ':'
+            set n/c inc n/c
+        set s/res strJoinEsc as/tempB ','
+    return s/res
+
+r/b/isKvArray as/data
+    new b/res
+    set b/res isEven count as/data
+    return b/res
+
+r/v/assertIsKvArray as/data
+    assertIsTrue isKvArray as/data

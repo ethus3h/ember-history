@@ -1,0 +1,139 @@
+r/s/strChar s/str n/index
+    new s/temp
+    set s/temp substring s/str n/index 1
+    return s/temp
+
+r/s/strCharAtPos s/str n/index
+    # helper alias
+    new s/temp
+    set s/temp strChar s/str n/index
+    return s/temp
+
+r/s/charAtPos s/str n/index
+    # helper alias
+    new s/temp
+    set s/temp strChar s/str n/index
+    return s/temp
+
+r/s/charAt s/str n/index
+    # helper alias
+    new s/temp
+    set s/temp strChar s/str n/index
+    return s/temp
+
+r/s/setCharAt s/str n/index s/char
+    new s/res
+    new n/firstEnd
+    new n/lastStart
+    set n/firstEnd sub len s/str } dec n/index
+    set n/lastStart sub len s/str } inc n/index
+    set s/res cat substr s/str 0 n/firstEnd } cat s/char substr s/str n/lastStart -1
+    return s/res
+
+r/s/reverseStr s/str
+    new n/l
+    set n/l len s/str
+    new n/c
+    set n/c 0
+    new s/res
+    while le n/c n/l
+        set s/res cat s/res strCharAtPos s/str sub n/l n/c
+        set n/c add 1 n/c
+    return s/res
+
+r/s/charToUpper s/char
+    assertIsChar s/char
+    new n/temp
+    set n/temp byteFromChar s/char
+    if intIsBetween n/temp 97 122
+        set n/temp sub n/temp 32
+    new s/res
+    set s/res charFromByte n/temp
+    return s/res
+
+r/s/strToUpper s/str
+    new s/res
+    new n/i
+    set n/i 0
+    new n/count
+    set n/count len s/str
+    while lt n/i n/count
+        set s/res cat s/res charToUpper strCharAtPos s/str n/i
+        set n/i add n/i 1
+    return s/res
+
+r/s/charToLower s/char
+    assertIsChar s/char
+    new n/temp
+    set n/temp byteFromChar s/char
+    if intIsBetween n/temp 65 90
+        set n/temp add n/temp 32
+    new s/res
+    set s/res charFromByte n/temp
+    return s/res
+
+r/s/strToLower s/str
+    new s/res
+    new n/i
+    set n/i 0
+    new n/count
+    set n/count len s/str
+    while lt n/i n/count
+        set s/res cat s/res charToLower strCharAtPos s/str n/i
+        set n/i add n/i 1
+    return s/res
+
+r/b/strEmpty s/str
+    new b/res
+    set b/res eq 0 len s/str
+    return b/res
+
+r/b/strNonempty s/str
+    new b/res
+    set b/res not strEmpty s/str
+    return b/res
+
+r/s/substr s/str n/start n/len
+    # Convenience wrapper
+    new s/res
+    set s/res substring s/str n/start n/len
+    return s/res
+
+r/b/strContainsOnlyInt s/in
+    # Positive int, specifically. Only digits allowed.
+    new n/temp
+    set n/temp len s/in
+    new n/i
+    set n/i 0
+    new b/res
+    set b/res true
+    while lt n/i n/temp
+        if not asciiIsDigit byteFromChar strCharAtPos s/in n/i
+            set b/res false
+        set n/i add n/i 1
+    return b/res
+
+r/s/isValidIdent s/in
+    # Doesn't check for duplicate idents or whatever. Just makes sure the basic form is correct.
+    new n/temp
+    set n/temp len s/in
+    new n/i
+    set n/i 0
+    new b/res
+    set b/res true
+    new n/currentCharByte
+    while lt n/i n/temp
+        set n/currentCharByte byteFromChar strCharAtPos s/in n/i
+        if eq n/i 0
+            # First character can only be lowercase letter
+            if not asciiIsLetterLower n/currentCharByte
+                set b/res false
+        elif not or asciiIsDigit n/currentCharByte } asciiIsLetter n/currentCharByte
+            set b/res false
+        set n/i add n/i 1
+    return b/res
+
+r/an/prepareStrForEcho s/in
+    new an/res
+    set an/res convertFormats 'ascii' getEnvPreferredFormat } append strToByteArray s/in } crlf
+    return an/res

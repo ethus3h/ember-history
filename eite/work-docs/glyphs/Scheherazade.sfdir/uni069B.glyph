@@ -1,0 +1,15 @@
+StartChar: uni069B
+Encoding: 1691 1691 360
+Width: 1348
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 300 -600 basechar 0
+AnchorPoint: "Anchor-1" 400 450 basechar 0
+LayerCount: 2
+Fore
+Refer: 357 1587 N 1 0 0 1 0 0 3
+Refer: 1128 -1 N 1 0 0 1 1003 -162 2
+Substitution2: "'medi' Medial Forms in Arabic lookup 3 subtable" uni069B.medi
+Substitution2: "'fina' Terminal Forms in Arabic lookup 2 subtable" uni069B.fina
+Substitution2: "'init' Initial Forms in Arabic lookup 1 subtable" uni069B.init
+EndChar

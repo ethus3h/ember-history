@@ -1,0 +1,15 @@
+StartChar: absSheenRetro1
+Encoding: 65549 -1 363
+Width: 1348
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 300 -600 basechar 0
+AnchorPoint: "Anchor-1" 325 996 basechar 0
+LayerCount: 2
+Fore
+Refer: 357 1587 N 1 0 0 1 0 0 3
+Refer: 1127 -1 N 1 0 0 1 927 594 2
+Substitution2: "'medi' Medial Forms in Arabic lookup 3 subtable" absSheenRetro1Med
+Substitution2: "'fina' Terminal Forms in Arabic lookup 2 subtable" absSheenRetro1Fin
+Substitution2: "'init' Initial Forms in Arabic lookup 1 subtable" absSheenRetro1Ini
+EndChar

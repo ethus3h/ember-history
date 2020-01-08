@@ -1,0 +1,15 @@
+r/an/byteArrayFromBasenbUtf8 an/in
+    assertIsByteArray an/in
+    new an/res
+    # Extract remainder length
+    new n/remainder
+    set n/remainder get byteArrayFromIntBitArray internalIntBitArrayFromBasenbString anSubset an/in -5 -1 } 0 } } 0 # last 4 characters
+    set an/res byteArrayFromIntBitArray internalIntBitArrayFromBasenbString an/in n/remainder
+    assertIsByteArray an/res
+    return an/res
+
+r/an/byteArrayToBase17bUtf8 an/in
+    # Convenience wrapper
+    new an/res
+    set an/res byteArrayToBasenbUtf8 17 an/in
+    return an/res

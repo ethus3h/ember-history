@@ -1,0 +1,14 @@
+StartChar: absLamRetroIni.preAlef
+Encoding: 66186 -1 1172
+Width: 374
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 65 -100 basechar 0
+AnchorPoint: "Anchor-2" -55 1514 basechar 0
+AnchorPoint: "Anchor-1" 73 1862 basechar 0
+AnchorPoint: "Cursive-0" 0 0 exit 0
+LayerCount: 2
+Fore
+Refer: 1167 -1 N 1 0 0 1 0 0 3
+Refer: 1131 -1 N 1 0 0 1 180 1352 2
+EndChar

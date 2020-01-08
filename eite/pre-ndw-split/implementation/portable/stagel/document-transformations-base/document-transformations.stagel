@@ -1,0 +1,20 @@
+r/b/isSupportedDocumentTransformation s/transform
+    new b/res
+    set b/res in s/transform as/listDocumentTransformations
+    return b/res
+
+r/v/assertIsSupportedDocumentTransformation s/transform
+    assertIsTrue isSupportedDocumentTransformation s/transform
+
+r/an/applyDocumentTransformation s/transform an/dcArrayIn
+    assertIsSupportedDocumentTransformation s/transform
+    assertIsDcArray an/dcArrayIn
+    new an/res
+    if eq s/transform 'semanticToText'
+        set an/res dctSemanticToText an/dcArrayIn
+    elif eq s/transform 'codeToText'
+        set an/res dctCodeToText an/dcArrayIn
+    else
+        die cat 'Unimplemented document transformation: ' s/transform
+    assertIsDcArray an/res
+    return an/res

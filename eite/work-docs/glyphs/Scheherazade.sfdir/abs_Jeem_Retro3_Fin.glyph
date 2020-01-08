@@ -1,0 +1,12 @@
+StartChar: absJeemRetro3Fin
+Encoding: 65661 -1 552
+Width: 977
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 400 -840 basechar 0
+AnchorPoint: "Anchor-1" 397 1171 basechar 0
+LayerCount: 2
+Fore
+Refer: 538 -1 N 1 0 0 1 0 0 3
+Refer: 1131 -1 N 1 0 0 1 546 596 2
+EndChar

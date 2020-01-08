@@ -1,0 +1,16 @@
+StartChar: absLamRetro
+Encoding: 65551 -1 416
+Width: 885
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 400 -330 basechar 0
+AnchorPoint: "Anchor-2" 460 540 basechar 0
+AnchorPoint: "Anchor-1" 436 1769 basechar 0
+LayerCount: 2
+Fore
+Refer: 411 1604 N 1 0 0 1 0 0 3
+Refer: 1131 -1 N 1 0 0 1 621 1300 2
+Substitution2: "'medi' Medial Forms in Arabic lookup 3 subtable" absLamRetroMed
+Substitution2: "'fina' Terminal Forms in Arabic lookup 2 subtable" absLamRetroFin
+Substitution2: "'init' Initial Forms in Arabic lookup 1 subtable" absLamRetroIni
+EndChar

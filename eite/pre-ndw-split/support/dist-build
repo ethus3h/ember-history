@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1091
+source ember_bash_setup &> /dev/null || { printf '%b' '\033[1;31m' >&2; echo "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd): The required dependency ember-shared could not be found (or ember_bash_setup could not be sourced for some other reason)." >&2; printf '%b' '\033[0m' >&2; exit 1; }
+#set -x
+
+trap 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."' ERR
+
+source ./support/build-scripts/dist-versions || die
+./support/build-scripts/dist-unpack || die "Could not run dist-unpack."
+
+# Build third-party components
+
+(
+
+rm -rf ./build-temp/build
+mkdir -p ./build-temp/build
+rm -rf ./build-temp/out
+mkdir ./build-temp/out
+
+cd ./build-temp/build || die
+
+unpackedDir="$(readlink -f .)/../unpacked"
+
+echo "Building Unicode data"
+cp -ra "$unpackedDir/ucd.all.flat-${myUnicodeVersion}" ./
+cd "./ucd.all.flat-${myUnicodeVersion}" || die
+# Split it into mulitple files based on https://web.archive.org/web/20190110070242/https://stackoverflow.com/questions/11313852/split-one-file-into-multiple-files-based-on-delimiter
+splitUcd() {
+    chunk="$1"
+    char="$2"
+    # requires gawk or compatible
+    awk '{print $0 > "file" NR}' RS='      <noncharacter first-cp="'"$char"'"' ucd.all.flat.xml."$chunk"
+    nextChunk=$(( chunk + 1 ))
+    mv file1 ucd.all.flat.xml."$chunk"
+    truncate -s -1 ucd.all.flat.xml."$chunk"
+    mv file2 ucd.all.flat.xml."$nextChunk"
+    print '      <noncharacter first-cp="'"$char"'"' >> ucd.all.flat.xml."$chunk"
+}
+cp ucd.all.flat.xml ucd.all.flat.xml.1
+splitUcd "1" "FFFE"
+splitUcd "2" "1FFFE"
+splitUcd "3" "2FFFE"
+splitUcd "4" "3FFFE"
+splitUcd "5" "4FFFE"
+splitUcd "6" "5FFFE"
+splitUcd "7" "6FFFE"
+splitUcd "8" "7FFFE"
+splitUcd "9" "8FFFE"
+splitUcd "10" "9FFFE"
+splitUcd "11" "AFFFE"
+splitUcd "12" "BFFFE"
+splitUcd "13" "CFFFE"
+splitUcd "14" "DFFFE"
+splitUcd "15" "EFFFE"
+splitUcd "16" "FFFFE"
+mkdir ../../../build-temp/out/ucd
+mv ./ucd.all.flat.xml.* ../../../build-temp/out/ucd/
+
+)
+
+rm -r ./build-temp/unpacked
+rm -r ./build-temp/build
+touch ./build-temp/dist-build-ready
+
+rm -rf ./built/dist-built
+cp -ra ./build-temp/out ./build-temp/dist-built
+mv ./build-temp/dist-built ./built/

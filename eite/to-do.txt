@@ -1,0 +1,33 @@
+HIGH PRIORITY EITE
+- Show a button. Do something when button is clicked.
+- Show a text field and a button. If/else to do something when button is clicked depending on text field contents.
+- Get document rendering to be a bit more sophisticated (support variables and function calls inside documents)
+- Get rendering through time working (right now it draws the completed document and stops running, rather than keeping it idle and having an event handling system, although I have started on the APIs for that)
+- Provide a way for an EITE document to start a sub-document in its own thread
+- Get data persistence
+- EITE-based GUI
+- EITE-based servers and service discovery
+- Implement more Dc abilities, in sync with creating EITE interface and server documents (main loader and other documents) Each Dc will need  more work to be implemented in each input and output format, I guess. More work will be desirable for on how Dc data are represented.
+
+LOW PRIORITY EITE
+- How to test that problem inputs fail to convert correctly? Need a way to catch things that error without it killing the main thread. Maybe run them in a new thread?
+- Clone Weave functionality
+- Output format settings tests
+- possibly raster area output
+- WASM in EITE
+- StageL implementation in EITE
+- FIXME: int32 in 8 bit cpu; comparison of bit operations by programming language; ceil/floor with negative numbers; effects of endianness
+- Decentralization/IPFS/OrbitDB integration
+- Output formats: Natlangs; auto-documentation
+
+OTHER
+- Idea for StageL: Make things like "set as/arr push as/arr s/val" nicer to write: how about: ": push as/arr val"
+- StageL: fix "until" keyword
+- StageL: Output auto-documentation
+- StageL: Iteration operator
+- More StageL output languages
+- StageL transpiler in StageL (allows transpiler in EITE, and faster StageL transpilation using e.g. a transpiled-to-C version of the transpiler)
+- StageL transpiler to Dcs
+- WASM compatibility in StageL
+- Import in editor is broken.
+- WebExt: button for swap between text and rendered; button to open in editor; editor open in tab option

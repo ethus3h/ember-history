@@ -1,0 +1,14 @@
+StartChar: uni0647.fina
+Encoding: 65740 -1 631
+Width: 553
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 250 -180 basechar 0
+AnchorPoint: "Anchor-1" 300 790 basechar 0
+LayerCount: 2
+Fore
+Refer: 635 -1 N 1 0 0 1 0 0 3
+Substitution2: "'calt' Contextual Alternates in Arabic lookup 13 subtable" uni0647.fina.hooked
+Substitution2: "'calt' Contextual Alternates in Arabic lookup 12 subtable" uni0647.fina.knottedHigh
+Substitution2: "'calt' Contextual Alternates in Arabic lookup 11 subtable" uni0647.fina.knottedHigh
+EndChar

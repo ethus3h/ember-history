@@ -1,0 +1,7 @@
+r/v/runTestsPack32 b/v
+    testing b/v 'pack32'
+    runTest b/v eq 0 unpack32 pack32 0
+    runTest b/v eq 10 unpack32 pack32 10
+    runTest b/v eq 100 unpack32 pack32 100
+    runTest b/v eq 1000 unpack32 pack32 1000
+    runTest b/v eq 10000 unpack32 pack32 10000

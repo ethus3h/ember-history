@@ -1,0 +1,32 @@
+StartChar: uni200F
+Encoding: 8207 8207 240
+Width: 0
+GlyphClass: 2
+Flags: W
+TtInstrs:
+SVTCA[y-axis]
+PUSHW_1
+ 1
+MDAP[rnd]
+PUSHW_1
+ 2
+MDAP[rnd]
+PUSHW_3
+ 0
+ 2
+ 1
+SRP1
+SRP2
+IP
+IUP[y]
+IUP[x]
+EndTTInstrs
+LayerCount: 2
+Fore
+SplineSet
+-100 1051 m 1,0,-1
+ 70 1151 l 1,1,-1
+ 70 951 l 1,2,-1
+ -100 1051 l 1,0,-1
+EndSplineSet
+EndChar

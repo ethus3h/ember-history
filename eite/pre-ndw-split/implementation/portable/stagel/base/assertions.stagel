@@ -1,0 +1,94 @@
+r/v/warnOrDie b/strict s/msg
+    if b/strict
+        die s/msg
+    warn s/msg
+
+r/v/assertIsTrue b/in
+    if isFalse b/in
+        assertionFailed cat bool ' is not true.'
+
+r/v/assertIsFalse b/in
+    if isTrue b/in
+        assertionFailed cat bool ' is true, but should be false.'
+
+r/v/assertContains ga/in g/value
+    assertIsTrue contains ga/in g/value
+
+r/v/assertIsByte n/in
+    assertIsTrue isByte n/in
+
+r/v/assertIsChar g/in
+    assertIsTrue isChar g/in
+
+r/v/assertIsCharByte n/in
+    assertIsTrue isCharByte n/in
+
+r/v/assertIsDc g/in
+    assertIsTrue isDc g/in
+
+r/v/assertStrContainsOnlyInt s/in
+    if not strContainsOnlyInt s/in
+        assertionFailed cat s/in ' does not only contain an integer.'
+
+r/v/assertIsNonnegative n/in
+    if not isNonnegative n/in
+        new s/temp
+        set s/temp strFrom n/in
+        assertionFailed cat s/temp ' is negative.'
+
+r/v/assertIsSupportedBase n/b
+    assertIsTrue isSupportedBase n/b
+
+r/v/assertIsBaseDigit s/in n/b
+    assertIsTrue isBaseDigit s/in n/b
+
+r/v/assertIsBaseStr s/in n/b
+    assertIsTrue isBaseStr s/in n/b
+
+r/v/assertIsArray gi/in
+    assertIsTrue isArray gi/in
+
+r/v/assertIsIntArray gi/in
+    assertIsTrue isIntArray gi/in
+
+r/v/assertIsBoolArray gi/in
+    assertIsTrue isBoolArray gi/in
+
+r/v/assertIsStrArray gi/in
+    assertIsTrue isStrArray gi/in
+
+r/v/assertIsCharArray gi/in
+    assertIsTrue isCharArray gi/in
+
+r/v/assertIsIntBitArray gi/in
+    assertIsTrue isIntBitArray gi/in
+
+r/v/assertIsByteArray gi/in
+    assertIsTrue isByteArray gi/in
+
+r/v/assertIsDcArray gi/in
+    assertIsTrue isDcArray gi/in
+
+r/v/assertIsDcDataset s/in
+    assertIsTrue isDcDataset s/in
+
+r/v/assertIsFormat s/in
+    assertIsTrue isFormat s/in
+
+r/v/assertIsSupportedInputFormat s/in
+    if not isSupportedInputFormat s/in
+        die cat s/in ' is not a supported input format.'
+    assertIsTrue isSupportedInputFormat s/in
+
+r/v/assertIsSupportedOutputFormat s/in
+    if not isSupportedOutputFormat s/in
+        die cat s/in ' is not a supported output format.'
+    assertIsTrue isSupportedOutputFormat s/in
+
+r/v/assertIsSupportedEnvironmentCharEncoding s/in
+    if not isSupportedEnvironmentCharEncoding s/in
+        die cat s/in ' is not a supported environment character encoding.'
+    assertIsTrue isSupportedEnvironmentCharEncoding s/in
+
+r/v/assertIsExecId n/in
+    assertIsTrue isExecId n/in

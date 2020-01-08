@@ -1,0 +1,126 @@
+Building wat2wasm: Compiling
+make[1]: warning: jobserver unavailable: using -j1.  Add '+' to parent make rule.
+make[1]: Entering directory '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8'
+mkdir -p out/emscripten/Release/
+cd out/emscripten/Release/ && cmake -G "Unix Makefiles" /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/ -DCMAKE_TOOLCHAIN_FILE=/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8//emscripten/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release 
+-- Looking for alloca.h
+-- Looking for alloca.h - not found
+-- Looking for unistd.h
+-- Looking for unistd.h - not found
+-- Looking for snprintf
+-- Looking for snprintf - not found
+-- Looking for sysconf
+-- Looking for sysconf - not found
+-- Looking for strcasecmp
+-- Looking for strcasecmp - not found
+-- Looking for sys/types.h
+-- Looking for sys/types.h - not found
+-- Looking for stdint.h
+-- Looking for stdint.h - not found
+-- Looking for stddef.h
+-- Looking for stddef.h - not found
+-- Check size of ssize_t
+-- Check size of ssize_t - failed
+-- Check size of size_t
+-- Check size of size_t - failed
+-- Found RE2C: /usr/bin/re2c  
+-- Using generated re2c lexer
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/out/emscripten/Release
+make --no-print-directory -C out/emscripten/Release/ all
+[  2%] [RE2C][WAST_LEXER_GEN_CC] Building lexer with re2c 0.101.1
+Scanning dependencies of target wabt
+[  4%] Building CXX object CMakeFiles/wabt.dir/src/apply-names.cc.o
+shared:DEBUG: EM_CONFIG is located in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/.emscripten                                                                                
+shared:DEBUG: PYTHON not defined in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/.emscripten, using "/usr/lib/python-exec/python2.7/python"                                   
+shared:DEBUG: JAVA not defined in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/.emscripten, using "java"                                                                      
+emscripten:DEBUG: Cache: PID 22351 acquiring multiprocess file lock to Emscripten cache at /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/.emscripten_cache                     
+emscripten:DEBUG: Cache: done
+emscripten:DEBUG: Cache: PID 22351 released multiprocess file lock to Emscripten cache at /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/.emscripten_cache                      
+shared:DEBUG: check tells us to use wasm backend
+shared:DEBUG: executed /usr/lib/llvm/9/bin/wasm-ld --version
+emcc:WARNING: invocation: /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/emcc.py -D__STDC_FORMAT_MACROS=1 -D__STDC_LIMIT_MACROS=1 @CMakeFiles/wabt.dir/includes_CXX.rsp -std=c++11 -Wold-style-cast -DNDEBUG -O2 -Wall -Wextra -Wno-unused-parameter -Wpointer-arith -g -Wuninitialized -fno-exceptions -Wno-warn-absolute-paths -o CMakeFiles/wabt.dir/src/apply-names.cc.o -c /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/src/apply-names.cc --emscripten-cxx  (in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/out/emscripten/Release)                                                                                                                                   
+shared:DEBUG: successfully executed /usr/lib/llvm/9/bin/clang++ --version
+root:DEBUG: Checking JS engine ['/usr/bin/node']
+shared:DEBUG: successfully executed /usr/bin/node --version
+shared:DEBUG: successfully executed /usr/lib/llvm/9/bin/llc --version
+shared:INFO: (Emscripten: Running sanity checks)
+shared:DEBUG: successfully executed java -version
+shared:WARNING: Closure compiler (/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/third_party/closure-compiler/compiler.jar) does not exist, check the paths in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/.emscripten                                                                                                                            
+shared:WARNING: closure compiler will not be available
+root:WARNING: Read response file CMakeFiles/wabt.dir/includes_CXX.rsp: ['-I/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8', '-I/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/out/emscripten/Release']              
+shared:DEBUG: executed /usr/lib/llvm/9/bin/wasm-ld --version
+emcc:DEBUG: asm.js opts not forced by user or an option that depends them, and we do not intend to run the asm.js, so disabling and leaving opts to the binaryen optimizer                                                                                                              
+emcc:DEBUG: compiling to bitcode
+emcc:DEBUG: emcc step "parse arguments and setup" took 0.83 seconds
+emscripten:DEBUG: Cache: PID 22351 acquiring multiprocess file lock to Emscripten cache at /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/.emscripten_cache/wasm_o              
+emscripten:DEBUG: Cache: done
+emcc:DEBUG: compiling source file: /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/src/apply-names.cc                                                                            
+emcc:DEBUG: running: /usr/lib/llvm/9/bin/clang++ -O0 -target wasm32-unknown-unknown-wasm -D__EMSCRIPTEN_major__=1 -D__EMSCRIPTEN_minor__=38 -D__EMSCRIPTEN_tiny__=27 -D_LIBCPP_ABI_VERSION=2 -D__EMSCRIPTEN__ -Dunix -D__unix -D__unix__ -Werror=implicit-function-declaration -nostdinc -Xclang -nobuiltininc -Xclang -nostdsysteminc -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/include/libcxx -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/lib/libcxxabi/include -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/include/compat -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/include -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/include/SSE -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/include/libc -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/lib/libc/musl/arch/emscripten -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/local/include -D__STDC_FORMAT_MACROS=1 -D__STDC_LIMIT_MACROS=1 -I/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8 -I/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/out/emscripten/Release -std=c++11 -Wold-style-cast -DNDEBUG -O2 -Wall -Wextra -Wno-unused-parameter -Wpointer-arith -Wuninitialized -fno-exceptions -c -g /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/src/apply-names.cc -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/include/SDL -c -o CMakeFiles/wabt.dir/src/apply-names.cc.o -mllvm -combiner-global-alias-analysis=false -mllvm -enable-emscripten-sjlj -mllvm -disable-lsr                                                                                                                              
+In file included from /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/src/apply-names.cc:17:
+In file included from /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/src/apply-names.h:20:
+In file included from /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/src/common.h:33:
+/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/out/emscripten/Release/config.h:273:2: error: 
+      no snprintf
+#error no snprintf
+ ^
+/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/out/emscripten/Release/config.h:291:2: error: 
+      no strcasecmp
+#error no strcasecmp
+ ^
+2 errors generated.
+shared:DEBUG: executed /usr/lib/llvm/9/bin/clang++ -O0 -target wasm32-unknown-unknown-wasm -D__EMSCRIPTEN_major__=1 -D__EMSCRIPTEN_minor__=38 -D__EMSCRIPTEN_tiny__=27 -D_LIBCPP_ABI_VERSION=2 -D__EMSCRIPTEN__ -Dunix -D__unix -D__unix__ -Werror=implicit-function-declaration -nostdinc -Xclang -nobuiltininc -Xclang -nostdsysteminc -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/include/libcxx -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/lib/libcxxabi/include -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/include/compat -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/include -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/include/SSE -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/include/libc -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/lib/libc/musl/arch/emscripten -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/local/include -D__STDC_FORMAT_MACROS=1 -D__STDC_LIMIT_MACROS=1 -I/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8 -I/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/out/emscripten/Release -std=c++11 -Wold-style-cast -DNDEBUG -O2 -Wall -Wextra -Wno-unused-parameter -Wpointer-arith -Wuninitialized -fno-exceptions -c -g /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/src/apply-names.cc -Xclang -isystem/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/emscripten/system/include/SDL -c -o CMakeFiles/wabt.dir/src/apply-names.cc.o -mllvm -combiner-global-alias-analysis=false -mllvm -enable-emscripten-sjlj -mllvm -disable-lsr                                                                                                                            
+shared:ERROR: compiler frontend failed to generate LLVM bitcode, halting
+emscripten:DEBUG: Cache: PID 22351 released multiprocess file lock to Emscripten cache at /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/.emscripten_cache/wasm_o               
+make[4]: *** [CMakeFiles/wabt.dir/build.make:68: CMakeFiles/wabt.dir/src/apply-names.cc.o] Error 1
+make[3]: *** [CMakeFiles/Makefile2:68: CMakeFiles/wabt.dir/all] Error 2
+make[2]: *** [Makefile:84: all] Error 2
+make[1]: *** [Makefile:169: emscripten-release] Error 2
+make[1]: Leaving directory '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8'
+bash support/build-scripts/build --somewhat-verbose
+failed with the error on /usr/bin/error-notify line 28 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8 at 20190217135757328508529_2d303530300a:
+A fatal error was reported on ./support/dist-build line 148 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8 at 20190217185757220741308U2d303530300a.
+bash support/build-scripts/build --somewhat-verbose
+failed with the error on /usr/bin/error-notify line 28 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8 at 20190217135757492974755_2d303530300a:
+A fatal error was reported on ./support/dist-build line 151 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8 at 20190217185757362754841U2d303530300a.
+bash support/build-scripts/build --somewhat-verbose
+failed with the error on /usr/bin/error-notify line 28 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999 at 20190217135757646792421_2d303530300a:
+A fatal error was reported on ./support/dist-build line 151 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999 at 20190217185757527402228U2d303530300a.
+bash support/prepare eite --override-data-dir=
+failed with the error on /usr/bin/error-notify line 28 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999 at 20190217135757801938786_2d303530300a:
+A fatal error was reported on support/build-scripts/build line 24 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999 at 20190217185757677941844U2d303530300a.
+make -j2
+failed with the error on /usr/bin/error-notify line 28 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999 at 20190217135757994500338_2d303530300a:
+Build failed!
+make: *** [Makefile:5: all] Error 1
+ * ERROR: app-misc/ember-information-technology-environment-9999::wreathe-overlay failed (compile phase):
+ *   emake failed
+ * 
+ * If you need support, post the output of `emerge --info '=app-misc/ember-information-technology-environment-9999::wreathe-overlay'`,
+ * the complete build log and the output of `emerge -pqv '=app-misc/ember-information-technology-environment-9999::wreathe-overlay'`.
+ * The complete build log is located at '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/temp/build.log'.
+ * The ebuild environment file is located at '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/temp/environment'.
+ * Working directory: '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999'
+ * S: '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999'
+
+>>> Failed to emerge app-misc/ember-information-technology-environment-9999, Log file:
+
+>>>  '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/temp/build.log'
+
+ * Messages for package app-misc/ember-information-technology-environment-9999:
+
+ * ERROR: app-misc/ember-information-technology-environment-9999::wreathe-overlay failed (compile phase):
+ *   emake failed
+ * 
+ * If you need support, post the output of `emerge --info '=app-misc/ember-information-technology-environment-9999::wreathe-overlay'`,
+ * the complete build log and the output of `emerge -pqv '=app-misc/ember-information-technology-environment-9999::wreathe-overlay'`.
+ * The complete build log is located at '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/temp/build.log'.
+ * The ebuild environment file is located at '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/temp/environment'.
+ * Working directory: '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999'
+ * S: '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999'
+-bash
+failed with the error on /usr/bin/error-notify line 28 in /root at 20190217135759045394306_2d303530300a:
+An error was reported on  line 1 in /root at 20190217185759011092524U2d303530300a.
+elegiac ~ # 
+elegiac ~ # 

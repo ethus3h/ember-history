@@ -1,0 +1,6 @@
+r/v/runTestsMath b/v
+    testing b/v 'math'
+    runTest b/v eq 4 add 2 2
+    runTest b/v ne 4 add 2 3
+    runTest b/v eq '26BD' decToHex 9917
+    runTest b/v eq 9917 hexToDec '26BD'

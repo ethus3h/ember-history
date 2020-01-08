@@ -1,0 +1,14 @@
+StartChar: uni076A.medi
+Encoding: 65863 -1 754
+Width: 403
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 150 -201 basechar 0
+AnchorPoint: "Anchor-2" 15 950 basechar 0
+AnchorPoint: "Anchor-1" 150 1154 basechar 0
+LayerCount: 2
+Fore
+Refer: 748 -1 N 1 0 0 1 0 0 3
+Refer: 1139 -1 N 1 0 0 1 160 687 2
+Substitution2: "Single Substitution lookup 15 subtable" uni076A.medi.preAlef
+EndChar

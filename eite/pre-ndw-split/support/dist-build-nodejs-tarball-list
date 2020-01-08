@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1091
+source ember_bash_setup &> /dev/null || { printf '%b' '\033[1;31m' >&2; echo "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd): The required dependency ember-shared could not be found (or ember_bash_setup could not be sourced for some other reason)." >&2; printf '%b' '\033[0m' >&2; exit 1; }
+#set -x
+
+trap 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."' ERR
+
+# This generates the list of tarballs for node.js dependencies.
+
+if [[ "$1" == "--bootstrap" ]]; then
+    boostrap="true"
+    shift
+else
+    if [[ "$1" != "--quick" ]]; then
+        ./support/dist-build
+    else
+        shift
+    fi
+fi
+
+[[ "$bootstrap" == "true" ]] && rm -rf support/build-nodejs-tarballs-process
+mkdir -p support/build-nodejs-tarballs-process
+
+(
+    [[ "$bootstrap" == "true" ]] && rm -rf ./build-temp/nodejs-build-temp/license-checker-dir
+    mkdir -p ./build-temp/nodejs-build-temp-license-checker-dir
+    cd ./build-temp/nodejs-build-temp-license-checker-dir || die
+    npm i npm-remote-ls
+    npm i license-checker
+    npm i npm-offline-packager
+    npm i verdaccio
+    npm i ipfs
+    # http://web.archive.org/web/20190328153031/https://medium.com/@fokusman/the-easiest-way-to-check-all-your-npm-dependency-licenses-753075ef1d9d
+    ./node_modules/license-checker/bin/license-checker > licenses.txt
+)
+
+./build-temp/nodejs-build-temp-license-checker-dir/node_modules/npm-remote-ls/bin/npm-remote-ls.js npm-remote-ls > support/build-nodejs-tarballs-process/npm-remote-ls.deps
+./build-temp/nodejs-build-temp-license-checker-dir/node_modules/npm-remote-ls/bin/npm-remote-ls.js license-checker > support/build-nodejs-tarballs-process/npm-remote-ls.deps
+./build-temp/nodejs-build-temp-license-checker-dir/node_modules/npm-remote-ls/bin/npm-remote-ls.js npm-offline-packager > support/build-nodejs-tarballs-process/npm-offline-packager.deps
+./build-temp/nodejs-build-temp-license-checker-dir/node_modules/npm-remote-ls/bin/npm-remote-ls.js verdaccio > support/build-nodejs-tarballs-process/verdaccio.deps
+./build-temp/nodejs-build-temp-license-checker-dir/node_modules/npm-remote-ls/bin/npm-remote-ls.js ipfs > support/build-nodejs-tarballs-process/ipfs.deps
+
+cp ./build-temp/nodejs-build-temp-license-checker-dir/licenses.txt support/build-nodejs-tarballs-process/licenses-unfiltered.lst
+grep 'licenses:' support/build-nodejs-tarballs-process/licenses-unfiltered.lst | sort -u -o support/build-nodejs-tarballs-process/licenses.lst -
+cat support/build-nodejs-tarballs-process/*.deps > support/build-nodejs-tarballs-process/all.deps-merged-pre
+sed -E 's/^[ ─└├│]+//g' support/build-nodejs-tarballs-process/all.deps-merged-pre > support/build-nodejs-tarballs-process/all.deps-merged-sed
+sort -u -o support/build-nodejs-tarballs-process/all.deps-merged-filtered support/build-nodejs-tarballs-process/all.deps-merged-sed
+
+while read package; do
+    npm view "$package" >> support/build-nodejs-tarballs-process/all.deps-urls
+done < support/build-nodejs-tarballs-process/all.deps-merged-filtered
+
+sed -E 's/^(.+)$/\t\1/g' support/build-nodejs-tarballs-process/all.deps-urls > support/build-nodejs-tarballs-process/all.deps-dist-urls
+sed -E 's/^(.+)$/        wget "\1"/g' support/build-nodejs-tarballs-process/all.deps-urls > support/build-nodejs-tarballs-process/all.deps-dist-urls
+sed -E 's/.*\/(.+)$/eiteEbuildDistfileCopy "\1"/g' support/build-nodejs-tarballs-process/all.deps-urls > support/build-nodejs-tarballs-process/all.deps-dist-urls
+
+if false; then
+if [[ "$1" != "--debug" ]]; then
+    rm support/build-nodejs-tarballs-process/licenses-unfiltered.lst
+    rm support/build-nodejs-tarballs-process/npm-remote-ls.deps
+    rm support/build-nodejs-tarballs-process/js-ipfs.deps
+    rm support/build-nodejs-tarballs-process/all.deps-merged-pre
+    rm support/build-nodejs-tarballs-process/all.deps-merged-sed
+    rm support/build-nodejs-tarballs-process/all.deps-merged-filtered
+fi
+fi

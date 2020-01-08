@@ -1,0 +1,14 @@
+StartChar: absLamRetroIni
+Encoding: 65989 -1 880
+Width: 336
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 100 -150 basechar 0
+AnchorPoint: "Anchor-2" 30 500 basechar 0
+AnchorPoint: "Anchor-1" 30 1718 basechar 0
+LayerCount: 2
+Fore
+Refer: 875 -1 N 1 0 0 1 0 0 3
+Refer: 1131 -1 N 1 0 0 1 144 1268 2
+Substitution2: "Single Substitution lookup 15 subtable" absLamRetroIni.preAlef
+EndChar

@@ -1,0 +1,28 @@
+StartChar: grave
+Encoding: 96 96 68
+Width: 580
+GlyphClass: 2
+Flags: W
+TtInstrs:
+SVTCA[y-axis]
+PUSHW_1
+ 5
+MDAP[rnd]
+PUSHW_1
+ 0
+MDAP[rnd]
+IUP[y]
+IUP[x]
+EndTTInstrs
+LayerCount: 2
+Fore
+SplineSet
+375 786 m 1,0,-1
+ 154 926 l 2,1,2
+ 86 968 86 968 86 993 c 0,3,4
+ 86 1051 86 1051 133 1051 c 0,5,6
+ 173 1051 173 1051 223 1001 c 2,7,-1
+ 438 786 l 1,8,-1
+ 375 786 l 1,0,-1
+EndSplineSet
+EndChar

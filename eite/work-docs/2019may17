@@ -1,0 +1,1164 @@
+kyan@elegiac ~/Ember Library/Ember/ember-information-technology-environment nohup compiz --replace openbox $ ./tests/stagel-run-tests 
+Test stagel/no-codegen/routine-minimal passed.
+Test stagel/no-codegen/routine-newline-in-body passed.
+Test stagel/no-codegen/if-with-indented passed.
+Test stagel/no-codegen/if-with-comment passed.
+Test stagel/no-codegen/routine-with-if passed.
+Test stagel/no-codegen/loop-block-longhand passed.
+Test stagel/no-codegen/loop-block passed.
+Test stagel/no-codegen/routine-fizzbuzz passed.
+Test stagel/js/arglist-two-nested passed.
+Test stagel/js/arglist-three-nested passed.
+Test stagel/js/routine-minimal passed.
+Test stagel/js/two-routines passed.
+Test stagel/js/bare-block passed.
+Test stagel/js/if-statement passed.
+Test stagel/js/if-one-command passed.
+Test stagel/js/if-with-indented passed.
+Test stagel/js/if-with-comment passed.
+Test stagel/js/if-with-comment-and-inner-block passed.
+Test stagel/js/routine-fbSwitcher-return-type passed.
+Test stagel/js/routine-fizzbuzz-fbSwitcher passed.
+Test stagel/js/routine-with-if passed.
+Test stagel/js/declare-n passed.
+Test stagel/js/set-number-add-no-routine passed.
+Test stagel/js/set-number-add passed.
+Test stagel/js/set-to-str-routine-with-new passed.
+Test stagel/js/set-to-str-routine-invocation passed.
+Document contains 14 tokens.
+Token #1 (1:1:0): start-document (1):  (2)
+Token #2 (1:1:0): filename (4): in (5)
+Token #3 (1:2:0): ident-r-s (7):  102 (8)
+Token #4 (1:6:0): newline (10):  (11)
+Token #5 (2:6:0): indent (13):  (14)
+Token #6 (2:6:1): command (16): until (17)
+Token #7 (2:12:1): command (19): condition (20)
+Token #8 (2:20:1): newline (22):  (23)
+Token #9 (3:10:1): indent (25):  (26)
+Token #10 (3:10:2): command (28): command (29)
+Token #11 (3:16:2): newline (31):  (32)
+Token #12 (4:1:1): dedent (34):  (35)
+Token #13 (4:1:0): dedent (37):  (38)
+Token #14 (4:1:0): end-document (40):  (41)
++(0) ./stagel-bootstrap-codegen::856:(( i=0 ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::858:codegenIndent=0
++(0) ./stagel-bootstrap-codegen::862:echo
+
++(0) ./stagel-bootstrap-codegen::863:codegenStatus='State: code:0, token #1 (1:1:0): start-document (1):  (2)'
++(0) ./stagel-bootstrap-codegen::864:codegenDebug
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: code:0, token #1 (1:1:0): start-document (1):  (2) (Debug info: Codegen: , routine : / Args:  / States: root code / Blocks: root  / Arglist:  / (true/false/false).)'
+State: code:0, token #1 (1:1:0): start-document (1):  (2) (Debug info: Codegen: , routine : / Args:  / States: root code / Blocks: root  / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen::866:[[ start-document == \f\i\l\e\n\a\m\e ]]
++(1) ./stagel-bootstrap-codegen::868:[[ start-document == \c\o\m\m\e\n\t ]]
++(1) ./stagel-bootstrap-codegen::871:[[ start-document == \l\i\t\e\r\a\l\-\a\b\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::874:[[ start-document == \l\i\t\e\r\a\l\-\a\n\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::877:[[ start-document == \l\i\t\e\r\a\l\-\a\s\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::881:case "${stateStack[-1]}" in
++(1) ./stagel-bootstrap-codegen::958:echo 'Working on code'
+Working on code
++(0) ./stagel-bootstrap-codegen::959:case "${tokens[$i - 1]}" in
++(0) ./stagel-bootstrap-codegen::961:codegenStartDocument
++(0) ./stagel-bootstrap-codegen:codegenStartDocument:341:codegenDebug 'Start document'
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: code:0, token #1 (1:1:0): start-document (1):  (2) (Debug info: Codegen: Start document, routine : / Args: Start document / States: root code / Blocks: root  / Arglist:  / (true/false/false).)'
+State: code:0, token #1 (1:1:0): start-document (1):  (2) (Debug info: Codegen: Start document, routine : / Args: Start document / States: root code / Blocks: root  / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen:codegenStartDocument:342:case "$targetLang" in
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::858:codegenIndent=0
++(0) ./stagel-bootstrap-codegen::862:echo
+
++(0) ./stagel-bootstrap-codegen::863:codegenStatus='State: code:0, token #2 (1:1:0): filename (4): in (5)'
++(0) ./stagel-bootstrap-codegen::864:codegenDebug
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: code:0, token #2 (1:1:0): filename (4): in (5) (Debug info: Codegen: , routine : / Args:  / States: root code / Blocks: root  / Arglist:  / (true/false/false).)'
+State: code:0, token #2 (1:1:0): filename (4): in (5) (Debug info: Codegen: , routine : / Args:  / States: root code / Blocks: root  / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen::866:[[ filename == \f\i\l\e\n\a\m\e ]]
++(0) ./stagel-bootstrap-codegen::867:filename=in
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::858:codegenIndent=0
++(0) ./stagel-bootstrap-codegen::862:echo
+
++(0) ./stagel-bootstrap-codegen::863:codegenStatus='State: code:0, token #3 (1:2:0): ident-r-s (7):  102 (8)'
++(0) ./stagel-bootstrap-codegen::864:codegenDebug
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: code:0, token #3 (1:2:0): ident-r-s (7):  102 (8) (Debug info: Codegen: , routine : / Args:  / States: root code / Blocks: root  / Arglist:  / (true/false/false).)'
+State: code:0, token #3 (1:2:0): ident-r-s (7):  102 (8) (Debug info: Codegen: , routine : / Args:  / States: root code / Blocks: root  / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen::866:[[ ident-r-s == \f\i\l\e\n\a\m\e ]]
++(1) ./stagel-bootstrap-codegen::868:[[ ident-r-s == \c\o\m\m\e\n\t ]]
++(1) ./stagel-bootstrap-codegen::871:[[ ident-r-s == \l\i\t\e\r\a\l\-\a\b\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::874:[[ ident-r-s == \l\i\t\e\r\a\l\-\a\n\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::877:[[ ident-r-s == \l\i\t\e\r\a\l\-\a\s\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::881:case "${stateStack[-1]}" in
++(1) ./stagel-bootstrap-codegen::958:echo 'Working on code'
+Working on code
++(0) ./stagel-bootstrap-codegen::959:case "${tokens[$i - 1]}" in
+++(0) ./stagel-bootstrap-codegen::979:asciiDecListToText ' 102'
+++(0) /usr/bin/ember_bash_setup:asciiDecListToText:1004:[[ -n x ]]
+++(0) /usr/bin/ember_bash_setup:asciiDecListToText:1004:asciiDecListToText
+++(0) /usr/bin/ember_bash_setup:asciiDecListToText:1004:[[ -n '' ]]
+++(1) /usr/bin/ember_bash_setup:asciiDecListToText:1005:tr -s '[:blank:]' '[\n*]'
+++(1) /usr/bin/ember_bash_setup:tr:143:[[ linux-gnu = darwin* ]]
+++(1) /usr/bin/ember_bash_setup:tr:146:command tr -s '[:blank:]' '[\n*]'
+++(1) /usr/bin/ember_bash_setup:tr:146:tr -s '[:blank:]' '[\n*]'
+++(1) /usr/bin/ember_bash_setup:asciiDecListToText:1005:read -r num
+++(0) /usr/bin/ember_bash_setup:asciiDecListToText:1007:[[ -n '' ]]
+++(1) /usr/bin/ember_bash_setup:asciiDecListToText:1008:true
+++(0) /usr/bin/ember_bash_setup:asciiDecListToText:1005:read -r num
+++(0) /usr/bin/ember_bash_setup:asciiDecListToText:1007:[[ -n 102 ]]
+++(0) /usr/bin/ember_bash_setup:asciiDecListToText:1007:[[ 102 != \0 ]]
+++(0) /usr/bin/ember_bash_setup:asciiDecListToText:1007:[[ 102 =~ ^[0-9]+$ ]]
+++(0) /usr/bin/ember_bash_setup:asciiDecListToText:1007:tr -d '\0'
+++(0) /usr/bin/ember_bash_setup:tr:143:[[ linux-gnu = darwin* ]]
+++(1) /usr/bin/ember_bash_setup:tr:146:command tr -d '\0'
+++(1) /usr/bin/ember_bash_setup:tr:146:tr -d '\0'
++++(0) /usr/bin/ember_bash_setup:asciiDecListToText:1007:printf '%x\n' 102
+++(0) /usr/bin/ember_bash_setup:asciiDecListToText:1007:printf '\x66'
+++(0) /usr/bin/ember_bash_setup:asciiDecListToText:1008:true
+++(0) /usr/bin/ember_bash_setup:asciiDecListToText:1005:read -r num
+++(0) /usr/bin/ember_bash_setup:asciiDecListToText:1004:return
++(0) ./stagel-bootstrap-codegen::979:codegenRoutineName=f
++(0) ./stagel-bootstrap-codegen::980:[[ filename =~ ^(start-document|filename)$ ]]
++(0) ./stagel-bootstrap-codegen::983:codegenRoutineType=ident-r-s
++(0) ./stagel-bootstrap-codegen::984:stateStack+=("routine-definition")
++(0) ./stagel-bootstrap-codegen::985:blockStack+=("${tokens[$i - 1]}" "${tokens[$i]}")
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::858:codegenIndent=0
++(0) ./stagel-bootstrap-codegen::862:echo
+
++(0) ./stagel-bootstrap-codegen::863:codegenStatus='State: routine-definition:0, token #4 (1:6:0): newline (10):  (11)'
++(0) ./stagel-bootstrap-codegen::864:codegenDebug
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: routine-definition:0, token #4 (1:6:0): newline (10):  (11) (Debug info: Codegen: , routine ident-r-s:f / Args:  / States: root code routine-definition / Blocks: root  ident-r-s  102 / Arglist:  / (true/false/false).)'
+State: routine-definition:0, token #4 (1:6:0): newline (10):  (11) (Debug info: Codegen: , routine ident-r-s:f / Args:  / States: root code routine-definition / Blocks: root  ident-r-s  102 / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen::866:[[ newline == \f\i\l\e\n\a\m\e ]]
++(1) ./stagel-bootstrap-codegen::868:[[ newline == \c\o\m\m\e\n\t ]]
++(1) ./stagel-bootstrap-codegen::871:[[ newline == \l\i\t\e\r\a\l\-\a\b\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::874:[[ newline == \l\i\t\e\r\a\l\-\a\n\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::877:[[ newline == \l\i\t\e\r\a\l\-\a\s\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::881:case "${stateStack[-1]}" in
++(1) ./stagel-bootstrap-codegen::1163:echo 'Working on routine definition'
+Working on routine definition
++(0) ./stagel-bootstrap-codegen::1166:case "${tokens[$i - 1]}" in
++(0) ./stagel-bootstrap-codegen::1173:codegenRoutineDefinitionStart
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:729:codegenDebug 'Routine definition start'
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: routine-definition:0, token #4 (1:6:0): newline (10):  (11) (Debug info: Codegen: Routine definition start, routine ident-r-s:f / Args: Routine definition start / States: root code routine-definition / Blocks: root  ident-r-s  102 / Arglist:  / (true/false/false).)'
+State: routine-definition:0, token #4 (1:6:0): newline (10):  (11) (Debug info: Codegen: Routine definition start, routine ident-r-s:f / Args: Routine definition start / States: root code routine-definition / Blocks: root  ident-r-s  102 / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:316:case "$targetLang" in
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:732:codegenOutput 'async function f('
++(0) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput: async function f()'
+(codegenOutput: async function f()
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print 'async function f('
++(0) /usr/bin/ember_bash_setup:print:135:printf %s 'async function f('
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[ async function f( == *\
+ ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:192:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:192:[[ async function f( == *\ \ \ \  ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:196:codegenNewLine=false
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:733:argumentCount=0
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:734:(( k=0 ))
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:734:(( k<argumentCount ))
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:744:codegenOutput ') {
+'
++(0) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput: ) {
+)'
+(codegenOutput: ) {
+)
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print ') {
+'
++(0) /usr/bin/ember_bash_setup:print:135:printf %s ') {
+'
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[ ) {
+ == *\
+ ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:190:codegenNewLine=true
++(0) ./stagel-bootstrap-codegen:codegenOutput:191:codegenNewlineLookingForSpaces=true
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:745:codegenIndent=1
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:746:codegenPrintIndentationSpaces
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j=0 ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j<codegenIndent ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:333:[[ '' == \-\-\f\o\r\c\e ]]
++(1) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:333:codegenOnNewLine
++(1) ./stagel-bootstrap-codegen:codegenOnNewLine:183:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:334:codegenOutput '    '
++(0) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput:     )'
+(codegenOutput:     )
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print '    '
++(0) /usr/bin/ember_bash_setup:print:135:printf %s '    '
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[      == *\
+ ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:192:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:192:[[      == *\ \ \ \  ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:193:codegenNewLine=true
++(0) ./stagel-bootstrap-codegen:codegenOutput:194:codegenNewlineLookingForSpaces=true
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j++  ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j<codegenIndent ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:337:true
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:747:codegenIndent=0
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:748:generateDebugCode
++(0) ./stagel-bootstrap-codegen:generateDebugCode:30:[[ --debug == \-\-\n\o\-\d\e\b\u\g ]]
++(0) ./stagel-bootstrap-codegen:generateDebugCode:33:return 0
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:749:(( k=0 ))
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:749:(( k<argumentCount ))
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:758:codegenOutput 'await internalDebugStackEnter('\''f:in'\'');'
++(0) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput: await internalDebugStackEnter('\''f:in'\'');)'
+(codegenOutput: await internalDebugStackEnter('f:in');)
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print 'await internalDebugStackEnter('\''f:in'\'');'
++(0) /usr/bin/ember_bash_setup:print:135:printf %s 'await internalDebugStackEnter('\''f:in'\'');'
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[ await internalDebugStackEnter('f:in'); == *\
+ ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:192:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:192:[[ await internalDebugStackEnter('f:in'); == *\ \ \ \  ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:196:codegenNewLine=false
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:760:[[ 0 != 0 ]]
++(1) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:760:[[ ident-r-s != \i\d\e\n\t\-\r\-\v ]]
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:761:codegenOutput ' '
++(0) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput:  )'
+(codegenOutput:  )
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print ' '
++(0) /usr/bin/ember_bash_setup:print:135:printf %s ' '
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[   == *\
+ ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:192:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:192:[[   == *\ \ \ \  ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:196:codegenNewLine=false
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:763:generateRuntimeTypeCheckCode
++(0) ./stagel-bootstrap-codegen:generateRuntimeTypeCheckCode:36:[[ --runtime-type-checks == \-\-\n\o\-\r\u\n\t\i\m\e\-\t\y\p\e\-\c\h\e\c\k\s ]]
++(0) ./stagel-bootstrap-codegen:generateRuntimeTypeCheckCode:39:return 0
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:764:(( k=0 ))
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:764:(( k<argumentCount ))
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:775:[[ 0 != 0 ]]
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:778:[[ ident-r-s != \i\d\e\n\t\-\r\-\v ]]
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:779:codegenOutput 'let '
++(0) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput: let )'
+(codegenOutput: let )
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print 'let '
++(0) /usr/bin/ember_bash_setup:print:135:printf %s 'let '
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[ let  == *\
+ ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:192:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:192:[[ let  == *\ \ \ \  ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:196:codegenNewLine=false
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:780:codegenFormatType ident-r-s
++(0) ./stagel-bootstrap-codegen:codegenFormatType:206:codegenDebug FormatType ident-r-s
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: routine-definition:0, token #4 (1:6:0): newline (10):  (11) (Debug info: Codegen: FormatType, routine ident-r-s:f / Args: FormatType ident-r-s / States: root code routine-definition / Blocks: root  ident-r-s  102 / Arglist:  / (true/false/false).)'
+State: routine-definition:0, token #4 (1:6:0): newline (10):  (11) (Debug info: Codegen: FormatType, routine ident-r-s:f / Args: FormatType ident-r-s / States: root code routine-definition / Blocks: root  ident-r-s  102 / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen:codegenFormatType:208:local result=
++(0) ./stagel-bootstrap-codegen:codegenFormatType:209:case "$targetLang" in
++(0) ./stagel-bootstrap-codegen:codegenFormatType:211:[[ ident-r-s == \l\i\t\e\r\a\l\-\b ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:212:[[ ident-r-s == \l\i\t\e\r\a\l\-\n ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:213:[[ ident-r-s == \l\i\t\e\r\a\l\-\s ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:214:[[ ident-r-s == \i\d\e\n\t\-\b ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:215:[[ ident-r-s == \i\d\e\n\t\-\g ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:216:[[ ident-r-s == \i\d\e\n\t\-\n ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:217:[[ ident-r-s == \i\d\e\n\t\-\s ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:218:[[ ident-r-s == \i\d\e\n\t\-\a\b ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:219:[[ ident-r-s == \i\d\e\n\t\-\a\n ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:220:[[ ident-r-s == \i\d\e\n\t\-\a\s ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:221:[[ ident-r-s == \i\d\e\n\t\-\g\a ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:222:[[ ident-r-s == \i\d\e\n\t\-\g\i ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:223:[[ ident-r-s == \i\d\e\n\t\-\r\-\b ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:224:[[ ident-r-s == \i\d\e\n\t\-\r\-\n ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:225:[[ ident-r-s == \i\d\e\n\t\-\r\-\s ]]
++(0) ./stagel-bootstrap-codegen:codegenFormatType:225:result=str
++(0) ./stagel-bootstrap-codegen:codegenFormatType:226:[[ ident-r-s == \i\d\e\n\t\-\r\-\v ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:227:[[ ident-r-s == \i\d\e\n\t\-\r\-\a\b ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:228:[[ ident-r-s == \i\d\e\n\t\-\r\-\a\n ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:229:[[ ident-r-s == \i\d\e\n\t\-\r\-\a\s ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:231:[[ -z str ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:232:[[ '' == \t\r\u\e ]]
++(1) ./stagel-bootstrap-codegen:codegenFormatType:235:codegenOutput str
++(1) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput: str)'
+(codegenOutput: str)
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print str
++(0) /usr/bin/ember_bash_setup:print:135:printf %s str
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[ str == *\
+ ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:192:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:192:[[ str == *\ \ \ \  ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:196:codegenNewLine=false
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:781:codegenOutput 'Return;'
++(0) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput: Return;)'
+(codegenOutput: Return;)
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print 'Return;'
++(0) /usr/bin/ember_bash_setup:print:135:printf %s 'Return;'
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[ Return; == *\
+ ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:192:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:192:[[ Return; == *\ \ \ \  ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:196:codegenNewLine=false
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:783:codegenOutput '
+
+'
++(0) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput: 
+
+)'
+(codegenOutput: 
+
+)
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print '
+
+'
++(0) /usr/bin/ember_bash_setup:print:135:printf %s '
+
+'
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[ 
+
+ == *\
+ ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:190:codegenNewLine=true
++(0) ./stagel-bootstrap-codegen:codegenOutput:191:codegenNewlineLookingForSpaces=true
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:789:codegenRoutineType=
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:790:codegenRoutineName=
++(0) ./stagel-bootstrap-codegen:codegenRoutineDefinitionStart:791:codegenArgList=()
++(0) ./stagel-bootstrap-codegen::1174:stateStack[-1]=routine-definition-end
++(0) ./stagel-bootstrap-codegen::1175:stateStack+=("code")
++(0) ./stagel-bootstrap-codegen::1177:[[ newline == \n\e\w\l\i\n\e ]]
++(0) ./stagel-bootstrap-codegen::1177:[[ indent == \i\n\d\e\n\t ]]
++(0) ./stagel-bootstrap-codegen::1177:i=14
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::858:codegenIndent=1
++(0) ./stagel-bootstrap-codegen::862:echo
+
++(0) ./stagel-bootstrap-codegen::863:codegenStatus='State: code:1, token #6 (2:6:1): command (16): until (17)'
++(0) ./stagel-bootstrap-codegen::864:codegenDebug
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: code:1, token #6 (2:6:1): command (16): until (17) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code / Blocks: root  ident-r-s  102 / Arglist:  / (true/false/false).)'
+State: code:1, token #6 (2:6:1): command (16): until (17) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code / Blocks: root  ident-r-s  102 / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen::866:[[ command == \f\i\l\e\n\a\m\e ]]
++(1) ./stagel-bootstrap-codegen::868:[[ command == \c\o\m\m\e\n\t ]]
++(1) ./stagel-bootstrap-codegen::871:[[ command == \l\i\t\e\r\a\l\-\a\b\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::874:[[ command == \l\i\t\e\r\a\l\-\a\n\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::877:[[ command == \l\i\t\e\r\a\l\-\a\s\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::881:case "${stateStack[-1]}" in
++(1) ./stagel-bootstrap-codegen::958:echo 'Working on code'
+Working on code
++(0) ./stagel-bootstrap-codegen::959:case "${tokens[$i - 1]}" in
++(0) ./stagel-bootstrap-codegen::988:codegenRoutineName=until
++(0) ./stagel-bootstrap-codegen::989:case "${tokens[$i]}" in
++(0) ./stagel-bootstrap-codegen::991:stateStack+=("test")
++(0) ./stagel-bootstrap-codegen::992:blockStack+=("test" "${tokens[$i]}")
++(0) ./stagel-bootstrap-codegen::993:codegenCommandInvocationStart
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:502:codegenDebug 'Command invocation start'
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: code:1, token #6 (2:6:1): command (16): until (17) (Debug info: Codegen: Command invocation start, routine :until / Args: Command invocation start / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 test until / Arglist:  / (true/false/false).)'
+State: code:1, token #6 (2:6:1): command (16): until (17) (Debug info: Codegen: Command invocation start, routine :until / Args: Command invocation start / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 test until / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:503:case "$codegenRoutineName" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:591:codegenPrintIndentationSpaces
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j=0 ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j<codegenIndent ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:333:[[ '' == \-\-\f\o\r\c\e ]]
++(1) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:333:codegenOnNewLine
++(1) ./stagel-bootstrap-codegen:codegenOnNewLine:183:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:334:codegenOutput '    '
++(0) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput:     )'
+(codegenOutput:     )
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print '    '
++(0) /usr/bin/ember_bash_setup:print:135:printf %s '    '
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[      == *\
+ ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:192:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:192:[[      == *\ \ \ \  ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:193:codegenNewLine=true
++(0) ./stagel-bootstrap-codegen:codegenOutput:194:codegenNewlineLookingForSpaces=true
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j++  ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j<codegenIndent ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:337:true
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:592:codegenOutput 'while (!('
++(0) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput: while (!()'
+(codegenOutput: while (!()
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print 'while (!('
++(0) /usr/bin/ember_bash_setup:print:135:printf %s 'while (!('
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[ while (!( == *\
+ ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:192:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:192:[[ while (!( == *\ \ \ \  ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:196:codegenNewLine=false
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:594:stateStack+=("arglist")
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:643:codegenRoutineType=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:644:codegenRoutineName=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:645:codegenArgList=()
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::858:codegenIndent=1
++(0) ./stagel-bootstrap-codegen::862:echo
+
++(0) ./stagel-bootstrap-codegen::863:codegenStatus='State: arglist:1, token #7 (2:12:1): command (19): condition (20)'
++(0) ./stagel-bootstrap-codegen::864:codegenDebug
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: arglist:1, token #7 (2:12:1): command (19): condition (20) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 test until / Arglist:  / (true/false/false).)'
+State: arglist:1, token #7 (2:12:1): command (19): condition (20) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 test until / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen::866:[[ command == \f\i\l\e\n\a\m\e ]]
++(1) ./stagel-bootstrap-codegen::868:[[ command == \c\o\m\m\e\n\t ]]
++(1) ./stagel-bootstrap-codegen::871:[[ command == \l\i\t\e\r\a\l\-\a\b\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::874:[[ command == \l\i\t\e\r\a\l\-\a\n\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::877:[[ command == \l\i\t\e\r\a\l\-\a\s\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::881:case "${stateStack[-1]}" in
++(1) ./stagel-bootstrap-codegen::1057:echo 'Working on arglist'
+Working on arglist
++(0) ./stagel-bootstrap-codegen::1058:case "${tokens[$i - 1]}" in
++(0) ./stagel-bootstrap-codegen::1071:[[ condition =~ ^(return|new|set)$ ]]
++(1) ./stagel-bootstrap-codegen::1071:[[ arglist == \t\e\s\t ]]
++(1) ./stagel-bootstrap-codegen::1085:[[ arglist != \t\e\s\t ]]
++(0) ./stagel-bootstrap-codegen::1086:codegenCommandInvocationArglist
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:661:codegenDebug 'Command invocation argument list'
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: arglist:1, token #7 (2:12:1): command (19): condition (20) (Debug info: Codegen: Command invocation argument list, routine : / Args: Command invocation argument list / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 test until / Arglist:  / (true/false/false).)'
+State: arglist:1, token #7 (2:12:1): command (19): condition (20) (Debug info: Codegen: Command invocation argument list, routine : / Args: Command invocation argument list / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 test until / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:316:case "$targetLang" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:665:argumentCount=0
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:666:codegenLastKnownArglistCount=0
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:667:(( k=0 ))
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:667:(( k<argumentCount ))
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:684:codegenRoutineType=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:685:codegenRoutineName=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:686:codegenArgList=()
++(0) ./stagel-bootstrap-codegen::1087:codegenIsTestCommand until
++(0) ./stagel-bootstrap-codegen:codegenIsTestCommand:830:case "$1" in
++(0) ./stagel-bootstrap-codegen:codegenIsTestCommand:832:true
++(0) ./stagel-bootstrap-codegen::1091:codegenRoutineName=condition
++(0) ./stagel-bootstrap-codegen::1092:[[ command == ident-r-* ]]
++(1) ./stagel-bootstrap-codegen::1093:codegenCommandInvocationStart
++(1) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:502:codegenDebug 'Command invocation start'
++(1) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: arglist:1, token #7 (2:12:1): command (19): condition (20) (Debug info: Codegen: Command invocation start, routine :condition / Args: Command invocation start / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 test until / Arglist:  / (true/false/false).)'
+State: arglist:1, token #7 (2:12:1): command (19): condition (20) (Debug info: Codegen: Command invocation start, routine :condition / Args: Command invocation start / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 test until / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:503:case "$codegenRoutineName" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:632:codegenPrintIndentationSpaces
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j=0 ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j<codegenIndent ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:333:[[ '' == \-\-\f\o\r\c\e ]]
++(1) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:333:codegenOnNewLine
++(1) ./stagel-bootstrap-codegen:codegenOnNewLine:183:[[ false == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j++  ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j<codegenIndent ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:337:true
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:633:case "$targetLang" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:635:codegenOutput 'await condition('
++(0) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput: await condition()'
+(codegenOutput: await condition()
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print 'await condition('
++(0) /usr/bin/ember_bash_setup:print:135:printf %s 'await condition('
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[ await condition( == *\
+ ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:192:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:192:[[ await condition( == *\ \ \ \  ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:196:codegenNewLine=false
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:643:codegenRoutineType=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:644:codegenRoutineName=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:645:codegenArgList=()
++(0) ./stagel-bootstrap-codegen::1094:[[ arglist == \t\e\s\t ]]
++(0) ./stagel-bootstrap-codegen::1097:stateStack+=("arglist")
++(0) ./stagel-bootstrap-codegen::1098:blockStack+=("arglist-command" "${tokens[$i]}")
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::858:codegenIndent=1
++(0) ./stagel-bootstrap-codegen::862:echo
+
++(0) ./stagel-bootstrap-codegen::863:codegenStatus='State: arglist:1, token #8 (2:20:1): newline (22):  (23)'
++(0) ./stagel-bootstrap-codegen::864:codegenDebug
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: arglist:1, token #8 (2:20:1): newline (22):  (23) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test arglist arglist / Blocks: root  ident-r-s  102 test until arglist-command condition / Arglist:  / (true/false/false).)'
+State: arglist:1, token #8 (2:20:1): newline (22):  (23) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test arglist arglist / Blocks: root  ident-r-s  102 test until arglist-command condition / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen::866:[[ newline == \f\i\l\e\n\a\m\e ]]
++(1) ./stagel-bootstrap-codegen::868:[[ newline == \c\o\m\m\e\n\t ]]
++(1) ./stagel-bootstrap-codegen::871:[[ newline == \l\i\t\e\r\a\l\-\a\b\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::874:[[ newline == \l\i\t\e\r\a\l\-\a\n\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::877:[[ newline == \l\i\t\e\r\a\l\-\a\s\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::881:case "${stateStack[-1]}" in
++(1) ./stagel-bootstrap-codegen::1057:echo 'Working on arglist'
+Working on arglist
++(0) ./stagel-bootstrap-codegen::1058:case "${tokens[$i - 1]}" in
++(0) ./stagel-bootstrap-codegen::1124:[[ arglist != \t\e\s\t ]]
++(0) ./stagel-bootstrap-codegen::1127:[[ condition != \e\l\s\e ]]
++(0) ./stagel-bootstrap-codegen::1128:codegenCommandInvocationArglist
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:661:codegenDebug 'Command invocation argument list'
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: arglist:1, token #8 (2:20:1): newline (22):  (23) (Debug info: Codegen: Command invocation argument list, routine : / Args: Command invocation argument list / States: root code routine-definition-end code test arglist arglist / Blocks: root  ident-r-s  102 test until arglist-command condition / Arglist:  / (true/false/false).)'
+State: arglist:1, token #8 (2:20:1): newline (22):  (23) (Debug info: Codegen: Command invocation argument list, routine : / Args: Command invocation argument list / States: root code routine-definition-end code test arglist arglist / Blocks: root  ident-r-s  102 test until arglist-command condition / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:316:case "$targetLang" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:665:argumentCount=0
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:666:codegenLastKnownArglistCount=0
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:667:(( k=0 ))
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:667:(( k<argumentCount ))
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:684:codegenRoutineType=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:685:codegenRoutineName=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:686:codegenArgList=()
++(0) ./stagel-bootstrap-codegen::1130:codegenCommandInvocationEnd
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:690:codegenDebug 'Command invocation end'
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: arglist:1, token #8 (2:20:1): newline (22):  (23) (Debug info: Codegen: Command invocation end, routine : / Args: Command invocation end / States: root code routine-definition-end code test arglist arglist / Blocks: root  ident-r-s  102 test until arglist-command condition / Arglist:  / (true/false/false).)'
+State: arglist:1, token #8 (2:20:1): newline (22):  (23) (Debug info: Codegen: Command invocation end, routine : / Args: Command invocation end / States: root code routine-definition-end code test arglist arglist / Blocks: root  ident-r-s  102 test until arglist-command condition / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:691:case "$codegenRoutineName" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:709:case "$targetLang" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:711:[[ arglist-command == \c\o\m\m\a\n\d ]]
++(1) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:711:codegenOutput ')'
++(1) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput: ))'
+(codegenOutput: ))
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print ')'
++(0) /usr/bin/ember_bash_setup:print:135:printf %s ')'
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[ ) == *\
+ ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:192:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:192:[[ ) == *\ \ \ \  ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:196:codegenNewLine=false
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:719:contains test root code routine-definition-end code test arglist arglist
++(0) /usr/bin/ember_bash_setup:contains:765:local e
++(0) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(0) /usr/bin/ember_bash_setup:contains:766:[[ root == \t\e\s\t ]]
++(1) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(1) /usr/bin/ember_bash_setup:contains:766:[[ code == \t\e\s\t ]]
++(1) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(1) /usr/bin/ember_bash_setup:contains:766:[[ routine-definition-end == \t\e\s\t ]]
++(1) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(1) /usr/bin/ember_bash_setup:contains:766:[[ code == \t\e\s\t ]]
++(1) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(1) /usr/bin/ember_bash_setup:contains:766:[[ test == \t\e\s\t ]]
++(0) /usr/bin/ember_bash_setup:contains:766:return 0
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:722:blockStackRemoveLast
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:841:print_r root '' ident-r-s ' 102' test until arglist-command condition
++(0) /usr/bin/ember_bash_setup:print_r:222:arr=("$@")
++(0) /usr/bin/ember_bash_setup:print_r:222:local arr
++(0) /usr/bin/ember_bash_setup:print_r:223:declare -p arr
+declare -a arr=([0]="root" [1]="" [2]="ident-r-s" [3]=" 102" [4]="test" [5]="until" [6]="arglist-command" [7]="condition")
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:842:[[ condition == '' ]]
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:846:unset 'blockStack[-1]'
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:847:[[ arglist-command == \r\o\o\t ]]
++(1) ./stagel-bootstrap-codegen:blockStackRemoveLast:848:unset 'blockStack[-1]'
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:723:codegenRoutineType=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:724:codegenRoutineName=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:725:codegenArgList=()
++(0) ./stagel-bootstrap-codegen::1131:unset 'stateStack[-1]'
++(0) ./stagel-bootstrap-codegen::1132:i=20
++(0) ./stagel-bootstrap-codegen::1135:[[ arglist == \t\e\s\t ]]
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::858:codegenIndent=1
++(0) ./stagel-bootstrap-codegen::862:echo
+
++(0) ./stagel-bootstrap-codegen::863:codegenStatus='State: arglist:1, token #8 (2:20:1): newline (22):  (23)'
++(0) ./stagel-bootstrap-codegen::864:codegenDebug
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: arglist:1, token #8 (2:20:1): newline (22):  (23) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 test until / Arglist:  / (true/false/false).)'
+State: arglist:1, token #8 (2:20:1): newline (22):  (23) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 test until / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen::866:[[ newline == \f\i\l\e\n\a\m\e ]]
++(1) ./stagel-bootstrap-codegen::868:[[ newline == \c\o\m\m\e\n\t ]]
++(1) ./stagel-bootstrap-codegen::871:[[ newline == \l\i\t\e\r\a\l\-\a\b\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::874:[[ newline == \l\i\t\e\r\a\l\-\a\n\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::877:[[ newline == \l\i\t\e\r\a\l\-\a\s\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::881:case "${stateStack[-1]}" in
++(1) ./stagel-bootstrap-codegen::1057:echo 'Working on arglist'
+Working on arglist
++(0) ./stagel-bootstrap-codegen::1058:case "${tokens[$i - 1]}" in
++(0) ./stagel-bootstrap-codegen::1124:[[ arglist != \t\e\s\t ]]
++(0) ./stagel-bootstrap-codegen::1127:[[ until != \e\l\s\e ]]
++(0) ./stagel-bootstrap-codegen::1128:codegenCommandInvocationArglist
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:661:codegenDebug 'Command invocation argument list'
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: arglist:1, token #8 (2:20:1): newline (22):  (23) (Debug info: Codegen: Command invocation argument list, routine : / Args: Command invocation argument list / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 test until / Arglist:  / (true/false/false).)'
+State: arglist:1, token #8 (2:20:1): newline (22):  (23) (Debug info: Codegen: Command invocation argument list, routine : / Args: Command invocation argument list / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 test until / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:316:case "$targetLang" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:665:argumentCount=0
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:666:codegenLastKnownArglistCount=0
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:667:(( k=0 ))
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:667:(( k<argumentCount ))
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:684:codegenRoutineType=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:685:codegenRoutineName=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:686:codegenArgList=()
++(0) ./stagel-bootstrap-codegen::1130:codegenCommandInvocationEnd
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:690:codegenDebug 'Command invocation end'
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: arglist:1, token #8 (2:20:1): newline (22):  (23) (Debug info: Codegen: Command invocation end, routine : / Args: Command invocation end / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 test until / Arglist:  / (true/false/false).)'
+State: arglist:1, token #8 (2:20:1): newline (22):  (23) (Debug info: Codegen: Command invocation end, routine : / Args: Command invocation end / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 test until / Arglist:  / (true/false/false).)
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:691:case "$codegenRoutineName" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:709:case "$targetLang" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:711:[[ test == \c\o\m\m\a\n\d ]]
++(1) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:711:codegenOutput ')'
++(1) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput: ))'
+(codegenOutput: ))
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print ')'
++(0) /usr/bin/ember_bash_setup:print:135:printf %s ')'
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[ ) == *\
+ ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:192:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:192:[[ ) == *\ \ \ \  ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:196:codegenNewLine=false
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:719:contains test root code routine-definition-end code test arglist
++(0) /usr/bin/ember_bash_setup:contains:765:local e
++(0) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(0) /usr/bin/ember_bash_setup:contains:766:[[ root == \t\e\s\t ]]
++(1) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(1) /usr/bin/ember_bash_setup:contains:766:[[ code == \t\e\s\t ]]
++(1) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(1) /usr/bin/ember_bash_setup:contains:766:[[ routine-definition-end == \t\e\s\t ]]
++(1) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(1) /usr/bin/ember_bash_setup:contains:766:[[ code == \t\e\s\t ]]
++(1) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(1) /usr/bin/ember_bash_setup:contains:766:[[ test == \t\e\s\t ]]
++(0) /usr/bin/ember_bash_setup:contains:766:return 0
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:722:blockStackRemoveLast
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:841:print_r root '' ident-r-s ' 102' test until
++(0) /usr/bin/ember_bash_setup:print_r:222:arr=("$@")
++(0) /usr/bin/ember_bash_setup:print_r:222:local arr
++(0) /usr/bin/ember_bash_setup:print_r:223:declare -p arr
+declare -a arr=([0]="root" [1]="" [2]="ident-r-s" [3]=" 102" [4]="test" [5]="until")
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:842:[[ until == '' ]]
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:846:unset 'blockStack[-1]'
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:847:[[ test == \r\o\o\t ]]
++(1) ./stagel-bootstrap-codegen:blockStackRemoveLast:848:unset 'blockStack[-1]'
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:723:codegenRoutineType=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:724:codegenRoutineName=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:725:codegenArgList=()
++(0) ./stagel-bootstrap-codegen::1131:unset 'stateStack[-1]'
++(0) ./stagel-bootstrap-codegen::1132:i=20
++(0) ./stagel-bootstrap-codegen::1135:[[ test == \t\e\s\t ]]
++(0) ./stagel-bootstrap-codegen::1135:[[ false != \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen::1136:codegenOutput '
+'
++(0) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput: 
+)'
+(codegenOutput: 
+)
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print '
+'
++(0) /usr/bin/ember_bash_setup:print:135:printf %s '
+'
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[ 
+ == *\
+ ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:190:codegenNewLine=true
++(0) ./stagel-bootstrap-codegen:codegenOutput:191:codegenNewlineLookingForSpaces=true
++(0) ./stagel-bootstrap-codegen::1137:codegenTestIndentDeferred=indent-deferred
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::858:codegenIndent=1
++(0) ./stagel-bootstrap-codegen::862:echo
+
++(0) ./stagel-bootstrap-codegen::863:codegenStatus='State: test:1, token #8 (2:20:1): newline (22):  (23)'
++(0) ./stagel-bootstrap-codegen::864:codegenDebug
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: test:1, token #8 (2:20:1): newline (22):  (23) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 / Arglist:  / (true/indent-deferred/false).)'
+State: test:1, token #8 (2:20:1): newline (22):  (23) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 / Arglist:  / (true/indent-deferred/false).)
++(0) ./stagel-bootstrap-codegen::866:[[ newline == \f\i\l\e\n\a\m\e ]]
++(1) ./stagel-bootstrap-codegen::868:[[ newline == \c\o\m\m\e\n\t ]]
++(1) ./stagel-bootstrap-codegen::871:[[ newline == \l\i\t\e\r\a\l\-\a\b\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::874:[[ newline == \l\i\t\e\r\a\l\-\a\n\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::877:[[ newline == \l\i\t\e\r\a\l\-\a\s\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::881:case "${stateStack[-1]}" in
++(1) ./stagel-bootstrap-codegen::1057:echo 'Working on test'
+Working on test
++(0) ./stagel-bootstrap-codegen::1058:case "${tokens[$i - 1]}" in
++(0) ./stagel-bootstrap-codegen::1124:[[ test != \t\e\s\t ]]
++(0) ./stagel-bootstrap-codegen::1135:[[ test == \t\e\s\t ]]
++(0) ./stagel-bootstrap-codegen::1135:[[ false != \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen::1136:codegenOutput '
+'
++(0) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput: 
+)'
+(codegenOutput: 
+)
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print '
+'
++(0) /usr/bin/ember_bash_setup:print:135:printf %s '
+'
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[ 
+ == *\
+ ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:190:codegenNewLine=true
++(0) ./stagel-bootstrap-codegen:codegenOutput:191:codegenNewlineLookingForSpaces=true
++(0) ./stagel-bootstrap-codegen::1137:codegenTestIndentDeferred=indent-deferred
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::858:codegenIndent=1
++(0) ./stagel-bootstrap-codegen::862:echo
+
++(0) ./stagel-bootstrap-codegen::863:codegenStatus='State: test:1, token #9 (3:10:1): indent (25):  (26)'
++(0) ./stagel-bootstrap-codegen::864:codegenDebug
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: test:1, token #9 (3:10:1): indent (25):  (26) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 / Arglist:  / (true/indent-deferred/false).)'
+State: test:1, token #9 (3:10:1): indent (25):  (26) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 / Arglist:  / (true/indent-deferred/false).)
++(0) ./stagel-bootstrap-codegen::866:[[ indent == \f\i\l\e\n\a\m\e ]]
++(1) ./stagel-bootstrap-codegen::868:[[ indent == \c\o\m\m\e\n\t ]]
++(1) ./stagel-bootstrap-codegen::871:[[ indent == \l\i\t\e\r\a\l\-\a\b\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::874:[[ indent == \l\i\t\e\r\a\l\-\a\n\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::877:[[ indent == \l\i\t\e\r\a\l\-\a\s\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::881:case "${stateStack[-1]}" in
++(1) ./stagel-bootstrap-codegen::1057:echo 'Working on test'
+Working on test
++(0) ./stagel-bootstrap-codegen::1058:case "${tokens[$i - 1]}" in
++(0) ./stagel-bootstrap-codegen::1108:[[ false == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::858:codegenIndent=2
++(0) ./stagel-bootstrap-codegen::862:echo
+
++(0) ./stagel-bootstrap-codegen::863:codegenStatus='State: test:2, token #10 (3:10:2): command (28): command (29)'
++(0) ./stagel-bootstrap-codegen::864:codegenDebug
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: test:2, token #10 (3:10:2): command (28): command (29) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 / Arglist:  / (true/indent-deferred/false).)'
+State: test:2, token #10 (3:10:2): command (28): command (29) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 / Arglist:  / (true/indent-deferred/false).)
++(0) ./stagel-bootstrap-codegen::866:[[ command == \f\i\l\e\n\a\m\e ]]
++(1) ./stagel-bootstrap-codegen::868:[[ command == \c\o\m\m\e\n\t ]]
++(1) ./stagel-bootstrap-codegen::871:[[ command == \l\i\t\e\r\a\l\-\a\b\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::874:[[ command == \l\i\t\e\r\a\l\-\a\n\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::877:[[ command == \l\i\t\e\r\a\l\-\a\s\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::881:case "${stateStack[-1]}" in
++(1) ./stagel-bootstrap-codegen::1057:echo 'Working on test'
+Working on test
++(0) ./stagel-bootstrap-codegen::1058:case "${tokens[$i - 1]}" in
++(0) ./stagel-bootstrap-codegen::1071:[[ command =~ ^(return|new|set)$ ]]
++(1) ./stagel-bootstrap-codegen::1071:[[ test == \t\e\s\t ]]
++(0) ./stagel-bootstrap-codegen::1071:[[ false == \t\r\u\e ]]
++(1) ./stagel-bootstrap-codegen::1085:[[ test != \t\e\s\t ]]
++(0) ./stagel-bootstrap-codegen::1091:codegenRoutineName=command
++(0) ./stagel-bootstrap-codegen::1092:[[ command == ident-r-* ]]
++(1) ./stagel-bootstrap-codegen::1093:codegenCommandInvocationStart
++(1) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:502:codegenDebug 'Command invocation start'
++(1) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: test:2, token #10 (3:10:2): command (28): command (29) (Debug info: Codegen: Command invocation start, routine :command / Args: Command invocation start / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 / Arglist:  / (true/indent-deferred/false).)'
+State: test:2, token #10 (3:10:2): command (28): command (29) (Debug info: Codegen: Command invocation start, routine :command / Args: Command invocation start / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 / Arglist:  / (true/indent-deferred/false).)
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:503:case "$codegenRoutineName" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:632:codegenPrintIndentationSpaces
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j=0 ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j<codegenIndent ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:333:[[ '' == \-\-\f\o\r\c\e ]]
++(1) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:333:codegenOnNewLine
++(1) ./stagel-bootstrap-codegen:codegenOnNewLine:183:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:334:codegenOutput '    '
++(0) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput:     )'
+(codegenOutput:     )
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print '    '
++(0) /usr/bin/ember_bash_setup:print:135:printf %s '    '
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[      == *\
+ ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:192:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:192:[[      == *\ \ \ \  ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:193:codegenNewLine=true
++(0) ./stagel-bootstrap-codegen:codegenOutput:194:codegenNewlineLookingForSpaces=true
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j++  ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j<codegenIndent ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:333:[[ '' == \-\-\f\o\r\c\e ]]
++(1) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:333:codegenOnNewLine
++(1) ./stagel-bootstrap-codegen:codegenOnNewLine:183:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:334:codegenOutput '    '
++(0) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput:     )'
+(codegenOutput:     )
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print '    '
++(0) /usr/bin/ember_bash_setup:print:135:printf %s '    '
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[      == *\
+ ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:192:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:192:[[      == *\ \ \ \  ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:193:codegenNewLine=true
++(0) ./stagel-bootstrap-codegen:codegenOutput:194:codegenNewlineLookingForSpaces=true
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j++  ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j<codegenIndent ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:337:true
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:633:case "$targetLang" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:635:codegenOutput 'await command('
++(0) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput: await command()'
+(codegenOutput: await command()
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print 'await command('
++(0) /usr/bin/ember_bash_setup:print:135:printf %s 'await command('
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[ await command( == *\
+ ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:192:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:192:[[ await command( == *\ \ \ \  ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:196:codegenNewLine=false
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:643:codegenRoutineType=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:644:codegenRoutineName=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationStart:645:codegenArgList=()
++(0) ./stagel-bootstrap-codegen::1094:[[ test == \t\e\s\t ]]
++(0) ./stagel-bootstrap-codegen::1095:testParameterFound=true
++(0) ./stagel-bootstrap-codegen::1097:stateStack+=("arglist")
++(0) ./stagel-bootstrap-codegen::1098:blockStack+=("arglist-command" "${tokens[$i]}")
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::858:codegenIndent=2
++(0) ./stagel-bootstrap-codegen::862:echo
+
++(0) ./stagel-bootstrap-codegen::863:codegenStatus='State: arglist:2, token #11 (3:16:2): newline (31):  (32)'
++(0) ./stagel-bootstrap-codegen::864:codegenDebug
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: arglist:2, token #11 (3:16:2): newline (31):  (32) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 arglist-command command / Arglist:  / (true/indent-deferred/true).)'
+State: arglist:2, token #11 (3:16:2): newline (31):  (32) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 arglist-command command / Arglist:  / (true/indent-deferred/true).)
++(0) ./stagel-bootstrap-codegen::866:[[ newline == \f\i\l\e\n\a\m\e ]]
++(1) ./stagel-bootstrap-codegen::868:[[ newline == \c\o\m\m\e\n\t ]]
++(1) ./stagel-bootstrap-codegen::871:[[ newline == \l\i\t\e\r\a\l\-\a\b\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::874:[[ newline == \l\i\t\e\r\a\l\-\a\n\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::877:[[ newline == \l\i\t\e\r\a\l\-\a\s\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::881:case "${stateStack[-1]}" in
++(1) ./stagel-bootstrap-codegen::1057:echo 'Working on arglist'
+Working on arglist
++(0) ./stagel-bootstrap-codegen::1058:case "${tokens[$i - 1]}" in
++(0) ./stagel-bootstrap-codegen::1124:[[ arglist != \t\e\s\t ]]
++(0) ./stagel-bootstrap-codegen::1127:[[ command != \e\l\s\e ]]
++(0) ./stagel-bootstrap-codegen::1128:codegenCommandInvocationArglist
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:661:codegenDebug 'Command invocation argument list'
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: arglist:2, token #11 (3:16:2): newline (31):  (32) (Debug info: Codegen: Command invocation argument list, routine : / Args: Command invocation argument list / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 arglist-command command / Arglist:  / (true/indent-deferred/true).)'
+State: arglist:2, token #11 (3:16:2): newline (31):  (32) (Debug info: Codegen: Command invocation argument list, routine : / Args: Command invocation argument list / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 arglist-command command / Arglist:  / (true/indent-deferred/true).)
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:316:case "$targetLang" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:665:argumentCount=0
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:666:codegenLastKnownArglistCount=0
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:667:(( k=0 ))
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:667:(( k<argumentCount ))
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:684:codegenRoutineType=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:685:codegenRoutineName=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:686:codegenArgList=()
++(0) ./stagel-bootstrap-codegen::1130:codegenCommandInvocationEnd
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:690:codegenDebug 'Command invocation end'
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: arglist:2, token #11 (3:16:2): newline (31):  (32) (Debug info: Codegen: Command invocation end, routine : / Args: Command invocation end / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 arglist-command command / Arglist:  / (true/indent-deferred/true).)'
+State: arglist:2, token #11 (3:16:2): newline (31):  (32) (Debug info: Codegen: Command invocation end, routine : / Args: Command invocation end / States: root code routine-definition-end code test arglist / Blocks: root  ident-r-s  102 arglist-command command / Arglist:  / (true/indent-deferred/true).)
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:691:case "$codegenRoutineName" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:709:case "$targetLang" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:711:[[ arglist-command == \c\o\m\m\a\n\d ]]
++(1) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:711:codegenOutput ')'
++(1) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput: ))'
+(codegenOutput: ))
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print ')'
++(0) /usr/bin/ember_bash_setup:print:135:printf %s ')'
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[ ) == *\
+ ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:192:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:192:[[ ) == *\ \ \ \  ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:196:codegenNewLine=false
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:719:contains test root code routine-definition-end code test arglist
++(0) /usr/bin/ember_bash_setup:contains:765:local e
++(0) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(0) /usr/bin/ember_bash_setup:contains:766:[[ root == \t\e\s\t ]]
++(1) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(1) /usr/bin/ember_bash_setup:contains:766:[[ code == \t\e\s\t ]]
++(1) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(1) /usr/bin/ember_bash_setup:contains:766:[[ routine-definition-end == \t\e\s\t ]]
++(1) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(1) /usr/bin/ember_bash_setup:contains:766:[[ code == \t\e\s\t ]]
++(1) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(1) /usr/bin/ember_bash_setup:contains:766:[[ test == \t\e\s\t ]]
++(0) /usr/bin/ember_bash_setup:contains:766:return 0
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:722:blockStackRemoveLast
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:841:print_r root '' ident-r-s ' 102' arglist-command command
++(0) /usr/bin/ember_bash_setup:print_r:222:arr=("$@")
++(0) /usr/bin/ember_bash_setup:print_r:222:local arr
++(0) /usr/bin/ember_bash_setup:print_r:223:declare -p arr
+declare -a arr=([0]="root" [1]="" [2]="ident-r-s" [3]=" 102" [4]="arglist-command" [5]="command")
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:842:[[ command == '' ]]
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:846:unset 'blockStack[-1]'
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:847:[[ arglist-command == \r\o\o\t ]]
++(1) ./stagel-bootstrap-codegen:blockStackRemoveLast:848:unset 'blockStack[-1]'
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:723:codegenRoutineType=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:724:codegenRoutineName=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:725:codegenArgList=()
++(0) ./stagel-bootstrap-codegen::1131:unset 'stateStack[-1]'
++(0) ./stagel-bootstrap-codegen::1132:i=29
++(0) ./stagel-bootstrap-codegen::1135:[[ test == \t\e\s\t ]]
++(0) ./stagel-bootstrap-codegen::1135:[[ true != \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::858:codegenIndent=2
++(0) ./stagel-bootstrap-codegen::862:echo
+
++(0) ./stagel-bootstrap-codegen::863:codegenStatus='State: test:2, token #11 (3:16:2): newline (31):  (32)'
++(0) ./stagel-bootstrap-codegen::864:codegenDebug
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: test:2, token #11 (3:16:2): newline (31):  (32) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 / Arglist:  / (true/indent-deferred/true).)'
+State: test:2, token #11 (3:16:2): newline (31):  (32) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 / Arglist:  / (true/indent-deferred/true).)
++(0) ./stagel-bootstrap-codegen::866:[[ newline == \f\i\l\e\n\a\m\e ]]
++(1) ./stagel-bootstrap-codegen::868:[[ newline == \c\o\m\m\e\n\t ]]
++(1) ./stagel-bootstrap-codegen::871:[[ newline == \l\i\t\e\r\a\l\-\a\b\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::874:[[ newline == \l\i\t\e\r\a\l\-\a\n\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::877:[[ newline == \l\i\t\e\r\a\l\-\a\s\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::881:case "${stateStack[-1]}" in
++(1) ./stagel-bootstrap-codegen::1057:echo 'Working on test'
+Working on test
++(0) ./stagel-bootstrap-codegen::1058:case "${tokens[$i - 1]}" in
++(0) ./stagel-bootstrap-codegen::1124:[[ test != \t\e\s\t ]]
++(0) ./stagel-bootstrap-codegen::1135:[[ test == \t\e\s\t ]]
++(0) ./stagel-bootstrap-codegen::1135:[[ true != \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::858:codegenIndent=1
++(0) ./stagel-bootstrap-codegen::862:echo
+
++(0) ./stagel-bootstrap-codegen::863:codegenStatus='State: test:1, token #12 (4:1:1): dedent (34):  (35)'
++(0) ./stagel-bootstrap-codegen::864:codegenDebug
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: test:1, token #12 (4:1:1): dedent (34):  (35) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 / Arglist:  / (true/indent-deferred/true).)'
+State: test:1, token #12 (4:1:1): dedent (34):  (35) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 / Arglist:  / (true/indent-deferred/true).)
++(0) ./stagel-bootstrap-codegen::866:[[ dedent == \f\i\l\e\n\a\m\e ]]
++(1) ./stagel-bootstrap-codegen::868:[[ dedent == \c\o\m\m\e\n\t ]]
++(1) ./stagel-bootstrap-codegen::871:[[ dedent == \l\i\t\e\r\a\l\-\a\b\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::874:[[ dedent == \l\i\t\e\r\a\l\-\a\n\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::877:[[ dedent == \l\i\t\e\r\a\l\-\a\s\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::881:case "${stateStack[-1]}" in
++(1) ./stagel-bootstrap-codegen::1057:echo 'Working on test'
+Working on test
++(0) ./stagel-bootstrap-codegen::1058:case "${tokens[$i - 1]}" in
++(0) ./stagel-bootstrap-codegen::1149:codegenCommandInvocationArglist
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:661:codegenDebug 'Command invocation argument list'
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: test:1, token #12 (4:1:1): dedent (34):  (35) (Debug info: Codegen: Command invocation argument list, routine : / Args: Command invocation argument list / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 / Arglist:  / (true/indent-deferred/true).)'
+State: test:1, token #12 (4:1:1): dedent (34):  (35) (Debug info: Codegen: Command invocation argument list, routine : / Args: Command invocation argument list / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 / Arglist:  / (true/indent-deferred/true).)
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:316:case "$targetLang" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:665:argumentCount=0
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:666:codegenLastKnownArglistCount=0
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:667:(( k=0 ))
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:667:(( k<argumentCount ))
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:684:codegenRoutineType=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:685:codegenRoutineName=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationArglist:686:codegenArgList=()
++(0) ./stagel-bootstrap-codegen::1150:codegenCommandInvocationEnd
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:690:codegenDebug 'Command invocation end'
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: test:1, token #12 (4:1:1): dedent (34):  (35) (Debug info: Codegen: Command invocation end, routine : / Args: Command invocation end / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 / Arglist:  / (true/indent-deferred/true).)'
+State: test:1, token #12 (4:1:1): dedent (34):  (35) (Debug info: Codegen: Command invocation end, routine : / Args: Command invocation end / States: root code routine-definition-end code test / Blocks: root  ident-r-s  102 / Arglist:  / (true/indent-deferred/true).)
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:691:case "$codegenRoutineName" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:709:case "$targetLang" in
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:711:[[ ident-r-s == \c\o\m\m\a\n\d ]]
++(1) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:711:codegenOutput ')'
++(1) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput: ))'
+(codegenOutput: ))
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print ')'
++(0) /usr/bin/ember_bash_setup:print:135:printf %s ')'
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[ ) == *\
+ ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:192:[[ true == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:192:[[ ) == *\ \ \ \  ]]
++(1) ./stagel-bootstrap-codegen:codegenOutput:196:codegenNewLine=false
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:719:contains test root code routine-definition-end code test
++(0) /usr/bin/ember_bash_setup:contains:765:local e
++(0) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(0) /usr/bin/ember_bash_setup:contains:766:[[ root == \t\e\s\t ]]
++(1) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(1) /usr/bin/ember_bash_setup:contains:766:[[ code == \t\e\s\t ]]
++(1) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(1) /usr/bin/ember_bash_setup:contains:766:[[ routine-definition-end == \t\e\s\t ]]
++(1) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(1) /usr/bin/ember_bash_setup:contains:766:[[ code == \t\e\s\t ]]
++(1) /usr/bin/ember_bash_setup:contains:766:for e in "${@:2}"
++(1) /usr/bin/ember_bash_setup:contains:766:[[ test == \t\e\s\t ]]
++(0) /usr/bin/ember_bash_setup:contains:766:return 0
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:722:blockStackRemoveLast
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:841:print_r root '' ident-r-s ' 102'
++(0) /usr/bin/ember_bash_setup:print_r:222:arr=("$@")
++(0) /usr/bin/ember_bash_setup:print_r:222:local arr
++(0) /usr/bin/ember_bash_setup:print_r:223:declare -p arr
+declare -a arr=([0]="root" [1]="" [2]="ident-r-s" [3]=" 102")
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:842:[[  102 == '' ]]
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:846:unset 'blockStack[-1]'
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:847:[[ ident-r-s == \r\o\o\t ]]
++(1) ./stagel-bootstrap-codegen:blockStackRemoveLast:848:unset 'blockStack[-1]'
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:723:codegenRoutineType=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:724:codegenRoutineName=
++(0) ./stagel-bootstrap-codegen:codegenCommandInvocationEnd:725:codegenArgList=()
++(0) ./stagel-bootstrap-codegen::1152:unset 'stateStack[-1]'
++(0) ./stagel-bootstrap-codegen::1153:i=32
++(0) ./stagel-bootstrap-codegen::1154:[[ code == \t\e\s\t ]]
++(1) ./stagel-bootstrap-codegen::1155:stateStack+=("code")
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::856:(( i++  ))
++(0) ./stagel-bootstrap-codegen::856:(( i<tokenCount ))
++(0) ./stagel-bootstrap-codegen::857:((  (i+1) % 3  ))
++(0) ./stagel-bootstrap-codegen::858:codegenIndent=1
++(0) ./stagel-bootstrap-codegen::862:echo
+
++(0) ./stagel-bootstrap-codegen::863:codegenStatus='State: code:1, token #12 (4:1:1): dedent (34):  (35)'
++(0) ./stagel-bootstrap-codegen::864:codegenDebug
++(0) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: code:1, token #12 (4:1:1): dedent (34):  (35) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code code / Blocks: root  / Arglist:  / (true/indent-deferred/true).)'
+State: code:1, token #12 (4:1:1): dedent (34):  (35) (Debug info: Codegen: , routine : / Args:  / States: root code routine-definition-end code code / Blocks: root  / Arglist:  / (true/indent-deferred/true).)
++(0) ./stagel-bootstrap-codegen::866:[[ dedent == \f\i\l\e\n\a\m\e ]]
++(1) ./stagel-bootstrap-codegen::868:[[ dedent == \c\o\m\m\e\n\t ]]
++(1) ./stagel-bootstrap-codegen::871:[[ dedent == \l\i\t\e\r\a\l\-\a\b\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::874:[[ dedent == \l\i\t\e\r\a\l\-\a\n\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::877:[[ dedent == \l\i\t\e\r\a\l\-\a\s\-\s\t\a\r\t ]]
++(1) ./stagel-bootstrap-codegen::881:case "${stateStack[-1]}" in
++(1) ./stagel-bootstrap-codegen::958:echo 'Working on code'
+Working on code
++(0) ./stagel-bootstrap-codegen::959:case "${tokens[$i - 1]}" in
++(0) ./stagel-bootstrap-codegen::973:[[ root == \i\d\e\n\t\-\r\-\v ]]
++(1) ./stagel-bootstrap-codegen::974:codegenDedent
++(1) ./stagel-bootstrap-codegen:codegenDedent:377:codegenDebug Dedent
++(1) ./stagel-bootstrap-codegen:codegenDebug:201:echo 'State: code:1, token #12 (4:1:1): dedent (34):  (35) (Debug info: Codegen: Dedent, routine : / Args: Dedent / States: root code routine-definition-end code code / Blocks: root  / Arglist:  / (true/indent-deferred/true).)'
+State: code:1, token #12 (4:1:1): dedent (34):  (35) (Debug info: Codegen: Dedent, routine : / Args: Dedent / States: root code routine-definition-end code code / Blocks: root  / Arglist:  / (true/indent-deferred/true).)
++(0) ./stagel-bootstrap-codegen:codegenDedent:379:codegenPrintIndentationSpaces
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j=0 ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j<codegenIndent ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:333:[[ '' == \-\-\f\o\r\c\e ]]
++(1) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:333:codegenOnNewLine
++(1) ./stagel-bootstrap-codegen:codegenOnNewLine:183:[[ false == \t\r\u\e ]]
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j++  ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:332:(( j<codegenIndent ))
++(0) ./stagel-bootstrap-codegen:codegenPrintIndentationSpaces:337:true
++(0) ./stagel-bootstrap-codegen:codegenDedent:381:case "$targetLang" in
++(0) ./stagel-bootstrap-codegen:codegenDedent:383:codegenOutput '}
+'
++(0) ./stagel-bootstrap-codegen:codegenOutput:187:echo '(codegenOutput: }
+)'
+(codegenOutput: }
+)
++(0) ./stagel-bootstrap-codegen:codegenOutput:188:print '}
+'
++(0) /usr/bin/ember_bash_setup:print:135:printf %s '}
+'
++(0) ./stagel-bootstrap-codegen:codegenOutput:189:[[ }
+ == *\
+ ]]
++(0) ./stagel-bootstrap-codegen:codegenOutput:190:codegenNewLine=true
++(0) ./stagel-bootstrap-codegen:codegenOutput:191:codegenNewlineLookingForSpaces=true
++(0) ./stagel-bootstrap-codegen::975:unset 'stateStack[-1]'
++(0) ./stagel-bootstrap-codegen::976:blockStackRemoveLast
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:841:print_r root ''
++(0) /usr/bin/ember_bash_setup:print_r:222:arr=("$@")
++(0) /usr/bin/ember_bash_setup:print_r:222:local arr
++(0) /usr/bin/ember_bash_setup:print_r:223:declare -p arr
+declare -a arr=([0]="root" [1]="")
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:842:[[ '' == '' ]]
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:842:[[ root == \p\l\a\i\n\-\b\l\o\c\k ]]
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:846:unset 'blockStack[-1]'
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:847:[[ root == \r\o\o\t ]]
++(0) ./stagel-bootstrap-codegen:blockStackRemoveLast:847:die 'Internal error: Trying to remove root block!'
++(0) /usr/bin/ember_bash_setup:die:70:source error-notify 'Internal error: Trying to remove root block!'
+++(0) /usr/bin/error-notify:source:10:[[ 1 -eq 0 ]]
+++(0) /usr/bin/error-notify:source:14:[[ Internal error: Trying to remove root block! =~ ^-?[0-9]+$ ]]
+++(1) /usr/bin/error-notify:source:24:ec=1
+++(0) /usr/bin/error-notify:source:26:printf %b '\033[1;31m'
++++(0) /usr/bin/error-notify:source:27:ps -o args= 8965
+++(0) /usr/bin/error-notify:source:27:printf '%s\n' 'bash ../../../../scripts/stagel-bootstrap-convert in/in.stagel js'
+bash ../../../../scripts/stagel-bootstrap-convert in/in.stagel js
++++(0) /usr/bin/error-notify:source:28:pwd
++++(0) /usr/bin/error-notify:source:28:emdate
++++(0) /usr/bin/error-notify:emdate:4:trap 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd)."' ERR
+++++(0) /usr/bin/error-notify:emdate:6:date +%Y-%m-%d-%H-%M-%S-%N
+++++(0) /usr/bin/error-notify:emdate:6:xxd -pu
++++++(0) /usr/bin/error-notify:emdate:6:date +%z
++++(0) /usr/bin/error-notify:emdate:6:temp=2019-05-17-23-23-18-503294982_2d303430300a
++++(0) /usr/bin/error-notify:emdate:7:echo 20190517232318503294982_2d303430300a
+++(0) /usr/bin/error-notify:source:28:printf '%s\n' 'failed with the error on /usr/bin/error-notify line 28 in /home/kyan/Ember Library/Ember/ember-information-technology-environment/scripts at 20190517232318503294982_2d303430300a:'
+failed with the error on /usr/bin/error-notify line 28 in /home/kyan/Ember Library/Ember/ember-information-technology-environment/scripts at 20190517232318503294982_2d303430300a:
+++(0) /usr/bin/error-notify:source:29:printf %s 'Internal error: Trying to remove root block!
+'
+Internal error: Trying to remove root block!
+++(0) /usr/bin/error-notify:source:30:printf %b '\033[0m'
++++(0) /usr/bin/error-notify:source:36:trap
+++(0) /usr/bin/error-notify:source:36:save_traps='trap -- '\''die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."'\'' ERR'
+++(0) /usr/bin/error-notify:source:37:trap 'eval "$save_traps"; false; exit 1' ERR
+++(0) /usr/bin/error-notify:source:38:exit 1
++++(1) /usr/bin/error-notify:source:38:eval 'trap -- '\''die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."'\'' ERR'
+++++(1) /usr/bin/error-notify:source:38:trap -- 'die "A fatal error was reported on ${BASH_SOURCE[0]} line ${LINENO} in $(pwd) at $(emdate)."' ERR
++++(0) /usr/bin/error-notify:source:38:false
++++(1) /usr/bin/error-notify:source:38:exit 1
+bash ./exec
+failed with the error on /usr/bin/error-notify line 28 in /home/kyan/Ember Library/Ember/ember-information-technology-environment/scripts at 20190517232318535051210_2d303430300a:
+A fatal error was reported on ../../../../scripts/stagel-bootstrap-convert line 39 in /home/kyan/Ember Library/Ember/ember-information-technology-environment/scripts at 20190518032318513563400U2d303430300a.
+bash ./tests/stagel-run-tests
+failed with the error on /usr/bin/error-notify line 28 in /home/kyan/Ember Library/Ember/ember-information-technology-environment/tests/stagel/js/routine-fizzbuzz at 20190517232318563501935_2d303430300a:
+A fatal error was reported on ./exec line 12 in /home/kyan/Ember Library/Ember/ember-information-technology-environment/tests/stagel/js/routine-fizzbuzz.
+Test stagel/js/routine-fizzbuzz failed.
+Test stagel/js/logical-or passed.
+Test stagel/js/generic-parameter passed.
+Test stagel/js/array-s passed.
+Test stagel/js/array-zero-only passed.
+Test stagel/js/bool-literal passed.
+Test stagel/js/str-escape-literal passed.
+Test stagel/js/else passed.
+Test stagel/js/elif passed.
+Test stagel/js/arglist-inline-end passed.
+Test stagel/js/loop-block-longhand passed.
+Test stagel/js/loop-block passed.
+Test stagel/js/wasm-tests passed.
+38 tests (97.436%) passed and 1 test (2.564%) failed out of a total of 39 tests.
+bash ./tests/stagel-run-tests
+failed with the error on /usr/bin/error-notify line 28 in /home/kyan/Ember Library/Ember/ember-information-technology-environment/tests at 20190517232322254239926_2d303430300a:
+Some tests (2.564%: 1 out of 39) failed!
+/bin/bash
+failed with the error on /usr/bin/error-notify line 28 in /home/kyan/Ember Library/Ember/ember-information-technology-environment/tests at 20190517232322286961541_2d303430300a:
+A fatal error was reported on /usr/bin/ember_bash_setup line 1388 in /home/kyan/Ember Library/Ember/ember-information-technology-environment/tests at 20190518032322262504369U2d303430300a.
+/bin/bash
+failed with the error on /usr/bin/error-notify line 28 in /home/kyan/Ember Library/Ember/ember-information-technology-environment at 20190517232322318757361_2d303430300a:
+A fatal error was reported on ./tests/stagel-run-tests line 52 in /home/kyan/Ember Library/Ember/ember-information-technology-environment at 20190518032322295282261U2d303430300a.
+/bin/bash
+failed with the error on /usr/bin/error-notify line 28 in /home/kyan/Ember Library/Ember/ember-information-technology-environment at 20190517232322372702469_2d303430300a:
+An error was reported on  line 19 in /home/kyan/Ember Library/Ember/ember-information-technology-environment at 20190518032322329110021U2d303430300a.
+kyan@elegiac ~/Ember Library/Ember/ember-information-technology-environment nohup compiz --replace openbox $ 

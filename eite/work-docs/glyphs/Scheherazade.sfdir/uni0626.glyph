@@ -1,0 +1,16 @@
+StartChar: uni0626
+Encoding: 1574 1574 310
+Width: 1130
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 450 -400 basechar 0
+AnchorPoint: "Anchor-1" 359 1008 basechar 0
+LayerCount: 2
+Fore
+Refer: 312 -1 N 1 0 0 1 0 0 3
+Refer: 1133 -1 N 1 0 0 1 409 690 2
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 7 subtable" uni064A uni0654
+Substitution2: "'medi' Medial Forms in Arabic lookup 3 subtable" uni0626.medi
+Substitution2: "'fina' Terminal Forms in Arabic lookup 2 subtable" uni0626.fina
+Substitution2: "'init' Initial Forms in Arabic lookup 1 subtable" uni0626.init
+EndChar

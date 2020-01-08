@@ -1,0 +1,14 @@
+StartChar: absLamRetroMed.preAlef
+Encoding: 66201 -1 1187
+Width: 522
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 250 -100 basechar 0
+AnchorPoint: "Anchor-2" 15 1360 basechar 0
+AnchorPoint: "Anchor-1" 143 1661 basechar 0
+AnchorPoint: "Cursive-0" 150 250 exit 0
+LayerCount: 2
+Fore
+Refer: 1182 -1 N 1 0 0 1 0 0 3
+Refer: 1131 -1 N 1 0 0 1 254 1177 2
+EndChar

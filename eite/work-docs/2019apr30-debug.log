@@ -1,0 +1,1028 @@
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:200:15
+<anonymous>
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:196:1
+Just finished setting up Library
+eite.js:1277:11
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:429:15
+<anonymous>
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:196:1
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:200:15
+<anonymous>
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:196:1
+Web wokrer is about to begin delegating requests
+eite.js:1277:11
+Just finished setting up Web Workers
+eite.js:1277:11
+Just finished setting up Library
+eite.js:1277:11
+Host got message 1 from worker: setSharedState,librarySetupFinished,true
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 1 from worker: setSharedState,librarySetupFinished,true
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 1 returned the result: undefined
+eite.js:1277:11
+Worker got message 1 from host: setupIfNeeded,
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Worker understood message 1 from host: setupIfNeeded,
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+setupIfNeeded
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:461:15
+eiteLibrarySetup/self.internalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:372:44
+eiteLibrarySetup/self.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:390:17
+Host got message 2 from worker: getSharedState,librarySetupFinished
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 2 from worker: getSharedState,librarySetupFinished
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup/window.eiteHostRequestInternalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:309:50
+eiteLibrarySetup/window.eiteWorker.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:339:21
+Request made of host by worker in message 2 returned the result: true
+eite.js:1277:11
+Worker got message 1 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 1.
+eite.js:1277:11
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:429:15
+<anonymous>
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:196:1
+Host got message 3 from worker: getSharedState,STAGEL_DEBUG_UNSET
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 3 from worker: getSharedState,STAGEL_DEBUG_UNSET
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup/window.eiteHostRequestInternalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:309:50
+eiteLibrarySetup/window.eiteWorker.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:339:21
+Request made of host by worker in message 3 returned the result: true
+eite.js:1277:11
+Worker got message 2 from host: true
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:200:15
+setupIfNeeded
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:462:15
+eiteLibrarySetup/self.internalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:372:44
+eiteLibrarySetup/self.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:390:17
+Host got message 4 from worker: getSharedState,STAGEL_DEBUG
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 4 from worker: getSharedState,STAGEL_DEBUG
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup/window.eiteHostRequestInternalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:309:50
+eiteLibrarySetup/window.eiteWorker.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:339:21
+Request made of host by worker in message 4 returned the result: 1
+eite.js:1277:11
+Worker got message 3 from host: true
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Worker got message 4 from host: 1
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:204:15
+setupIfNeeded
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:462:15
+eiteLibrarySetup/self.internalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:372:44
+eiteLibrarySetup/self.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:390:17
+Host got message 5 from worker: getSharedState,EITE_STORAGE_CFG
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 5 from worker: getSharedState,EITE_STORAGE_CFG
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup/window.eiteHostRequestInternalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:309:50
+eiteLibrarySetup/window.eiteWorker.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:339:21
+Request made of host by worker in message 5 returned the result: 
+eite.js:1277:11
+Worker got message 5 from host: 
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:207:15
+setupIfNeeded
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:462:15
+eiteLibrarySetup/self.internalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:372:44
+eiteLibrarySetup/self.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:390:17
+Host got message 6 from worker: getSharedState,importSettings
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 6 from worker: getSharedState,importSettings
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup/window.eiteHostRequestInternalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:309:50
+eiteLibrarySetup/window.eiteWorker.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:339:21
+Request made of host by worker in message 6 returned the result: 
+eite.js:1277:11
+Worker got message 6 from host: 
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:210:15
+setupIfNeeded
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:462:15
+eiteLibrarySetup/self.internalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:372:44
+eiteLibrarySetup/self.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:390:17
+Host got message 7 from worker: getSharedState,exportSettings
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 7 from worker: getSharedState,exportSettings
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup/window.eiteHostRequestInternalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:309:50
+eiteLibrarySetup/window.eiteWorker.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:339:21
+Request made of host by worker in message 7 returned the result: 
+eite.js:1277:11
+Worker got message 7 from host: 
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:213:15
+setupIfNeeded
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:462:15
+eiteLibrarySetup/self.internalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:372:44
+eiteLibrarySetup/self.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:390:17
+Host got message 8 from worker: getSharedState,envPreferredFormat
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 8 from worker: getSharedState,envPreferredFormat
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup/window.eiteHostRequestInternalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:309:50
+eiteLibrarySetup/window.eiteWorker.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:339:21
+Request made of host by worker in message 8 returned the result: 
+eite.js:1277:11
+Worker got message 8 from host: 
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:216:15
+setupIfNeeded
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:462:15
+eiteLibrarySetup/self.internalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:372:44
+eiteLibrarySetup/self.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:390:17
+Host got message 9 from worker: getSharedState,envCharEncoding
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 9 from worker: getSharedState,envCharEncoding
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup/window.eiteHostRequestInternalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:309:50
+eiteLibrarySetup/window.eiteWorker.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:339:21
+Request made of host by worker in message 9 returned the result: asciiSafeSubset
+eite.js:1277:11
+Worker got message 9 from host: asciiSafeSubset
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:219:15
+setupIfNeeded
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:462:15
+eiteLibrarySetup/self.internalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:372:44
+eiteLibrarySetup/self.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:390:17
+Host got message 10 from worker: getSharedState,envTerminalType
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 10 from worker: getSharedState,envTerminalType
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup/window.eiteHostRequestInternalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:309:50
+eiteLibrarySetup/window.eiteWorker.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:339:21
+Request made of host by worker in message 10 returned the result: vt100
+eite.js:1277:11
+Worker got message 10 from host: vt100
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:222:15
+setupIfNeeded
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:462:15
+eiteLibrarySetup/self.internalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:372:44
+eiteLibrarySetup/self.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:390:17
+Host got message 11 from worker: getSharedState,envLanguage
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 11 from worker: getSharedState,envLanguage
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup/window.eiteHostRequestInternalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:309:50
+eiteLibrarySetup/window.eiteWorker.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:339:21
+Request made of host by worker in message 11 returned the result: en-US
+eite.js:1277:11
+Worker got message 11 from host: en-US
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:225:15
+setupIfNeeded
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:462:15
+eiteLibrarySetup/self.internalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:372:44
+eiteLibrarySetup/self.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:390:17
+Host got message 12 from worker: getSharedState,envLocaleConfig
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 12 from worker: getSharedState,envLocaleConfig
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup/window.eiteHostRequestInternalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:309:50
+eiteLibrarySetup/window.eiteWorker.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:339:21
+Request made of host by worker in message 12 returned the result: inherit:usa,
+eite.js:1277:11
+Worker got message 12 from host: inherit:usa,
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:228:15
+setupIfNeeded
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:462:15
+eiteLibrarySetup/self.internalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:372:44
+eiteLibrarySetup/self.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:390:17
+Host got message 13 from worker: getSharedState,envCodeLanguage
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 13 from worker: getSharedState,envCodeLanguage
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup/window.eiteHostRequestInternalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:309:50
+eiteLibrarySetup/window.eiteWorker.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:339:21
+Request made of host by worker in message 13 returned the result: javascript
+eite.js:1277:11
+Worker got message 13 from host: javascript
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:231:15
+setupIfNeeded
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:462:15
+eiteLibrarySetup/self.internalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:372:44
+eiteLibrarySetup/self.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:390:17
+Host got message 14 from worker: getSharedState,envResolutionW
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 14 from worker: getSharedState,envResolutionW
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup/window.eiteHostRequestInternalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:309:50
+eiteLibrarySetup/window.eiteWorker.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:339:21
+Request made of host by worker in message 14 returned the result: 0
+eite.js:1277:11
+Worker got message 14 from host: 0
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:234:15
+setupIfNeeded
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:462:15
+eiteLibrarySetup/self.internalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:372:44
+eiteLibrarySetup/self.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:390:17
+Host got message 15 from worker: getSharedState,envResolutionH
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 15 from worker: getSharedState,envResolutionH
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+console.trace()
+eite.js:437:5
+getSharedState
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:437:5
+eiteLibrarySetup/window.eiteHostRequestInternalOnMessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:309:50
+eiteLibrarySetup/window.eiteWorker.onmessage
+file:///library/Ember/ember-information-technology-environment/built/web/eite.js:339:21
+Request made of host by worker in message 15 returned the result: 0
+eite.js:1277:11
+Worker got message 15 from host: 0
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host got message 16 from worker: setSharedState,datasets,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 16 from worker: setSharedState,datasets,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 16 returned the result: undefined
+eite.js:1277:11
+Worker got message 16 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 16.
+eite.js:1277:11
+Host got message 17 from worker: setSharedState,datasetsLoaded,false
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 17 from worker: setSharedState,datasetsLoaded,false
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 17 returned the result: undefined
+eite.js:1277:11
+Worker got message 17 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 17.
+eite.js:1277:11
+Host got message 18 from worker: setSharedState,dcData,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 18 from worker: setSharedState,dcData,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 18 returned the result: undefined
+eite.js:1277:11
+Worker got message 18 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 18.
+eite.js:1277:11
+Host got message 19 from worker: setSharedState,strArrayDocumentExecData,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 19 from worker: setSharedState,strArrayDocumentExecData,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 19 returned the result: undefined
+eite.js:1277:11
+Worker got message 19 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 19.
+eite.js:1277:11
+Host got message 20 from worker: setSharedState,strArrayDocumentExecSymbolIndex,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 20 from worker: setSharedState,strArrayDocumentExecSymbolIndex,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 20 returned the result: undefined
+eite.js:1277:11
+Worker got message 20 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 20.
+eite.js:1277:11
+Host got message 21 from worker: setSharedState,strArrayDocumentExecPtrs,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 21 from worker: setSharedState,strArrayDocumentExecPtrs,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 21 returned the result: undefined
+eite.js:1277:11
+Worker got message 21 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 21.
+eite.js:1277:11
+Host got message 22 from worker: setSharedState,strArrayDocumentExecFrames,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 22 from worker: setSharedState,strArrayDocumentExecFrames,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 22 returned the result: undefined
+eite.js:1277:11
+Worker got message 22 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 22.
+eite.js:1277:11
+Host got message 23 from worker: setSharedState,strArrayDocumentExecEvents,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 23 from worker: setSharedState,strArrayDocumentExecEvents,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 23 returned the result: undefined
+eite.js:1277:11
+Worker got message 23 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 23.
+eite.js:1277:11
+Host got message 24 from worker: setSharedState,strArrayDocumentExecLogs,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 24 from worker: setSharedState,strArrayDocumentExecLogs,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 24 returned the result: undefined
+eite.js:1277:11
+Worker got message 24 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 24.
+eite.js:1277:11
+Host got message 25 from worker: setSharedState,strArrayDocumentExecSettings,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 25 from worker: setSharedState,strArrayDocumentExecSettings,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 25 returned the result: undefined
+eite.js:1277:11
+Worker got message 25 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 25.
+eite.js:1277:11
+Host got message 26 from worker: setSharedState,librarySetupFinished,false
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 26 from worker: setSharedState,librarySetupFinished,false
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 26 returned the result: undefined
+eite.js:1277:11
+Worker got message 26 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 26.
+eite.js:1277:11
+Host got message 27 from worker: setSharedState,setupFinished,false
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 27 from worker: setSharedState,setupFinished,false
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 27 returned the result: undefined
+eite.js:1277:11
+Worker got message 27 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 27.
+eite.js:1277:11
+Host got message 28 from worker: setSharedState,intPassedTests,0
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 28 from worker: setSharedState,intPassedTests,0
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 28 returned the result: undefined
+eite.js:1277:11
+Worker got message 28 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 28.
+eite.js:1277:11
+Host got message 29 from worker: setSharedState,intFailedTests,0
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 29 from worker: setSharedState,intFailedTests,0
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 29 returned the result: undefined
+eite.js:1277:11
+Worker got message 29 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 29.
+eite.js:1277:11
+Host got message 30 from worker: setSharedState,intTotalTests,0
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 30 from worker: setSharedState,intTotalTests,0
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 30 returned the result: undefined
+eite.js:1277:11
+Worker got message 30 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 30.
+eite.js:1277:11
+Host got message 31 from worker: setSharedState,intArrayTestFrameBuffer,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 31 from worker: setSharedState,intArrayTestFrameBuffer,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 31 returned the result: undefined
+eite.js:1277:11
+Worker got message 31 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 31.
+eite.js:1277:11
+Host got message 32 from worker: setSharedState,eiteWasmModule,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 32 from worker: setSharedState,eiteWasmModule,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 32 returned the result: undefined
+eite.js:1277:11
+Worker got message 32 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 32.
+eite.js:1277:11
+Host got message 33 from worker: setSharedState,strArrayImportDeferredSettingsStack,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 33 from worker: setSharedState,strArrayImportDeferredSettingsStack,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 33 returned the result: undefined
+eite.js:1277:11
+Worker got message 33 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 33.
+eite.js:1277:11
+Host got message 34 from worker: setSharedState,strArrayExportDeferredSettingsStack,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 34 from worker: setSharedState,strArrayExportDeferredSettingsStack,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 34 returned the result: undefined
+eite.js:1277:11
+Worker got message 34 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 34.
+eite.js:1277:11
+Host got message 35 from worker: setSharedState,strArrayImportWarnings,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 35 from worker: setSharedState,strArrayImportWarnings,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 35 returned the result: undefined
+eite.js:1277:11
+Worker got message 35 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 35.
+eite.js:1277:11
+Host got message 36 from worker: setSharedState,strArrayExportWarnings,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 36 from worker: setSharedState,strArrayExportWarnings,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 36 returned the result: undefined
+eite.js:1277:11
+Worker got message 36 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 36.
+eite.js:1277:11
+Host got message 37 from worker: setSharedState,strArrayStorageCfg,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 37 from worker: setSharedState,strArrayStorageCfg,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 37 returned the result: undefined
+eite.js:1277:11
+Worker got message 37 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 37.
+eite.js:1277:11
+Host got message 38 from worker: setSharedState,ipfsNode,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 38 from worker: setSharedState,ipfsNode,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 38 returned the result: undefined
+eite.js:1277:11
+Worker got message 38 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 38.
+eite.js:1277:11
+Host got message 39 from worker: setSharedState,haveDom,false
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 39 from worker: setSharedState,haveDom,false
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 39 returned the result: undefined
+eite.js:1277:11
+Worker got message 39 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 39.
+eite.js:1277:11
+Host got message 40 from worker: setSharedState,internalDelegateStateRequests,false
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 40 from worker: setSharedState,internalDelegateStateRequests,false
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 40 returned the result: undefined
+eite.js:1277:11
+Worker got message 40 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 40.
+eite.js:1277:11
+Host got message 41 from worker: setSharedState,stagelDebugCallstack,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 41 from worker: setSharedState,stagelDebugCallstack,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 41 returned the result: undefined
+eite.js:1277:11
+Worker got message 41 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 41.
+eite.js:1277:11
+Host got message 42 from worker: setSharedState,stagelDebugCallNames,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 42 from worker: setSharedState,stagelDebugCallNames,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 42 returned the result: undefined
+eite.js:1277:11
+Worker got message 42 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 42.
+eite.js:1277:11
+Host got message 43 from worker: setSharedState,stagelDebugCallCounts,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 43 from worker: setSharedState,stagelDebugCallCounts,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 43 returned the result: undefined
+eite.js:1277:11
+Worker got message 43 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 43.
+eite.js:1277:11
+Host got message 44 from worker: setSharedState,stagelDebugCollection,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 44 from worker: setSharedState,stagelDebugCollection,
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 44 returned the result: undefined
+eite.js:1277:11
+Worker got message 44 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 44.
+eite.js:1277:11
+Web wokrer is about to begin delegating requests
+eite.js:1277:11
+Host got message 1 from worker: setSharedState,internalDelegateStateRequests,true
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 1 from worker: setSharedState,internalDelegateStateRequests,true
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Request made of host by worker in message 1 returned the result: undefined
+eite.js:1277:11
+Worker got message 1 from host: undefined
+eite.js:1277:11
+[object MessageEvent]
+eite.js:1443:9
+Host sent undefined contents in message 1.
+eite.js:1277:11
+Just finished setting up Web Workers
+eite.js:1277:11
+Just finished setting up Library
+eite.js:1277:11
+Host got message 2 from worker: setSharedState,librarySetupFinished,true
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+Host understood message 2 from worker: setSharedState,librarySetupFinished,true
+eite.js:1277:11
+message { target: Worker, isTrusted: true, data: {…}, origin: "", lastEventId: "", ports: Restricted, currentTarget: Worker, eventPhase: 2, bubbles: false, cancelable: false, … }
+eite.js:1443:9
+too much recursion[Learn More]
+eite.js:446:1
+unreachable code after return statement[Learn More]
+edit.html:27440:8
+unreachable code after return statement[Learn More]
+edit.html:29405:12
+unreachable code after return statement[Learn More]
+edit.html:30157:28

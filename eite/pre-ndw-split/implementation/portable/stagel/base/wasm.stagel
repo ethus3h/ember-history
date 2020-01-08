@@ -1,0 +1,57 @@
+# For now, I'm inclined to skip implementing wasm right now, and just have a stub interface here. It seems well specced and portable, so I think it *can* be at some point. It would be nice if it were already implemented in StageL, but I might have to do that later.
+# Copies of the current versions as of this writing (latest git commits) of wac, WebAssembly spec, and dependencies are included in work-docs/wasm for easy access, and are covered under their respective licenses. The following repositories are there:
+# https://github.com/kanaka/wac
+# https://github.com/kanaka/fooboot
+# https://github.com/WebAssembly/wabt
+# https://github.com/WebAssembly/spec
+# https://github.com/WebAssembly/testsuite
+# https://github.com/google/googletest
+# https://github.com/dabeaz/ply
+
+r/v/wasmCheckForError s/caller gi/arg
+    new s/argStr
+    if isArray gi/arg
+        set s/argStr printArray gi/arg
+    else
+        set s/argStr strFrom gi/arg
+    new n/err
+    set n/err internalWasmCall 'checkForError'
+    # await console.log('intErr='+intErr+typeof intErr);
+    # await console.log('strArgStr='+strArgStr+typeof strArgStr);
+    # Next line seems to crash with intErr being a null object. Why????
+    # await console.log(await ne(intErr, 0));
+    # return;
+    warn 'WASM error checking does not yet work.'
+    #if ne 0 n/err
+        #die cat 'WebAssembly call to ' cat s/caller cat ' with the argument ' cat s/argStr ' reported an error.'
+
+r/n/wasmCall s/routine n/val
+    new n/res
+    set n/res internalWasmCall s/routine n/val
+    wasmCheckForError s/routine n/val
+    return n/res
+
+r/n/wasmCallNoArgs s/routine
+    # Only returns an int
+    new n/res
+    set n/res internalWasmCallNoArgs s/routine
+    wasmCheckForError s/routine
+    return n/res
+
+r/n/wasmCallArrIn s/routine an/vals
+    new n/res
+    set n/res internalWasmCallArrIn s/routine an/vals
+    wasmCheckForError s/routine an/vals
+    return n/res
+
+r/an/wasmCallArrOut s/routine n/val
+    new an/res
+    set n/res internalWasmCallArrOut s/routine n/val
+    wasmCheckForError s/routine n/val
+    return an/res
+
+r/an/wasmCallArrInOut s/routine an/vals
+    new an/res
+    set n/res internalWasmCallArrInOut s/routine an/vals
+    wasmCheckForError s/routine an/vals
+    return an/res

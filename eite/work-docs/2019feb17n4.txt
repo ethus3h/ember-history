@@ -1,0 +1,320 @@
+make[4]: *** [CMakeFiles/wabt.dir/build.make:68: CMakeFiles/wabt.dir/src/apply-names.cc.o] Error 1
+make[3]: *** [CMakeFiles/Makefile2:68: CMakeFiles/wabt.dir/all] Error 2
+make[2]: *** [Makefile:84: all] Error 2
+make[1]: *** [Makefile:169: emscripten-release] Error 2
+make[1]: Leaving directory '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8'
+removed 'out/emscripten/Release/CMakeCache.txt'
+removed 'out/emscripten/Release/CMakeFiles/Makefile2'
+removed 'out/emscripten/Release/CMakeFiles/CMakeDirectoryInformation.cmake'
+removed directory 'out/emscripten/Release/CMakeFiles/CMakeTmp'
+removed 'out/emscripten/Release/CMakeFiles/WAST_LEXER_GEN_CC.dir/progress.make'
+removed 'out/emscripten/Release/CMakeFiles/WAST_LEXER_GEN_CC.dir/build.make'
+removed 'out/emscripten/Release/CMakeFiles/WAST_LEXER_GEN_CC.dir/cmake_clean.cmake'
+removed 'out/emscripten/Release/CMakeFiles/WAST_LEXER_GEN_CC.dir/DependInfo.cmake'
+removed directory 'out/emscripten/Release/CMakeFiles/WAST_LEXER_GEN_CC.dir'
+removed 'out/emscripten/Release/CMakeFiles/Progress/count.txt'
+removed 'out/emscripten/Release/CMakeFiles/Progress/4'
+removed 'out/emscripten/Release/CMakeFiles/Progress/5'
+removed directory 'out/emscripten/Release/CMakeFiles/Progress'
+removed 'out/emscripten/Release/CMakeFiles/TargetDirectories.txt'
+removed 'out/emscripten/Release/CMakeFiles/CMakeError.log'
+removed 'out/emscripten/Release/CMakeFiles/Makefile.cmake'
+removed 'out/emscripten/Release/CMakeFiles/everything.dir/progress.make'
+removed 'out/emscripten/Release/CMakeFiles/everything.dir/build.make'
+removed 'out/emscripten/Release/CMakeFiles/everything.dir/cmake_clean.cmake'
+removed 'out/emscripten/Release/CMakeFiles/everything.dir/DependInfo.cmake'
+removed directory 'out/emscripten/Release/CMakeFiles/everything.dir'
+removed 'out/emscripten/Release/CMakeFiles/CheckTypeSize/SSIZE_T.c'
+removed 'out/emscripten/Release/CMakeFiles/CheckTypeSize/SIZEOF_SIZE_T.c'
+removed directory 'out/emscripten/Release/CMakeFiles/CheckTypeSize'
+removed 'out/emscripten/Release/CMakeFiles/cmake.check_cache'
+removed 'out/emscripten/Release/CMakeFiles/CMakeOutput.log'
+removed 'out/emscripten/Release/CMakeFiles/CMakeRuleHashes.txt'
+removed directory 'out/emscripten/Release/CMakeFiles/libwabtjs.dir/src'
+removed 'out/emscripten/Release/CMakeFiles/libwabtjs.dir/progress.make'
+removed 'out/emscripten/Release/CMakeFiles/libwabtjs.dir/depend.make'
+removed 'out/emscripten/Release/CMakeFiles/libwabtjs.dir/link.txt'
+removed 'out/emscripten/Release/CMakeFiles/libwabtjs.dir/linklibs.rsp'
+removed 'out/emscripten/Release/CMakeFiles/libwabtjs.dir/objects1.rsp'
+removed 'out/emscripten/Release/CMakeFiles/libwabtjs.dir/flags.make'
+removed 'out/emscripten/Release/CMakeFiles/libwabtjs.dir/build.make'
+removed 'out/emscripten/Release/CMakeFiles/libwabtjs.dir/includes_CXX.rsp'
+removed 'out/emscripten/Release/CMakeFiles/libwabtjs.dir/cmake_clean.cmake'
+removed 'out/emscripten/Release/CMakeFiles/libwabtjs.dir/DependInfo.cmake'
+removed directory 'out/emscripten/Release/CMakeFiles/libwabtjs.dir'
+removed 'out/emscripten/Release/CMakeFiles/progress.marks'
+removed directory 'out/emscripten/Release/CMakeFiles/wabt.dir/src/interp'
+removed directory 'out/emscripten/Release/CMakeFiles/wabt.dir/src'
+removed 'out/emscripten/Release/CMakeFiles/wabt.dir/progress.make'
+removed 'out/emscripten/Release/CMakeFiles/wabt.dir/depend.make'
+removed 'out/emscripten/Release/CMakeFiles/wabt.dir/CXX.includecache'
+removed 'out/emscripten/Release/CMakeFiles/wabt.dir/link.txt'
+removed 'out/emscripten/Release/CMakeFiles/wabt.dir/C.includecache'
+removed 'out/emscripten/Release/CMakeFiles/wabt.dir/objects1.rsp'
+removed 'out/emscripten/Release/CMakeFiles/wabt.dir/flags.make'
+removed 'out/emscripten/Release/CMakeFiles/wabt.dir/includes_C.rsp'
+removed 'out/emscripten/Release/CMakeFiles/wabt.dir/cmake_clean_target.cmake'
+removed 'out/emscripten/Release/CMakeFiles/wabt.dir/build.make'
+removed 'out/emscripten/Release/CMakeFiles/wabt.dir/includes_CXX.rsp'
+removed 'out/emscripten/Release/CMakeFiles/wabt.dir/cmake_clean.cmake'
+removed 'out/emscripten/Release/CMakeFiles/wabt.dir/DependInfo.cmake'
+removed 'out/emscripten/Release/CMakeFiles/wabt.dir/depend.internal'
+removed directory 'out/emscripten/Release/CMakeFiles/wabt.dir'
+removed 'out/emscripten/Release/CMakeFiles/3.9.6/CMakeSystem.cmake'
+removed 'out/emscripten/Release/CMakeFiles/3.9.6/CMakeCCompiler.cmake'
+removed 'out/emscripten/Release/CMakeFiles/3.9.6/CMakeCXXCompiler.cmake'
+removed directory 'out/emscripten/Release/CMakeFiles/3.9.6'
+removed directory 'out/emscripten/Release/CMakeFiles'
+removed 'out/emscripten/Release/config.h'
+removed 'out/emscripten/Release/wast-lexer-gen.cc'
+removed 'out/emscripten/Release/cmake_install.cmake'
+removed 'out/emscripten/Release/Makefile'
+removed directory 'out/emscripten/Release'
+removed directory 'out/emscripten'
+removed directory 'out'
+elegiac /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8 # env
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.cfg=00;32:*.conf=00;32:*.diff=00;32:*.doc=00;32:*.ini=00;32:*.log=00;32:*.patch=00;32:*.pdf=00;32:*.ps=00;32:*.tex=00;32:*.txt=00;32:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+LANG=en_US.utf8
+QT_GRAPHICSSYSTEM=raster
+LESS=-R -M --shift 5
+SUDO_GID=1000
+DISPLAY=:0
+OPENGL_PROFILE=xorg-x11
+OLDPWD=/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999
+NIX_REMOTE=daemon
+CONFIG_PROTECT_MASK=/etc/sandbox.d /etc/php/cli-php5.6/ext-active/ /etc/php/cgi-php5.6/ext-active/ /etc/php/apache2-php5.6/ext-active/ /etc/php/cli-php7.1/ext-active/ /etc/php/cgi-php7.1/ext-active/ /etc/php/apache2-php7.1/ext-active/ /etc/fonts/fonts.conf /etc/gentoo-release /etc/gconf /etc/terminfo /etc/dconf /etc/ca-certificates.conf /etc/texmf/web2c /etc/texmf/language.dat.d /etc/texmf/language.def.d /etc/texmf/updmap.d /etc/revdep-rebuild
+EDITOR=/bin/nano
+GTK_CSD=0
+COLORTERM=truecolor
+USERNAME=root
+JAVA_HOME=/etc/java-config-2/current-system-vm
+SUDO_COMMAND=/bin/bash
+CFLAGS=
+GCC_SPECS=
+EMCC_TEMP_DIR=/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/.emscripten_temp
+INFINALITY_FT_STEM_FITTING_STRENGTH=15
+VBOX_APP_HOME=/usr/lib64/virtualbox
+USER=root
+CXXFLAGS=
+PAGER=/usr/bin/less
+PYTHONDOCS_2_7=/usr/share/doc/python-docs-2.7.14/html/library
+PYTHONDOCS=/usr/share/doc/python-docs-2.7.14/html/library
+NIX_PATH=/nix/var/nix/profiles/per-user/root/channels:nixpkgs=/root/.nix-defexpr/channels/nixpkgs
+PWD=/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8
+emberCrystallizeVersion=3.1.2.5.14.239
+MANPAGER=manpager
+HOME=/root
+SUDO_USER=kyan
+GSETTINGS_BACKEND=dconf
+XDG_DATA_DIRS=/usr/local/share:/usr/trinity/14/share:/usr/share:/usr/share/mesa/xdg
+FLTK_DOCDIR=/usr/share/doc/fltk-1.3.3-r3/html
+TEXINPUTS=/usr/lib64/ocaml/ocamldoc:
+JDK_HOME=/etc/java-config-2/current-system-vm
+R_HOME=/usr/lib64/R
+INFINALITY_FT_WINDOWS_STYLE_SHARPENING_STRENGTH=25
+LADSPA_PATH=/usr/lib64/ladspa
+TEMP_DIR=/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/.emscripten_temp
+SUDO_UID=1000
+MAIL=/var/mail/root
+EM_CACHE=/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/.emscripten_cache
+QT_PLUGIN_PATH=/usr/kde4/lib64/kde4/plugins
+CONFIG_PROTECT=/usr/share/gnupg/qualified.txt /usr/share/config /usr/trinity/14/share/config /usr/trinity/14/env /usr/trinity/14/shutdown /var/spool/fax/etc /usr/lib64/fax /usr/share/themes/oxygen-gtk/gtk-2.0
+SHELL=/bin/bash
+TERM=xterm-256color
+INFINALITY_FT_USE_VARIOUS_TWEAKS=true
+JAVAC=/etc/java-config-2/current-system-vm/bin/javac
+EM_PORTS=/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/.emscripten_ports
+OPENCL_PROFILE=mesa
+MOZ_GMP_PATH=/usr/lib64/nsbrowser/plugins/gmp-gmpopenh264/system-installed
+NIX_SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+SHLVL=1
+LANGUAGE=en_GB
+MANPATH=/root/.nix-profile/share/man:/etc/java-config-2/current-system-vm/man:/usr/share/gcc-data/x86_64-pc-linux-gnu/7.3.1/man:/usr/share/binutils-data/x86_64-pc-linux-gnu/2.30/man:/usr/lib/llvm/9/share/man:/usr/lib/llvm/5/share/man:/etc/java-config-2/current-system-vm/man/:/usr/lib64/php5.6/man/:/usr/lib64/php7.1/man/:/usr/tqt3/doc/man:/usr/trinity/14/share/man:/usr/local/share/man:/usr/share/man:/usr/share/rust-1.29.1/man
+LOGNAME=root
+IBPATH=/usr/sbin
+XAUTHORITY=/home/kyan/.Xauthority
+emberSharedVersion=1.1.4.378
+ANT_HOME=/usr/share/ant
+XDG_CONFIG_DIRS=/etc/xdg
+PATH=/usr/local/bin/:/usr/sbin/:/sbin/:/root/.nix-profile/bin:/root/.nix-profile/bin:/root/.nix-profile/lib/kde4/libexec:/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default:/nix/var/nix/profiles/default/lib/kde4/libexec:/usr/lib/llvm/9/bin:/usr/lib/llvm/5/bin:/usr/tqt3/bin:/usr/trinity/14/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin:/usr/lib64/subversion/bin:/usr/games/bin:/usr/kde4/bin:/var/spool/fax/bin:/root/.gem/ruby/2.4.0/bin
+INFINALITY_FT_FILTER_PARAMS=08 24 36 24 08
+INFINALITY_FT_STEM_ALIGNMENT_STRENGTH=15
+PS4=+($?) $BASH_SOURCE:$FUNCNAME:$LINENO:
+PKG_CONFIG_PATH=/usr/trinity/14/lib64/pkgconfig
+INFOPATH=/usr/share/gcc-data/x86_64-pc-linux-gnu/7.3.1/info:/usr/share/binutils-data/x86_64-pc-linux-gnu/2.30/info:/usr/share/info:/usr/share/info/emacs-25
+LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
+INFINALITY_FT_FRINGE_FILTER_STRENGTH=25
+EM_CONFIG=/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/.emscripten
+LESSOPEN=|lesspipe %s
+BASH_FUNC_egupexit%%=() {  if ! [[ -f .egup.environment ]]; then
+ true;
+ else
+ [[ -n "$egupDir" ]] || egupDir=".";
+ if [[ -f "${egupDir:?}/.egup.useOverrides" ]]; then
+ if [[ "$(readlink -f "$(pwd)")" != "$(readlink -f "$egupDir")" ]]; then
+ if [[ -f .egup.nopush ]]; then
+ mv -vf .egup.nopush "$egupDir/.egup.nopush";
+ fi;
+ if [[ -f .egup.nopush.bak ]]; then
+ echo "Restoring .egup.nopush";
+ mv -v .egup.nopush.bak .egup.nopush;
+ fi;
+ if [[ -f .gitattributes ]]; then
+ mv -vf .gitattributes "$egupDir/.egup.gitattributes";
+ fi;
+ if [[ -f .egup.gitattributes.bak ]]; then
+ echo "Restoring overridden .gitattributes";
+ mv -v .egup.gitattributes.bak .gitattributes;
+ fi;
+ if [[ -f .gitignore ]]; then
+ mv -vf .gitignore "$egupDir/.egup.gitignore";
+ fi;
+ if [[ -f .egup.gitignore.bak ]]; then
+ echo "Restoring overridden .gitignore";
+ mv -v .egup.gitignore.bak .gitignore;
+ fi;
+ if [[ -f .gitmodules ]]; then
+ mv -vf .gitmodules "$egupDir/.egup.gitmodules";
+ fi;
+ if [[ -f .egup.gitmodules.bak ]]; then
+ echo "Restoring overridden .gitmodules";
+ mv -v .egup.gitmodules.bak .gitmodules;
+ fi;
+ if [[ -f README.md ]]; then
+ mv -vf README.md "$egupDir/.egup.readme";
+ fi;
+ if [[ -f .egup.readme.bak ]]; then
+ echo "Restoring overridden README.md";
+ mv -v .egup.readme.bak README.md;
+ fi;
+ if [[ -f .egup.branches ]]; then
+ mv -vf .egup.branches "$egupDir/.egup.branches";
+ fi;
+ if [[ -f .egup.branches.bak ]]; then
+ echo "Restoring overridden .egup.branches";
+ mv -v .egup.branches.bak .egup.branches;
+ fi;
+ if [[ -f .egup.refs ]]; then
+ mv -vf .egup.refs "$egupDir/.egup.refs";
+ fi;
+ if [[ -f .egup.refs.bak ]]; then
+ echo "Restoring overridden .egup.refs";
+ mv -v .egup.refs.bak .egup.refs;
+ fi;
+ if [[ -f .egup.tags ]]; then
+ mv -vf .egup.tags "$egupDir/.egup.tags";
+ fi;
+ if [[ -f .egup.tags.bak ]]; then
+ echo "Restoring overridden .egup.tags";
+ mv -v .egup.tags.bak .egup.tags;
+ fi;
+ fi;
+ GIT_WORK_TREE="$worktreebak";
+ export GIT_WORK_TREE;
+ GIT_DIR="$gitdirbak";
+ export GIT_DIR;
+ PS1="$egupEnvPsbak";
+ rm .egup.environment;
+ cd "$egupDir" || exit 1;
+ fi;
+ fi
+}
+_=/usr/bin/env
+elegiac /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8 # 
+make[1]: warning: jobserver unavailable: using -j1.  Add '+' to parent make rule.
+make[1]: Entering directory '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8'
+mkdir -p out/emscripten/Release/
+cd out/emscripten/Release/ && cmake -G "Unix Makefiles" /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/ -DCMAKE_TOOLCHAIN_FILE=/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8//emscripten/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_BUILD_TYPE=Release 
+-- Looking for alloca.h
+-- Looking for alloca.h - not found
+-- Looking for unistd.h
+-- Looking for unistd.h - not found
+-- Looking for snprintf
+-- Looking for snprintf - not found
+-- Looking for sysconf
+-- Looking for sysconf - not found
+-- Looking for strcasecmp
+-- Looking for strcasecmp - not found
+-- Looking for sys/types.h
+-- Looking for sys/types.h - not found
+-- Looking for stdint.h
+-- Looking for stdint.h - not found
+-- Looking for stddef.h
+-- Looking for stddef.h - not found
+-- Check size of ssize_t
+-- Check size of ssize_t - failed
+-- Check size of size_t
+-- Check size of size_t - failed
+-- Found RE2C: /usr/bin/re2c  
+-- Using generated re2c lexer
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/out/emscripten/Release
+make --no-print-directory -C out/emscripten/Release/ all
+[  2%] [RE2C][WAST_LEXER_GEN_CC] Building lexer with re2c 0.101.1
+Scanning dependencies of target wabt
+[  4%] Building CXX object CMakeFiles/wabt.dir/src/apply-names.cc.o
+In file included from /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/src/apply-names.cc:17:
+In file included from /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/src/apply-names.h:20:
+In file included from /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/src/common.h:33:
+/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/out/emscripten/Release/config.h:273:2: error: 
+      no snprintf
+#error no snprintf
+ ^
+/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8/out/emscripten/Release/config.h:291:2: error: 
+      no strcasecmp
+#error no strcasecmp
+ ^
+2 errors generated.
+shared:ERROR: compiler frontend failed to generate LLVM bitcode, halting
+make[4]: *** [CMakeFiles/wabt.dir/build.make:68: CMakeFiles/wabt.dir/src/apply-names.cc.o] Error 1
+make[3]: *** [CMakeFiles/Makefile2:68: CMakeFiles/wabt.dir/all] Error 2
+make[2]: *** [Makefile:84: all] Error 2
+make[1]: *** [Makefile:169: emscripten-release] Error 2
+make[1]: Leaving directory '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8'
+bash support/build-scripts/build --somewhat-verbose
+failed with the error on /usr/bin/error-notify line 28 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8 at 20190217211625992991527_2d303530300a:
+A fatal error was reported on ./support/dist-build line 155 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8 at 20190218021625901587207U2d303530300a.
+bash support/build-scripts/build --somewhat-verbose
+failed with the error on /usr/bin/error-notify line 28 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8 at 20190217211626113660225_2d303530300a:
+A fatal error was reported on ./support/dist-build line 158 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999/build-temp/build/wabt-1.0.8 at 20190218021626012299630U2d303530300a.
+bash support/build-scripts/build --somewhat-verbose
+failed with the error on /usr/bin/error-notify line 28 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999 at 20190217211626232704305_2d303530300a:
+A fatal error was reported on ./support/dist-build line 158 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999 at 20190218021626142553969U2d303530300a.
+bash support/prepare eite --override-data-dir=
+failed with the error on /usr/bin/error-notify line 28 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999 at 20190217211626332628377_2d303530300a:
+A fatal error was reported on support/build-scripts/build line 24 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999 at 20190218021626248671813U2d303530300a.
+make -j2
+failed with the error on /usr/bin/error-notify line 28 in /var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999 at 20190217211626436486283_2d303530300a:
+Build failed!
+make: *** [Makefile:5: all] Error 1
+ * ERROR: app-misc/ember-information-technology-environment-9999::wreathe-overlay failed (compile phase):
+ *   emake failed
+ * 
+ * If you need support, post the output of `emerge --info '=app-misc/ember-information-technology-environment-9999::wreathe-overlay'`,
+ * the complete build log and the output of `emerge -pqv '=app-misc/ember-information-technology-environment-9999::wreathe-overlay'`.
+ * The complete build log is located at '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/temp/build.log'.
+ * The ebuild environment file is located at '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/temp/environment'.
+ * Working directory: '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999'
+ * S: '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999'
+
+>>> Failed to emerge app-misc/ember-information-technology-environment-9999, Log file:
+
+>>>  '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/temp/build.log'
+
+ * Messages for package app-misc/ember-information-technology-environment-9999:
+
+ * ERROR: app-misc/ember-information-technology-environment-9999::wreathe-overlay failed (compile phase):
+ *   emake failed
+ * 
+ * If you need support, post the output of `emerge --info '=app-misc/ember-information-technology-environment-9999::wreathe-overlay'`,
+ * the complete build log and the output of `emerge -pqv '=app-misc/ember-information-technology-environment-9999::wreathe-overlay'`.
+ * The complete build log is located at '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/temp/build.log'.
+ * The ebuild environment file is located at '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/temp/environment'.
+ * Working directory: '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999'
+ * S: '/var/tmp/portage/app-misc/ember-information-technology-environment-9999/work/ember-information-technology-environment-9999'
+-bash
+failed with the error on /usr/bin/error-notify line 28 in /root at 20190217211627561521112_2d303530300a:
+An error was reported on  line 1 in /root at 20190218021627499815225U2d303530300a.
+elegiac ~ # 
+elegiac ~ # 

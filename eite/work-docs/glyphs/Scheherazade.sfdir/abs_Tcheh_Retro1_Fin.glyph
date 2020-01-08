@@ -1,0 +1,13 @@
+StartChar: absTchehRetro1Fin
+Encoding: 65657 -1 548
+Width: 977
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 400 -840 basechar 0
+AnchorPoint: "Anchor-1" 402 1171 basechar 0
+LayerCount: 2
+Fore
+Refer: 538 -1 N 1 0 0 1 0 0 3
+Refer: 1131 -1 N 1 0 0 1 546 596 2
+Refer: 1128 -1 N 1 0 0 1 520 -138 2
+EndChar

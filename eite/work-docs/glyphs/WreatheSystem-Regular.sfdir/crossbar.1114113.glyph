@@ -1,0 +1,16 @@
+StartChar: crossbar.1114113
+Encoding: 65537 -1 349
+Width: 683
+Flags: W
+LayerCount: 2
+Fore
+SplineSet
+152 314 m 1,0,-1
+ 319 314 l 1,1,-1
+ 319 289 l 1,2,-1
+ 152 289 l 1,3,-1
+ 19 289 l 1,4,-1
+ 19 314 l 1,5,-1
+ 152 314 l 1,0,-1
+EndSplineSet
+EndChar

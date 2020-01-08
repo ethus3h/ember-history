@@ -1,0 +1,9 @@
+DcData layout note 2019jan30a31
+-1 0 h
+0  1 null
+1  2 val
+2  3 undefined
+left column: id of row for get by ID
+middle column: dcData internal array indices
+array length: 4
+Dc length: 2

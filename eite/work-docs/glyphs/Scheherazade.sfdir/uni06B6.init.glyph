@@ -1,0 +1,14 @@
+StartChar: uni06B6.init
+Encoding: 65986 -1 877
+Width: 336
+GlyphClass: 2
+Flags: W
+AnchorPoint: "Anchor-4" 100 -150 basechar 0
+AnchorPoint: "Anchor-2" 30 650 basechar 0
+AnchorPoint: "Anchor-1" 120 1530 basechar 0
+LayerCount: 2
+Fore
+Refer: 875 -1 N 1 0 0 1 0 0 3
+Refer: 1119 -1 N 1 0 0 1 118 1245 2
+Substitution2: "Single Substitution lookup 15 subtable" uni06B6.init.preAlef
+EndChar
